@@ -68,7 +68,7 @@ func lighting() -> void:
 			var env: Environment = child.environment
 			env.fog_enabled = true
 			env.fog_light_color = Color("d9cbb4")
-			env.fog_density = 0.0018
+			env.fog_density = 0.0006
 			env.fog_sky_affect = 0.25
 		elif child is DirectionalLight3D:
 			child.directional_shadow_max_distance = 60
@@ -874,27 +874,29 @@ func terrain_mesh() -> void:
 	var nz := 61
 	var surface := SurfaceTool.new()
 	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var heights := []
+	# Shared vertices with indices give smooth shading instead of a faceted hill.
 	for iz in range(nz):
-		var row := []
 		for ix in range(nx):
-			row.append(terrain_height(x0 + ix * step, z0 - iz * step))
-		heights.append(row)
+			var x := x0 + ix * step
+			var z := z0 - iz * step
+			var y := terrain_height(x, z)
+			var slope := absf(terrain_height(x + step, z) - y) / step + absf(terrain_height(x, z - step) - y) / step
+			var low := Color("5e5038")
+			var mid := Color("4b5a33")
+			var high := Color("5a544c")
+			var color := low.lerp(mid, clampf(y / 30.0, 0.0, 1.0)).lerp(high, clampf((y - 45.0) / 40.0, 0.0, 1.0))
+			color = color.lerp(Color("7a6c5a"), clampf(slope * 1.2, 0.0, 0.7))
+			color = color.darkened(clampf(noise.get_noise_2d(x * 2.0, z * 2.0) * 0.3, -0.18, 0.18))
+			surface.set_color(color)
+			surface.add_vertex(Vector3(x, y, z))
 	for iz in range(nz - 1):
 		for ix in range(nx - 1):
-			var corners := [Vector3(x0 + ix * step, heights[iz][ix], z0 - iz * step), Vector3(x0 + (ix + 1) * step, heights[iz][ix + 1], z0 - iz * step), Vector3(x0 + (ix + 1) * step, heights[iz + 1][ix + 1], z0 - (iz + 1) * step), Vector3(x0 + ix * step, heights[iz + 1][ix], z0 - (iz + 1) * step)]
-			var order := [0, 2, 1, 0, 3, 2]
-			for i in order:
-				var p: Vector3 = corners[i]
-				var slope := absf(corners[0].y - corners[2].y) / (step * 1.4)
-				var low := Color("6f5f45")
-				var mid := Color("55633a")
-				var high := Color("5e5548")
-				var color := low.lerp(mid, clampf(p.y / 30.0, 0.0, 1.0)).lerp(high, clampf((p.y - 45.0) / 40.0, 0.0, 1.0))
-				color = color.lerp(Color("7d6f5e"), clampf(slope * 2.5, 0.0, 0.7))
-				color = color.darkened(clampf(noise.get_noise_2d(p.x * 2.0, p.z * 2.0) * 0.25, -0.15, 0.15))
-				surface.set_color(color)
-				surface.add_vertex(p)
+			var a := iz * nx + ix
+			var b := a + 1
+			var c := a + nx
+			var d := c + 1
+			for index in [a, d, b, a, c, d]:
+				surface.add_index(index)
 	surface.generate_normals()
 	var mesh := surface.commit()
 	var instance := MeshInstance3D.new()
