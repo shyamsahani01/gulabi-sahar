@@ -48,7 +48,7 @@ Only the young selfie-taker is the character reference; other people in those ph
 3. A v0.5 geometry study changed jaw/nose/eyelids, hair fibers, fabric and shoes. Separate eye spheres were tested and did not fit the reconstructed sockets properly.
 4. Current internal mesh **v0.6** (`shyam_hero_v06.glb`) fits a facial surface to 478 locally detected MediaPipe landmarks from 03C, uses approximate inferred depth/canonical topology, and binds it to the existing head rig. Unmatched temporary eye spheres were removed. The Android app containing this study is **app v0.5.0**; asset-study numbering and app version are different.
 
-**Current limits:** this is an approximate single-view face surface. The face/skull transition, facial volume in side view, eyes/cornea, hair silhouette, cloth drape and footwear remain art problems. It is not a full head scan, exact likeness, or finished photorealistic character. The painted eye detail is not a complete articulated eye/cornea rig. Expressions deform the face surface but are not a full facial-animation production rig.
+**Current limits:** this is an approximate single-view face surface. The face/skull transition, facial volume in side view, eyes/cornea, hair silhouette, cloth drape and footwear remain art problems. It is not a full head scan, exact likeness, or finished photorealistic character. The painted eye detail is not a complete articulated eye/cornea rig; blinking can visibly compress/stretch that detail and needs a proper eyelid/eye solution. Expressions deform the face surface but are not a full facial-animation production rig.
 
 Before calling the character finished, compare front, three-quarter, profile, full body and every expression against 03C. Fix anatomy and hair geometry, not only texture/color. Preserve the useful body rig and locomotion.
 
@@ -63,6 +63,8 @@ Godot 4.7.2 Standard, Compatibility renderer. Main scene: `main.tscn` / `main.gd
 - Neutral, Smile, Serious and Surprised expression selector; automatic blinking.
 - Ten ambient NPCs: six pedestrians and four stationary people/shopkeepers. Nearby vendors turn toward and greet the player.
 - v0.5 replaces the broad test street with an original narrow bazaar lane based on real Jaipur photo references, and adjusts NPC routes for its width.
+
+In the current initial spawn, the FACE camera can look toward the open end of the lane, producing a sparse sky-heavy backdrop. Fix the spawn/camera composition or add the missing return-lane background; do not hide this behind a concept render.
 
 The scene is still a mobile prototype. NPCs share one male base model, ambient behavior is limited, and there are no missions, driving, traffic, police, economy or save/load systems yet. Those features appeared as later roadmap suggestions, not completed deliverables.
 
