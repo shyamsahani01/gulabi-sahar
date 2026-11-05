@@ -249,6 +249,9 @@ func draw_map() -> void:
 		draw_rect(Rect2(tab, Vector2(4, 36)), tints[i % tints.size()].darkened(0.3))
 		hindi_at(tab + Vector2(10, 15), str(zone.hindi), 11, ink)
 		text_at(tab + Vector2(10, 29), str(zone.name).to_upper(), 8, ink_soft)
+	draw_rect(map_rect(24, -274, 100, -226), Color("cb9878"))
+	draw_line(map_point(12, -250), map_point(99, -250), Color("ede0c9"), 5)
+	text_at(map_point(40, -250), "ARTISAN SQUARE", 10, ink)
 	# Hills: contour ridges, rampart, fort.
 	for ridge in range(8):
 		var z := -500.0 - ridge * 34.0

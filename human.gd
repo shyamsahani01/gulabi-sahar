@@ -258,6 +258,7 @@ func configure_animations() -> void:
 			clip.loop_mode = Animation.LOOP_LINEAR
 			# Keep the motion capture in place: physics controls world movement.
 			for track in range(clip.get_track_count()):
+				clip.track_set_path(track, NodePath(str(clip.track_get_path(track)).replace("Shyam_rig/Skeleton3D:", "Shyam_rig:")))
 				if clip.track_get_type(track) == Animation.TYPE_POSITION_3D and str(clip.track_get_path(track)) == "Shyam_rig":
 					for key in range(clip.track_get_key_count(track)):
 						var pos: Vector3 = clip.track_get_key_value(track, key)

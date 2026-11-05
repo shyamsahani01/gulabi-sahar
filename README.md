@@ -248,3 +248,16 @@ For the detailed revision history and direct user requests, read [CHAT_REQUIREME
 > **Still open / user feedback:** the hero face still looks like a pasted photo (needs a real head: selfie-based avatar service or Blender FaceBuilder); the user wants characters, animals, people and buildings far more realistic ("GTA-like"), says no zone looks good yet, and wants the map to stay big and clear. No zone is visually approved. Keep the design-review workflow: engine renders first, then the user's verdict. Keep the tablet performance budget. After accepted changes: test, build, push the APK to the tablet, update README/CHAT_REQUIREMENTS/ASSETS, commit; push to GitHub only when the user asks.
 >
 > **Next steps:** (the user writes these)
+
+## v0.7.0 — street interactions and Artisan Square
+
+New native tablet buttons: HIT (Q), TALK (T), DASH (X). HIT targets a nearby adult in front of the player, with a wall obstruction check, cooldown, health, knockdown and 25-second recovery. Optional blood marks expire after 20 seconds and are capped at 16. Children are excluded from combat. Combat currently uses a simple body lunge; weapons, driving, police and full combat animations are future work.
+
+TALK opens resident choices for directions, nearby work suggestions and a chai/stamina break. These are text conversations, not voice acting or a mission system. DASH spends 35 stamina for a brief burst; stamina regenerates. Artisan Square branches east off Sikar Road at z=-250, with walkable ground, stalls, residents and a map marker. Existing PBR materials are reused; no new third-party asset downloads were required.
+
+Research references reviewed for this update:
+- Godot 3D performance: https://docs.godotengine.org/en/stable/tutorials/performance/optimizing_3d_performance.html
+- Godot MultiMesh batching: https://docs.godotengine.org/en/stable/tutorials/performance/using_multimesh.html
+- Kenney CC0 city assets (reference only, not bundled): https://kenney.nl/assets/city-kit-suburban
+
+Validation: `tests/smoke.gd` covers existing movement, world and touch controls; `tests/actions.gd` covers conversation, combat, recovery, stamina and square ground collision. Build with `./build-android.sh`, then use `python3 tools/install_tablet.py` to validate and update the connected tablet. Installation preserves app data and fails rather than uninstalling on certificate mismatch.

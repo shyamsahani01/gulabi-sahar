@@ -46,7 +46,7 @@ func make_materials() -> void:
 	pbr("plaster", "plasterwall", Color("e6d8bd"), 0.5, 0.6)
 	pbr("rose", "roughplaster", Color("d9a28a"), 0.45, 0.7)
 	pbr("ochre", "paintedwall", Color("dcbf90"), 0.5, 0.5)
-	pbr("terracotta", "roughplaster", Color("c07656"), 0.45, 0.7)
+	pbr("terracotta", "roughplaster", Color("d39a7c"), 0.45, 0.5)
 	pbr("white", "paintedwall", Color("efe9dc"), 0.5, 0.4)
 	pbr("cream", "paintedwall", Color("e8dabd"), 0.5, 0.4)
 	pbr("trim", "paintedwall", Color("efe6d4"), 0.6, 0.4)
@@ -79,7 +79,7 @@ func pbr(key: String, short: String, tint: Color, scale: float, normal: float) -
 	mat.uv1_scale = Vector3.ONE * scale
 	mat.uv1_triplanar = true
 	mat.uv1_world_triplanar = true
-	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 
 func lighting() -> void:
 	super.lighting()
@@ -93,18 +93,21 @@ func lighting() -> void:
 			env.tonemap_mode = Environment.TONE_MAPPER_ACES
 			env.tonemap_exposure = 1.05
 			env.glow_enabled = true
-			env.glow_intensity = 0.35
-			env.glow_bloom = 0.08
-			env.glow_hdr_threshold = 1.1
+			env.glow_intensity = 0.25
+			env.glow_bloom = 0.05
+			env.glow_hdr_threshold = 1.2
+			env.set("glow_levels/1", 0.0)
+			env.set("glow_levels/3", 1.0)
 			env.adjustment_enabled = true
 			env.adjustment_contrast = 1.06
 			env.adjustment_saturation = 1.08
 		elif child is DirectionalLight3D:
 			child.light_energy = 0.95
 			child.rotation_degrees = Vector3(-42, -48, 0)
-			child.directional_shadow_max_distance = 70
-			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS
-			child.directional_shadow_blend_splits = true
+			# Two splits over 45 m keeps the Adreno 810 near the 30 FPS cap.
+			child.directional_shadow_max_distance = 45
+			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+			child.directional_shadow_blend_splits = false
 			child.shadow_bias = 0.03
 			child.shadow_normal_bias = 1.2
 
@@ -119,6 +122,7 @@ func build_street() -> void:
 	zone_sikar_road()
 	zone_vdn()
 	zone_hills()
+	artisan_square()
 	embed_gali()
 	world_boundaries()
 
@@ -1021,3 +1025,27 @@ func zone_sign_small(x: float, z: float, hindi: String, text: String) -> void:
 	label.modulate = Color("f4efe4")
 	label.outline_size = 2
 	add_child(label)
+
+# An eastward branch makes a walkable destination off the main corridor.
+func artisan_square() -> void:
+	box(Vector3(50, -0.3, -250), Vector3(100, 0.6, 48), "stone", true)
+	box(Vector3(50, 0.025, -250), Vector3(100, 0.04, 12), "tarmac")
+	for x in range(26, 100, 12):
+		for side in [-1, 1]:
+			var z: float = -250.0 + side * 18.0
+			box(Vector3(x, 2.5, z), Vector3(9, 5, 10), "rose", true)
+			box(Vector3(x, 5.15, z), Vector3(9.6, 0.3, 10.4), "cream")
+			box(Vector3(x, 1.6, z - side * 5.05), Vector3(4, 3.2, 0.08), "wood")
+			box(Vector3(x, 3.5, z - side * 6.0), Vector3(6, 0.15, 2.5), "teal")
+			box(Vector3(x, 0.65, z - side * 6.0), Vector3(3, 1.3, 0.8), "terracotta", true)
+		for z in [-257, -243]:
+			box(Vector3(x, 2.0, z), Vector3(0.08, 4, 0.08), "metal")
+	box(Vector3(99, 1.0, -250), Vector3(0.4, 2, 48), "rose", true)
+	for z in [-274, -226]:
+		box(Vector3(62, 1.0, z), Vector3(76, 2, 0.4), "rose", true)
+	var sign := Label3D.new()
+	sign.text = "ARTISAN SQUARE  →"
+	sign.position = Vector3(14, 4, -243)
+	sign.font_size = 48
+	sign.pixel_size = 0.012
+	add_child(sign)

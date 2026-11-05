@@ -74,6 +74,9 @@ func spawn_world() -> void:
 	spawn(Vector3(17.2, 0.6, -418.0), 6, false, 1, "elder", [], PI / 2)
 	spawn(Vector3(17.2, 0.6, -405.0), 1, false, 1, "elder", [], PI / 2)
 	spawn(Vector3(-14.0, 0.6, -449.0), 4, false, 1, "adult", [], -PI / 2)
+	# Residents of the new eastward artisan branch.
+	for i in range(4):
+		spawn(Vector3(32 + i * 16, 0.5, -242), i + 1, false, 1, "adult", [], 0.0)
 	# Hills: two walkers climbing the steps to the chhatri.
 	for i in range(2):
 		var hx := -0.8 + i * 1.6
@@ -151,6 +154,18 @@ func _physics_process(delta: float) -> void:
 					human.animator.active = near
 			if not near:
 				continue
+		if person.get("defeated", false):
+			person.respawn = maxf(0, person.respawn - delta)
+			if person.respawn <= 0:
+				person.defeated = false
+				person.health = 100
+				human.rotation.z = 0
+				body.collision_layer = 2
+			continue
+		if person.get("stun", 0.0) > 0:
+			person.stun -= delta
+			human.movement_speed = 0
+			continue
 		var speed := 0.0
 		person.greet_time = maxf(0, person.greet_time - delta)
 		person.cooldown = maxf(0, person.cooldown - delta)

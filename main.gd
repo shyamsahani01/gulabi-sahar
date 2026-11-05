@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPAWN := Vector3(11.3, 0.4, 30.0)
+const SPAWN := Vector3(3.5, 0.3, 34.0)
 
 var player: CharacterBody3D
 var pivot: Node3D
@@ -14,13 +14,18 @@ var portrait := false
 var portrait_angle := 0.0
 var portrait_height := 0.0
 var portrait_camera: Camera3D
+var activity: Node3D
+var actions: Control
+var dash_time := 0.0
+var stamina := 100.0
+var attack_cooldown := 0.0
 var hud: Control
 
 func _ready() -> void:
 	world = preload("res://world.gd").new()
 	world.name = "World"
 	add_child(world)
-	var activity = preload("res://market_life.gd").new()
+	activity = preload("res://market_life.gd").new()
 	activity.world_mode = true
 	activity.world = world
 
@@ -70,6 +75,10 @@ func _ready() -> void:
 	avatar.add_child(portrait_camera)
 	portrait_camera.position = Vector3(0, 1.58, -0.85)
 	portrait_camera.rotation.y = PI
+	actions = preload("res://street_actions.gd").new()
+	actions.game = self
+	canvas.add_child(actions)
+	actions.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.face_view.connect(toggle_portrait)
 	hud.expression_changed.connect(func():
 		avatar.cycle_expression()
@@ -117,7 +126,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			yaw -= event.relative.x * 0.004
 			pitch = clampf(pitch - event.relative.y * 0.004, -0.7, 0.18)
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F:
+		if event.keycode == KEY_Q:
+			actions.attack()
+		elif event.keycode == KEY_T:
+			actions.talk()
+		elif event.keycode == KEY_X:
+			actions.dash()
+		elif event.keycode == KEY_F:
 			toggle_portrait()
 		elif event.keycode == KEY_E:
 			avatar.cycle_expression()
@@ -128,14 +143,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			reset_player()
 
 func _physics_process(delta: float) -> void:
+	attack_cooldown = maxf(0, attack_cooldown - delta)
+	dash_time = maxf(0, dash_time - delta)
+	stamina = minf(100, stamina + delta * 12)
 	var move: Vector2 = (touch_move + hud.movement).limit_length()
 	move.x += float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
 	move.y += float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
-	if portrait or hud.map_open:
+	if portrait or hud.map_open or actions.dialogue_open:
 		move = Vector2.ZERO
 	var direction := Basis(Vector3.UP, yaw) * Vector3(move.x, 0, move.y).limit_length()
 	var running: bool = Input.is_physical_key_pressed(KEY_SHIFT) or hud.running
 	var speed := 5.2 if running else 2.3
+	if dash_time > 0 and not portrait and not hud.map_open and not actions.dialogue_open:
+		direction = -Basis(Vector3.UP, yaw).z
+		speed = 11.0
 	player.velocity.x = move_toward(player.velocity.x, direction.x * speed, delta * 22)
 	player.velocity.z = move_toward(player.velocity.z, direction.z * speed, delta * 22)
 	if not player.is_on_floor():
