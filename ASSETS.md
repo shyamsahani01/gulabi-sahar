@@ -55,3 +55,8 @@ Jaipur reference photographs were fetched for local visual research only; their 
 ## Authored action animations (0.8.0)
 
 `action_animation.gd` builds the Jab, Cross, Kick, Dodge, Jump, Hit, Wave, Guard and Crouch clips at runtime from bone-rotation keyframes on the existing Mixamo-derived rig. They are original project data, not downloaded clips; locomotion (Idle/Walk/Run) remains the user's existing mocap assets listed above.
+
+
+### v0.9.0 original city/vehicle geometry
+
+`vehicle_design.gd` and `city_services.gd` author parametric geometry directly in Godot. No downloaded vehicle/building meshes or reference photographs are bundled by this revision. Reuses the project's existing fonts/materials and their licenses. Business names/positions are fictional authored game content. Original OSM JSON is unchanged; gameplay applies 0.88 horizontal compression on top of the source's 0.65 scale. See README v0.9.0 for reference links and limitations.

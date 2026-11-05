@@ -9,6 +9,8 @@ func _ready() -> void:
 	for i in 8:
 		var car=preload("res://city_vehicle.gd").new()
 		car.game=game
+		car.paint=Color(["c47e61","7eaaa7","e4c776","d3d8d8","526a80","eee5d2","8b464e","c1c7b1"][i])
+		car.style="taxi" if i%3==0 else "sedan"
 		add_child(car)
 		car.set_physics_process(false)
 		car.collision_layer=4
@@ -72,3 +74,4 @@ func _physics_process(delta: float) -> void:
 		node.velocity.y=-1 if node.is_on_floor() else -12
 		node.rotation.y=lerp_angle(node.rotation.y,atan2(-direction.x,-direction.z),delta*4)
 		node.move_and_slide()
+		node.design.animate_wheels(node.velocity.length()*delta,0.0)

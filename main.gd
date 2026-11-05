@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPAWN := Vector3(25.0, 1.0, 0.0)
+const SPAWN := Vector3(22.0, 1.0, 0.0)
 
 var player: CharacterBody3D
 var pivot: Node3D
@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	player = CharacterBody3D.new()
 	player.name = "Player"
-	player.collision_mask = 3
+	player.collision_mask = 7
 	player.position = SPAWN
 	player.floor_snap_length = 0.35
 	player.floor_max_angle = deg_to_rad(48)
@@ -91,7 +91,7 @@ func _ready() -> void:
 	portrait_camera.rotation.y = PI
 	vehicle = preload("res://city_vehicle.gd").new()
 	vehicle.game = self
-	vehicle.position = Vector3(25,1,4)
+	vehicle.position = Vector3(22,1,4)
 	vehicle.heading = -PI/2
 	add_child(vehicle)
 	var traffic = preload("res://city_traffic.gd").new()
@@ -176,20 +176,27 @@ func _unhandled_input(event: InputEvent) -> void:
 			reset_player()
 
 func travel_to(index: int) -> void:
-	if index<0 or index>=world.landmarks.size():
+	if index<0 or index>=world.destinations().size():
 		return
-	var poi: Dictionary = world.landmarks[index]
+	var poi: Dictionary = world.destinations()[index]
 	var destination := Vector3(poi.p[0],world.terrain_height(poi.p[0],poi.p[1])+2.0,poi.p[1])
 	vehicle.driving=false
 	vehicle.speed=0
 	avatar.show()
 	player.collision_layer=1
-	player.collision_mask=3
+	player.collision_mask=7
 	player.position=destination
 	player.velocity=Vector3.ZERO
 	world.update_cells(destination)
 	activity.populate_near(destination)
-	vehicle.position=destination+Vector3(4,0,0)
+	if poi.has("car_p"):
+		vehicle.position=Vector3(poi.car_p[0],world.terrain_height(poi.car_p[0],poi.car_p[1])+1,poi.car_p[1])
+		vehicle.heading=poi.car_heading
+		yaw=poi.rotation
+		smooth_yaw=yaw
+	else:
+		vehicle.position=destination+Vector3(4,0,0)
+	vehicle.velocity=Vector3.ZERO
 	hud.clear_input()
 	hud.map_open=false
 

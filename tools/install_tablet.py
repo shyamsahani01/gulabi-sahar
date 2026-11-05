@@ -1,7 +1,7 @@
-import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil
+import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil,os
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.8.0';tag='v08'
-sdk=pathlib.Path('/home/shyam/Android/Sdk');apk=root/f'builds/GulabiSahar-{version}-debug.apk'
+version='0.9.0';tag='v09'
+sdk=pathlib.Path(os.environ.get('ANDROID_HOME','/home/shyam/Android/sdk'));apk=root/f'builds/GulabiSahar-{version}-debug.apk'
 def run(args):
  p=subprocess.run([str(a) for a in args],capture_output=True,text=True)
  if p.returncode:raise RuntimeError(p.stdout+p.stderr)

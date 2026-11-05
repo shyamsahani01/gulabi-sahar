@@ -2,7 +2,13 @@
 
 **Read this file first when continuing the project.** It records the user's requirements, the current implementation, files, commands and unfinished work. It is project context; the user's latest instructions take precedence.
 
-**Latest build: Android test version 0.8.0 (version code 8), 2026-11-05 — the OpenStreetMap city.** `main.gd` now loads `city_world.gd`: 5,136 real OSM road ways (5 × 4.95 km of Jaipur at 65% scale, Chandpole → Shastri Nagar → Vidhyadhar Nagar / Sikar Road → Brahmpuri / Nahargarh), 11,137 buildings (750 OSM footprints + 10,390 generated street-facing infill plots), 40 OSM parks, roadside stalls, lamp posts, trees, 8 traffic cars, a drivable car, punch/kick/dodge/block/crouch combat with authored skeletal clips, resident conversations, a three-stop delivery job with cash and save/load, a radar minimap, a full city atlas with tap-to-travel districts and sound effects. One short road is **not** OSM: the real motor route up to Nahargarh leaves the imported boundary, so a clearly signed, yellow-kerbed *game connector* joins the fort access road to the city inside the map (see §v0.8.0 below). `tests/city_smoke.gd` and `tests/city_combat.gd` pass with 0 failures; engine renders are in `designs/04-city/`. The APK was built on this machine but the tablet was not connected, so **v0.8.0 is not installed or play-tested on the device yet**, and none of its visuals are approved.
+**Current build: Android 0.9.0 (code 9), 2026-11-06 — compact city + vehicle and storefront refresh.** Updated from GitHub commit `91c1244` before editing. The playable layout is 12% shorter in each horizontal direction (4.40 × 4.356 km; 77.44% of the previous area), with all eight districts, the road graph and the marked Nahargarh connector retained. The radar occupies less screen space. Original OSM JSON remains unchanged; runtime compression is centralized in `city_world.gd`.
+
+Original modeled sedans and taxis replace the box cars: shaped bonnet/boot, sloping glazing, mirrors, grille, lamps, alloy wheels, front-wheel steering and wheel rotation for both the player and traffic. Six **fictional** neighborhood locations replace existing infill plots near Chandpole: Gulabi Motors showroom (two display cars), Sahar Hospital, City Police (patrol car), Theka, Sharma Kirana and Gulabi Chai. Their entrances are walkable; the atlas **SERVICES** tab travels to each location and places the player's car on the adjoining road. These are visual environments, not full shopping, policing, hospital or dealership gameplay systems. Existing resident conversations, driving, combat and delivery missions remain.
+
+Validation/install results for this revision are recorded in the v0.9 section below. **The hero likeness remains unresolved and the new visuals await user review.** Actual engine captures: [`designs/05-city-refresh/`](designs/05-city-refresh/).
+
+**Previous build: Android test version 0.8.0 (version code 8), 2026-11-05 — the OpenStreetMap city.** `main.gd` now loads `city_world.gd`: 5,136 real OSM road ways (5 × 4.95 km of Jaipur at 65% scale, Chandpole → Shastri Nagar → Vidhyadhar Nagar / Sikar Road → Brahmpuri / Nahargarh), 11,137 buildings (750 OSM footprints + 10,390 generated street-facing infill plots), 40 OSM parks, roadside stalls, lamp posts, trees, 8 traffic cars, a drivable car, punch/kick/dodge/block/crouch combat with authored skeletal clips, resident conversations, a three-stop delivery job with cash and save/load, a radar minimap, a full city atlas with tap-to-travel districts and sound effects. One short road is **not** OSM: the real motor route up to Nahargarh leaves the imported boundary, so a clearly signed, yellow-kerbed *game connector* joins the fort access road to the city inside the map (see §v0.8.0 below). `tests/city_smoke.gd` and `tests/city_combat.gd` pass with 0 failures; engine renders are in `designs/04-city/`. The APK was built on this machine but the tablet was not connected, so **v0.8.0 is not installed or play-tested on the device yet**, and none of its visuals are approved.
 
 **Previous: Android test version 0.6.0 (version code 6), 2026-11-05.** It replaces the single lane with a whole world (`world.gd`): Hawa Mahal Road → old gali → Chandpole Bazar and gate → Sikar Road → Vidhyadhar Nagar → Nahargarh hills, plus street animals (`animals.gd`), children/adult/elder NPCs, and an in-game map (MAP button / M). Real Street View references for every zone are listed in `designs/02-jaipur-lane/references/sources.json`; actual engine renders of each zone are in `designs/03-world/`. The user asked for the world, animals, children/adults, the map and a tablet install in one go ("code bhi kar do"), so this build shipped without a separate per-zone approval round — **none of its visuals are approved yet**, review them zone by zone. The APK was pushed to the tablet's `Download/` folder because MIUI blocks silent adb installs on this tablet (`INSTALL_FAILED_USER_RESTRICTED`); the final install tap happens on the device.
 
@@ -77,7 +83,7 @@ Machine setup used for 0.6.0 (this machine, not the earlier one): Godot 4.7.2 at
 
 In the current initial spawn, the FACE camera can look toward the open end of the lane, producing a sparse sky-heavy backdrop. Fix the spawn/camera composition or add the missing return-lane background; do not hide this behind a concept render.
 
-The scene is still a mobile prototype. NPCs share one male base model, ambient behavior is limited, and there are no missions, driving, traffic, police, economy or save/load systems yet. Those features appeared as later roadmap suggestions, not completed deliverables.
+The scene remains a mobile prototype. NPCs share one base rig and ambient behavior is limited. Driving, traffic, combat, resident conversations, delivery missions, cash and save/load exist in the current city. Police AI, vehicle purchasing and complete shop/hospital interactions are not implemented.
 
 ## 4. Jaipur environment reference and implementation
 
@@ -91,7 +97,7 @@ References:
 
 The current native 3D lane uses close shopfronts, recessed windows, jharokha details, chhajjas, counters/stock, hanging textiles, cloth shade canopies, sagging cables, meters, pipes, stone paving, drains, chai tables and small street clutter. Photographs are visual references, not a flat backdrop in the game.
 
-`art_review/lane_study.gd` now supplies the main scene's street. The directory name reflects its origin as a separate review study. `street.gd` remains its reusable geometry/material helper and preserves the earlier broad street implementation.
+`art_review/lane_study.gd` supplied the v0.5 street; `city_world.gd` supplies the current main scene. The directory name reflects its origin as a separate review study. `street.gd` remains its reusable geometry/material helper and preserves the earlier broad street implementation.
 
 **Environment is not photoreal-complete or visually approved.** Repeated geometry, simplified props, material wear, clutter variety and indirect/contact lighting still need work. Do not infer visual approval from the user's request to test/install it.
 
@@ -108,6 +114,8 @@ Real Godot captures from the review work are in `designs/02-jaipur-lane/actual-3
 | `tablet_controls.gd` | Touch joystick/buttons, camera touch, face view UI, FPS |
 | `street.gd` | Reusable batched boxes/arches/props, earlier broad street |
 | `city_world.gd` | **Current main world**: loads the OSM data, terrain, streamed cells, road ribbons, 11k buildings, parks, landmarks, the marked game connector, AStar road routing |
+| `vehicle_design.gd`, `city_services.gd` | Original batched vehicle geometry and six authored, walkable business/service interiors |
+| `tests/city_refresh.gd`, `tests/design_review_v09.gd` | Compact-map, entrances, service travel, wheel regression checks and actual engine captures |
 | `city_life.gd`, `city_traffic.gd`, `city_vehicle.gd` | Residents around the player (fight back), 8 AI cars on real routes, drivable player car |
 | `city_actions.gd`, `city_hud.gd`, `city_audio.gd` | Combat/talk/delivery job/cash/save, HUD + radar + city atlas with district travel, synthesized sound effects |
 | `action_animation.gd` | Authored skeletal action clips (Jab, Cross, Kick, Dodge, Jump, Hit, Wave, Guard, Crouch) built at runtime on the existing rig |
@@ -180,9 +188,9 @@ xvfb-run -a -s "-screen 0 1280x800x24" ./play.sh --fixed-fps 60 --script res://t
 python3 tools/install_tablet.py
 ```
 
-Output: `builds/GulabiSahar-0.8.0-debug.apk` (built 2026-11-05 15:55, ~173 MB, not yet installed — tablet was offline). Package: `com.itgurujan.gulabisahar`. ARM64, min SDK 24, target SDK 36, debug signed, no Internet permission. This is a sideload test build, not a Play Store release.
+Output: `builds/GulabiSahar-0.9.0-debug.apk`. Package: `com.itgurujan.gulabisahar`. ARM64, min SDK 24, target SDK 36, debug signed, no Internet permission. This is a sideload test build, not a Play Store release.
 
-Current workstation paths:
+Current workstation paths (2026-11-06):
 
 - Godot: `/home/shyam/MyWork/Tools/Godot/Godot_v4.7.2-stable_linux.x86_64`
 - Godot user/config/cache and Android templates: `/home/shyam/MyWork/Tools/Godot/userdata`
@@ -245,7 +253,7 @@ The initial PDF was `/home/shyam/Downloads/IT_Gurujan_Jaipur_Streets_Development
 
 For the detailed revision history and direct user requests, read [CHAT_REQUIREMENTS_README.md](CHAT_REQUIREMENTS_README.md) and [its PDF](docs/Gulabi_Sahar_Chat_Requirements.pdf).
 
-### Copyable restart prompt (kept current with each commit)
+### Historical restart prompt (superseded by the current build summary above) (kept current with each commit)
 
 > Continue the Gulabi Sahar project (Godot 4.7.2, GDScript, Android, repo `shyamsahani01/gulabi-sahar`). Read README.md, CHAT_REQUIREMENTS_README.md and ASSETS.md first, then inspect the actual code and the latest engine renders in `designs/03-world/`.
 >
@@ -302,3 +310,31 @@ Validation: `tests/smoke.gd` covers existing movement, world and touch controls;
 - Traffic routes, resident spawns, the delivery job stops, cash values, sound effects and all animation clips.
 
 Regenerate the data with `pip install shapely && python3 tools/update_city_data.py` (`--refresh` re-downloads; otherwise the `/tmp/osm-*.json` caches are reused). The OSM extracts stay out of the repository; only the derived, compressed `jaipur_city.json` is committed and bundled in the APK.
+
+
+## v0.9.0 — compact city, vehicles and neighborhood services
+
+The user explicitly authorized the `gulabi-sahar` repository, README update, GitHub push and then wireless tablet installation. Do not apply this change to the portfolio repository. Source base: `91c1244` (v0.8.0).
+
+- `CITY_COMPRESSION = 0.88` transforms road positions/widths, building footprints, parks, landmarks and navigation together. Terrain samples and district thresholds use the same coordinate convention; boundary walls and the fort exclusion are adjusted too. Character/car dimensions remain natural. The effective horizontal scale is 57.2% of geographical distances (65% × 88%). The original ODbL source data and attribution are preserved.
+- Radar changed from 212 × 190 to 174 × 154 pixels. District and service destination lists have separate tabs; service locations are explicitly fictional. Existing district IDs and delivery/save indices remain stable.
+- `vehicle_design.gd` contains original parametric geometry, merged per material with separate wheel assemblies. Traffic uses varied paint and sedan/taxi variants; the police display car has roof lights and stripes. Display vehicles are solid, static scenery; the original cream player car remains drivable.
+- Fixed rotated building batches to apply dimensions in local space before rotation; rendered facades now agree with their collision boxes instead of shearing across signs/doors.
+- Existing infill buildings gain glazed storefront bays, trim and selected nearby shop signs. Six service buildings use their existing footprints, recessed interiors, Hindi/English signs, roof details, interior counters/shelves/seating, planters and illuminated ceiling strips. No external model licensing or network dependency was added.
+- The Android build/install scripts now use this workstation's lowercase `Android/sdk` path by default and allow `ANDROID_HOME` overrides. The existing signing certificate and app data must be preserved.
+
+Design references: [Kimi's 3D workflow](https://www.kimi.ai/academy/3d-tutorial) (parametric forms and iterative scene inspection), [Jaipur bazaar architecture](https://www.hawa-mahal.com/jaipur-markets/) (warm plaster, projecting shopfronts, signage and street detail). References guide original geometry; no Kimi output or third-party photographs/models were copied into the game.
+
+Run checks and capture the implemented scene:
+
+```sh
+./play.sh --headless --fixed-fps 60 --script res://tests/city_smoke.gd
+./play.sh --headless --fixed-fps 60 --script res://tests/city_combat.gd
+./play.sh --headless --fixed-fps 60 --script res://tests/city_refresh.gd
+./play.sh --fixed-fps 60 --script res://tests/design_review_v09.gd
+./build-android.sh
+# Push the reviewed code/README before installation, as requested.
+python3 tools/install_tablet.py
+```
+
+**Validation (2026-11-06):** city smoke, combat and refresh checks each passed with **0 failures**. Refresh checks cover all six destinations, solid floors, walking through every entrance, road parking after travel, vehicle wheel roll/steering, service-tab touch and unsheared building batches. Nine actual Godot renders were reviewed; the review caught and fixed the rotated-wall/sign issue. Android APK built successfully (173,209,534 bytes), v2/v3 signature verification passed, ZIP integrity passed and 16 KB alignment passed. APK SHA-256: `31c8c5af28dc936ff33a647ac6b634c573d6fb26eafa50d94e289caee59e7ec8`. **Wireless installation is next, after this source/README push; no v0.9 device success is claimed yet.** Sustained tablet FPS, thermals and battery use require a longer play session. Visual approval and the unresolved face likeness are not implied by automated checks.

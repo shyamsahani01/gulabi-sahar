@@ -56,7 +56,7 @@ func check() -> void:
 	var fort: PackedVector3Array=scene.world.route_between(Vector3.ZERO,Vector3(scene.world.landmarks[5].p[0],0,scene.world.landmarks[5].p[1]))
 	var uses_connector:=false
 	for p in fort:
-		if Vector2(p.x,p.z).distance_to(Vector2(500,-896))<40:
+		if Vector2(p.x,p.z).distance_to(Vector2(500,-896)*scene.world.CITY_COMPRESSION)<40:
 			uses_connector=true
 	expect(fort.size()>2 and uses_connector,"Nahargarh route reaches the fort through the marked game connector")
 	expect(scene.world.data.roads.filter(func(r):return r.get("source","osm")=="osm" or not r.has("source")).size()>5000,"Everything else in the road network comes from OSM")
