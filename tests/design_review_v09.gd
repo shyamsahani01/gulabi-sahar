@@ -42,7 +42,8 @@ func capture() -> void:
 		scene.player.position=Vector3(poi.p[0],base.y+1,poi.p[1])
 		scene.player.velocity=Vector3.ZERO
 		scene.world.update_cells(base)
-		camera.position=base+basis*Vector3(b.w*.15,4.4,b.d/2+11)
+		camera.fov=70 if poi.kind=="grocery" else 48
+		camera.position=base+basis*Vector3(0,3.3,b.d/2+6.5) if poi.kind=="grocery" else base+basis*Vector3(b.w*.15,4.4,b.d/2+11)
 		camera.look_at(base+Vector3(0,2.4,0))
 		await shot("%02d-%s"%[i+4,poi.kind])
 	quit()

@@ -9,7 +9,12 @@ export ANDROID_HOME="${ANDROID_HOME:-/home/shyam/Android/sdk}"
 PROJECT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 mkdir -p "$PROJECT/builds"
 "$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --editor --import
-APK="$PROJECT/builds/GulabiSahar-0.9.0-debug.apk"
-"$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --export-debug Android "$APK"
+PROFILE="${1:-standard}"
+case "$PROFILE" in
+  standard) PRESET="Android"; APK="$PROJECT/builds/GulabiSahar-0.9.0-debug.apk" ;;
+  preview) PRESET="Android Preview"; APK="$PROJECT/builds/GulabiSahar-0.9.0-preview-debug.apk" ;;
+  *) echo "Usage: $0 [standard|preview]" >&2; exit 2 ;;
+esac
+"$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --export-debug "$PRESET" "$APK"
 # Preserve the original installed debug certificate even if editor settings change.
 exec "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --ks /home/shyam/.android/debug.keystore --ks-key-alias androiddebugkey --ks-pass pass:android "$APK"

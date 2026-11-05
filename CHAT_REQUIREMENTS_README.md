@@ -184,3 +184,5 @@ User asked to pull latest GitHub code first, improve 3D design using Kimi/other 
 Implementation: 12% shorter horizontal map with source OSM data preserved, smaller radar, original shaped vehicles with animated wheels, detailed storefronts and six fictional service/business interiors accessible through a Services atlas tab. These buildings do not imply complete business/police simulation. Hero likeness remains unresolved. See README v0.9.0 and actual engine captures in `designs/05-city-refresh/` for current evidence.
 
 Pre-install verification: city smoke, combat and refresh suites passed with 0 failures; nine actual engine renders reviewed; APK signature, ZIP integrity and 16 KB alignment passed. Source/README are pushed before wireless installation as requested. Device outcome is recorded separately after the attempt.
+
+Tablet update attempt returned a signing-certificate mismatch against the existing v0.8 app. Original app/data were retained. Added an explicit side-by-side `Android Preview` preset (launcher name Gulabi Sahar 0.9), with first-install save copying. Source/README for the fallback is pushed before installing that APK.

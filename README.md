@@ -337,4 +337,16 @@ Run checks and capture the implemented scene:
 python3 tools/install_tablet.py
 ```
 
-**Validation (2026-11-06):** city smoke, combat and refresh checks each passed with **0 failures**. Refresh checks cover all six destinations, solid floors, walking through every entrance, road parking after travel, vehicle wheel roll/steering, service-tab touch and unsheared building batches. Nine actual Godot renders were reviewed; the review caught and fixed the rotated-wall/sign issue. Android APK built successfully (173,209,534 bytes), v2/v3 signature verification passed, ZIP integrity passed and 16 KB alignment passed. APK SHA-256: `31c8c5af28dc936ff33a647ac6b634c573d6fb26eafa50d94e289caee59e7ec8`. **Wireless installation is next, after this source/README push; no v0.9 device success is claimed yet.** Sustained tablet FPS, thermals and battery use require a longer play session. Visual approval and the unresolved face likeness are not implied by automated checks.
+**Validation (2026-11-06):** city smoke, combat and refresh checks each passed with **0 failures**. Refresh checks cover all six destinations, solid floors, walking through every entrance, road parking after travel, vehicle wheel roll/steering, service-tab touch and unsheared building batches. Nine actual Godot renders were reviewed; the review caught and fixed the rotated-wall/sign issue. Android APK built successfully (173,209,534 bytes), v2/v3 signature verification passed, ZIP integrity passed and 16 KB alignment passed. APK SHA-256: `31c8c5af28dc936ff33a647ac6b634c573d6fb26eafa50d94e289caee59e7ec8`. The source/README was pushed first as `a95ad92`. Direct tablet update returned `INSTALL_FAILED_UPDATE_INCOMPATIBLE`: installed v0.8 uses certificate SHA-256 `2af69659a56c359f2f53f6319412720fd0ded642142ccc32b41e990414386d0d`; this workstation's original debug key is `dea7abbbbb3e0ba3d256d1c180d407fc9136690cd42a4f2b25951be1fae634c7`. The matching private key is not present locally. **The original app was not uninstalled.** A separately signed preview package is built for a data-preserving install; device success is not claimed until the next verification record. Sustained tablet FPS, thermals and battery use require a longer play session. Visual approval and the unresolved face likeness are not implied by automated checks.
+
+
+### Tablet signing fallback
+
+`Android Preview` installs the same v0.9 game as **Gulabi Sahar 0.9**, package `com.itgurujan.gulabisahar.preview`, alongside the existing v0.8 app. This avoids uninstalling the old app when its original signing key is unavailable. It is explicitly a separate installation, not a successful in-place update.
+
+```sh
+./build-android.sh preview
+python3 tools/install_tablet.py --preview
+```
+
+The installer copies readable `files/city_progress.json` from the old debug app only on the first preview installation, retains an ignored local backup, and leaves the original app/data intact. Subsequent preview updates keep their own progress. APK: `builds/GulabiSahar-0.9.0-preview-debug.apk`; verification/install reports and device screenshot use the `v09-preview` suffix. Returning to the original package requires the matching signing key; do not uninstall to bypass the mismatch.
