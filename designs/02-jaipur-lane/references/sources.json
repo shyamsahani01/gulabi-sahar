@@ -16,5 +16,41 @@
     "image_url": "https://static1.squarespace.com/static/66211a16f4005302f836fb5e/6674bb3f06bb013442f4e026/6674bc2d06bb013442f510b8/1718926381121/bazaar-in-jaipur-1-1.jpg?format=original",
     "source_page": "https://www.mycookinghut.com/foodtravel/jaipur-rajasthan",
     "usage": "Local visual reference only; not packaged as game texture."
+  },
+  {
+    "file": "hawa-mahal-road-sv-yaw0.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=TVKMh8VoIiRYjsNUNoHXJA&yaw=0",
+    "source_page": "https://www.google.com/maps/place/Hawa+Mahal/@26.9239747,75.8271431,476a,75y,263.62h,83.66t/data=!3m7!1e1!3m5!1sTVKMh8VoIiRYjsNUNoHXJA!2e0",
+    "usage": "Google Street View, Hawa Mahal Road, panoid TVKMh8VoIiRYjsNUNoHXJA, looking north. Local visual reference only; not packaged as game texture. Same panoid at yaw 45/90/135/180/225/270/315 gives the full 360 (files hawa-mahal-road-sv-yaw*.jpg)."
+  },
+  {
+    "file": "pano_chandpole_gate_<yaw>.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=o5z_cTKwnkmtsjAwCFg_4w&yaw=<0|90|180|270>",
+    "source_page": "https://www.google.com/maps/@26.9262,75.8072,3a,75y/data=!3m4!1e1!3m2!1so5z_cTKwnkmtsjAwCFg_4w!2e0",
+    "usage": "Street View near Chandpole bus stand (26.92620, 75.80718), found with the streetlevel library. Reference for the Chandpole zone: pink arcade with arches, e-rickshaws, concrete divider. Local only."
+  },
+  {
+    "file": "pano_chandpole_bazar_<yaw>.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=HjxYMG6hNayNA_s4MyW1sg&yaw=<0|90|180|270>",
+    "source_page": "https://www.google.com/maps/@26.9257,75.8135,3a,75y/data=!3m4!1e1!3m2!1sHjxYMG6hNayNA_s4MyW1sg!2e0",
+    "usage": "Street View on Chandpole Bazar (26.92572, 75.81350): wide road, planted median with railing, pink two-storey arcade shops. Reference for the Chandpole Bazar zone. Local only."
+  },
+  {
+    "file": "pano_sikar_road_<yaw>.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=tYbPMARe7iM_0cBHOeU0zg&yaw=<0|90|180|270>",
+    "source_page": "https://www.google.com/maps/@26.9436,75.7857,3a,75y/data=!3m4!1e1!3m2!1stYbPMARe7iM_0cBHOeU0zg!2e0",
+    "usage": "Street View in a residential colony off Sikar Road (26.94357, 75.78571): pink/cream houses, ornate black iron gates, arched boundary-wall panels, balcony railings, parked cars. Reference for the Vidhyadhar Nagar house() style. Local only."
+  },
+  {
+    "file": "pano_vdn_central_spine_<yaw>.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=k6wOEO8zJ-hWWlnwCr5Egw&yaw=<0|90|180|270>",
+    "source_page": "https://www.google.com/maps/@26.9717,75.7808,3a,75y/data=!3m4!1e1!3m2!1sk6wOEO8zJ-hWWlnwCr5Egw!2e0",
+    "usage": "Street View at the edge of Vidhyadhar Nagar (26.97168, 75.78076): red boundary walls, open plots, trees, water tower. Local only."
+  },
+  {
+    "file": "pano_vdn_sector_houses_<yaw>.jpg",
+    "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=ZlXjx7sh9quao6ex29ECMg&yaw=<0|90|180|270>",
+    "source_page": "https://www.google.com/maps/@26.9745,75.7775,3a,75y/data=!3m4!1e1!3m2!1sZlXjx7sh9quao6ex29ECMg!2e0",
+    "usage": "Street View in the VKI industrial strip next to Vidhyadhar Nagar (26.97454, 75.77750): yellow painted walls with adverts, trucks, warehouses, two-lane road with yellow centre lines. Reference for the modern-road feel of the Sikar Road zone. Local only."
   }
 ]

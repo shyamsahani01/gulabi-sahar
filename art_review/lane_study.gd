@@ -2,6 +2,8 @@ extends "res://street.gd"
 # Native 3D environment study from photographed old-city lanes. No reference photo
 # is displayed as a backdrop: all architecture and nearby props are modeled.
 var rng := RandomNumberGenerator.new()
+# When embedded in the world, the +z end stays open so the lane joins the main road.
+var open_end := false
 
 func make_materials() -> void:
 	super.make_materials()
@@ -60,7 +62,7 @@ func lighting() -> void:
 func build_street() -> void:
 	rng.seed = 4603
 	# Physical boundaries preserve the cross-lane view without a fake opaque gate.
-	for z in [-27.0, 27.0]:
+	for z in ([-27.0] if open_end else [-27.0, 27.0]):
 		var limit := CollisionShape3D.new()
 		var shape := BoxShape3D.new()
 		shape.size = Vector3(20, 5, 0.3)

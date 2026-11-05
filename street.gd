@@ -7,12 +7,14 @@ var collision_root := StaticBody3D.new()
 var round_batches: Dictionary = {}
 var arch_batches: Dictionary = {}
 var hindi_font = preload("res://assets/fonts/NotoSansDevanagari-Regular.ttf")
+var skip_lighting := false
 
 func _ready() -> void:
 	cube.size = Vector3.ONE
 	add_child(collision_root)
 	make_materials()
-	lighting()
+	if not skip_lighting:
+		lighting()
 	build_street()
 	flush_batches()
 	flush_rounds()
@@ -124,10 +126,10 @@ func label3d(pos: Vector3, content: String, side: int, color := Color("ead8b3"),
 	label.outline_size = 3
 	add_child(label)
 
-func arch(x: float, y: float, z: float, radius: float) -> void:
+func arch(x: float, y: float, z: float, radius: float, rot_y := 0.0) -> void:
 	if not arch_batches.has(radius):
 		arch_batches[radius] = []
-	arch_batches[radius].append(Transform3D(Basis.IDENTITY, Vector3(x, y, z)))
+	arch_batches[radius].append(Transform3D(Basis.from_euler(Vector3(0, rot_y, 0)), Vector3(x, y, z)))
 
 func quad(surface: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
 	for point in [a, b, c, a, c, d]:

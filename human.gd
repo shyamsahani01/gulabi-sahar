@@ -9,6 +9,7 @@ var grounded := true
 var talking := false
 var variant := 0
 var crowd := false
+var kind := "adult"
 var animator: AnimationPlayer
 static var shared_library: AnimationLibrary
 var bones: Dictionary = {}
@@ -51,6 +52,11 @@ func update_face(delta: float) -> void:
 func _ready() -> void:
 	model = (preload("res://assets/characters/crowd_walk.glb") if crowd else hero_scene).instantiate()
 	model.rotation.y = PI
+	# Children and elders reuse the crowd rig at a different scale until dedicated models exist.
+	if kind == "child":
+		model.scale = Vector3(0.62, 0.62, 0.62)
+	elif kind == "elder":
+		model.scale = Vector3(0.95, 0.95, 0.95)
 	add_child(model)
 	skeleton = model.find_children("*", "Skeleton3D", true, false)[0]
 	for i in range(skeleton.get_bone_count()):
@@ -58,6 +64,12 @@ func _ready() -> void:
 		bones[name_key] = i
 	var shirts := [Color("b5a482"), Color("759591"), Color("b57965"), Color("657b97"), Color("d0bfa2"), Color("8f857b")]
 	var trousers := [Color("29383f"), Color("4c4540"), Color("343a4e")]
+	if kind == "child":
+		shirts = [Color("d9a441"), Color("c94f4f"), Color("4f8fc9"), Color("5fa565"), Color("d97ba8"), Color("f0e4c2")]
+		trousers = [Color("3a4e7a"), Color("6b4a3a"), Color("2f2f2f")]
+	elif kind == "elder":
+		shirts = [Color("efe8d6"), Color("e3d9c3"), Color("d8d2c2")]
+		trousers = [Color("e9e3d4"), Color("4c4540"), Color("d9d2c1")]
 	for mesh in model.find_children("*", "MeshInstance3D", true, false):
 		if not crowd and mesh.mesh.get_blend_shape_count() > 0 and (face == null or mesh.name.begins_with("HeroFace")):
 			face = mesh
@@ -129,7 +141,40 @@ func _ready() -> void:
 			for lace in range(5):
 				sneaker_part(sneaker, Vector3(0, 0.037, -0.063 + lace * 0.024), Vector3(0.078, 0.005, 0.007), Color("d7d2c5"))
 
+	if kind == "elder":
+		add_turban()
 	configure_animations()
+
+func add_turban() -> void:
+	var head_bone := -1
+	for bone_name in bones:
+		if str(bone_name).to_lower() == "head":
+			head_bone = bones[bone_name]
+			break
+	if head_bone < 0:
+		for bone_name in bones:
+			if "head" in str(bone_name).to_lower():
+				head_bone = bones[bone_name]
+				break
+	if head_bone < 0:
+		return
+	var attachment := BoneAttachment3D.new()
+	attachment.bone_name = skeleton.get_bone_name(head_bone)
+	skeleton.add_child(attachment)
+	var rest := skeleton.get_bone_global_rest(head_bone)
+	var turban := MeshInstance3D.new()
+	var shape := SphereMesh.new()
+	shape.radius = 0.5
+	shape.height = 1
+	shape.radial_segments = 14
+	shape.rings = 7
+	turban.mesh = shape
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = [Color("c2410c"), Color("d9a441"), Color("b64e36"), Color("efe8d6")][variant % 4]
+	mat.roughness = 0.9
+	turban.material_override = mat
+	turban.transform = rest.affine_inverse() * Transform3D(Basis.IDENTITY.scaled(Vector3(0.24, 0.17, 0.25)), Vector3(0, 1.72, 0.0))
+	attachment.add_child(turban)
 
 func sneaker_part(parent: Node3D, at: Vector3, dimensions: Vector3, color: Color) -> void:
 	var piece := MeshInstance3D.new()

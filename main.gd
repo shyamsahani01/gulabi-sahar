@@ -1,8 +1,11 @@
 extends Node3D
 
+const SPAWN := Vector3(11.3, 0.4, 30.0)
+
 var player: CharacterBody3D
 var pivot: Node3D
 var avatar: Node3D
+var world: Node3D
 var yaw := 0.0
 var pitch := -0.14
 var touch_move := Vector2.ZERO
@@ -14,20 +17,25 @@ var portrait_camera: Camera3D
 var hud: Control
 
 func _ready() -> void:
-	var street = preload("res://art_review/lane_study.gd").new()
-	add_child(street)
+	world = preload("res://world.gd").new()
+	world.name = "World"
+	add_child(world)
 	var activity = preload("res://market_life.gd").new()
-	activity.lane_study = true
-	add_child(activity)
+	activity.world_mode = true
+	activity.world = world
 
 	player = CharacterBody3D.new()
 	player.name = "Player"
 	player.collision_mask = 3
-	player.position = Vector3(0, 0.1, 20)
+	player.position = SPAWN
 	player.floor_snap_length = 0.35
 	player.floor_max_angle = deg_to_rad(48)
 	add_child(player)
 	activity.player = player
+	add_child(activity)
+	var animals = preload("res://animals.gd").new()
+	add_child(animals)
+	animals.populate(player, world)
 	var collision := CollisionShape3D.new()
 	var capsule := CapsuleShape3D.new()
 	capsule.radius = 0.3
@@ -48,13 +56,14 @@ func _ready() -> void:
 	camera.current = true
 	camera.fov = 68
 	camera.near = 0.15
-	camera.far = 100
+	camera.far = 720
 	arm.add_child(camera)
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
 	hud = preload("res://tablet_controls.gd").new()
 	canvas.add_child(hud)
 	hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	hud.zones = world.ZONES
 	portrait_camera = Camera3D.new()
 	portrait_camera.fov = 32
 	portrait_camera.near = 0.03
@@ -95,6 +104,10 @@ func build_avatar() -> void:
 	avatar = preload("res://human.gd").new()
 	player.add_child(avatar)
 
+func reset_player() -> void:
+	player.position = SPAWN + Vector3(0, 0.6, 0)
+	player.velocity = Vector3.ZERO
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if event.position.x > 400 and event.position.y < 570:
@@ -109,15 +122,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_E:
 			avatar.cycle_expression()
 			hud.expression_label = avatar.expression
-	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
-		player.position = Vector3(0, 1, 20)
-		player.velocity = Vector3.ZERO
+		elif event.keycode == KEY_M:
+			hud.map_open = not hud.map_open
+		elif event.keycode == KEY_R:
+			reset_player()
 
 func _physics_process(delta: float) -> void:
 	var move: Vector2 = (touch_move + hud.movement).limit_length()
 	move.x += float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
 	move.y += float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
-	if portrait:
+	if portrait or hud.map_open:
 		move = Vector2.ZERO
 	var direction := Basis(Vector3.UP, yaw) * Vector3(move.x, 0, move.y).limit_length()
 	var running: bool = Input.is_physical_key_pressed(KEY_SHIFT) or hud.running
@@ -136,6 +150,8 @@ func _physics_process(delta: float) -> void:
 		avatar.rotation.y = lerp_angle(avatar.rotation.y, atan2(-direction.x, -direction.z), delta * 12)
 	avatar.movement_speed = Vector2(player.velocity.x, player.velocity.z).length()
 	avatar.grounded = player.is_on_floor()
+	hud.map_player = player.position
+	hud.map_yaw = yaw
+	hud.zone_name = world.zone_at(player.position.z)
 	if player.position.y < -10:
-		player.position = Vector3(0, 2, 20)
-		player.velocity = Vector3.ZERO
+		reset_player()

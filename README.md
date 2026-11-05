@@ -2,7 +2,9 @@
 
 **Read this file first when continuing the project.** It records the user's requirements, the current implementation, files, commands and unfinished work. It is project context; the user's latest instructions take precedence.
 
-**Installed and launched on the wireless Redmi tablet: Android test version 0.5.0 (version code 5).** The game runs, but the user has rejected the main character's visual quality. **Matching the approved character image remains unfinished and is the highest priority.** A successful APK install or passing code test does not mean the character design is approved.
+**Latest build: Android test version 0.6.0 (version code 6), 2026-11-05.** It replaces the single lane with a whole world (`world.gd`): Hawa Mahal Road → old gali → Chandpole Bazar and gate → Sikar Road → Vidhyadhar Nagar → Nahargarh hills, plus street animals (`animals.gd`), children/adult/elder NPCs, and an in-game map (MAP button / M). Real Street View references for every zone are listed in `designs/02-jaipur-lane/references/sources.json`; actual engine renders of each zone are in `designs/03-world/`. The user asked for the world, animals, children/adults, the map and a tablet install in one go ("code bhi kar do"), so this build shipped without a separate per-zone approval round — **none of its visuals are approved yet**, review them zone by zone. The APK was pushed to the tablet's `Download/` folder because MIUI blocks silent adb installs on this tablet (`INSTALL_FAILED_USER_RESTRICTED`); the final install tap happens on the device.
+
+**Previous: Android test version 0.5.0 (version code 5).** The user rejected the main character's visual quality. **Matching the approved character image remains unfinished and is the highest priority for art.** It was not changed in 0.6.0 because Blender and the MediaPipe fit pipeline are not installed on the current machine. A successful APK install or passing code test does not mean the character design is approved.
 
 Repository: [shyamsahani01/gulabi-sahar](https://github.com/shyamsahani01/gulabi-sahar) — private. Local project: `/home/shyam/MyWork/Gulabi Sahar`.
 
@@ -63,6 +65,9 @@ Godot 4.7.2 Standard, Compatibility renderer. Main scene: `main.tscn` / `main.gd
 - Neutral, Smile, Serious and Surprised expression selector; automatic blinking.
 - Ten ambient NPCs: six pedestrians and four stationary people/shopkeepers. Nearby vendors turn toward and greet the player.
 - v0.5 replaces the broad test street with an original narrow bazaar lane based on real Jaipur photo references, and adjusts NPC routes for its width.
+- v0.6 (2026-11-05) adds the world: five zones over 820 m (Hawa Mahal Road 80 m, Chandpole 100 m, Sikar Road 160 m, Vidhyadhar Nagar 180 m, hills 300 m) with the v0.5 gali branching off Hawa Mahal Road; 49 NPCs (adults, children at 0.62 scale with bright clothes, elders with turbans — all on the same male crowd rig, no dedicated models yet); 30 box-built animals; walkable height-map hills with a stepped path, chhatri and Nahargarh-style rampart; full-screen map (MAP / M) and a zone label in the HUD; parked vehicle props. Camera far plane 720 m with fog. Far NPCs (>75 m) freeze their animation for tablet performance — not yet measured on the device.
+
+Machine setup used for 0.6.0 (this machine, not the earlier one): Godot 4.7.2 at `/home/shyam/MyWork/Tools/Godot/` (path `play.sh` expects), Android export templates under its `userdata/godot/export_templates/4.7.2.stable/`, Android SDK `/home/shyam/Android/Sdk` (build-tools 35.0.0), JDK `/home/shyam/.jdks/jdk-21.0.11+10`, debug keystore `~/.android/debug.keystore` — all set in the editor settings and `build-android.sh`. The tablet connects over wireless adb (discover with `adb mdns services`, then `adb connect ip:port`).
 
 In the current initial spawn, the FACE camera can look toward the open end of the lane, producing a sparse sky-heavy backdrop. Fix the spawn/camera composition or add the missing return-lane background; do not hide this behind a concept render.
 
@@ -96,7 +101,10 @@ Real Godot captures from the review work are in `designs/02-jaipur-lane/actual-3
 | `market_life.gd` | Ten NPCs, narrow-lane routes, avoidance, vendor greetings |
 | `tablet_controls.gd` | Touch joystick/buttons, camera touch, face view UI, FPS |
 | `street.gd` | Reusable batched boxes/arches/props, earlier broad street |
-| `art_review/lane_study.gd` | Current narrow bazaar geometry, materials and lighting |
+| `world.gd` | The whole map: zones, Hawa Mahal block, arcade bays, Chandpole gate, Sikar Road blocks, VDN houses/park/temple, terrain + fort, embeds the gali |
+| `animals.gd` | Box-built cows, dogs, goats, monkeys, pigeons, peacocks, camel; wander/rest/flap |
+| `tests/capture_views.gd` | Saves real engine renders of 14 world views to `designs/03-world/` (run under `xvfb-run`) |
+| `art_review/lane_study.gd` | Narrow bazaar gali (photo-referenced); embedded in the world as "Maniharon ka Rasta" |
 | `art_review/review.tscn`, `review_stage.gd` | Separate 3D inspection scene; F/E/drag controls |
 | `assets/characters/shyam_hero_v06.glb` | Current reference-fitted character candidate |
 | `assets/characters/shyam_hero.glb` | Preserved v0.4 hero for comparison |
