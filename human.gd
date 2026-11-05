@@ -7,6 +7,12 @@ var time := 0.0
 var movement_speed := 0.0
 var grounded := true
 var talking := false
+var action := ""
+var action_left := 0.0
+var guarding := false
+var crouching := false
+var animation_tree: AnimationTree
+var locomotion_blend := 0.0
 var variant := 0
 var crowd := false
 var kind := "adult"
@@ -174,6 +180,9 @@ func _ready() -> void:
 	if kind == "elder":
 		add_turban()
 	configure_animations()
+	var action_library = preload("res://action_animation.gd").build(self)
+	animator.add_animation_library("action", action_library)
+	setup_blending()
 
 func polish_generated_materials() -> void:
 	# MPFB exports plain principled materials; keep them but soften specular and fix hair alpha.
@@ -270,14 +279,59 @@ func configure_animations() -> void:
 		run_model.free()
 	for library in animator.get_animation_library_list():
 		animator.remove_animation_library(library)
-	animator.add_animation_library("", shared_library)
+	# Each imported mesh has a different skeleton nesting; resolve it rather than
+	# silently animating the armature Node3D instead of its Skeleton3D child.
+	var local_library := AnimationLibrary.new()
+	var skeleton_path := str(animator.get_node(animator.root_node).get_path_to(skeleton))
+	for clip_name in shared_library.get_animation_list():
+		var clip: Animation = shared_library.get_animation(clip_name).duplicate(true)
+		for track in clip.get_track_count():
+			var path := clip.track_get_path(track)
+			if path.get_subname_count()>0:
+				clip.track_set_path(track,NodePath(skeleton_path+":"+str(path.get_subname(0))))
+		local_library.add_animation(clip_name,clip)
+	animator.add_animation_library("", local_library)
 	animator.play("Idle")
 	animator.seek(fmod(variant * 1.23, 8.0), true)
+
+func setup_blending() -> void:
+	animation_tree = AnimationTree.new()
+	add_child(animation_tree)
+	animation_tree.anim_player = animation_tree.get_path_to(animator)
+	animation_tree.root_node = animation_tree.get_path_to(animator.get_node(animator.root_node))
+	var blend := AnimationNodeBlendSpace1D.new()
+	blend.min_space = 0
+	blend.max_space = 6.5
+	for spec in [["Idle",0.0],["Walk",2.2],["Run",6.5]]:
+		var node := AnimationNodeAnimation.new()
+		node.animation = spec[0]
+		blend.add_blend_point(node,spec[1],-1,spec[0])
+	blend.sync = true
+	animation_tree.tree_root = blend
+	animation_tree.active = true
+
+func play_action(value: String, duration := -1.0) -> void:
+	if not animator.has_animation("action/"+value):
+		return
+	action = value
+	action_left = animator.get_animation("action/"+value).length if duration < 0 else duration
+	animation_tree.active = false
+	animator.speed_scale = 1.0
+	animator.play("action/"+value,0.09)
 
 func _process(delta: float) -> void:
 	time += delta
 	update_face(delta)
-	var clip := "Run" if movement_speed > 4.0 and grounded else ("Walk" if movement_speed > 0.15 and grounded else "Idle")
-	if animator.current_animation != clip:
-		animator.play(clip, 0.2)
-	animator.speed_scale = clampf(movement_speed / 1.7, 0.5, 1.6) if clip == "Walk" else (clampf(movement_speed / 4.8, 0.8, 1.4) if clip == "Run" else 1.0)
+	if action_left > 0:
+		action_left -= delta
+		return
+	if guarding or crouching:
+		var pose := "Guard" if guarding else "Crouch"
+		if action != pose:
+			play_action(pose,0.01)
+		return
+	if action != "":
+		action = ""
+		animation_tree.active = true
+	locomotion_blend = move_toward(locomotion_blend,movement_speed,delta*12)
+	animation_tree.set("parameters/blend_position",locomotion_blend)

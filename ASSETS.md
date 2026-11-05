@@ -43,3 +43,15 @@ Fourteen more Poly Haven CC0 texture sets (1K diffuse, OpenGL normal, roughness;
 The v0.6 review face is derived from the approved generated concept through locally detected MediaPipe landmarks and approximate inferred depth, combined with the existing user rig. Canonical face topology is from Google AI Edge MediaPipe: https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/modules/face_geometry/data/canonical_face_model.obj . Apache 2.0 license is bundled as `assets/characters/MEDIAPIPE-LICENSE.txt`. MediaPipe model/runtime downloads remain outside the project and are not game runtime dependencies.
 
 Jaipur reference photographs were fetched for local visual research only; their source URLs are tracked in `designs/02-jaipur-lane/references/sources.json`, while downloaded third-party photos and Google search HTML are ignored by Git. Original native geometry is used in the lane study.
+
+## OpenStreetMap city data (0.8.0, 2026-11-05)
+
+`assets/data/jaipur_city.json` is a derived database built by `tools/update_city_data.py` from OpenStreetMap: roads, 750 building footprints, parks and POI coordinates for Chandpole, Shastri Nagar, Vidhyadhar Nagar, Sikar Road and Nahargarh/Brahmpuri. Data © OpenStreetMap contributors, Open Database License (ODbL) 1.0 — https://www.openstreetmap.org/copyright. The license text pointer is bundled as `assets/data/OSM-LICENSE.txt` and the in-game atlas shows the attribution. Generated infill buildings, heights, terrain and one authored road (the Nahargarh game connector, `source: authored`) are the project's own additions and are tagged as such in every record; see README §v0.8.0. The raw OSM extracts are cached outside the repository (`/tmp/osm-*.json`).
+
+## Synthesized sound effects (0.8.0)
+
+`assets/audio/step.wav`, `impact.wav`, `dodge.wav` and `engine.wav` are generated procedurally by `tools/synthesize_audio.py` (filtered noise and sine tones, 22.05 kHz mono). No third-party samples are used.
+
+## Authored action animations (0.8.0)
+
+`action_animation.gd` builds the Jab, Cross, Kick, Dodge, Jump, Hit, Wave, Guard and Crouch clips at runtime from bone-rotation keyframes on the existing Mixamo-derived rig. They are original project data, not downloaded clips; locomotion (Idle/Walk/Run) remains the user's existing mocap assets listed above.

@@ -1,6 +1,6 @@
 import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.7.0';tag='v07'
+version='0.8.0';tag='v08'
 sdk=pathlib.Path('/home/shyam/Android/Sdk');apk=root/f'builds/GulabiSahar-{version}-debug.apk'
 def run(args):
  p=subprocess.run([str(a) for a in args],capture_output=True,text=True)

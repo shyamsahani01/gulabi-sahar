@@ -21,6 +21,10 @@ func check() -> void:
 	var scene = load("res://main.tscn").instantiate()
 	root.add_child(scene)
 	await ticks(90)
+	if scene.world.get_script().resource_path.ends_with("city_world.gd"):
+		print("LEGACY TEST SKIPPED: main.tscn now loads the OSM city (city_world.gd). This test targets the v0.6/v0.7 hand-built world.gd scene; run tests/city_smoke.gd and tests/city_combat.gd instead.")
+		quit(0)
+		return
 	expect(scene.player.is_on_floor(), "Player must land on street")
 	var start: Vector3 = scene.player.position
 	scene.touch_move = Vector2(0, -1)

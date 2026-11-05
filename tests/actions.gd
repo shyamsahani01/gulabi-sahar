@@ -11,6 +11,10 @@ func check() -> void:
 	root.add_child(scene)
 	for i in range(90):
 		await physics_frame
+	if scene.world.get_script().resource_path.ends_with("city_world.gd"):
+		print("LEGACY TEST SKIPPED: main.tscn now loads the OSM city (city_world.gd). This test targets the v0.6/v0.7 hand-built world.gd scene; run tests/city_smoke.gd and tests/city_combat.gd instead.")
+		quit(0)
+		return
 	var person: Dictionary = scene.activity.people[0]
 	person.walking = false
 	scene.player.position = person.body.position + Vector3(0, 0, 1.2)

@@ -1,0 +1,13 @@
+Jaipur map data: © OpenStreetMap contributors
+https://www.openstreetmap.org/copyright
+
+assets/data/jaipur_city.json is a derived database distributed under the
+Open Data Commons Open Database License (ODbL) 1.0:
+https://opendatacommons.org/licenses/odbl/1-0/
+
+Retrieved 5 November 2026 from the public OpenStreetMap API. Original way IDs
+are retained in road/building records. Game coordinates use the origin and
+scale recorded in meta. Building infill and estimated heights are identified
+in each record. Terrain is an artistic reconstruction, not elevation survey data.
+The map's license does not change the license of independent game code/assets.
+Rebuild/refresh instructions: tools/update_city_data.py.

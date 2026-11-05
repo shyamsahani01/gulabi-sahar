@@ -1,12 +1,12 @@
 extends Node3D
 
-const SPAWN := Vector3(3.5, 0.3, 34.0)
+const SPAWN := Vector3(25.0, 1.0, 0.0)
 
 var player: CharacterBody3D
 var pivot: Node3D
 var avatar: Node3D
 var world: Node3D
-var yaw := 0.0
+var yaw := -PI/2
 var pitch := -0.14
 var touch_move := Vector2.ZERO
 var jump_requested := false
@@ -19,13 +19,23 @@ var actions: Control
 var dash_time := 0.0
 var stamina := 100.0
 var attack_cooldown := 0.0
+var move_input := Vector2.ZERO
+var dodge_direction := Vector3.ZERO
+var camera_shake := 0.0
+var jump_buffer := 0.0
+var coyote_time := 0.0
+var smooth_yaw := -PI/2
+var smooth_pitch := -0.14
+var sound: Node
+var player_collider: CollisionShape3D
+var vehicle: CharacterBody3D
 var hud: Control
 
 func _ready() -> void:
-	world = preload("res://world.gd").new()
+	world = preload("res://city_world.gd").new()
 	world.name = "World"
 	add_child(world)
-	activity = preload("res://market_life.gd").new()
+	activity = preload("res://city_life.gd").new()
 	activity.world_mode = true
 	activity.world = world
 
@@ -36,12 +46,15 @@ func _ready() -> void:
 	player.floor_snap_length = 0.35
 	player.floor_max_angle = deg_to_rad(48)
 	add_child(player)
+	world.player_ref = player
 	activity.player = player
 	add_child(activity)
 	var animals = preload("res://animals.gd").new()
 	add_child(animals)
-	animals.populate(player, world)
+	animals.player = player
+	animals.world = world
 	var collision := CollisionShape3D.new()
+	player_collider=collision
 	var capsule := CapsuleShape3D.new()
 	capsule.radius = 0.3
 	capsule.height = 1.75
@@ -65,7 +78,8 @@ func _ready() -> void:
 	arm.add_child(camera)
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
-	hud = preload("res://tablet_controls.gd").new()
+	hud = preload("res://city_hud.gd").new()
+	hud.game = self
 	canvas.add_child(hud)
 	hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.zones = world.ZONES
@@ -75,10 +89,22 @@ func _ready() -> void:
 	avatar.add_child(portrait_camera)
 	portrait_camera.position = Vector3(0, 1.58, -0.85)
 	portrait_camera.rotation.y = PI
-	actions = preload("res://street_actions.gd").new()
+	vehicle = preload("res://city_vehicle.gd").new()
+	vehicle.game = self
+	vehicle.position = Vector3(25,1,4)
+	vehicle.heading = -PI/2
+	add_child(vehicle)
+	var traffic = preload("res://city_traffic.gd").new()
+	traffic.game = self
+	add_child(traffic)
+	hud.travel_requested.connect(travel_to)
+	actions = preload("res://city_actions.gd").new()
 	actions.game = self
 	canvas.add_child(actions)
 	actions.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	sound = preload("res://city_audio.gd").new()
+	sound.game = self
+	add_child(sound)
 	hud.face_view.connect(toggle_portrait)
 	hud.expression_changed.connect(func():
 		avatar.cycle_expression()
@@ -135,44 +161,120 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_F:
 			toggle_portrait()
 		elif event.keycode == KEY_E:
-			avatar.cycle_expression()
-			hud.expression_label = avatar.expression
+			actions.kick()
+		elif event.keycode == KEY_B:
+			actions.handle_action("guard")
+		elif event.keycode == KEY_C:
+			actions.handle_action("crouch")
+		elif event.keycode == KEY_V:
+			actions.handle_action("ride")
+		elif event.keycode == KEY_SPACE:
+			jump_requested = true
 		elif event.keycode == KEY_M:
 			hud.map_open = not hud.map_open
 		elif event.keycode == KEY_R:
 			reset_player()
 
+func travel_to(index: int) -> void:
+	if index<0 or index>=world.landmarks.size():
+		return
+	var poi: Dictionary = world.landmarks[index]
+	var destination := Vector3(poi.p[0],world.terrain_height(poi.p[0],poi.p[1])+2.0,poi.p[1])
+	vehicle.driving=false
+	vehicle.speed=0
+	avatar.show()
+	player.collision_layer=1
+	player.collision_mask=3
+	player.position=destination
+	player.velocity=Vector3.ZERO
+	world.update_cells(destination)
+	activity.populate_near(destination)
+	vehicle.position=destination+Vector3(4,0,0)
+	hud.clear_input()
+	hud.map_open=false
+
 func _physics_process(delta: float) -> void:
-	attack_cooldown = maxf(0, attack_cooldown - delta)
-	dash_time = maxf(0, dash_time - delta)
-	stamina = minf(100, stamina + delta * 12)
-	var move: Vector2 = (touch_move + hud.movement).limit_length()
-	move.x += float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
-	move.y += float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
-	if portrait or hud.map_open or actions.dialogue_open:
-		move = Vector2.ZERO
-	var direction := Basis(Vector3.UP, yaw) * Vector3(move.x, 0, move.y).limit_length()
-	var running: bool = Input.is_physical_key_pressed(KEY_SHIFT) or hud.running
-	var speed := 5.2 if running else 2.3
-	if dash_time > 0 and not portrait and not hud.map_open and not actions.dialogue_open:
-		direction = -Basis(Vector3.UP, yaw).z
-		speed = 11.0
-	player.velocity.x = move_toward(player.velocity.x, direction.x * speed, delta * 22)
-	player.velocity.z = move_toward(player.velocity.z, direction.z * speed, delta * 22)
-	if not player.is_on_floor():
-		player.velocity.y -= 22 * delta
-	elif Input.is_physical_key_pressed(KEY_SPACE) or jump_requested:
-		player.velocity.y = 7
-	jump_requested = false
-	player.move_and_slide()
-	pivot.rotation = Vector3(pitch, yaw, 0)
-	var moving := direction.length() > 0.05
-	if moving:
-		avatar.rotation.y = lerp_angle(avatar.rotation.y, atan2(-direction.x, -direction.z), delta * 12)
-	avatar.movement_speed = Vector2(player.velocity.x, player.velocity.z).length()
-	avatar.grounded = player.is_on_floor()
-	hud.map_player = player.position
-	hud.map_yaw = yaw
-	hud.zone_name = world.zone_at(player.position.z)
+	if hud==null or actions==null:
+		return
+	attack_cooldown=maxf(0,attack_cooldown-delta)
+	dash_time=maxf(0,dash_time-delta)
+	camera_shake=maxf(0,camera_shake-delta)
+	var move: Vector2=touch_move+hud.movement
+	move.x+=float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT))-float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
+	move.y+=float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN))-float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
+	move=move.limit_length()
+	var locked: bool=portrait or hud.map_open or actions.dialogue_open
+	if locked:
+		move=Vector2.ZERO
+	move_input=move
+	var direction := Basis(Vector3.UP,yaw)*Vector3(move.x,0,move.y)
+	var running: bool=(Input.is_physical_key_pressed(KEY_SHIFT) or hud.running) and stamina>3 and not avatar.guarding and not avatar.crouching
+	var speed := 6.5 if running else 2.4
+	if avatar.crouching:
+		speed=1.25
+	elif avatar.guarding:
+		speed=1.5
+	if attack_cooldown>0:
+		speed*=.35
+	if running and move.length()>.1 and not vehicle.driving:
+		stamina=maxf(0,stamina-delta*7)
+		if stamina<=3:
+			hud.running=false
+	elif dash_time<=0 and attack_cooldown<=0:
+		stamina=minf(100,stamina+delta*14)
+	if dash_time>0 and not locked:
+		direction=dodge_direction
+		speed=8.5
+	if not avatar.crouching and player_collider.shape.height<1.7:
+		var overhead:=PhysicsRayQueryParameters3D.create(player.position+Vector3.UP,player.position+Vector3(0,1.8,0),1)
+		overhead.exclude=[player.get_rid()]
+		if not get_world_3d().direct_space_state.intersect_ray(overhead).is_empty():
+			avatar.crouching=true
+	player_collider.shape.height=1.2 if avatar.crouching else 1.75
+	player_collider.position.y=player_collider.shape.height*.5
+	var accel := 18.0 if player.is_on_floor() else 6.0
+	if direction.length()<.1:
+		accel=24.0
+	if not vehicle.driving:
+		player.velocity.x=move_toward(player.velocity.x,direction.x*speed,delta*accel)
+		player.velocity.z=move_toward(player.velocity.z,direction.z*speed,delta*accel)
+		coyote_time=.12 if player.is_on_floor() else maxf(0,coyote_time-delta)
+		jump_buffer=maxf(0,jump_buffer-delta)
+		if jump_requested and not locked:
+			jump_buffer=.15
+		jump_requested=false
+		if jump_buffer>0 and coyote_time>0:
+			player.velocity.y=6.7
+			jump_buffer=0
+			coyote_time=0
+			avatar.play_action("Jump")
+		elif not player.is_on_floor():
+			player.velocity.y-=20*delta
+		else:
+			player.velocity.y=-.5
+		player.move_and_slide()
+		if direction.length()>.08 and attack_cooldown<=0 and dash_time<=0:
+			avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-direction.x,-direction.z),1-exp(-12*delta))
+		avatar.movement_speed=Vector2(player.velocity.x,player.velocity.z).length()
+		avatar.grounded=player.is_on_floor()
+	else:
+		player.velocity=Vector3.ZERO
+		jump_requested=false
+		if move.length()>.1:
+			yaw=lerp_angle(yaw,vehicle.heading,delta*2)
+	smooth_yaw=lerp_angle(smooth_yaw,yaw,1-exp(-18*delta))
+	smooth_pitch=lerpf(smooth_pitch,pitch,1-exp(-18*delta))
+	pivot.rotation=Vector3(smooth_pitch,smooth_yaw,0)
+	pivot.position.y=lerpf(pivot.position.y,2.1 if vehicle.driving else (1.2 if avatar.crouching else 1.55),delta*5)
+	var arm: SpringArm3D=pivot.get_child(0)
+	arm.spring_length=lerpf(arm.spring_length,7.3 if vehicle.driving else 4.5,delta*4)
+	var camera: Camera3D=arm.get_child(0)
+	camera.fov=lerpf(camera.fov,76.0 if running or vehicle.driving else 68.0,delta*4)
+	camera.h_offset=sin(Time.get_ticks_msec()*.12)*camera_shake*.18
+	hud.map_player=player.position
+	hud.map_yaw=yaw
+	hud.zone_name=world.district_at(player.position)
+	hud.driving=vehicle.driving
+	hud.speed=int(absf(vehicle.speed)*3.6)
 	if player.position.y < -10:
-		reset_player()
+		travel_to(0)
