@@ -1,0 +1,8 @@
+{
+  "concept": 2,
+  "status": "awaiting_user_approval",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-02.png",
+  "prompt": "concept-02-prompt.txt",
+  "implemented": false
+}

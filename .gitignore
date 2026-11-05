@@ -1,0 +1,28 @@
+.godot/
+builds/
+*.apk
+*.aab
+*.keystore
+export_credentials.cfg
+
+# Local credentials and tool caches
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+
+# Blender autosave copies; keep the actual editable .blend sources
+*.blend[0-9]
+*.blend[0-9][0-9]
+
+# Downloaded third-party reference photos remain local; commit their source URLs
+designs/02-jaipur-lane/references/*.jpg
+designs/02-jaipur-lane/references/*.html

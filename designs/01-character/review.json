@@ -1,0 +1,9 @@
+{
+  "name": "Shyam \u2014 Character Concept 01",
+  "status": "rejected_by_user",
+  "image": "shyam-concept-01.png",
+  "generator": "built-in image_gen",
+  "implementation": "not implemented; concept only",
+  "workflow": "Review each part separately. Implement only the approved design. Do not move to the next design before the user approves the current one.",
+  "feedback": "User did not like Concept 01 and requested a different character."
+}

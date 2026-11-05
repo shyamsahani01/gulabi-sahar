@@ -1,0 +1,14 @@
+{
+  "concept": "03",
+  "status": "preferred_base_pending_pose_revision",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-03.png",
+  "prompt": "concept-03-prompt.txt",
+  "references": [
+    "/home/shyam/Downloads/IMG_0733.jpg",
+    "/home/shyam/Downloads/IMG_0959.jpg"
+  ],
+  "reference_subject": "Young selfie-taker in both photographs",
+  "implemented": false,
+  "feedback": "Keep this face and design; only straighten the head tilt."
+}

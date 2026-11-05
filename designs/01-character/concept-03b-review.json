@@ -1,0 +1,11 @@
+{
+  "concept": "03B",
+  "status": "revision_requested",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-03b.png",
+  "prompt": "concept-03b-prompt.txt",
+  "source": "shyam-concept-03.png",
+  "change": "Head tilt straightened while retaining Concept 03 identity and styling.",
+  "implemented": false,
+  "feedback": "Head feels oversized relative to body; correct proportions."
+}

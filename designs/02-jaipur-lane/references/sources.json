@@ -1,0 +1,20 @@
+[
+  {
+    "file": "jaipur-market-arch.jpg",
+    "image_url": "https://images.unsplash.com/photo-1606837731771-4b732ecc477f?w=1600&q=85",
+    "source_page": "https://unsplash.com/photos/people-walking-on-street-during-daytime-0Si7zZJ30gs",
+    "usage": "Local visual reference only; not packaged as game texture."
+  },
+  {
+    "file": "maniharon-ka-rasta.jpg",
+    "image_url": "https://www.lifeberrys.com/img/article/1464885382-maniharo-ka-raasta.jpg",
+    "source_page": "https://www.lifeberrys.com/articles/6/2016/20/holidays/hidden-treasures-of-jaipur-amer-nahargarh-and-jaigarh-fort.html",
+    "usage": "Local visual reference only; not packaged as game texture."
+  },
+  {
+    "file": "jaipur-bazaar.jpg",
+    "image_url": "https://static1.squarespace.com/static/66211a16f4005302f836fb5e/6674bb3f06bb013442f4e026/6674bc2d06bb013442f510b8/1718926381121/bazaar-in-jaipur-1-1.jpg?format=original",
+    "source_page": "https://www.mycookinghut.com/foodtravel/jaipur-rajasthan",
+    "usage": "Local visual reference only; not packaged as game texture."
+  }
+]

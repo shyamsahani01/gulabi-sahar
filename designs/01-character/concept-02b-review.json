@@ -1,0 +1,10 @@
+{
+  "concept": "02B",
+  "status": "rejected_by_user",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-02b.png",
+  "prompt": "concept-02b-prompt.txt",
+  "change": "Same character, plain off-white T-shirt; overshirt removed.",
+  "implemented": false,
+  "feedback": "Character should look younger and resemble the young selfie-taker in both supplied reference photos."
+}

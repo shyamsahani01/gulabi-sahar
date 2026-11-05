@@ -1,0 +1,13 @@
+{
+  "concept": "03C",
+  "status": "approved",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-03c.png",
+  "prompt": "concept-03c-prompt.txt",
+  "source": "shyam-concept-03b.png",
+  "change": "Adjusted head-to-body proportions and portrait framing.",
+  "implemented": false,
+  "implementation": "Native 3D adaptation with portrait UV bake, wardrobe and facial blendshapes; simplified mesh differs from the concept.",
+  "approval": "User: ok ab isse main chacter me use karo or ha expression bhi dena",
+  "implementation_status": "v0.4 likeness rejected by user; native v05 correction candidate under review"
+}

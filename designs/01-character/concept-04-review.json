@@ -1,0 +1,14 @@
+{
+  "concept": "04",
+  "status": "rejected_by_user",
+  "generator": "built-in image_gen",
+  "image": "shyam-concept-04.png",
+  "prompt": "concept-04-prompt.txt",
+  "references": [
+    "/home/shyam/Downloads/IMG_8175-removebg-preview.png",
+    "/home/shyam/Downloads/IMG_7330-removebg-preview.png"
+  ],
+  "change": "Upright frontal face and full-body pose using new identity references.",
+  "implemented": false,
+  "feedback": "User prefers Concept 03 identity and requests only straightening its head tilt."
+}
