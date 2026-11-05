@@ -14,6 +14,8 @@ var map_bounds := Rect2(-2900, -4200, 5000, 4950)
 var landmarks: Array = []
 var routes: Array = []
 var authored_roads: Array = []
+var amenities: Array = []
+var amenity_count := 0
 var spawn_point := Vector3(25, 1, 0)
 
 func _ready() -> void:
@@ -25,14 +27,16 @@ func _ready() -> void:
 	sphere_mesh.rings=6
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/jaipur_city.json"))
 	landmarks = data.pois
+	amenities = data.get("amenities", [])
+	var bb: Array = data.meta.bounds
+	map_bounds = Rect2(bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1])
 	make_materials()
 	# Less aggressive surface relief removes the sandpaper shimmer seen on the tablet.
 	for key in mats:
 		mats[key].normal_scale *= 0.32
 		mats[key].texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	lighting()
-	mats["sand"].albedo_color=Color("b8b4a2")
-	mats["scrub"].albedo_color=Color("84947b")
+	style_pass()
 	for key in ["hm_pink","rose","terracotta","fort"]:
 		mats[key].normal_enabled=false
 		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
@@ -40,19 +44,14 @@ func _ready() -> void:
 	mats["rose"].albedo_color=Color("cc9b87")
 	mats["terracotta"].albedo_color=Color("b98069")
 	mats["fort"].albedo_color=Color("aa9a7c")
-	for child in get_children():
-		if child is WorldEnvironment:
-			child.environment.ambient_light_energy=.52
-			child.environment.tonemap_exposure=.85
-			child.environment.fog_density=.0013
-			child.environment.adjustment_saturation=.94
 	build_ground()
 	build_roads()
 	for b in data.buildings:
-		if Vector2(b.x-495,b.z+760).length()<105:
+		if Vector2(b.x-495,b.z+760).length()<105 or b.has("kind"):
 			continue
 		city_building(b)
 		building_count += 1
+	build_amenities()
 	build_parks()
 	build_landmarks()
 	flush_batches()
@@ -104,7 +103,7 @@ func flush_batches() -> void:
 		var mesh := MultiMeshInstance3D.new()
 		mesh.multimesh = multi
 		mesh.material_override = mats[parts[1]]
-		mesh.visibility_range_end = 240 if parts[2] == "1" else 620
+		mesh.visibility_range_end = 170 if parts[2] == "1" else 600
 		mesh.visibility_range_end_margin = 20
 		cell(transforms[0].origin).add_child(mesh)
 
@@ -133,8 +132,10 @@ func terrain_raw(x: float,z: float) -> float:
 
 func build_ground() -> void:
 	var step := 25.0
-	for cx in range(-3000, 2200, 400):
-		for cz in range(-4300, 900, 400):
+	var x0 := int(floor(map_bounds.position.x / 400.0) * 400) - 400
+	var z0 := int(floor(map_bounds.position.y / 400.0) * 400) - 400
+	for cx in range(x0, int(map_bounds.end.x) + 400, 400):
+		for cz in range(z0, int(map_bounds.end.y) + 400, 400):
 			var st := SurfaceTool.new()
 			st.begin(Mesh.PRIMITIVE_TRIANGLES)
 			for ix in 16:
@@ -155,7 +156,9 @@ func build_ground() -> void:
 			add_child(mesh)
 			mesh.create_trimesh_collision()
 	# Boundaries stop traversal beyond the imported area.
-	for spec in [[Vector3(-2900,80,-1725),Vector3(2,400,4950)],[Vector3(2100,80,-1725),Vector3(2,400,4950)],[Vector3(-400,80,-4200),Vector3(5000,400,2)],[Vector3(-400,80,750),Vector3(5000,400,2)]]:
+	var c := map_bounds.get_center()
+	var sz := map_bounds.size
+	for spec in [[Vector3(map_bounds.position.x,80,c.y),Vector3(2,400,sz.y)],[Vector3(map_bounds.end.x,80,c.y),Vector3(2,400,sz.y)],[Vector3(c.x,80,map_bounds.position.y),Vector3(sz.x,400,2)],[Vector3(c.x,80,map_bounds.end.y),Vector3(sz.x,400,2)]]:
 		box(spec[0],spec[1],"sand",true)
 
 func road_piece(a: Vector2, b: Vector2, width: float, key: String, lift: float) -> void:
@@ -203,7 +206,7 @@ func build_roads() -> void:
 				var y := terrain_height(at.x,at.y)
 				draw_detail = true
 				box(Vector3(at.x,y+3,at.y),Vector3(.12,6,.12),"metal")
-				box(Vector3(at.x,y+6,at.y),Vector3(1,.1,.35),"cream")
+				box(Vector3(at.x,y+6,at.y),Vector3(1,.1,.35),"lamp")
 				draw_detail = false
 				if i%8==0:
 					tree_at(Vector3(at.x,y,at.y))
@@ -262,32 +265,381 @@ func flush_road_meshes() -> void:
 		instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		cell(entry.at).add_child(instance)
 
+# ------------------------------------------------------------ style pass ----
+func style_pass() -> void:
+	# Clean, warm, readable look: one warm key light, cool sky fill, crisp
+	# shadows near the player, light haze far away, harmonious palette.
+	for child in get_children():
+		if child is DirectionalLight3D:
+			child.light_color = Color("ffe6c7")
+			child.light_energy = 1.22
+			child.rotation_degrees = Vector3(-46, -34, 0)
+			child.directional_shadow_max_distance = 58
+			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+			child.shadow_bias = 0.03
+			child.shadow_normal_bias = 1.4
+		elif child is WorldEnvironment:
+			var env: Environment = child.environment
+			var sky_mat: ProceduralSkyMaterial = env.sky.sky_material
+			sky_mat.sky_top_color = Color("5f98c6")
+			sky_mat.sky_horizon_color = Color("e8dcc6")
+			sky_mat.ground_horizon_color = Color("e8dcc6")
+			sky_mat.ground_bottom_color = Color("8d7f68")
+			sky_mat.sun_angle_max = 20
+			sky_mat.sun_curve = 0.12
+			env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+			env.ambient_light_sky_contribution = 1.0
+			env.ambient_light_energy = 0.72
+			env.tonemap_mode = Environment.TONE_MAPPER_ACES
+			env.tonemap_exposure = 1.0
+			env.tonemap_white = 5.0
+			env.fog_enabled = true
+			env.fog_light_color = Color("e5d8c3")
+			env.fog_density = 0.0011
+			env.fog_sky_affect = 0.18
+			env.glow_enabled = true
+			env.glow_intensity = 0.22
+			env.glow_hdr_threshold = 1.15
+			env.adjustment_enabled = true
+			env.adjustment_contrast = 1.08
+			env.adjustment_saturation = 1.07
+	var palette := {"rose": "d9a08b", "hm_pink": "cf8f79", "terracotta": "c58a71", "ochre": "dcc08f", "cream": "ece0c4", "white": "f1ece0", "ivory": "e3d6b8", "concrete": "c9c3b7", "glass": "587f94", "dark": "2d3638", "trim": "f4ebda", "kerb_yellow": "e4bd3f", "teal": "3f8d85", "maroon": "95433f", "saffron": "e08a3c", "blue": "3f6aa6", "sky_blue": "6fb2d6", "green": "4e8f55", "wood": "9a7452", "tarmac": "585a5c", "stone": "cdc3b1", "sand": "c9bea3", "scrub": "8a9a6c", "grass": "8fb56f", "leaves": "4f7f45", "leaves_light": "7da35a", "red": "c8463a", "orange": "e58a2c", "yellow": "e9c54c", "metal": "6b7275"}
+	for key in palette:
+		if mats.has(key):
+			mats[key].albedo_color = Color(palette[key])
+	for key in ["white", "cream", "ivory", "trim", "concrete"]:
+		mats[key].roughness = 0.85
+	mats["glass"].roughness = 0.18
+	mats["glass"].metallic = 0.55
+	mats["glass"].metallic_specular = 0.8
+	var lamp := StandardMaterial3D.new()
+	lamp.albedo_color = Color("fff3d0")
+	lamp.emission_enabled = true
+	lamp.emission = Color("ffe9b0")
+	lamp.emission_energy_multiplier = 1.6
+	mats["lamp"] = lamp
+	var cross := StandardMaterial3D.new()
+	cross.albedo_color = Color("d83a2e")
+	cross.emission_enabled = true
+	cross.emission = Color("ff5a4a")
+	cross.emission_energy_multiplier = 0.9
+	mats["cross_red"] = cross
+	var cross_green := StandardMaterial3D.new()
+	cross_green.albedo_color = Color("2e9a4c")
+	cross_green.emission_enabled = true
+	cross_green.emission = Color("4fdc73")
+	cross_green.emission_energy_multiplier = 0.8
+	mats["cross_green"] = cross_green
+	var showroom_glass := StandardMaterial3D.new()
+	showroom_glass.albedo_color = Color(.55, .72, .8, .42)
+	showroom_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	showroom_glass.roughness = .12
+	showroom_glass.metallic = .4
+	showroom_glass.metallic_specular = .9
+	showroom_glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mats["showroom_glass"] = showroom_glass
+	var police_blue := StandardMaterial3D.new()
+	police_blue.albedo_color = Color("2d4f9a")
+	police_blue.roughness = 0.7
+	mats["police_blue"] = police_blue
+
+# ------------------------------------------------------------ buildings ----
+const SHOP_COLORS := ["teal", "maroon", "saffron", "blue", "green", "red"]
+
 func city_building(b: Dictionary) -> void:
-	var base := Vector3(b.x,terrain_height(b.x,b.z),b.z)
-	var basis := Basis(Vector3.UP,b.a)
+	var base := Vector3(b.x, terrain_height(b.x, b.z), b.z)
+	var ang: float = b.a
+	var basis := Basis(Vector3.UP, ang)
+	var rot := Vector3(0, ang, 0)
 	var old: bool = b.z > -1000 and b.x > -850
-	var color: String = ["rose","hm_pink","terracotta","ochre"][int(abs(b.x+b.z))%4] if old else ["cream","white","concrete","ivory"][int(abs(b.x+b.z))%4]
+	var seed_value: int = int(abs(b.x * 7 + b.z * 13))
+	var color: String = ["rose", "hm_pink", "terracotta", "ochre"][seed_value % 4] if old else ["cream", "white", "concrete", "ivory"][seed_value % 4]
+	var width: float = b.w
+	var depth: float = b.d
 	var height: float = b.h
-	box(base+Vector3(0,height/2,0),Vector3(b.w,height,b.d),color,true,Vector3(0,b.a,0))
-	box(base+Vector3(0,height+.12,0),Vector3(b.w+.5,.24,b.d+.5),"cream",false,Vector3(0,b.a,0))
+	var floors: int = maxi(1, mini(5, int(height / 3.0)))
+	box(base + Vector3(0, height / 2, 0), Vector3(width, height, depth), color, true, rot)
+	# Parapet and roof furniture (cheap, always visible).
+	box(base + basis * Vector3(0, height + .14, 0), Vector3(width + .4, .28, depth + .4), "trim", false, rot)
 	draw_detail = true
-	for side in [-1,1]:
-		var front: float = side*(b.d/2+.06)
-		for floor_index in range(mini(4,int(height/3))):
-			for bay in range(maxi(1,mini(4,int(b.w/3)))):
-				var x: float = -b.w/2+1.7+bay*2.8
-				var y := 1.5+floor_index*3
-				box(base+basis*Vector3(x,y,front),Vector3(1.2,1.65,.09),"dark" if old else "glass",false,Vector3(0,b.a,0))
-				box(base+basis*Vector3(x,y+1.0,front+side*.18),Vector3(1.65,.13,.6),"trim",false,Vector3(0,b.a,0))
-		if old:
-			box(base+basis*Vector3(0,2.7,front+side*.8),Vector3(b.w*.9,.13,1.7),"teal" if int(b.x)%2 else "maroon",false,Vector3(0,b.a,0))
-			box(base+basis*Vector3(0,3.1,front),Vector3(b.w*.8,.45,.15),"dark",false,Vector3(0,b.a,0))
+	box(base + basis * Vector3(width * .25, height + .55, depth * .15), Vector3(1.1, 1.1, 1.1), "dark", false, rot)
+	if seed_value % 3 == 0:
+		box(base + basis * Vector3(-width * .25, height + .9, -depth * .2), Vector3(2.2, 1.8, 2.0), color, false, rot)
+	for side in [-1, 1]:
+		var front: float = side * (depth / 2 + .05)
+		var usable: float = width - 1.2
+		# Ground floor: shopfront (shutter + awning + sign) on old-city streets, door + window otherwise.
+		if old or seed_value % 2 == 0:
+			var shop_color: String = SHOP_COLORS[(seed_value + side + 3) % SHOP_COLORS.size()]
+			box(base + basis * Vector3(0, 1.35, front), Vector3(usable * .9, 2.5, .1), "dark", false, rot)
+			box(base + basis * Vector3(0, 2.75, front + side * .55), Vector3(usable * .95, .12, 1.2), shop_color, false, Vector3(side * .22, ang, 0))
+			box(base + basis * Vector3(0, 3.15, front + side * .08), Vector3(usable * .96, .55, .14), shop_color, false, rot)
 		else:
-			box(base+basis*Vector3(0,3.2,front+side*.4),Vector3(b.w*.8,.2,1.0),"white",false,Vector3(0,b.a,0))
-	# Rooftop water tank, parapet and solar panel silhouettes.
-	box(base+basis*Vector3(b.w*.25,height+.55,b.d*.2),Vector3(1.1,1.1,1.1),"dark")
-	box(base+basis*Vector3(-b.w*.2,height+.3,0),Vector3(2,.12,1.3),"blue",false,Vector3(.18,b.a,0))
+			box(base + basis * Vector3(-usable * .3, 1.1, front), Vector3(1.0, 2.2, .1), "wood", false, rot)
+			box(base + basis * Vector3(usable * .2, 1.6, front), Vector3(usable * .4, 1.3, .1), "glass" if not old else "dark", false, rot)
+		# Upper floors: one window strip per floor, balcony slab or chhajja.
+		for floor_index in range(1, floors):
+			var y: float = 1.55 + floor_index * 3.0
+			box(base + basis * Vector3(0, y, front), Vector3(usable * .82, 1.5, .1), "dark" if old else "glass", false, rot)
+			if old:
+				box(base + basis * Vector3(0, y + .95, front + side * .35), Vector3(usable * .9, .12, .8), "trim", false, rot)
+			else:
+				box(base + basis * Vector3(0, y - 1.05, front + side * .5), Vector3(usable * .7, .14, 1.1), "white", false, rot)
+				box(base + basis * Vector3(0, y - .5, front + side * 1.0), Vector3(usable * .7, .9, .06), "metal", false, rot)
 	draw_detail = false
+
+func sign_board(at: Vector3, ang: float, front: float, text: String, board_key: String, size: Vector3, text_color := Color("fff6e6"), font_size := 36) -> void:
+	# Painted board with readable text, facing the road.
+	box(at, size, board_key, false, Vector3(0, ang, 0))
+	var label := Label3D.new()
+	label.font = hindi_font
+	label.text = text
+	label.font_size = font_size
+	label.pixel_size = .0045
+	label.modulate = text_color
+	label.outline_size = 4
+	label.outline_modulate = Color(0, 0, 0, .55)
+	label.width = size.x / .0045
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.position = at + Basis(Vector3.UP, ang) * Vector3(0, 0, front * (size.z / 2 + .02))
+	label.rotation.y = ang + (0.0 if front > 0 else PI)
+	label.visibility_range_end = 110
+	cell(at).add_child(label)
+
+func parked_vehicle(at: Vector3, ang: float, kind: String, color: String) -> void:
+	# Static silhouette for forecourts (traffic/driving use city_vehicle.gd).
+	var basis := Basis(Vector3.UP, ang)
+	var rot := Vector3(0, ang, 0)
+	draw_detail = true
+	if kind == "ambulance" or kind == "jeep":
+		box(at + basis * Vector3(0, .95, 0), Vector3(1.8, 1.5, 4.4), "white", false, rot)
+		box(at + basis * Vector3(0, 1.0, 0), Vector3(1.84, .28, 4.0), "cross_red" if kind == "ambulance" else "police_blue", false, rot)
+		box(at + basis * Vector3(0, 1.75, 1.2), Vector3(.5, .2, .5), "cross_red" if kind == "ambulance" else "police_blue", false, rot)
+		box(at + basis * Vector3(0, 1.35, -1.5), Vector3(1.6, .6, 1.3), "glass", false, rot)
+	else:
+		box(at + basis * Vector3(0, .62, 0), Vector3(1.7, .5, 3.9), color, false, rot)
+		box(at + basis * Vector3(0, 1.12, .25), Vector3(1.5, .55, 1.9), "glass", false, rot)
+		box(at + basis * Vector3(0, 1.42, .25), Vector3(1.55, .08, 2.0), color, false, rot)
+	for side in [-1, 1]:
+		for z in [-1.35, 1.35]:
+			round_prop(at + basis * Vector3(side * .85, .34, z), Vector3(.3, .66, .66), "dark")
+	draw_detail = false
+
+func build_amenities() -> void:
+	for a in amenities:
+		if not map_bounds.has_point(Vector2(a.p[0], a.p[1])):
+			continue
+		amenity_count += 1
+		var p := Vector3(a.p[0], terrain_height(a.p[0], a.p[1]), a.p[1])
+		var ang: float = a.a
+		var front: float = a.get("front", 1)
+		var w: float = a.w
+		var d: float = a.d
+		var display_name: String = a.name if a.name != "" else ""
+		match a.kind:
+			"police": amenity_police(p, ang, front, w, d, display_name)
+			"hospital": amenity_hospital(p, ang, front, w, d, display_name)
+			"showroom": amenity_showroom(p, ang, front, w, d, display_name)
+			"theka": amenity_theka(p, ang, front, w, d)
+			"fuel": amenity_fuel(p, ang, front, w, d, display_name)
+			"bank": amenity_bank(p, ang, front, w, d, display_name)
+			"school": amenity_school(p, ang, front, w, d, display_name)
+			"temple": amenity_temple(p, ang, front, w, d, display_name)
+			"pharmacy": amenity_shop(p, ang, front, w, d, 6.0, "white", "cross_green", "मेडिकल स्टोर · " + (display_name if display_name != "" else "PHARMACY"))
+			"restaurant": amenity_shop(p, ang, front, w, d, 7.0, "ivory", "maroon", (display_name if display_name != "" else "RESTAURANT") + " · भोजनालय")
+			_: amenity_shop(p, ang, front, w, d, 6.0, "cream", SHOP_COLORS[int(abs(p.x)) % SHOP_COLORS.size()], display_name if display_name != "" else "GENERAL STORE")
+
+func lb(p: Vector3, ang: float, local: Vector3, size: Vector3, key: String, solid := false, tilt := 0.0) -> void:
+	box(p + Basis(Vector3.UP, ang) * local, size, key, solid, Vector3(tilt, ang, 0))
+
+func amenity_police(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	# Rajasthan thana: cream two-storey block with a blue band, portico, compound wall,
+	# gate pillars, striped barrier, flag mast, a parked jeep.
+	var bw: float = w * .78
+	var bd: float = d * .5
+	var back: float = -front * d * .22
+	lb(p, ang, Vector3(0, 3.5, back), Vector3(bw, 7, bd), "cream", true)
+	lb(p, ang, Vector3(0, 7.15, back), Vector3(bw + .5, .3, bd + .5), "trim")
+	lb(p, ang, Vector3(0, 3.3, back), Vector3(bw + .06, .5, bd + .06), "police_blue")
+	draw_detail = true
+	for side in [-1, 1]:
+		for floor_index in 2:
+			lb(p, ang, Vector3(0, 1.6 + floor_index * 3.0, back + side * (bd / 2 + .05)), Vector3(bw * .8, 1.4, .1), "dark")
+	# Portico.
+	lb(p, ang, Vector3(0, 3.6, back + front * (bd / 2 + 1.6)), Vector3(bw * .45, .25, 3.2), "cream")
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * bw * .2, 1.75, back + front * (bd / 2 + 2.9)), Vector3(.35, 3.5, .35), "cream")
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.6, back + front * (bd / 2 + .12)), ang, front, "पुलिस थाना\nPOLICE STATION\n" + display_name, "police_blue", Vector3(bw * .7, 1.6, .2), Color("ffffff"), 34)
+	# Compound wall with gate.
+	var fz: float = front * (d / 2 - .3)
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * (w * .5 - w * .17), .7, fz), Vector3(w * .34, 1.4, .3), "cream")
+		lb(p, ang, Vector3(side * w * .17, 1.1, fz), Vector3(.5, 2.2, .5), "ochre")
+		lb(p, ang, Vector3(side * (w / 2 - .15), .7, 0), Vector3(.3, 1.4, d), "cream")
+	lb(p, ang, Vector3(0, 1.0, fz + front * 1.2), Vector3(w * .3, .12, .12), "red")
+	lb(p, ang, Vector3(w * .13, .5, fz + front * 1.2), Vector3(.3, 1.0, .3), "white")
+	lb(p, ang, Vector3(-w * .15, 4.0, back + front * (bd / 2 + 3.5)), Vector3(.1, 8, .1), "metal")
+	for i in 3:
+		lb(p, ang, Vector3(-w * .15 + .55, 7.75 - i * .3, back + front * (bd / 2 + 3.5)), Vector3(1.0, .3, .04), ["saffron", "white", "green"][i])
+	draw_detail = false
+	parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(w * .3, 0, back + front * (bd / 2 + 3.2)), ang, "jeep", "white")
+
+func amenity_hospital(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	var big: bool = w > 20
+	var height: float = 15.0 if big else 7.0
+	var bw: float = w * .8
+	var bd: float = d * .55
+	var back: float = -front * d * .18
+	lb(p, ang, Vector3(0, height / 2, back), Vector3(bw, height, bd), "white", true)
+	lb(p, ang, Vector3(0, height + .15, back), Vector3(bw + .4, .3, bd + .4), "trim")
+	draw_detail = true
+	var floors: int = int(height / 3.0)
+	for side in [-1, 1]:
+		for floor_index in floors:
+			lb(p, ang, Vector3(0, 1.6 + floor_index * 3.0, back + side * (bd / 2 + .05)), Vector3(bw * .84, 1.5, .1), "sky_blue")
+			lb(p, ang, Vector3(0, 2.6 + floor_index * 3.0, back + side * (bd / 2 + .4)), Vector3(bw * .9, .12, .8), "white")
+	# Red cross and canopy.
+	var top := Vector3(0, height + 1.6, back)
+	lb(p, ang, top, Vector3(2.4, .7, .3), "cross_red")
+	lb(p, ang, top, Vector3(.7, 2.4, .3), "cross_red")
+	lb(p, ang, Vector3(0, 3.4, back + front * (bd / 2 + 2.0)), Vector3(bw * .5, .2, 4.0), "white")
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * bw * .22, 1.7, back + front * (bd / 2 + 3.8)), Vector3(.3, 3.4, .3), "white")
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.9 if big else 4.4, back + front * (bd / 2 + .12)), ang, front, ("अस्पताल · HOSPITAL\n" if big else "क्लिनिक · CLINIC\n") + display_name, "white", Vector3(bw * .8, 1.5, .18), Color("c8302a"), 32)
+	draw_detail = false
+	if big:
+		parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(bw * .3, 0, back + front * (bd / 2 + 5.0)), ang, "ambulance", "white")
+	else:
+		lb(p, ang, Vector3(0, .3, back + front * (bd / 2 + 1.8)), Vector3(bw * .4, .6, 3.2), "concrete", true)
+
+func amenity_showroom(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	# Glass box with a white fascia band, brand name and cars on a lit plinth.
+	var bw: float = w * .86
+	var bd: float = d * .6
+	var back: float = -front * d * .15
+	lb(p, ang, Vector3(0, .25, back), Vector3(bw + 1, .5, bd + 1), "concrete", true)
+	lb(p, ang, Vector3(0, 4.5, back), Vector3(bw, 8.0, bd), "showroom_glass", true)
+	lb(p, ang, Vector3(0, .6, back), Vector3(bw * .9, .5, bd * .8), "white")
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * (bw / 2), 4.5, back), Vector3(.5, 8.2, bd + .1), "white")
+	lb(p, ang, Vector3(0, 8.9, back), Vector3(bw + .9, 1.4, bd + .9), "white")
+	lb(p, ang, Vector3(0, 9.75, back), Vector3(bw + 1.1, .3, bd + 1.1), "trim")
+	draw_detail = true
+	for i in range(1, 4):
+		lb(p, ang, Vector3(-bw / 2 + i * bw / 4, 4.5, back + front * (bd / 2)), Vector3(.14, 8, .2), "metal")
+	for i in 6:
+		lb(p, ang, Vector3(-bw / 2 + 1.5 + i * (bw - 3) / 5, 7.8, back), Vector3(.3, .08, .3), "lamp")
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 8.9, back + front * (bd / 2 + .6)), ang, front, (display_name if display_name != "" else "CAR SHOWROOM").to_upper() + "  ·  कार शोरूम", "white", Vector3(bw * .8, 1.3, .1), Color("1d2a3a"), 44)
+	var colors := ["red", "white", "sky_blue", "dark"]
+	for i in 3:
+		parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(-bw * .3 + i * bw * .3, .5, back), ang + PI / 2, "car", colors[i])
+	parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(bw * .25, 0, back + front * (bd / 2 + 4.5)), ang, "car", colors[3])
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * bw * .42, 3.5, back + front * (bd / 2 + 4.5)), Vector3(.08, 7, .08), "metal")
+		lb(p, ang, Vector3(side * bw * .42 + .5, 6.5, back + front * (bd / 2 + 4.5)), Vector3(1.0, .6, .04), "blue")
+
+func amenity_theka(p: Vector3, ang: float, front: float, w: float, d: float) -> void:
+	# Rajasthan excise retail: small cream kiosk, iron grille counter, green-white board.
+	lb(p, ang, Vector3(0, 1.8, 0), Vector3(w, 3.6, d), "cream", true)
+	lb(p, ang, Vector3(0, 3.7, 0), Vector3(w + .3, .2, d + .3), "concrete")
+	draw_detail = true
+	var fz: float = front * (d / 2 + .05)
+	lb(p, ang, Vector3(0, 1.5, fz), Vector3(w * .7, 1.6, .1), "dark")
+	for i in 6:
+		lb(p, ang, Vector3(-w * .3 + i * w * .12, 1.5, fz + front * .05), Vector3(.04, 1.6, .04), "metal")
+	lb(p, ang, Vector3(0, .95, fz + front * .35), Vector3(w * .75, .12, .7), "concrete")
+	for i in 5:
+		round_prop(p + Basis(Vector3.UP, ang) * Vector3(-w * .25 + i * w * .12, 1.3, fz - front * .4), Vector3(.14, .4, .14), ["green", "dark", "yellow", "green", "maroon"][i])
+	lb(p, ang, Vector3(w * .55, .6, fz + front * 1.4), Vector3(.06, 1.2, .06), "metal")
+	lb(p, ang, Vector3(w * .2, 1.1, fz + front * 1.4), Vector3(w * .7, .05, .05), "metal")
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 3.1, fz + front * .12), ang, front, "देसी · अंग्रेज़ी शराब की दुकान\nWINE & BEER SHOP", "green", Vector3(w * .95, .9, .16), Color("ffffff"), 26)
+
+func amenity_fuel(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	var brand: String = display_name.to_upper()
+	var key: String = "orange" if "INDIAN" in brand else ("blue" if "HP" in brand or "HINDUSTAN" in brand else "yellow")
+	lb(p, ang, Vector3(0, .08, 0), Vector3(w, .16, d), "tarmac")
+	lb(p, ang, Vector3(0, 5.6, 0), Vector3(w * .9, .45, d * .7), "white")
+	lb(p, ang, Vector3(0, 5.35, 0), Vector3(w * .92, .12, d * .72), key)
+	for sx in [-1, 1]:
+		for sz in [-1, 1]:
+			lb(p, ang, Vector3(sx * w * .32, 2.7, sz * d * .22), Vector3(.45, 5.4, .45), "white", true)
+	draw_detail = true
+	for sx in [-1, 1]:
+		lb(p, ang, Vector3(sx * w * .18, .2, 0), Vector3(2.0, .4, d * .45), "concrete", true)
+		for sz in [-1, 1]:
+			lb(p, ang, Vector3(sx * w * .18, 1.0, sz * d * .13), Vector3(.9, 1.6, .5), "white")
+			lb(p, ang, Vector3(sx * w * .18, 1.4, sz * d * .13), Vector3(.92, .35, .52), key)
+	for i in 4:
+		lb(p, ang, Vector3(-w * .3 + i * w * .2, 5.3, 0), Vector3(.3, .08, .3), "lamp")
+	draw_detail = false
+	lb(p, ang, Vector3(0, 1.5, -front * (d / 2 - 2.0)), Vector3(w * .35, 3.0, 3.5), "white", true)
+	lb(p, ang, Vector3(w * .42, 3.8, front * (d / 2 - .8)), Vector3(.25, 7.6, .25), "metal")
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(w * .42, 7.0, front * (d / 2 - .8)), ang, front, display_name if display_name != "" else "PETROL PUMP", key, Vector3(3.6, 1.6, .3), Color("ffffff"), 30)
+
+func amenity_bank(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	lb(p, ang, Vector3(0, 4.0, 0), Vector3(w, 8, d), "concrete", true)
+	lb(p, ang, Vector3(0, 8.15, 0), Vector3(w + .3, .3, d + .3), "trim")
+	draw_detail = true
+	var fz: float = front * (d / 2 + .05)
+	lb(p, ang, Vector3(0, 1.6, fz), Vector3(w * .7, 2.6, .1), "glass")
+	lb(p, ang, Vector3(0, 5.6, fz), Vector3(w * .8, 1.5, .1), "glass")
+	lb(p, ang, Vector3(w * .32, 1.3, fz + front * .9), Vector3(1.6, 2.5, 1.6), "white", true)
+	lb(p, ang, Vector3(w * .32, 1.5, fz + front * 1.72), Vector3(.9, .9, .05), "dark")
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 3.6, fz + front * .1), ang, front, (display_name if display_name != "" else "BANK") + " · बैंक", "blue", Vector3(w * .85, 1.0, .16), Color("ffffff"), 30)
+
+func amenity_school(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	var bd: float = d * .4
+	var back: float = -front * d * .25
+	lb(p, ang, Vector3(0, 3.5, back), Vector3(w * .95, 7, bd), "ochre", true)
+	lb(p, ang, Vector3(0, 7.15, back), Vector3(w * .95 + .4, .3, bd + .4), "trim")
+	draw_detail = true
+	for floor_index in 2:
+		lb(p, ang, Vector3(0, 1.6 + floor_index * 3.0, back + front * (bd / 2 + .05)), Vector3(w * .85, 1.5, .1), "blue")
+		lb(p, ang, Vector3(0, 2.6 + floor_index * 3.0, back + front * (bd / 2 + .4)), Vector3(w * .9, .12, .8), "white")
+	# Playground, boundary wall and flag.
+	lb(p, ang, Vector3(0, .05, front * d * .2), Vector3(w * .9, .1, d * .45), "sand")
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * (w / 2 - .15), .6, 0), Vector3(.3, 1.2, d), "ochre")
+	lb(p, ang, Vector3(0, .6, front * (d / 2 - .15)), Vector3(w * .7, 1.2, .3), "ochre")
+	lb(p, ang, Vector3(w * .35, 3.5, front * d * .3), Vector3(.1, 7, .1), "metal")
+	for i in 3:
+		lb(p, ang, Vector3(w * .35 + .5, 6.8 - i * .3, front * d * .3), Vector3(.9, .3, .04), ["saffron", "white", "green"][i])
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.9, back + front * (bd / 2 + .12)), ang, front, display_name if display_name != "" else "SCHOOL · विद्यालय", "blue", Vector3(w * .7, 1.1, .16), Color("ffffff"), 30)
+
+func amenity_temple(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
+	var s: float = minf(w, d)
+	lb(p, ang, Vector3(0, .5, 0), Vector3(s, 1.0, s), "cream", true)
+	lb(p, ang, Vector3(0, 3.0, 0), Vector3(s * .6, 4.0, s * .6), "ivory", true)
+	draw_detail = true
+	for i in 5:
+		lb(p, ang, Vector3(0, 5.4 + i * 1.0, 0), Vector3(s * (.5 - i * .08), 1.0, s * (.5 - i * .08)), "saffron" if i % 2 else "ochre")
+	round_prop(p + Vector3(0, 10.8, 0), Vector3(1.4, 1.4, 1.4), "yellow")
+	lb(p, ang, Vector3(0, 12.0, 0), Vector3(.06, 2.2, .06), "metal")
+	lb(p, ang, Vector3(.4, 12.7, 0), Vector3(.8, .5, .03), "saffron")
+	for side in [-1, 1]:
+		lb(p, ang, Vector3(side * s * .35, 2.2, front * s * .3), Vector3(.4, 3.4, .4), "cream")
+	lb(p, ang, Vector3(0, 2.0, front * s * .3), Vector3(s * .8, .3, .5), "cream")
+	lb(p, ang, Vector3(0, 1.6, front * (s * .3 + .1)), Vector3(1.6, 2.4, .1), "dark")
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.3, front * (s * .3 + .15)), ang, front, display_name if display_name != "" else "मंदिर · TEMPLE", "saffron", Vector3(s * .6, .8, .14), Color("fff6e0"), 26)
+
+func amenity_shop(p: Vector3, ang: float, front: float, w: float, d: float, height: float, wall: String, accent: String, text: String) -> void:
+	lb(p, ang, Vector3(0, height / 2, 0), Vector3(w, height, d), wall, true)
+	lb(p, ang, Vector3(0, height + .12, 0), Vector3(w + .3, .24, d + .3), "trim")
+	draw_detail = true
+	var fz: float = front * (d / 2 + .05)
+	lb(p, ang, Vector3(0, 1.4, fz), Vector3(w * .8, 2.6, .1), "glass" if accent == "cross_green" else "dark")
+	lb(p, ang, Vector3(0, 2.85, fz + front * .55), Vector3(w * .9, .12, 1.2), accent if accent != "cross_green" else "green", false, front * .22)
+	if accent == "cross_green":
+		lb(p, ang, Vector3(w * .4, 4.3, fz), Vector3(1.2, .4, .14), "cross_green")
+		lb(p, ang, Vector3(w * .4, 4.3, fz), Vector3(.4, 1.2, .14), "cross_green")
+	draw_detail = false
+	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 3.6, fz + front * .1), ang, front, text, accent if accent != "cross_green" else "white", Vector3(w * .85, .8, .14), Color("fff6e6") if accent != "cross_green" else Color("1f7a3a"), 24)
 
 func build_parks() -> void:
 	for park_data in data.parks:

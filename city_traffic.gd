@@ -6,14 +6,18 @@ var random := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	random.seed=86
+	var paints := [Color("e9e4d6"), Color("b9342c"), Color("3b5f9a"), Color("6c7378"), Color("d9d9d4"), Color("2f2f33")]
 	for i in 8:
 		var car=preload("res://city_vehicle.gd").new()
 		car.game=game
+		# Every third vehicle is an auto-rickshaw, the rest are hatchbacks in different paints.
+		car.kind="auto" if i%3==2 else "car"
+		car.paint=paints[i%paints.size()]
 		add_child(car)
 		car.set_physics_process(false)
 		car.collision_layer=4
 		car.hide()
-		cars.append({"node":car,"route":PackedVector3Array(),"index":0,"speed":5.0+i*.5})
+		cars.append({"node":car,"route":PackedVector3Array(),"index":0,"speed":(4.0 if car.kind=="auto" else 5.5)+i*.4})
 
 func pick_route(car: Dictionary) -> void:
 	var candidates: Array=[]

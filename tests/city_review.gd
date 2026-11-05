@@ -49,4 +49,21 @@ func capture() -> void:
 	await shot("08-nahargarh-fort")
 	await place(Vector3(scene.world.landmarks[6].p[0],0,scene.world.landmarks[6].p[1]),PI*0.5,-0.05)
 	await shot("09-brahmpuri-ridge-view")
+	# Real OSM amenities: look at each from the road side.
+	for spec in [["police","10-panipech-police-station"],["showroom","11-car-showroom"],["hospital","12-hospital"],["theka","13-wine-shop"],["fuel","14-petrol-pump"]]:
+		var pick: Dictionary={}
+		for a in scene.world.amenities:
+			if a.kind==spec[0] and (pick.is_empty() or a.w>pick.w):
+				pick=a
+		if pick.is_empty():
+			continue
+		var basis := Basis(Vector3.UP,pick.a)
+		var front: float = pick.get("front",1)
+		var at: Vector3 = Vector3(pick.p[0],0,pick.p[1])+basis*Vector3(0,0,front*(pick.d/2+14))
+		var look: Vector3 = basis*Vector3(0,0,-front)
+		await place(at,atan2(-look.x,-look.z),-0.1)
+		await shot(spec[1])
+	# The player's car up close.
+	await place(scene.vehicle.position+Vector3(-5,0,3),atan2(5,-3),-0.15)
+	await shot("15-player-car")
 	quit()

@@ -12,6 +12,8 @@ var health := 100.0
 var stamina := 100.0
 var driving := false
 var speed := 0
+# Real amenities drawn on the atlas/radar (OSM, see city_world.amenities).
+const AMENITY_STYLE := {"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
 
 func action_centers() -> Dictionary:
 	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"crouch":Vector2(size.x-450,size.y-90)}
@@ -114,10 +116,10 @@ func button_circle(at: Vector2,label: String,radius: float,color: Color) -> void
 	draw_string(font,at+Vector2(-radius,5),label,HORIZONTAL_ALIGNMENT_CENTER,radius*2,12,Color("f3e5d2"))
 
 func draw_radar() -> void:
-	var rect := Rect2(24,144,212,190)
+	var rect := Rect2(24,144,184,156)
 	draw_style_box(panel(Color("15282e")),rect)
 	var origin := rect.get_center()
-	var scale := .65
+	var scale := .55
 	for road in game.world.data.roads:
 		if road.p.size()<2:
 			continue
@@ -132,17 +134,24 @@ func draw_radar() -> void:
 				draw_line(a,b,Color("e0a44a") if authored else Color("718282"),maxf(1,road.width*scale*.35))
 	draw_circle(origin,4,Color("f4dc9e"))
 	draw_line(origin,origin+Vector2(-sin(map_yaw),-cos(map_yaw))*14,Color("f4dc9e"),2)
-	text_at(Vector2(36,323),"N ↑     JAIPUR / 65% SCALE",10,Color("adbdba"))
+	for a in game.world.amenities:
+		if not AMENITY_STYLE.has(a.kind):
+			continue
+		var at := origin+(Vector2(a.p[0],a.p[1])-Vector2(map_player.x,map_player.z))*scale
+		if rect.grow(-6).has_point(at):
+			draw_circle(at,3.5,AMENITY_STYLE[a.kind][1])
+	text_at(Vector2(36,290),"N ↑   JAIPUR / 65%",10,Color("adbdba"))
 	if has_waypoint:
 		var direction := Vector2(waypoint.x-map_player.x,waypoint.z-map_player.z)
 		var at := origin+direction.limit_length(100)*.65
 		draw_circle(at,5,Color("75cbbb"))
-		text_at(Vector2(30,355),"DESTINATION  %d m"%int(direction.length()),12,Color("91d8c7"))
+		text_at(Vector2(30,320),"DESTINATION  %d m"%int(direction.length()),12,Color("91d8c7"))
 
 func draw_map() -> void:
 	draw_rect(Rect2(Vector2.ZERO,size),Color("10242c"))
 	text_at(Vector2(36,46),"JAIPUR  /  CITY ATLAS",27,Color("f1ddba"))
-	text_at(Vector2(36,74),"5 × 4.95 km · roads from OpenStreetMap · tap a district to travel",13,Color("9eb5bb"))
+	var km: Vector2 = game.world.map_bounds.size/1000.0
+	text_at(Vector2(36,74),"%.1f × %.1f km playable (65%% scale of %.1f × %.1f km of real Jaipur) · roads, parks and %d real places from OpenStreetMap · tap a district to travel"%[km.x,km.y,km.x/.65,km.y/.65,game.world.amenities.size()],13,Color("9eb5bb"))
 	for road in game.world.data.roads:
 		var line := PackedVector2Array()
 		for p in road.p:
@@ -178,6 +187,26 @@ func draw_map() -> void:
 	text_at(here+Vector2(10,5),"YOU",12,Color("7de4cf"))
 	var car: Vector3 = game.vehicle.position
 	draw_circle(map_point(car.x,car.z),4,Color("d5a7ed"))
+	var area:=Rect2(30,100,size.x-370,size.y-150)
+	for a in game.world.amenities:
+		if not AMENITY_STYLE.has(a.kind):
+			continue
+		var at := map_point(a.p[0],a.p[1])
+		if not area.has_point(at):
+			continue
+		var style: Array = AMENITY_STYLE[a.kind]
+		draw_circle(at,6.5,Color(0,0,0,.45))
+		draw_circle(at,5.5,style[1])
+		draw_string(font,at+Vector2(-5.5,4),style[0],HORIZONTAL_ALIGNMENT_CENTER,11,9,Color("102028"))
+		if map_zoom>=2.0 and a.kind in ["police","hospital","showroom","fuel"] and a.name!="":
+			text_at(at+Vector2(8,4),a.name,10,style[1])
+	var legend_x := 35.0
+	for kind in ["police","hospital","showroom","theka","fuel","temple","bank","school"]:
+		var style: Array = AMENITY_STYLE[kind]
+		draw_circle(Vector2(legend_x+5,size.y-64),5,style[1])
+		var label: String = {"police":"police","hospital":"hospital/clinic","showroom":"car showroom","theka":"wine shop","fuel":"petrol pump","temple":"temple","bank":"bank/ATM","school":"school"}[kind]
+		text_at(Vector2(legend_x+14,size.y-60),label,10,Color("c9d6d6"))
+		legend_x += 26+label.length()*5.6
 	for road in game.world.authored_roads:
 		var mid: Array = road.p[road.p.size()/2]
 		var at := map_point(mid[0],mid[1])

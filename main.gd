@@ -91,11 +91,13 @@ func _ready() -> void:
 	portrait_camera.rotation.y = PI
 	vehicle = preload("res://city_vehicle.gd").new()
 	vehicle.game = self
+	vehicle.paint = Color("f0ece2")
 	vehicle.position = Vector3(25,1,4)
 	vehicle.heading = -PI/2
 	add_child(vehicle)
 	var traffic = preload("res://city_traffic.gd").new()
 	traffic.game = self
+	traffic.name = "Traffic"
 	add_child(traffic)
 	hud.travel_requested.connect(travel_to)
 	actions = preload("res://city_actions.gd").new()

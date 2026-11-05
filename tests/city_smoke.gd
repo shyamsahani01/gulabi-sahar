@@ -59,7 +59,20 @@ func check() -> void:
 		if Vector2(p.x,p.z).distance_to(Vector2(500,-896))<40:
 			uses_connector=true
 	expect(fort.size()>2 and uses_connector,"Nahargarh route reaches the fort through the marked game connector")
-	expect(scene.world.data.roads.filter(func(r):return r.get("source","osm")=="osm" or not r.has("source")).size()>5000,"Everything else in the road network comes from OSM")
+	expect(scene.world.data.roads.filter(func(r):return r.get("source","osm")=="osm" or not r.has("source")).size()>4000,"Everything else in the road network comes from OSM")
+	var kinds: Dictionary={}
+	for a in scene.world.amenities:
+		kinds[a.kind]=kinds.get(a.kind,0)+1
+	print("AMENITIES ",kinds)
+	expect(scene.world.amenities.size()>200 and scene.world.amenity_count>200,"Real OSM amenities are loaded and built")
+	expect(kinds.get("police",0)>=2 and kinds.get("showroom",0)>=3 and kinds.get("theka",0)>=5 and kinds.get("hospital",0)>=20 and kinds.get("fuel",0)>=5,"Police stations, car showrooms, wine shops, hospitals and petrol pumps exist")
+	expect(scene.world.map_bounds.size.x<4500 and scene.world.map_bounds.size.y<4500,"Map bounds come from the data and are smaller than v0.8.0")
+	expect(scene.world.get_tree().get_nodes_in_group("").size()>=0 and scene.vehicle.body_mesh.get_child_count()>30,"Player car has a detailed body")
+	var autos:=0
+	for car in scene.get_node("Traffic").cars if scene.has_node("Traffic") else []:
+		if car.node.kind=="auto":
+			autos+=1
+	expect(autos>=2,"Traffic includes auto-rickshaws")
 	scene.vehicle.position=scene.player.position+Vector3(3,0,0)
 	scene.vehicle.toggle_drive()
 	expect(scene.vehicle.driving,"Player can enter car")

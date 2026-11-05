@@ -184,7 +184,20 @@ func close_dialogue() -> void:
 func directions() -> void:
 	var district: String=game.world.district_at(game.player.position).id
 	var hints: Dictionary={"chandpole":"Bazaar lanes, Chandpole Gate and the road toward Shastri Nagar.","vdn":"Residential sectors, parks and the Central Spine shopping streets.","hills":"Brahmpuri below; Nahargarh fort and the Aravalli ridge above.","sikar":"Sikar Road links the northern colonies and bus depots.","shastri":"Shastri Nagar connects the old city and Vidhyadhar Nagar."}
-	notify(hints[district])
+	var nearest_text := ""
+	for kind in ["police","hospital","theka","showroom","fuel"]:
+		var best := 1e9
+		var best_name := ""
+		for a in game.world.amenities:
+			if a.kind != kind:
+				continue
+			var dist: float = Vector2(a.p[0]-game.player.position.x,a.p[1]-game.player.position.z).length()
+			if dist < best:
+				best = dist
+				best_name = a.name if a.name != "" else {"police":"police station","hospital":"clinic","theka":"wine shop","showroom":"car showroom","fuel":"petrol pump"}[kind]
+		if best < 1e8:
+			nearest_text += "\n%s %d m" % [best_name, int(best)]
+	notify(hints[district] + nearest_text)
 func work() -> void:
 	if not mission_active:
 		mission_active=true
