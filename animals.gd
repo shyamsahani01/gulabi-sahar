@@ -19,6 +19,8 @@ const KINDS := {
 	"camel": {"body": Vector3(0.75, 1.0, 2.4), "head": Vector3(0.3, 0.32, 0.6), "leg": 1.4, "speed": 0.9, "idle": 0.6, "hump": true, "tail": true, "neck": true},
 }
 const COLORS := {"cow": ["e8e2d6", "7a4a2f", "c9b9a4"], "dog": ["a68a63", "4d4036", "d9cdb8"], "goat": ["e2dccf", "3a3330", "9c7a55"], "monkey": ["8f7b66", "b09c86"], "pigeon": ["6d6f7a", "9aa0ad"], "peacock": ["1f6f8f", "1e8a63"], "camel": ["c9a56e"]}
+# Rigged CC0 models (Quaternius farm pack) replace the box builds where one exists.
+const MODELS := {"cow": {"scene": "res://assets/animals/cow.glb", "scale": 0.24, "tints": ["ffffff", "c9a98a", "8a7a6a"]}, "dog": {"scene": "res://assets/animals/pug.glb", "scale": 0.22, "tints": ["ffffff", "b8a58a", "7a6a5a"]}, "goat": {"scene": "res://assets/animals/sheep.glb", "scale": 0.2, "tints": ["ffffff", "d9cdb8", "9c8a70"]}}
 
 func _ready() -> void:
 	name = "Animals"
@@ -56,6 +58,35 @@ func spawn(kind: String, at: Vector3, area: Rect2, variant := 0, ground_y := 0.0
 	add_child(root)
 	var body := Node3D.new()
 	root.add_child(body)
+	if MODELS.has(kind):
+		var model_spec: Dictionary = MODELS[kind]
+		var model: Node3D = load(model_spec.scene).instantiate()
+		model.scale = Vector3.ONE * model_spec.scale
+		model.rotation.y = PI
+		body.add_child(model)
+		var tint := Color(model_spec.tints[variant % model_spec.tints.size()])
+		for mesh in model.find_children("*", "MeshInstance3D", true, false):
+			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+			for surface in range(mesh.mesh.get_surface_count()):
+				var original = mesh.get_active_material(surface)
+				if original is StandardMaterial3D:
+					var mat: StandardMaterial3D = original.duplicate()
+					mat.albedo_color = mat.albedo_color * tint
+					mat.roughness = 0.9
+					mesh.set_surface_override_material(surface, mat)
+		var players := model.find_children("*", "AnimationPlayer", true, false)
+		var animator: AnimationPlayer = players[0] if players.size() > 0 else null
+		var clips := {}
+		if animator != null:
+			for clip_name in animator.get_animation_list():
+				var short := str(clip_name).get_slice("|", str(clip_name).count("|"))
+				clips[short] = clip_name
+				animator.get_animation(clip_name).loop_mode = Animation.LOOP_LINEAR
+			if clips.has("Idle"):
+				animator.play(clips["Idle"])
+				animator.seek(randf() * 2.0, true)
+		creatures.append({"root": root, "body": body, "legs": [], "wings": [], "kind": kind, "spec": spec, "area": area, "target": at, "wait": randf_range(0.5, 3.0), "phase": randf() * TAU, "speed": spec.speed * randf_range(0.8, 1.2), "ground": ground_y, "resting": false, "rest_timer": 0.0, "animator": animator, "clips": clips, "current": "Idle"})
+		return root
 	var leg_h: float = spec.leg
 	var body_size: Vector3 = spec.body
 	body.position.y = leg_h
@@ -103,8 +134,18 @@ func spawn(kind: String, at: Vector3, area: Rect2, variant := 0, ground_y := 0.0
 		for s in [-1, 1]:
 			var wing := part(body, Vector3(s * 0.12, body_size.y * 0.7, 0), Vector3(0.28, 0.03, 0.28), hex)
 			wings.append(wing)
-	creatures.append({"root": root, "body": body, "legs": legs, "wings": wings, "kind": kind, "spec": spec, "area": area, "target": at, "wait": randf_range(0.5, 3.0), "phase": randf() * TAU, "speed": spec.speed * randf_range(0.8, 1.2), "ground": ground_y, "resting": false, "rest_timer": 0.0})
+	creatures.append({"root": root, "body": body, "legs": legs, "wings": wings, "kind": kind, "spec": spec, "area": area, "target": at, "wait": randf_range(0.5, 3.0), "phase": randf() * TAU, "speed": spec.speed * randf_range(0.8, 1.2), "ground": ground_y, "resting": false, "rest_timer": 0.0, "animator": null, "clips": {}, "current": "Idle"})
 	return root
+
+func play_clip(c: Dictionary, wanted: String) -> void:
+	var animator: AnimationPlayer = c.animator
+	if animator == null:
+		return
+	var clips: Dictionary = c.clips
+	var choice := wanted if clips.has(wanted) else "Idle"
+	if c.current != choice and clips.has(choice):
+		animator.play(clips[choice], 0.25)
+		c.current = choice
 
 func _process(delta: float) -> void:
 	for c in creatures:
@@ -114,10 +155,14 @@ func _process(delta: float) -> void:
 		var spec: Dictionary = c.spec
 		var body: Node3D = c.body
 		c.phase += delta
+		var modelled: bool = c.animator != null
 		if c.resting:
 			c.rest_timer -= delta
-			body.position.y = spec.leg * 0.55 + sin(c.phase * 1.5) * 0.01
-			body.rotation.x = 0.0
+			if modelled:
+				play_clip(c, "Idle")
+			else:
+				body.position.y = spec.leg * 0.55 + sin(c.phase * 1.5) * 0.01
+				body.rotation.x = 0.0
 			if c.rest_timer <= 0:
 				c.resting = false
 				c.wait = 0.5
@@ -149,6 +194,13 @@ func _process(delta: float) -> void:
 					var ground: float = world.terrain_height(root.position.x, root.position.z)
 					root.position.y = maxf(c.ground, ground)
 				root.rotation.y = lerp_angle(root.rotation.y, atan2(-direction.x, -direction.z), delta * 5)
+		if modelled:
+			play_clip(c, "Walk" if moving else "Idle")
+			if moving and not c.clips.has("Walk"):
+				body.position.y = absf(sin(c.phase * 7.0 * c.speed)) * 0.05
+			else:
+				body.position.y = 0.0
+			continue
 		var swing := sin(c.phase * (9.0 if spec.has("bird") else 6.0) * c.speed) * (0.55 if moving else 0.0)
 		var legs: Array = c.legs
 		for i in range(legs.size()):

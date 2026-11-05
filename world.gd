@@ -39,27 +39,47 @@ func make_materials() -> void:
 	mats["glass"].roughness = 0.25
 	mats["glass"].metallic = 0.3
 	mats["glass"].metallic_specular = 0.7
-	for key in ["hm_pink", "hm_red", "terracotta"]:
-		mats[key].albedo_texture = load("res://assets/textures/weathered_Diffuse.jpg")
-		mats[key].normal_enabled = true
-		mats[key].normal_texture = load("res://assets/textures/weathered_nor_gl.jpg")
-		mats[key].normal_scale = 0.3
-		mats[key].uv1_scale = Vector3.ONE * 0.45
-		mats[key].uv1_triplanar = true
-		mats[key].uv1_world_triplanar = true
-	for key in ["white", "cream", "concrete"]:
-		mats[key].albedo_texture = load("res://assets/textures/plaster_Diffuse.jpg")
-		mats[key].normal_enabled = true
-		mats[key].normal_texture = load("res://assets/textures/plaster_nor_gl.jpg")
-		mats[key].normal_scale = 0.25
-		mats[key].uv1_scale = Vector3.ONE * 0.5
-		mats[key].uv1_triplanar = true
-		mats[key].uv1_world_triplanar = true
-	mats["tarmac"].albedo_texture = load("res://assets/textures/asphalt_Diffuse.jpg")
-	mats["tarmac"].uv1_scale = Vector3.ONE * 0.2
-	mats["tarmac"].uv1_triplanar = true
-	mats["tarmac"].uv1_world_triplanar = true
-	mats["tarmac"].albedo_color = Color(0.55, 0.55, 0.54)
+	# Real CC0 PBR surfaces (Poly Haven, see assets/textures/polyhaven_sources.json).
+	pbr("hm_pink", "sandstone", Color("c9806a"), 0.35, 0.5)
+	pbr("hm_red", "sandstone", Color("a85f4b"), 0.35, 0.5)
+	pbr("fort", "sandstone", Color("b3a384"), 0.3, 0.7)
+	pbr("plaster", "plasterwall", Color("e6d8bd"), 0.5, 0.6)
+	pbr("rose", "roughplaster", Color("d9a28a"), 0.45, 0.7)
+	pbr("ochre", "paintedwall", Color("dcbf90"), 0.5, 0.5)
+	pbr("terracotta", "roughplaster", Color("c07656"), 0.45, 0.7)
+	pbr("white", "paintedwall", Color("efe9dc"), 0.5, 0.4)
+	pbr("cream", "paintedwall", Color("e8dabd"), 0.5, 0.4)
+	pbr("trim", "paintedwall", Color("efe6d4"), 0.6, 0.4)
+	pbr("concrete", "concrete", Color("c4bfb4"), 0.4, 0.5)
+	pbr("grey", "concrete", Color("8f8f8a"), 0.4, 0.5)
+	pbr("stone", "cobble", Color("cfc5b4"), 0.5, 0.8)
+	pbr("road", "asphalt2", Color("8c8a86"), 0.2, 0.6)
+	pbr("tarmac", "asphalt2", Color("6a6a69"), 0.2, 0.6)
+	pbr("brick", "brick", Color("c89a86"), 0.5, 0.6)
+	pbr("wood", "wornwood", Color("b08a66"), 0.7, 0.6)
+	pbr("metal", "metal", Color("6d7274"), 0.6, 0.6)
+	mats["metal"].metallic = 0.6
+	mats["metal"].roughness = 0.55
+	pbr("grass", "grass", Color("9fbe7a"), 0.35, 0.6)
+	pbr("hedge", "grass", Color("5d8a4a"), 0.9, 0.6)
+	pbr("hill_rock", "rock", Color("b4a593"), 0.3, 0.7)
+	pbr("sand", "scrubland", Color("d2c2a2"), 0.25, 0.5)
+	pbr("scrub", "scrubland", Color("8da06f"), 0.9, 0.5)
+
+func pbr(key: String, short: String, tint: Color, scale: float, normal: float) -> void:
+	var mat: StandardMaterial3D = mats[key]
+	mat.albedo_color = tint
+	mat.albedo_texture = load("res://assets/textures/" + short + "_Diffuse.jpg")
+	mat.normal_enabled = true
+	mat.normal_texture = load("res://assets/textures/" + short + "_nor_gl.jpg")
+	mat.normal_scale = normal
+	mat.roughness_texture = load("res://assets/textures/" + short + "_Rough.jpg")
+	mat.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_RED
+	mat.roughness = 1.0
+	mat.uv1_scale = Vector3.ONE * scale
+	mat.uv1_triplanar = true
+	mat.uv1_world_triplanar = true
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 
 func lighting() -> void:
 	super.lighting()
@@ -70,8 +90,23 @@ func lighting() -> void:
 			env.fog_light_color = Color("d9cbb4")
 			env.fog_density = 0.0006
 			env.fog_sky_affect = 0.25
+			env.tonemap_mode = Environment.TONE_MAPPER_ACES
+			env.tonemap_exposure = 1.05
+			env.glow_enabled = true
+			env.glow_intensity = 0.35
+			env.glow_bloom = 0.08
+			env.glow_hdr_threshold = 1.1
+			env.adjustment_enabled = true
+			env.adjustment_contrast = 1.06
+			env.adjustment_saturation = 1.08
 		elif child is DirectionalLight3D:
-			child.directional_shadow_max_distance = 60
+			child.light_energy = 0.95
+			child.rotation_degrees = Vector3(-42, -48, 0)
+			child.directional_shadow_max_distance = 70
+			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS
+			child.directional_shadow_blend_splits = true
+			child.shadow_bias = 0.03
+			child.shadow_normal_bias = 1.2
 
 # ---------------------------------------------------------------- world ----
 
@@ -903,11 +938,15 @@ func terrain_mesh() -> void:
 	instance.mesh = mesh
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
+	mat.albedo_color = Color(1.25, 1.2, 1.1)
 	mat.roughness = 1.0
-	mat.albedo_texture = load("res://assets/textures/plaster_Diffuse.jpg")
+	mat.albedo_texture = load("res://assets/textures/scrubland_Diffuse.jpg")
+	mat.normal_enabled = true
+	mat.normal_texture = load("res://assets/textures/scrubland_nor_gl.jpg")
+	mat.normal_scale = 0.8
 	mat.uv1_triplanar = true
 	mat.uv1_world_triplanar = true
-	mat.uv1_scale = Vector3.ONE * 0.08
+	mat.uv1_scale = Vector3.ONE * 0.12
 	instance.material_override = mat
 	add_child(instance)
 	var body := StaticBody3D.new()
