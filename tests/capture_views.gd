@@ -17,6 +17,7 @@ const VIEWS := [
 	{"name": "12-view-point", "pos": Vector3(0.0, 2.0, -500.0), "look": Vector3(0.0, 40.0, -640.0)},
 	{"name": "13-from-the-chhatri", "pos": Vector3(6.0, 2.2, -598.0), "look": Vector3(0.0, 0.0, -300.0)},
 	{"name": "14-nahargarh-wall", "pos": Vector3(20.0, 2.0, -660.0), "look": Vector3(0.0, 0.0, -712.0)},
+	{"name": "15-map-screen", "pos": Vector3(9.0, 1.7, 34.0), "look": Vector3(-8.0, 6.0, -10.0), "map": true},
 ]
 
 func _initialize() -> void:
@@ -45,6 +46,11 @@ func capture() -> void:
 		camera.look_at(look)
 		scene.player.position = pos + Vector3(0, 0.3, 2.0)
 		scene.player.velocity = Vector3.ZERO
+		var show_map: bool = view.get("map", false)
+		scene.hud.visible = show_map
+		scene.hud.map_open = show_map
+		if show_map:
+			scene.player.position = Vector3(11.3, 0.4, 30.0)
 		for i in range(12):
 			await process_frame
 		var image: Image = root.get_viewport().get_texture().get_image()
