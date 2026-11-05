@@ -216,8 +216,9 @@ No repository-wide open-source license is claimed for user/Mixamo-derived charac
 
 ## 11. Next work, in priority order
 
-1. **Fix the main character's likeness and detail.** The user rejects the current appearance. Use 03C plus supplied photos; accurately fit the complete head/jaw/nose/eyes, eliminate face/skull seams, build convincing hair, and correct cloth/shoes. Show actual engine front/side/full-body/expression comparisons. Do not call the current asset approved.
-2. Improve the nearby Jaipur lane from real references: reduce repeated facades, improve materials/wear, stock/clutter variety and lighting. Keep the tablet performance budget in view.
+1. **Fix the main character's likeness and detail.** The user rejects the current appearance ("skin pasted on"). Options offered on 2026-11-05: selfie-based avatar service (Ready Player Me / Avaturn) GLB + Mixamo clips, or Blender + FaceBuilder + MPFB for a true likeness. Show actual engine front/side/full-body/expression comparisons. Do not call the current asset approved.
+2. **Finish the MakeHuman crowd** (`tools/build_crowd.py` once the asset packs are in place), then replace the remaining box animals with rigged models and add moving traffic.
+3. Improve the environment further from real references: real building models instead of box massing where it matters most (Hawa Mahal, Chandpole gate, arcade fronts), rockier hills, baked lighting. Keep the tablet performance budget in view.
 3. Let the user inspect and give design feedback. Preserve the workflow of separate visual reviews for each part.
 4. Run meaningful checks, build and install on the wireless tablet after changes. Record real results, including any failures.
 5. Update this handoff, requirements/PDF, source attribution and GitHub with the accepted work.
@@ -229,6 +230,21 @@ The initial PDF was `/home/shyam/Downloads/IT_Gurujan_Jaipur_Streets_Development
 
 For the detailed revision history and direct user requests, read [CHAT_REQUIREMENTS_README.md](CHAT_REQUIREMENTS_README.md) and [its PDF](docs/Gulabi_Sahar_Chat_Requirements.pdf).
 
-### Copyable restart prompt
+### Copyable restart prompt (kept current with each commit)
 
-> Continue the Gulabi Sahar project. Read README.md, CHAT_REQUIREMENTS_README.md and ASSETS.md first, then inspect the actual code/assets and latest device/build evidence. The main character is not approved and does not match concept 03C well enough; fixing its 3D likeness and detail is the top priority. Use actual engine comparisons and Jaipur photo references. Keep the Redmi Pad 2 Pro 8 GB performance target and design-review workflow. After accepted changes, test, build, install through wireless adb, update documentation and push to the private GitHub repo. Do not treat an earlier successful install as visual approval.
+> Continue the Gulabi Sahar project (Godot 4.7.2, GDScript, Android, repo `shyamsahani01/gulabi-sahar`). Read README.md, CHAT_REQUIREMENTS_README.md and ASSETS.md first, then inspect the actual code and the latest engine renders in `designs/03-world/`.
+>
+> **Done so far (as of 2026-11-05, commit `779300f` and later):**
+> - World `world.gd` replaces the single lane: Hawa Mahal Road (rebuilt from 8 Street View angles: two 7 m carriageways, 3 m planted median with twin lamps, railings, Hawa Mahal block with a 15×4 jharokha grid and shops under it, arcade bays), the photo-referenced old gali (`art_review/lane_study.gd`) branching west, Chandpole Bazar + gate, Sikar Road (modern blocks, petrol pump, bus stop), Vidhyadhar Nagar (16 houses in 3 styles, side lanes, sector park, temple, corner shops), and walkable height-map hills with a stepped path, chhatri view point and a Nahargarh-style rampart/fort. Zones in `world.ZONES`; `zone_at(z)` drives the HUD label.
+> - Every world material uses Poly Haven CC0 PBR sets (`assets/textures/`, `polyhaven_sources.json`), triplanar world-mapped, via `world.pbr()`. Android uses the Mobile renderer (ACES, glow, 4-split soft shadows, fog); desktop stays Compatibility so headless capture works.
+> - `animals.gd`: 30 animals. Cows, dogs, goats are Quaternius CC0 rigged GLBs (`assets/animals/`) playing Idle/Walk; monkeys, pigeons, peacocks, camel are still box-built. They wander, rest, avoid the player.
+> - `market_life.gd` / `human.gd`: 49 NPCs with kinds adult/child/elder (scaled crowd rig, bright clothes for children, turbans for elders, tourist queue at Hawa Mahal, park loops, hill walkers). Far NPCs (>75 m) freeze animation. `human.gd` loads MakeHuman crowd variants from `assets/characters/crowd/<name>.glb` when present (`CROWD_MODELS`), else the old `crowd_walk.glb`.
+> - Map: full-screen parchment map (`tablet_controls.draw_map`), north to the right, drag to pan, +/− zoom, zones/blocks/landmarks/compass/legend, "आप यहाँ हैं". MAP button or M key.
+> - Landscape orientation locked; APK v0.6.0 (versionCode 6) built on this machine (`build-android.sh`; Godot + templates at `~/MyWork/Tools/Godot`, SDK `~/Android/Sdk`, JDK `~/.jdks/jdk-21.0.11+10`). The tablet (Redmi Pad 2 Pro, wireless adb) blocks silent adb installs (MIUI `INSTALL_FAILED_USER_RESTRICTED`); push the APK to `/sdcard/Download/` and install on-device. Old app `com.gurujan.gulabisheher` was removed. Last device screenshot: 28 FPS at the 30 FPS cap on the Compatibility build.
+> - Tests: `./play.sh --headless --fixed-fps 60 --script res://tests/smoke.gd` (0 failures: zones, terrain, gali, hillside, population kinds, animals, map). Engine renders: `xvfb-run -a -s "-screen 0 1280x800x24" ./play.sh --fixed-fps 60 --script res://tests/capture_views.gd` → `designs/03-world/`.
+> - Crowd pipeline prepared, not yet run to completion: portable Blender 4.2.3 at `~/MyWork/Tools/Blender/` with the MPFB2 extension installed; `tools/build_crowd.py` generates 11 CC0 MakeHuman variants (men, women, children, elders, game_engine rig = same bone names as the existing rigs) once the MakeHuman asset packs are unzipped into an MPFB user-data dir (`data/skins`, `data/hair`, `data/clothes`, …).
+> - Review pages: claude.ai artifacts "Hawa Mahal Gali" (street blueprint) and "Gulabi Sahar World" (map, references, engine renders).
+>
+> **Still open / user feedback:** the hero face still looks like a pasted photo (needs a real head: selfie-based avatar service or Blender FaceBuilder); the user wants characters, animals, people and buildings far more realistic ("GTA-like"), says no zone looks good yet, and wants the map to stay big and clear. No zone is visually approved. Keep the design-review workflow: engine renders first, then the user's verdict. Keep the tablet performance budget. After accepted changes: test, build, push the APK to the tablet, update README/CHAT_REQUIREMENTS/ASSETS, commit; push to GitHub only when the user asks.
+>
+> **Next steps:** (the user writes these)
