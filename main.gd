@@ -29,6 +29,7 @@ var smooth_pitch := -0.14
 var sound: Node
 var player_collider: CollisionShape3D
 var vehicle: CharacterBody3D
+var traffic: Node3D
 var hud: Control
 
 func _ready() -> void:
@@ -95,7 +96,7 @@ func _ready() -> void:
 	vehicle.position = Vector3(25,1,4)
 	vehicle.heading = -PI/2
 	add_child(vehicle)
-	var traffic = preload("res://city_traffic.gd").new()
+	traffic = preload("res://city_traffic.gd").new()
 	traffic.game = self
 	traffic.name = "Traffic"
 	add_child(traffic)
@@ -140,6 +141,19 @@ func orbit_portrait(delta: Vector2) -> void:
 func build_avatar() -> void:
 	avatar = preload("res://human.gd").new()
 	player.add_child(avatar)
+
+func nearest_drivable() -> CharacterBody3D:
+	# Any visible traffic car works too, not just the player's own car.
+	var best := vehicle
+	var best_dist := vehicle.global_position.distance_to(player.global_position)
+	for car in traffic.cars:
+		if not car.node.visible:
+			continue
+		var d: float = car.node.global_position.distance_to(player.global_position)
+		if d < best_dist:
+			best = car.node
+			best_dist = d
+	return best
 
 func reset_player() -> void:
 	player.position = SPAWN + Vector3(0, 0.6, 0)

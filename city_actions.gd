@@ -79,7 +79,17 @@ func handle_action(value: String) -> void:
 				game.avatar.guarding = false
 		"ride":
 			if not game.hud.map_open and not dialogue_open:
+				var was_driving: bool = game.vehicle.driving
+				if not was_driving:
+					game.vehicle = game.nearest_drivable()
+					game.vehicle.set_physics_process(true)
 				game.vehicle.toggle_drive()
+				if was_driving:
+					for car in game.traffic.cars:
+						if car.node == game.vehicle:
+							car.route = PackedVector3Array()
+							car.node.set_physics_process(false)
+							break
 
 func blocked() -> bool:
 	return game.portrait or game.hud.map_open or dialogue_open or game.vehicle.driving

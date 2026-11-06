@@ -34,6 +34,11 @@ func _input(event: InputEvent) -> void:
 	if modal:
 		clear_input()
 		return
+	var radar_rect := Rect2(24, 144, 184, 156)
+	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed and radar_rect.has_point(event.position):
+		map_open = true
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			for action in action_centers():

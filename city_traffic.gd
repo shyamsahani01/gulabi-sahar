@@ -51,10 +51,12 @@ func _physics_process(delta: float) -> void:
 	if check_clock<=0:
 		check_clock=2.0
 		for car in cars:
+			if car.node.driving:
+				continue
 			if car.route.is_empty() or car.node.position.distance_to(game.player.position)>300:
 				pick_route(car)
 	for car in cars:
-		if car.route.is_empty() or not car.node.visible:
+		if car.route.is_empty() or not car.node.visible or car.node.driving:
 			continue
 		var node: CharacterBody3D=car.node
 		var destination: Vector3=car.route[car.index]
