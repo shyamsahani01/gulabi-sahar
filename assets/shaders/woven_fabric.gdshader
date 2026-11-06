@@ -8,9 +8,10 @@ void fragment() {
 	float weft = sin(UV.y * weave_scale * 6.28318);
 	float twill = sin((UV.x + UV.y * 0.52) * weave_scale * 3.14159);
 	float filter_width = max(fwidth(UV.x), fwidth(UV.y)) * weave_scale;
-	float thread = mix(warp * weft, twill, denim) * (1.0 - smoothstep(0.2, 0.8, filter_width));
+	float visibility = 1.0 - smoothstep(0.2, 0.8, filter_width);
+	float thread = mix(warp * weft, twill, denim) * visibility;
 	ALBEDO = cloth_color.rgb * (0.94 + thread * 0.035);
 	ROUGHNESS = 0.88 + 0.05 * thread;
 	SPECULAR = 0.22;
-	NORMAL_MAP = normalize(vec3(warp * 0.06, weft * 0.06, 1.0)) * 0.5 + 0.5;
+	NORMAL_MAP = normalize(vec3(warp * 0.025 * visibility, weft * 0.025 * visibility, 1.0)) * 0.5 + 0.5;
 }

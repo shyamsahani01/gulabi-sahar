@@ -2,11 +2,13 @@
 
 **Read this file first when continuing the project.** It records the user's requirements, the current implementation, files, commands and unfinished work. It is project context; the user's latest instructions take precedence.
 
-**Current build: Android 0.9.0 (code 9), 2026-11-06 — compact city + vehicle and storefront refresh.** Updated from GitHub commit `91c1244` before editing. The playable layout is 12% shorter in each horizontal direction (4.40 × 4.356 km; 77.44% of the previous area), with all eight districts, the road graph and the marked Nahargarh connector retained. The radar occupies less screen space. Original OSM JSON remains unchanged; runtime compression is centralized in `city_world.gd`.
+**Current build: Android 0.9.1 (code 10), 2026-11-06 — character, materials and street-detail refresh.** The current hero uses one continuous skinned head/body instead of the separate fitted face patch, with a new skin bake, swept hair locks, cloth folds and closed canvas shoes. Real Jaipur market photographs informed awnings, AC vents, drainpipes, meters and parked scooters. Pavement now uses a newly fetched Poly Haven CC0 material; service interiors have tiled floors and warm lights. Actual engine renders: [`designs/06-realism/`](designs/06-realism/). Four automated suites pass; exact likeness, visible forehead/temple transitions and a complete articulated eye rig remain unfinished. See v0.9.1 below for build/install evidence.
+
+**Retained from 0.9.0 — compact city + vehicle and storefront refresh.** Updated from GitHub commit `91c1244` before editing. The playable layout is 12% shorter in each horizontal direction (4.40 × 4.356 km; 77.44% of the previous area), with all eight districts, the road graph and the marked Nahargarh connector retained. The radar occupies less screen space. Original OSM JSON remains unchanged; runtime compression is centralized in `city_world.gd`.
 
 Original modeled sedans and taxis replace the box cars: shaped bonnet/boot, sloping glazing, mirrors, grille, lamps, alloy wheels, front-wheel steering and wheel rotation for both the player and traffic. Six **fictional** neighborhood locations replace existing infill plots near Chandpole: Gulabi Motors showroom (two display cars), Sahar Hospital, City Police (patrol car), Theka, Sharma Kirana and Gulabi Chai. Their entrances are walkable; the atlas **SERVICES** tab travels to each location and places the player's car on the adjoining road. These are visual environments, not full shopping, policing, hospital or dealership gameplay systems. Existing resident conversations, driving, combat and delivery missions remain.
 
-Validation/install results for this revision are recorded in the v0.9 section below. **The hero likeness remains unresolved and the new visuals await user review.** Actual engine captures: [`designs/05-city-refresh/`](designs/05-city-refresh/).
+Validation/install results are recorded in the version sections below. **The hero likeness remains unresolved and the new visuals await user review.** Actual engine captures: [`designs/05-city-refresh/`](designs/05-city-refresh/).
 
 **Previous build: Android test version 0.8.0 (version code 8), 2026-11-05 — the OpenStreetMap city.** `main.gd` now loads `city_world.gd`: 5,136 real OSM road ways (5 × 4.95 km of Jaipur at 65% scale, Chandpole → Shastri Nagar → Vidhyadhar Nagar / Sikar Road → Brahmpuri / Nahargarh), 11,137 buildings (750 OSM footprints + 10,390 generated street-facing infill plots), 40 OSM parks, roadside stalls, lamp posts, trees, 8 traffic cars, a drivable car, punch/kick/dodge/block/crouch combat with authored skeletal clips, resident conversations, a three-stop delivery job with cash and save/load, a radar minimap, a full city atlas with tap-to-travel districts and sound effects. One short road is **not** OSM: the real motor route up to Nahargarh leaves the imported boundary, so a clearly signed, yellow-kerbed *game connector* joins the fort access road to the city inside the map (see §v0.8.0 below). `tests/city_smoke.gd` and `tests/city_combat.gd` pass with 0 failures; engine renders are in `designs/04-city/`. The APK was built on this machine but the tablet was not connected, so **v0.8.0 is not installed or play-tested on the device yet**, and none of its visuals are approved.
 
@@ -14,7 +16,7 @@ Validation/install results for this revision are recorded in the v0.9 section be
 
 **Previous: Android test version 0.5.0 (version code 5).** The user rejected the main character's visual quality. **Matching the approved character image remains unfinished and is the highest priority for art.** It was not changed in 0.6.0 because Blender and the MediaPipe fit pipeline are not installed on the current machine. A successful APK install or passing code test does not mean the character design is approved.
 
-Repository: [shyamsahani01/gulabi-sahar](https://github.com/shyamsahani01/gulabi-sahar) — private. Local project on this machine: `/home/shyam/Documents/Work/gulabi-sahar` (the earlier machine used `/home/shyam/MyWork/Gulabi Sahar`).
+Repository: [shyamsahani01/gulabi-sahar](https://github.com/shyamsahani01/gulabi-sahar) — private. Local project on this machine: `/home/shyam/MyWork/Gulabi Sahar` (another workstation used `/home/shyam/Documents/Work/gulabi-sahar`).
 
 ## 1. User ka goal aur non-negotiable requirements
 
@@ -56,9 +58,11 @@ Only the young selfie-taker is the character reference; other people in those ph
 1. v0.3 used the user's existing MPFB/MakeHuman-style Shyam mesh, imported locomotion and restored textures.
 2. v0.4 projected/baked the approved portrait onto that existing mesh, changed wardrobe, and added expression morphs. The user rejected this result: a photo texture on the generic head did not reproduce the approved anatomy or hair.
 3. A v0.5 geometry study changed jaw/nose/eyelids, hair fibers, fabric and shoes. Separate eye spheres were tested and did not fit the reconstructed sockets properly.
-4. Current internal mesh **v0.6** (`shyam_hero_v06.glb`) fits a facial surface to 478 locally detected MediaPipe landmarks from 03C, uses approximate inferred depth/canonical topology, and binds it to the existing head rig. Unmatched temporary eye spheres were removed. The Android app containing this study is **app v0.5.0**; asset-study numbering and app version are different.
+4. Previous internal mesh **v0.6** (`shyam_hero_v06.glb`) fits a facial surface to 478 locally detected MediaPipe landmarks from 03C, uses approximate inferred depth/canonical topology, and binds it to the existing head rig. Unmatched temporary eye spheres were removed. The Android app containing this study is **app v0.5.0**; asset-study numbering and app version are different.
 
-**Current limits:** this is an approximate single-view face surface. The face/skull transition, facial volume in side view, eyes/cornea, hair silhouette, cloth drape and footwear remain art problems. It is not a full head scan, exact likeness, or finished photorealistic character. The painted eye detail is not a complete articulated eye/cornea rig; blinking can visibly compress/stretch that detail and needs a proper eyelid/eye solution. Expressions deform the face surface but are not a full facial-animation production rig.
+5. App v0.9.1 uses internal mesh **v0.7** (`shyam_hero_v07.glb`): the fitted detail is transferred into the connected original head, the detached patch is removed, and the combined skin is baked to 2K. The original rig/expression keys remain. Hair locks, relaxed shirt folds and closed, foot-bound canvas shoes are added. Editable source: `tools/source/hero_continuous.blend`; reproduction: `tools/refine_hero_v07.py` using the retained v05/reference-fit sources.
+
+**Current limits:** this remains an approximate single-view likeness. Forehead/temple transitions remain visible in close-up. The face/skull transition, facial volume in side view, eyes/cornea, hair silhouette, cloth drape and footwear remain art problems. It is not a full head scan, exact likeness, or finished photorealistic character. The painted eye detail is not a complete articulated eye/cornea rig; blinking can visibly compress/stretch that detail and needs a proper eyelid/eye solution. Expressions deform the face surface but are not a full facial-animation production rig.
 
 Before calling the character finished, compare front, three-quarter, profile, full body and every expression against 03C. Fix anatomy and hair geometry, not only texture/color. Preserve the useful body rig and locomotion.
 
@@ -129,7 +133,9 @@ Real Godot captures from the review work are in `designs/02-jaipur-lane/actual-3
 | `tests/capture_views.gd` | Saves real engine renders of 14 world views to `designs/03-world/` (run under `xvfb-run`) |
 | `art_review/lane_study.gd` | Narrow bazaar gali (photo-referenced); embedded in the world as "Maniharon ka Rasta" |
 | `art_review/review.tscn`, `review_stage.gd` | Separate 3D inspection scene; F/E/drag controls |
-| `assets/characters/shyam_hero_v06.glb` | Current reference-fitted character candidate |
+| `assets/characters/shyam_hero_v07.glb` | Current continuous-head character candidate; v06 retained for comparison |
+| `scooter_design.gd`, `street_details.gd` | Original parked scooters, awnings, AC housings, meters, pipes and bins |
+| `tools/refine_hero_v07.py`, `tests/hero_portraits.gd` | Editable hero refinement pipeline and seven actual-engine portrait/expression captures |
 | `assets/characters/shyam_hero.glb` | Preserved v0.4 hero for comparison |
 | `assets/characters/shyam_hero_v05.glb` | Intermediate geometry study |
 | `assets/characters/shyam_idle/walk/run.glb` | Existing imported locomotion clips |
@@ -342,11 +348,30 @@ python3 tools/install_tablet.py
 
 ### Tablet signing fallback
 
-`Android Preview` installs the same v0.9 game as **Gulabi Sahar 0.9**, package `com.itgurujan.gulabisahar.preview`, alongside the existing v0.8 app. This avoids uninstalling the old app when its original signing key is unavailable. It is explicitly a separate installation, not a successful in-place update.
+`Android Preview` installs the current v0.9.1 game as **Gulabi Sahar 0.9.1**, package `com.itgurujan.gulabisahar.preview`, alongside the existing v0.8 app. This avoids uninstalling the old app when its original signing key is unavailable. It is explicitly a separate installation, not a successful in-place update.
 
 ```sh
 ./build-android.sh preview
 python3 tools/install_tablet.py --preview
 ```
 
-The installer copies readable `files/city_progress.json` from the old debug app only on the first preview installation, retains an ignored local backup, and leaves the original app/data intact. Subsequent preview updates keep their own progress. APK: `builds/GulabiSahar-0.9.0-preview-debug.apk`; verification/install reports and device screenshot use the `v09-preview` suffix. Returning to the original package requires the matching signing key; do not uninstall to bypass the mismatch.
+The installer copies readable `files/city_progress.json` from the old debug app only on the first preview installation, retains an ignored local backup, and leaves the original app/data intact. Subsequent preview updates keep their own progress. APK: `builds/GulabiSahar-0.9.1-preview-debug.apk`; verification/install reports and device screenshot use the `v091-preview` suffix. Returning to the original package requires the matching signing key; do not uninstall to bypass the mismatch.
+
+
+## v0.9.1 — character and photographed-reference detail
+
+The user explicitly asked to continue improving the character/design, fetch web references/data, then update the README, push GitHub first and install on the tablet. The existing v0.9 compact map, services and vehicles are retained.
+
+- The new continuous hero preserves the skeleton, Idle/Walk/Run and facial morphs. Skin is baked into the original body UVs, avoiding a separate floating face mesh. Hair uses coherent swept locks; cloth has small compression folds and distance-filtered weave normals; two foot-bound shoes include canvas, rubber toe caps/soles and crossed laces. No claim of exact likeness or visual approval: forehead/temple blending and painted eyes still need art work.
+- [Chameliwala Market, Jaipur](https://travjoy.com/jaipur/eat-shop-and-party/local-bazaars-and-flea-markets/chameliwala-market) was inspected as a real street reference for shop shade, signs, scooters and external utility detail. The photograph is reference-only and is not shipped. `street_details.gd` authors those details around the six service buildings, retaining clear entrances. Parked scooters are static scenery.
+- [Pavement 05 by Jan Burghardt / Poly Haven](https://polyhaven.com/a/pavement_05), under [CC0](https://polyhaven.com/license), supplies newly downloaded 1K diffuse, OpenGL normal and roughness maps. Exact download URLs and SHA-256 checksums: `assets/textures/realism_sources.json`. Godot uses a 3.4 m repeat scale; tile/grout geometry and short-range, shadow-free interior lights distinguish indoor floors from the pavement.
+- Four suites passed with **0 failures**: `tests/art_review.gd`, `tests/city_smoke.gd`, `tests/city_combat.gd`, `tests/city_refresh.gd`. Added character checks cover the continuous skinned mesh, absence of the old detached patch and both shoes. Doorway, floor, travel, combat, movement and wheel checks remain green. Sixteen actual engine captures are in `designs/06-realism/`; these are implementation evidence, not user approval.
+- Preview APK: **175,610,830 bytes**, SHA-256 `598939c8038233c248e59a0e67101e42333d154259b7ff2058cb98803d0daf15`. APK v2/v3 signature, ZIP integrity and 16 KB alignment passed. Source/docs are pushed before installing. The device result will be recorded after the installation attempt; no sustained FPS/thermal claim is made.
+
+```sh
+./play.sh --fixed-fps 60 --script res://tests/hero_portraits.gd
+./play.sh --fixed-fps 60 --script res://tests/design_review_v09.gd
+./build-android.sh preview
+# Commit/push the current source and README first.
+python3 tools/install_tablet.py --preview
+```

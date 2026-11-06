@@ -1,0 +1,28 @@
+{
+  "asset": "Pavement 05",
+  "author": "Jan Burghardt",
+  "license": "CC0-1.0",
+  "source": "https://polyhaven.com/a/pavement_05",
+  "license_url": "https://polyhaven.com/license",
+  "downloaded": "2026-11-06",
+  "files": [
+    {
+      "file": "pavement05_diff.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/pavement_05/pavement_05_diff_1k.jpg",
+      "sha256": "f0ded52f419cdba4381766db395df9a1821be6de7628fe66398d2883929efc40",
+      "bytes": 961331
+    },
+    {
+      "file": "pavement05_nor_gl.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/pavement_05/pavement_05_nor_gl_1k.jpg",
+      "sha256": "a4388ec9356e43ddc8b772bf07bafb4489b3db1901bedac4c21b37fab1761091",
+      "bytes": 790099
+    },
+    {
+      "file": "pavement05_rough.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/pavement_05/pavement_05_rough_1k.jpg",
+      "sha256": "7575ec4a061094c14bf94fa22a75637858b52b00c301caec8f5143cb329acbe4",
+      "bytes": 339256
+    }
+  ]
+}

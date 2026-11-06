@@ -1,6 +1,6 @@
 extends SceneTree
 ## Actual engine captures, not generated concept images.
-const OUT := "res://designs/05-city-refresh/"
+const OUT := "res://designs/06-realism/"
 var scene: Node3D
 var camera: Camera3D
 func _initialize() -> void:

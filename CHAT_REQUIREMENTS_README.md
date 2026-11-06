@@ -186,3 +186,12 @@ Implementation: 12% shorter horizontal map with source OSM data preserved, small
 Pre-install verification: city smoke, combat and refresh suites passed with 0 failures; nine actual engine renders reviewed; APK signature, ZIP integrity and 16 KB alignment passed. Source/README are pushed before wireless installation as requested. Device outcome is recorded separately after the attempt.
 
 Tablet update attempt returned a signing-certificate mismatch against the existing v0.8 app. Original app/data were retained. Added an explicit side-by-side `Android Preview` preset (launcher name Gulabi Sahar 0.9), with first-install save copying. Source/README for the fallback is pushed before installing that APK.
+
+
+## 2026-11-06 — continue character and realism, push before tablet (v0.9.1)
+
+User: “continue karo … design or chacter aur achhe … web se data fetch karo aur details daalo … realistic lage … tablet me instal … read me update and phle github pe push.” This authorizes continuing implementation and device testing without another design-approval stop, while the visuals still await the user's verdict.
+
+Implemented a continuous skinned hero candidate (v07) replacing the detached face patch, new skin bake, swept hair locks, relaxed cloth folds and closed canvas sneakers. Jaipur market photography informed original awnings, AC housings, pipes, meters, bins and parked scooters. New Poly Haven Pavement 05 CC0 maps were fetched, with source/license/checksum records; interiors have tiles/grout and short-range warm lights. Exact likeness, forehead/temple transitions and a complete eye rig remain unfinished.
+
+Four automated suites passed with zero failures; sixteen actual Godot captures are in `designs/06-realism/`. Android preview v0.9.1/code10 built and passed signature, archive and 16 KB alignment checks. Code/docs are pushed before the wireless install. Because the old v0.8 signing key is unavailable, the new app uses the separate `com.itgurujan.gulabisahar.preview` package and launcher label **Gulabi Sahar 0.9.1**, preserving the original app/save and copying readable progress on first install. Actual device outcome is recorded after the attempt.

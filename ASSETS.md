@@ -60,3 +60,10 @@ Jaipur reference photographs were fetched for local visual research only; their 
 ### v0.9.0 original city/vehicle geometry
 
 `vehicle_design.gd` and `city_services.gd` author parametric geometry directly in Godot. No downloaded vehicle/building meshes or reference photographs are bundled by this revision. Reuses the project's existing fonts/materials and their licenses. Business names/positions are fictional authored game content. Original OSM JSON is unchanged; gameplay applies 0.88 horizontal compression on top of the source's 0.65 scale. See README v0.9.0 for reference links and limitations.
+
+
+## v0.9.1 materials, street details and continuous hero
+
+- **Pavement 05**, Jan Burghardt / Poly Haven, CC0: https://polyhaven.com/a/pavement_05 ; license https://polyhaven.com/license . Newly downloaded diffuse/OpenGL-normal/roughness JPEGs (1K), direct official download URLs and local SHA-256 hashes in `assets/textures/realism_sources.json`. This set was fetched from the official asset CDN; its hashes record local file integrity and are not claimed as API-verified upstream hashes.
+- Chameliwala Market reference: https://travjoy.com/jaipur/eat-shop-and-party/local-bazaars-and-flea-markets/chameliwala-market . The downloaded photograph stays in ignored `builds/references/`; it is not a game texture. `scooter_design.gd`/`street_details.gd` are original native geometry, informed by street details rather than a literal reconstruction.
+- `shyam_hero_v07.glb` and `shyam_continuous_skin.png` derive from the existing user/MakeHuman body, approved generated concept and earlier MediaPipe fit described above. No new person's face was downloaded. `tools/refine_hero_v07.py` transfers fitted detail to the connected head, bakes the texture, adds original hair locks/cloth shaping/shoes and preserves the rig/morphs. `tools/source/hero_continuous.blend` is the editable packed source. Godot-generated GLB texture extractions are committed alongside the GLB. Prior candidates are retained. Approximate likeness and visible close-up transitions remain; not a scan or complete eye rig.

@@ -69,7 +69,11 @@ func build(b: Dictionary) -> void:
 	var front := depth/2
 	var tint: String = spec.color
 	var wall := "cream" if spec.kind in ["hospital","showroom"] else "rose"
-	box(Vector3(0,.08,0),Vector3(width,.16,depth),"stone",true)
+	box(Vector3(0,.08,0),Vector3(width,.16,depth),"tile",true)
+	for x in range(-int(width/2),int(width/2)+1):
+		box(Vector3(x,.165,0),Vector3(.012,.005,depth-.2),"grout")
+	for z in range(-int(depth/2),int(depth/2)+1):
+		box(Vector3(0,.165,z),Vector3(width-.2,.005,.012),"grout")
 	box(Vector3(0,1.6,-front+.12),Vector3(width,3.2,.24),wall,true)
 	for side in [-1,1]:
 		box(Vector3(side*(width/2-.12),1.6,0),Vector3(.24,3.2,depth),wall,true)
@@ -141,6 +145,16 @@ func build(b: Dictionary) -> void:
 				box(Vector3(side*width*.3,.37,.8),Vector3(.09,.7,.09),"metal")
 				for cup in 3:
 					box(Vector3(side*width*.3-.3+cup*.3,.83,.8),Vector3(.10,.14,.1),"terracotta")
+	var light:=OmniLight3D.new()
+	light.position=base+Vector3(0,2.6,0)
+	light.light_color=Color("fff0d8")
+	light.light_energy=.65
+	light.omni_range=maxf(width,depth)*.65
+	light.shadow_enabled=false
+	light.distance_fade_enabled=true
+	light.distance_fade_begin=35
+	light.distance_fade_length=12
+	world.cell(base).add_child(light)
 	# A shaded threshold, warm interior strips and planters give every frontage depth.
 	for side in [-1,1]:
 		box(Vector3(side*(width/2-.6),.3,front+.55),Vector3(.65,.6,.65),"terracotta",true)

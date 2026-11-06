@@ -1,6 +1,6 @@
 import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil,os
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.9.0';tag='v09'
+version='0.9.1';tag='v091'
 preview='--preview' in sys.argv
 package='com.itgurujan.gulabisahar'+('.preview' if preview else '')
 suffix='-preview' if preview else ''

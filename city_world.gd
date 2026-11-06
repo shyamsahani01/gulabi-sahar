@@ -62,6 +62,10 @@ func _ready() -> void:
 		building_count += 1
 	var order := ["showroom","hospital","police","theka","grocery","chai"]
 	services.sort_custom(func(a,b): return order.find(a.kind)<order.find(b.kind))
+	var details=preload("res://street_details.gd").new()
+	details.world=self
+	for i in services.size():
+		details.build(services[i].building,services[i].rotation,i)
 	build_parks()
 	build_landmarks()
 	flush_batches()
@@ -95,7 +99,7 @@ func compact_layout() -> void:
 			p[1] *= CITY_COMPRESSION
 
 func make_city_materials() -> void:
-	for pair in [["shop_glass","779b9e"],["warm_light","ffe6b3"],["chrome","bac5c8"]]:
+	for pair in [["shop_glass","779b9e"],["warm_light","ffe6b3"],["chrome","bac5c8"],["tile","c7cec8"],["grout","89958e"]]:
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(pair[1])
 		mat.roughness = .28
@@ -109,7 +113,13 @@ func make_city_materials() -> void:
 	mats["glass"].albedo_color = Color("35535c")
 	mats["glass"].metallic = .08
 	mats["glass"].roughness = .45
-	mats["stone"].normal_scale = .08
+	mats["stone"].albedo_texture = preload("res://assets/textures/pavement05_diff.jpg")
+	mats["stone"].normal_texture = preload("res://assets/textures/pavement05_nor_gl.jpg")
+	mats["stone"].roughness_texture = preload("res://assets/textures/pavement05_rough.jpg")
+	mats["stone"].uv1_scale = Vector3.ONE/3.4
+	mats["stone"].albedo_color = Color("b8b6a9")
+	mats["stone"].normal_scale = .20
+	mats["tile"].roughness = .55
 	# Quieter road surfaces leave silhouette, signs and traffic readable at tablet scale.
 	mats["tarmac"].albedo_color = Color("4d5255")
 	mats["tarmac"].normal_enabled = false

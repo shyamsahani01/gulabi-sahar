@@ -12,7 +12,7 @@ var info: Label
 func _ready() -> void:
 	add_child(preload("res://art_review/lane_study.gd").new())
 	hero = preload("res://human.gd").new()
-	hero.hero_scene = preload("res://assets/characters/shyam_hero_v06.glb")
+	hero.hero_scene = preload("res://assets/characters/shyam_hero_v07.glb")
 	hero.position = Vector3(0, 0.03, 7.0)
 	hero.rotation.y = PI
 	add_child(hero)
