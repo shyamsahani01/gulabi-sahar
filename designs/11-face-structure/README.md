@@ -17,4 +17,6 @@ All PNGs here are actual Godot renders of the playable hero (`tests/hero_portrai
 | `hero-serious`, `hero-surprised` | Serious adds BrowFurrow (inner brows down and in, glabella knot); Surprised adds full BrowRaise. |
 | `hero-full-body` | Body, outfit and shoes unchanged. |
 
-**Still open, honestly:** this is the same approximate single-photo likeness on the MakeHuman topology, now with modelled structure; it is not a scan. The eyes are still painted on the skin with no eyeball/cornea rig, so blinks compress the painted eye. The lower-lid area around the painted eye keeps some texture softness from the original projection. The hair cap edge is unchanged. Exact likeness to concept 03C remains the user's call.
+**v09 update (same evening):** `zoom-eyes.png`, `zoom-eyes-blink.png`, `zoom-eyes-gaze.png` now show real eyeballs in restored sockets, lids that close over them, eyelashes, and the gaze turned to the side. The front/three-quarter/profile/smile renders were re-captured with v09.
+
+**Still open, honestly:** this is the same approximate single-photo likeness on the MakeHuman topology, now with modelled structure and real eyes; it is not a scan. The iris texture is MakeHuman's brown eye, tinted; there is no separate cornea layer or eye-direction bone (gaze is a texture slide). The hair cap edge is unchanged. Exact likeness to concept 03C remains the user's call.

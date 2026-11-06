@@ -76,7 +76,9 @@ func check() -> void:
 	scene.sit_toggle()
 	await ticks(30)
 	expect(not scene.seated.is_empty(),"Player sits on the nearest cafe seat")
-	expect(hero.action=="Sit","Sitting clip plays while seated")
+	expect(hero.action in ["Sit","SitDown"],"Sit-down clip starts (%s)"%hero.action)
+	await ticks(85)
+	expect(hero.action=="Sit","Seated loop plays after the sit-down transition")
 	expect(scene.player.position.distance_to(nearest_seat.p)<.05,"Player pinned to the seat position")
 	expect(absf(angle_difference(hero.rotation.y,nearest_seat.yaw))<.05,"Player faces the seat direction")
 	var pelvis: int=hero.skeleton.find_bone("pelvis")
@@ -86,6 +88,8 @@ func check() -> void:
 	await ticks(10)
 	scene.touch_move=Vector2.ZERO
 	expect(scene.seated.is_empty(),"Pushing the stick stands the player up")
+	expect(hero.action in ["","StandUp"],"Stand-up clip plays (%s)"%hero.action)
+	await ticks(70)
 	expect(hero.action=="","Locomotion resumes after standing")
 	await ticks(20)
 	# --- conversation with the seated guest: gestures, facing and the speech panel.
@@ -138,6 +142,22 @@ func check() -> void:
 		await physics_frame
 		if hero.action=="HardLand": saw_hard=true
 	expect(saw_hard,"Hard landing clip after a 9 m drop")
+	# --- physical layer: foot IK installed, ragdoll knockdown and recovery, dangling wardrobe.
+	expect(hero.foot_ik.size()==2,"Foot IK installed on both legs")
+	await ticks(30)
+	hero.knock_down(Vector3(0,3,4))
+	await ticks(45)
+	expect(hero.ragdolling and hero.ragdoll!=null,"Knockdown switches the hero to the ragdoll")
+	# Modifier results are not visible through get_bone_global_pose(); read the simulated body.
+	var head_height: float=hero.ragdoll.get_node("PB_head").global_position.y-hero.global_position.y
+	expect(head_height<1.0,"Ragdoll head drops under physics (%.2f m)"%head_height)
+	hero.get_up()
+	await ticks(5)
+	expect(not hero.ragdolling and hero.animation_tree.active,"Get-up restores the animation")
+	hero.apply_outfit(0)
+	expect(hero.pendulums.size()>=1,"Street outfit hangs a swinging necklace")
+	for name in ["Jab","Kick","Sit","Talk","Fall","Wave"]:
+		expect(hero.animator.has_animation("Mocap"+name),"Motion-capture clip loaded: "+name)
 	# --- face: structured head keys, brow-driven expressions and the FACE-view zoom.
 	for shape in ["Smile","BrowRaise","BrowFurrow","BlinkLeft","Serious","Surprised"]:
 		expect(hero.face.find_blend_shape_by_name(shape)>=0,"Face key present: "+shape)

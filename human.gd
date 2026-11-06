@@ -2,7 +2,7 @@ extends Node3D
 
 var skeleton: Skeleton3D
 var model: Node3D
-var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v08.glb")
+var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v09.glb")
 var time := 0.0
 var movement_speed := 0.0
 var grounded := true
@@ -33,6 +33,17 @@ func crowd_model_path() -> String:
 	return "res://assets/characters/crowd_walk.glb"
 var animator: AnimationPlayer
 var look: LookAtModifier3D
+var action_next := ""
+# Physical layer (hero_physics.gd): ragdoll for knockdowns, foot IK, dangling wardrobe.
+var ragdoll: PhysicalBoneSimulator3D
+var ragdolling := false
+var ragdoll_time := 0.0
+var foot_ik: Dictionary = {}
+var pendulums: Array = []
+# Real motion-capture clips (CMU database, retargeted by tools/cmu_retarget.py) replace the
+# hand-keyed action clips of the same name; these loop, these need fists.
+const MOCAP_LOOPS := ["JumpAir", "Guard", "Crouch", "Sit", "SitHigh", "Talk", "Listen", "Fidget"]
+const MOCAP_FISTS := ["Jab", "Cross", "Kick", "Guard"]
 var outfit := 0
 var wardrobe_nodes: Array = []
 var stubble: MeshInstance3D
@@ -47,6 +58,13 @@ var expression_time := 0.0
 var blink_clock := 1.8
 var blink_phase := -1.0
 var brow_flash := 0.0
+# Real eyeballs (v09): the gaze is steered by sliding the iris texture a little on the sphere,
+# which gives saccades and look-at without an eye bone.
+var eye_material: StandardMaterial3D
+var eye_base_uv := Vector3.ZERO
+var gaze := Vector2.ZERO
+var gaze_target := Vector2.ZERO
+var gaze_clock := 0.6
 const EXPRESSIONS := ["Neutral", "Smile", "Serious", "Surprised"]
 # Blend-shape targets per expression. Smile carries its own cheek lift and lower-lid squint
 # (built in tools/refine_hero_v08.py); the eyebrows ride on separate BrowRaise/BrowFurrow keys.
@@ -75,6 +93,24 @@ func face_targets() -> Dictionary:
 		targets["BrowRaise"] = maxf(targets.get("BrowRaise", 0.0), 0.1 + 0.22 * beat)
 	return targets
 
+func update_gaze(delta: float) -> void:
+	if eye_material == null:
+		return
+	gaze_clock -= delta
+	if gaze_clock <= 0:
+		# Saccade: a quick jump to a new fixation, mostly near the centre, occasionally wider.
+		gaze_clock = randf_range(0.5, 2.6)
+		var wide := randf() < 0.25
+		gaze_target = Vector2(randf_range(-1, 1), randf_range(-0.6, 0.6)) * (0.022 if wide else 0.009)
+	var aim := gaze_target
+	if look != null and look.influence > 0.3 and look_target != null and is_instance_valid(look_target):
+		# Eyes lead the head toward whoever we are looking at.
+		var local := skeleton.to_local(look_target.global_position) - skeleton.get_bone_global_pose(skeleton.find_bone("head")).origin
+		aim += Vector2(clampf(-local.x * 0.03, -0.02, 0.02), clampf(local.y * 0.015, -0.012, 0.012))
+	# Saccades are fast (~40 ms); smooth pursuit is slower.
+	gaze = gaze.move_toward(aim, delta * (0.6 if gaze.distance_to(aim) > 0.004 else 0.12))
+	eye_material.uv1_offset = eye_base_uv + Vector3(gaze.x, gaze.y, 0)
+
 func cycle_expression() -> void:
 	set_expression(EXPRESSIONS[(EXPRESSIONS.find(expression) + 1) % EXPRESSIONS.size()], 3600.0)
 
@@ -95,6 +131,7 @@ func update_face(delta: float) -> void:
 		if blink_phase >= 0.18:
 			blink_phase = -1
 	brow_flash = move_toward(brow_flash, 0.0, delta * 1.4)
+	update_gaze(delta)
 	var targets := face_targets()
 	for i in range(face.mesh.get_blend_shape_count()):
 		var shape := str(face.mesh.get_blend_shape_name(i))
@@ -157,9 +194,16 @@ func _ready() -> void:
 			elif mesh.name.begins_with("HeroHair"):
 				mat.roughness = .58
 				mat.metallic_specular = .25
-			if mesh.name.begins_with("HeroEye"):
-				mat.roughness = 0.22
-				mat.metallic_specular = 0.45
+			if mesh.name.begins_with("HeroEyelashes"):
+				mat.roughness = 0.65
+				mat.metallic_specular = 0.1
+			elif mesh.name.begins_with("HeroEye"):
+				# Wet cornea: tight highlight, a slightly darker brown iris, and the material is
+				# kept so the gaze can move (the iris texture slides on the sphere).
+				mat.roughness = 0.1
+				mat.metallic_specular = 0.6
+				eye_material = mat
+				eye_base_uv = mat.uv1_offset
 			# The closed body mesh culls back faces so the lid and mouth shells never show through
 			# the skin; garments and the hair cap stay double-sided.
 			mat.cull_mode = BaseMaterial3D.CULL_BACK if mesh.name.begins_with("HeroFace_Continuous") else BaseMaterial3D.CULL_DISABLED
@@ -175,7 +219,7 @@ func _ready() -> void:
 				mat.albedo_color = trousers[variant % trousers.size()] if crowd else Color("34363b")
 			elif "low-poly" in mesh.name:
 				mat.albedo_texture = preload("res://assets/characters/shyam_brown_eye.png")
-				mat.albedo_color = Color.WHITE
+				mat.albedo_color = Color(0.82, 0.76, 0.74) if mesh.name.begins_with("HeroEye") else Color.WHITE
 			elif mesh.name == "Shyam" or mesh.name == "Shyam_gltf":
 				mat.albedo_texture = preload("res://assets/characters/shyam_young_lightskinned_male_diffuse3.png") if crowd else preload("res://assets/characters/shyam_approved_skin.png")
 				mat.albedo_color = (Color(0.77, 0.66, 0.55) if variant % 3 == 0 else Color(0.90, 0.78, 0.66)) if crowd else Color.WHITE
@@ -188,7 +232,7 @@ func _ready() -> void:
 			else:
 				mesh.set_surface_override_material(surface, mat)
 	for side in ["l", "r"]:
-		if not legacy_model or (not crowd and hero_scene.resource_path.get_file() in ["shyam_hero_v07.glb", "shyam_hero_v08.glb"]):
+		if not legacy_model or (not crowd and hero_scene.resource_path.get_file() in ["shyam_hero_v07.glb", "shyam_hero_v08.glb", "shyam_hero_v09.glb"]):
 			break
 		var attachment := BoneAttachment3D.new()
 		attachment.bone_name = "foot_" + side
@@ -223,12 +267,46 @@ func _ready() -> void:
 		add_turban()
 	configure_animations()
 	var action_library = preload("res://action_animation.gd").build(self)
+	install_mocap_actions(action_library)
 	animator.add_animation_library("action", action_library)
 	setup_blending()
 	setup_head_look()
 	if not crowd:
+		foot_ik = preload("res://hero_physics.gd").setup_foot_ik(self)
 		setup_stubble()
 		preload("res://hero_wardrobe.gd").apply(self, outfit)
+
+func install_mocap_actions(library: AnimationLibrary) -> void:
+	# Swap the authored keyframe clips for the retargeted motion capture where a clip exists.
+	var curl := Quaternion(Vector3.RIGHT, .65)
+	for clip_name in animator.get_animation_list():
+		if not clip_name.begins_with("Mocap"):
+			continue
+		var action_name := clip_name.trim_prefix("Mocap")
+		var clip: Animation = animator.get_animation(clip_name).duplicate(true)
+		if action_name in MOCAP_FISTS:
+			for track in range(clip.get_track_count()):
+				var bone := str(clip.track_get_path(track).get_subname(0)) if clip.track_get_path(track).get_subname_count() > 0 else ""
+				if clip.track_get_type(track) == Animation.TYPE_ROTATION_3D and (bone.begins_with("index_") or bone.begins_with("middle_") or bone.begins_with("ring_") or bone.begins_with("pinky_")):
+					for key in range(clip.track_get_key_count(track)):
+						var q: Quaternion = clip.track_get_key_value(track, key)
+						clip.track_set_key_value(track, key, (q * curl).normalized())
+		library.add_animation(action_name, clip)
+
+func has_action(value: String) -> bool:
+	return animator != null and animator.has_animation("action/" + value)
+
+func knock_down(impulse: Vector3) -> void:
+	# Physics takes the body over (built on first use so idle residents cost nothing).
+	if ragdoll == null:
+		ragdoll = preload("res://hero_physics.gd").setup_ragdoll(self)
+	action = ""
+	action_left = 0.0
+	action_next = ""
+	preload("res://hero_physics.gd").start_ragdoll(self, impulse)
+
+func get_up() -> void:
+	preload("res://hero_physics.gd").stop_ragdoll(self)
 
 func apply_outfit(index: int) -> void:
 	if crowd:
@@ -288,6 +366,7 @@ func setup_head_look() -> void:
 func stop_action(blend := .25) -> void:
 	action = ""
 	action_left = 0.0
+	action_next = ""
 	if animation_tree != null:
 		animation_tree.active = true
 	animator.play("Idle",blend)
@@ -385,6 +464,17 @@ func configure_animations() -> void:
 			shared_library.add_animation(clip_name, clip)
 		idle_model.free()
 		run_model.free()
+		var mocap_model = preload("res://assets/characters/hero_mocap.glb").instantiate()
+		var mocap_player: AnimationPlayer = mocap_model.find_children("*", "AnimationPlayer", true, false)[0]
+		for clip_name in mocap_player.get_animation_list():
+			var clip: Animation = mocap_player.get_animation(clip_name).duplicate(true)
+			clip.loop_mode = Animation.LOOP_LINEAR if clip_name in MOCAP_LOOPS else Animation.LOOP_NONE
+			for track in range(clip.get_track_count()):
+				var path := clip.track_get_path(track)
+				if path.get_subname_count() > 0:
+					clip.track_set_path(track, NodePath("Shyam_rig:" + str(path.get_subname(0))))
+			shared_library.add_animation("Mocap" + clip_name, clip)
+		mocap_model.free()
 	for library in animator.get_animation_library_list():
 		animator.remove_animation_library(library)
 	# Each imported mesh has a different skeleton nesting; resolve it rather than
@@ -418,9 +508,10 @@ func setup_blending() -> void:
 	animation_tree.tree_root = blend
 	animation_tree.active = true
 
-func play_action(value: String, duration := -1.0, blend := 0.09) -> void:
+func play_action(value: String, duration := -1.0, blend := 0.09, then := "") -> void:
 	if not animator.has_animation("action/"+value):
 		return
+	action_next = then
 	action = value
 	action_left = animator.get_animation("action/"+value).length if duration < 0 else duration
 	animation_tree.active = false
@@ -443,8 +534,18 @@ func _process(delta: float) -> void:
 	update_face(delta)
 	update_head_look(delta)
 	update_stubble()
+	preload("res://hero_physics.gd").update_pendulums(self, delta)
+	if ragdolling:
+		ragdoll_time += delta
+		return
+	preload("res://hero_physics.gd").update_foot_ik(self, delta, grounded and action == "" and movement_speed < 4.5)
 	if action_left > 0:
 		action_left -= delta
+		if action_left <= 0 and action_next != "":
+			# Chained clip, e.g. SitDown flowing into the seated loop.
+			var next := action_next
+			action_next = ""
+			play_action(next, 3600.0, .25)
 		return
 	if guarding or crouching:
 		var pose := "Guard" if guarding else "Crouch"

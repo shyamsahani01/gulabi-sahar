@@ -155,10 +155,19 @@ func resolve_hit() -> void:
 		person.respawn=30.0
 		person.body.collision_layer=0
 		person.aggressive=false
-		person.human.animation_tree.active=false
-		person.human.animator.pause()
-		var tween:=create_tween()
-		tween.tween_property(person.human,"rotation:z",PI*.48,.35)
+		if hit_damage==40:
+			# A kick knocks them off their feet: physics ragdoll in the direction of the blow.
+			var push: Vector3=(person.body.position-game.player.position)
+			push.y=0
+			person.human.knock_down(push.normalized()*7.0+Vector3.UP*3.0)
+		elif person.human.has_action("Fall"):
+			# Punch knockdown: motion-captured fall; the clip ends lying down and holds there.
+			person.human.play_action("Fall",3600.0,.12)
+		else:
+			person.human.animation_tree.active=false
+			person.human.animator.pause()
+			var tween:=create_tween()
+			tween.tween_property(person.human,"rotation:z",PI*.48,.35)
 		notify("Knockdown · area residents will recover")
 
 func receive_hit(damage: float) -> void:
@@ -175,8 +184,8 @@ func receive_hit(damage: float) -> void:
 	if health<=0:
 		health=100
 		cash=maxi(0,cash-50)
-		game.travel_to(0)
-		notify("Recovered at Chandpole · Rs 50 first aid")
+		var attacker := nearest(3.5,true)
+		game.knockout(attacker.body.global_position if not attacker.is_empty() else game.player.global_position-game.avatar.global_basis.z)
 
 func dash() -> void:
 	if blocked() or game.stamina<25 or game.dash_time>0 or game.attack_cooldown>0:

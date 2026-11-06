@@ -12,7 +12,9 @@ masks = np.load(work / 'mask.npy').astype(np.float64)
 mask = np.clip(masks[:, :, 0], 0, 1)
 neck = np.clip(masks[:, :, 1], 0, 1)
 under_eye = np.clip(masks[:, :, 2], 0, 1)
-hairline = np.clip(np.load(work / 'zone.npy').astype(np.float64)[:, :, 0], 0, 1)
+zone = np.load(work / 'zone.npy').astype(np.float64)
+hairline = np.clip(zone[:, :, 0], 0, 1)
+socket_interior = np.clip(zone[:, :, 1], 0, 1)  # v09: orbit interior behind the eyeballs
 target = np.load(work / 'target.npy')
 H, W, _ = skin.shape
 covered = (tone.sum(axis=2) > 0.05)
@@ -52,6 +54,16 @@ dark = np.maximum(dark, np.clip(gaussian_filter(dark, 2.0) * 1.5, 0, 1) * hairli
 result = result * (1 - dark)[:, :, None] + lowskin * dark[:, :, None]
 soft = np.stack([gaussian_filter(result[:, :, c], 2.5) for c in range(3)], axis=2)
 result = result * (1 - 0.85 * under_eye)[:, :, None] + soft * (0.85 * under_eye)[:, :, None]
+# v09: the socket interior behind the restored eyeballs gets the base skin back (the photo's
+# painted eye had been baked there), a little darker because it is a cavity.
+if (work / 'base_skin.npy').exists() and socket_interior.max() > 0:
+    base = np.load(work / 'base_skin.npy').astype(np.float64)
+    if base.shape[:2] != (H, W):
+        from PIL import Image as _I
+        base = np.asarray(_I.fromarray((base * 255).astype(np.uint8)).resize((W, H))).astype(np.float64) / 255
+    cavity = base * np.array([0.86, 0.74, 0.66]) * 0.78
+    result = result * (1 - socket_interior)[:, :, None] + cavity * socket_interior[:, :, None]
+    print('SOCKET interior repainted texels', int((socket_interior > 0.5).sum()))
 # Fill everything outside the UV islands with the nearest island colour so mipmaps never
 # bleed black into the seams (that reads as dark lines down the neck and around the head).
 _, (iy, ix) = distance_transform_edt(~covered, return_indices=True)

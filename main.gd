@@ -42,6 +42,7 @@ var was_grounded := true
 var fall_speed := 0.0
 var jump_delay := -1.0
 var landing_lock := 0.0
+var knockout_timer := 0.0
 var land_dip := 0.0
 var idle_clock := 0.0
 var next_idle := 8.0
@@ -300,21 +301,42 @@ func sit_toggle() -> void:
 	avatar.crouching = false
 	avatar.guarding = false
 	avatar.rotation.y = best.yaw
-	avatar.play_action(best.pose, 3600.0, .4)
+	if avatar.has_action(best.pose + "Down"):
+		# Motion-captured sit-down, then the seated loop.
+		avatar.play_action(best.pose + "Down", -1.0, .3, best.pose)
+	else:
+		avatar.play_action(best.pose, 3600.0, .4)
 	avatar.set_expression("Smile", 3)
 	sound.play_effect("sit")
 	hud.clear_input()
 	actions.notify("Sitting down · push the stick or tap STAND to get up")
 
+func knockout(from: Vector3) -> void:
+	# The hero goes limp (ragdoll) toward the blow, then wakes up at Chandpole.
+	var away: Vector3=player.global_position-from
+	away.y=0
+	if away.length()<.01:
+		away=-avatar.global_basis.z
+	knockout_timer=2.4
+	avatar.knock_down(away.normalized()*5.0+Vector3.UP*2.5)
+	camera_shake=.3
+	hud.clear_input()
+	actions.notify("Knocked out...")
+
 func stand_up() -> void:
 	if seated.is_empty():
 		return
+	var exit_clip: String = "SitHighUp" if seated.get("pose", "Sit") == "SitHigh" else "StandUp"
 	seated = {}
 	player.collision_layer = 1
 	player.collision_mask = 7
 	player.position = sit_restore + Vector3(0, .05, 0)
 	player.velocity = Vector3.ZERO
-	avatar.stop_action(.35)
+	if avatar.has_action(exit_clip):
+		avatar.play_action(exit_clip, -1.0, .2)
+		landing_lock = maxf(landing_lock, .5)
+	else:
+		avatar.stop_action(.35)
 	jump_requested = false
 	hud.clear_input()
 
@@ -335,6 +357,15 @@ func _physics_process(delta: float) -> void:
 		return
 	attack_cooldown=maxf(0,attack_cooldown-delta)
 	dash_time=maxf(0,dash_time-delta)
+	if knockout_timer>0:
+		# Ragdolled: no input, no locomotion; wake up at the hospital corner afterwards.
+		knockout_timer-=delta
+		player.velocity=Vector3.ZERO
+		if knockout_timer<=0:
+			avatar.get_up()
+			travel_to(0)
+			actions.notify("Recovered at Chandpole · Rs 50 first aid")
+		return
 	camera_shake=maxf(0,camera_shake-delta)
 	landing_lock=maxf(0,landing_lock-delta)
 	land_dip=maxf(0,land_dip-delta*.5)
@@ -345,7 +376,7 @@ func _physics_process(delta: float) -> void:
 	if not seated.is_empty() and (move.length()>.4 or jump_requested):
 		stand_up()
 	var talking: bool=actions.dialogue_open and not actions.target.is_empty() and actions.target.has("body") and is_instance_valid(actions.target.body)
-	var locked: bool=portrait or hud.map_open or actions.dialogue_open or not seated.is_empty()
+	var locked: bool=portrait or hud.map_open or actions.dialogue_open or not seated.is_empty() or knockout_timer>0
 	if locked:
 		move=Vector2.ZERO
 	move_input=move
@@ -389,7 +420,7 @@ func _physics_process(delta: float) -> void:
 		avatar.grounded=true
 		jump_requested=false
 		actions.health=minf(100,actions.health+delta*3)
-		if avatar.action!=seated.pose:
+		if avatar.action!=seated.pose and avatar.action!=seated.pose+"Down":
 			avatar.play_action(seated.pose,3600.0,.3)
 	elif not vehicle.driving:
 		player.velocity.x=move_toward(player.velocity.x,direction.x*speed,delta*accel)
@@ -401,8 +432,8 @@ func _physics_process(delta: float) -> void:
 		jump_requested=false
 		var launch := false
 		if jump_buffer>0 and coyote_time>0 and jump_delay<0 and landing_lock<=0 and dash_time<=0:
-			# Short anticipation dip before the feet leave the ground.
-			jump_delay=.06
+			# Anticipation dip before the feet leave the ground (the mocap Jump clip crouches first).
+			jump_delay=.16
 			jump_buffer=0
 			coyote_time=0
 			avatar.crouching=false
@@ -444,7 +475,10 @@ func _physics_process(delta: float) -> void:
 			if idle_clock>next_idle:
 				idle_clock=0
 				next_idle=randf_range(7,13)
-				avatar.play_action("LookAround",-1.0,.3)
+				if randf()<.45 and avatar.has_action("Fidget"):
+					avatar.play_action("Fidget",5.5,.4)
+				else:
+					avatar.play_action("LookAround",-1.0,.3)
 		else:
 			idle_clock=0
 	else:

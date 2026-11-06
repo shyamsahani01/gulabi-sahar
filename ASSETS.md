@@ -72,6 +72,11 @@ Jaipur reference photographs were fetched for local visual research only; their 
 
 - `shyam_hero_v08.glb`, `shyam_structured_skin.png` and `tools/source/hero_v08.blend` derive from `shyam_hero_v07.glb` only (same user/MakeHuman body, approved concept and earlier MediaPipe fit). No new person's face, photo or downloaded asset is involved. `tools/refine_hero_v08.py` (portable Blender 4.2 + numpy) applies authored anatomical displacement fields, rebuilds the Smile key, adds BrowRaise/BrowFurrow, repairs the eyelid UVs/normals and bakes per-vertex tone/mask images; `tools/hero_v08_texture.py` (system Python, scipy/PIL) de-lights the photo region, matches the body skin tone to it and fills the texture background. Godot-generated GLB texture extractions are committed alongside the GLB; v07 and earlier candidates are retained. Still an approximate likeness with painted eyes; not a scan or a complete eye rig.
 
+### v0.9.5 real eyes and motion capture
+
+- `shyam_hero_v09.glb`, `shyam_structured_skin_v09.png`, `tools/source/hero_v09.blend`: the v08 hero plus the character's own MakeHuman eyeballs (`Shyam.low-poly` mesh and `shyam_brown_eye.png` from the existing v0.4 export, CC0 MakeHuman assets), the original MakeHuman orbit geometry restored from `shyam_hero.glb`, and procedural eyelashes. No new downloaded asset.
+- `hero_mocap.glb`: 22 clips derived from the **CMU Graphics Lab Motion Capture Database** (http://mocap.cs.cmu.edu), trials 02_04, 13_01, 13_04, 13_11, 13_17, 18_08, 19_08, 74_04, 77_04, 77_09, 90_18, 140_06, 141_14, 141_16, retargeted onto the project's own rig by `tools/cmu_retarget.py`. The database is free for any use, including commercial, with the acknowledgement: "The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217." Source ASF/AMC files stay in ignored `builds/cmu/`.
+
 ### v0.9.2 café / hospital architecture
 
 - `assets/fonts/DejaVuSans-Bold.ttf`: DejaVu Sans Bold, copied from the system font

@@ -52,6 +52,8 @@ func populate_near(at: Vector3) -> void:
 			p.health = 100
 			p.home = start
 			p.defeated = false
+			p.human.get_up()
+			p.human.stop_action(.4)
 			p.aggressive = false
 			p.body.collision_layer = 2
 			p.human.rotation.z = 0

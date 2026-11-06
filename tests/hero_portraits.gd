@@ -64,6 +64,16 @@ func capture() -> void:
 	await shoot(camera,out,"zoom-nose-three-quarter",Vector3(.26,1.565,.3),Vector3(0,1.555,0))
 	await shoot(camera,out,"zoom-jaw-neck",Vector3(.42,1.49,.5),Vector3(0,1.47,0))
 	await shoot(camera,out,"zoom-low-angle",Vector3(.2,1.42,.55),Vector3(0,1.53,0))
+	# Real eyes: mid-blink and a sideways gaze.
+	for side in ["BlinkLeft","BlinkRight"]:
+		hero.face.set_blend_shape_value(hero.face.find_blend_shape_by_name(side),0.55)
+	await shoot(camera,out,"zoom-eyes-blink",Vector3(0,1.595,.32),Vector3(0,1.59,0))
+	for side in ["BlinkLeft","BlinkRight"]:
+		hero.face.set_blend_shape_value(hero.face.find_blend_shape_by_name(side),0.0)
+	if hero.eye_material!=null:
+		hero.eye_material.uv1_offset=hero.eye_base_uv+Vector3(0.03,0,0)
+		await shoot(camera,out,"zoom-eyes-gaze",Vector3(0,1.595,.32),Vector3(0,1.59,0))
+		hero.eye_material.uv1_offset=hero.eye_base_uv
 	for expression in ["Smile","Serious","Surprised"]:
 		hero.set_expression(expression,100)
 		settle_face()

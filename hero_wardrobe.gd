@@ -69,6 +69,7 @@ static func apply(human: Node3D, index: int) -> void:
 		if is_instance_valid(node):
 			node.queue_free()
 	human.wardrobe_nodes.clear()
+	human.pendulums.clear()
 	var o: Dictionary = OUTFITS[wrapi(index, 0, OUTFITS.size())]
 	human.outfit = wrapi(index, 0, OUTFITS.size())
 	# Torso and legs reuse the skinned garments with new surface looks.
@@ -127,8 +128,13 @@ static func apply(human: Node3D, index: int) -> void:
 		torus.ring_segments = 8
 		torus.inner_radius = .064
 		torus.outer_radius = .07
-		part(chest, torus, Vector3(0, .262, .095), Vector3.ONE, chrome, Vector3(-.32, 0, 0))
-		part(chest, cube(), Vector3(0, .2, .133), Vector3(.014, .022, .005), chrome)
+		# The necklace hangs from a pivot at the collar so it swings with the body (hero_physics pendulum).
+		var necklace := Node3D.new()
+		necklace.position = Vector3(0, .262, .095)
+		chest.add_child(necklace)
+		part(necklace, torus, Vector3.ZERO, Vector3.ONE, chrome, Vector3(-.32, 0, 0))
+		part(necklace, cube(), Vector3(0, -.062, .038), Vector3(.014, .022, .005), chrome)
+		human.pendulums.append(preload("res://hero_physics.gd").make_pendulum(necklace, 55.0, 5.0, 1.0, 0.35))
 	if o.get("watch", false):
 		var wrist := attach(human, "lowerarm_l")
 		part(wrist, tube(.5, .5), Vector3(0, .222, 0), Vector3(.076, .02, .066), black)
@@ -141,7 +147,11 @@ static func apply(human: Node3D, index: int) -> void:
 		part(head, cube(), Vector3(0, .05, -.06), Vector3(.215, .018, .2), cap)
 	if o.get("hood", false):
 		var back := attach(human, "spine_03")
-		part(back, sphere(), Vector3(0, .325, -.055), Vector3(.22, .12, .16), solid(o.shell, .92))
+		var hood_pivot := Node3D.new()
+		hood_pivot.position = Vector3(0, .37, -.02)
+		back.add_child(hood_pivot)
+		part(hood_pivot, sphere(), Vector3(0, -.045, -.035), Vector3(.22, .12, .16), solid(o.shell, .92))
+		human.pendulums.append(preload("res://hero_physics.gd").make_pendulum(hood_pivot, 70.0, 7.0, 0.7, 0.3))
 	if o.get("logo", false):
 		var chest := attach(human, "spine_03")
 		var text := TextMesh.new()
