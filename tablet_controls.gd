@@ -1,6 +1,7 @@
 extends Control
 
 signal face_view
+signal face_zoom(factor: float)
 signal expression_changed
 signal outfit_changed
 signal jump
@@ -15,6 +16,10 @@ var frames := 0.0
 var elapsed := 0.0
 var fps := 0
 var portrait := false
+var face_zoom_level := 1.0
+var pinch_id := -1
+var pinch_distance := 0.0
+var touch_points: Dictionary = {}
 var expression_label := "Neutral"
 var outfit_label := "Street"
 var hindi_font: Font = preload("res://assets/fonts/NotoSansDevanagari-Regular.ttf")
@@ -41,6 +46,8 @@ func _notification(what: int) -> void:
 func clear_input() -> void:
 	move_id = -1
 	look_id = -1
+	pinch_id = -1
+	touch_points.clear()
 	movement = Vector2.ZERO
 	knob = Vector2.ZERO
 	running = false
@@ -138,6 +145,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
+			touch_points[event.index] = event.position
 			if event.position.distance_to(face_center()) < 42:
 				face_view.emit()
 			elif not portrait and event.position.distance_to(map_center()) < 42:
@@ -146,27 +154,50 @@ func _input(event: InputEvent) -> void:
 				expression_changed.emit()
 			elif portrait and event.position.distance_to(outfit_center()) < 64:
 				outfit_changed.emit()
+			elif portrait and event.position.distance_to(map_zoom_in_center()) < 32:
+				face_zoom.emit(1.25)
+			elif portrait and event.position.distance_to(map_zoom_out_center()) < 32:
+				face_zoom.emit(1 / 1.25)
+			elif portrait and look_id != -1 and pinch_id == -1 and event.index != look_id:
+				# Second finger while inspecting the face: pinch to zoom.
+				pinch_id = event.index
+				pinch_distance = touch_points.get(look_id, event.position).distance_to(event.position)
 			elif event.position.distance_to(jump_center()) < 58:
 				jump.emit()
 			elif event.position.distance_to(run_center()) < 45:
 				running = not running
-			elif event.position.distance_to(center()) < 115 and move_id == -1:
+			elif not portrait and event.position.distance_to(center()) < 115 and move_id == -1:
 				move_id = event.index
 				update_move(event.position)
-			elif event.position.x > size.x * 0.4 and event.position.y > 110 and look_id == -1:
+			elif (portrait or (event.position.x > size.x * 0.4 and event.position.y > 110)) and look_id == -1:
 				look_id = event.index
 		else:
+			touch_points.erase(event.index)
 			if event.index == move_id:
 				move_id = -1
 				movement = Vector2.ZERO
 				knob = Vector2.ZERO
 			if event.index == look_id:
 				look_id = -1
+				pinch_id = -1
+			if event.index == pinch_id:
+				pinch_id = -1
 	if event is InputEventScreenDrag:
+		touch_points[event.index] = event.position
 		if event.index == move_id:
 			update_move(event.position)
+		elif pinch_id != -1 and (event.index == look_id or event.index == pinch_id):
+			if touch_points.has(look_id) and touch_points.has(pinch_id):
+				var spread: float = touch_points[look_id].distance_to(touch_points[pinch_id])
+				if pinch_distance > 12 and spread > 12:
+					face_zoom.emit(spread / pinch_distance)
+				pinch_distance = spread
 		elif event.index == look_id:
 			look.emit(event.relative)
+	if portrait and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+		face_zoom.emit(1.15)
+	elif portrait and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		face_zoom.emit(1 / 1.15)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.position.distance_to(face_center()) < 42:
 			face_view.emit()
@@ -176,6 +207,10 @@ func _input(event: InputEvent) -> void:
 			expression_changed.emit()
 		elif portrait and event.position.distance_to(outfit_center()) < 64:
 			outfit_changed.emit()
+		elif portrait and event.position.distance_to(map_zoom_in_center()) < 32:
+			face_zoom.emit(1.25)
+		elif portrait and event.position.distance_to(map_zoom_out_center()) < 32:
+			face_zoom.emit(1 / 1.25)
 		elif event.position.distance_to(jump_center()) < 58:
 			jump.emit()
 		elif event.position.distance_to(run_center()) < 45:
@@ -226,6 +261,7 @@ func _draw() -> void:
 	if portrait:
 		draw_style_box(panel(Color(0.1, 0.15, 0.16, 0.9)), Rect2(expression_center() - Vector2(70, 25), Vector2(140, 50)))
 		text_at(expression_center() + Vector2(-55, 6), expression_label + " >", 16, cream)
+		draw_face_zoom(cream, muted)
 	text_at(Vector2(30, size.y - 22), "WASD  Move    SHIFT  Run    SPACE  Jump    DRAG  Look    R  Reset", 14, muted)
 	draw_circle(center(), 94, Color(0.08, 0.12, 0.13, 0.35))
 	draw_arc(center(), 94, 0, TAU, 64, Color(0.94, 0.85, 0.69, 0.35), 2, true)
@@ -237,6 +273,14 @@ func _draw() -> void:
 	draw_circle(run_center(), 40, Color(0.65, 0.39, 0.22, 0.85) if running else Color(0.1, 0.15, 0.16, 0.65))
 	text_at(run_center() + Vector2(-18, 5), "RUN", 15, cream)
 	text_at(Vector2(size.x - 270, size.y - 221), "DRAG TO LOOK", 12, muted)
+
+func draw_face_zoom(ink: Color, quiet: Color) -> void:
+	for pair in [[map_zoom_in_center(), "+"], [map_zoom_out_center(), "−"]]:
+		draw_circle(pair[0], 26, Color(0.1, 0.15, 0.16, 0.85))
+		draw_arc(pair[0], 26, 0, TAU, 32, Color(0.94, 0.85, 0.69, 0.5), 1.5, true)
+		text_at(pair[0] + Vector2(-7, 8), pair[1], 22, ink)
+	text_at(map_zoom_in_center() + Vector2(-82, -46), "ZOOM %.1fx" % face_zoom_level, 13, ink)
+	text_at(map_zoom_out_center() + Vector2(-150, 48), "PINCH  •  DRAG TO LOOK", 11, quiet)
 
 func draw_map() -> void:
 	# Full-screen tourist map, north to the right: parchment, pink old city, green colony, brown hills.

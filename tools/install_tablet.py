@@ -1,6 +1,6 @@
 import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil,os
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.9.3';tag='v093'
+version='0.9.4';tag='v094'
 preview='--preview' in sys.argv
 package='com.itgurujan.gulabisahar'+('.preview' if preview else '')
 suffix='-preview' if preview else ''
@@ -49,12 +49,21 @@ if fresh_preview:
   record['save_migration']='Existing save was not readable; original retained'
 
 print('INSTALL',record['install'],flush=True)
+# Keep the tablet awake while Godot creates its Vulkan surface: a sleep/pause during startup
+# makes the engine quit ("Couldn't create Android Surface"), which looked like a crash in 0.9.4.
+screen_timeout=run(base+['shell','settings','get','system','screen_off_timeout'])
+run(base+['shell','settings','put','system','screen_off_timeout','600000'])
+run(base+['shell','input','keyevent','KEYCODE_WAKEUP'])
+subprocess.run([str(x) for x in base+['shell','wm','dismiss-keyguard']],capture_output=True)
 record['launch']=run(base+['shell','am','start','-W','-n',package+'/com.godot.game.GodotAppLauncher'])
 record['package']=run(base+['shell','dumpsys','package',package])
 record['package']='\n'.join(x.strip() for x in record['package'].splitlines() if 'versionName=' in x or 'versionCode=' in x)
 time.sleep(8)
 record['foreground']='\n'.join(x.strip() for x in run(base+['shell','dumpsys','activity','activities']).splitlines() if 'ResumedActivity' in x)
-record['pid']=run(base+['shell','pidof',package])
+pid=subprocess.run([str(x) for x in base+['shell','pidof',package]],capture_output=True,text=True)
+record['pid']=pid.stdout.strip() or 'NOT RUNNING after 8 s'
+record['keyguard']=run(base+['shell','dumpsys','window']).count('isKeyguardShowing=true') and 'secure keyguard showing: screenshot will be black until the user unlocks' or 'unlocked'
+run(base+['shell','settings','put','system','screen_off_timeout',screen_timeout])
 (root/f'builds/tablet-install-{tag}.json').write_text(json.dumps(record,indent=2))
 (root/'builds/previews').mkdir(parents=True,exist_ok=True)
 with (root/f'builds/previews/tablet-{tag}-installed.png').open('wb') as f:subprocess.run([str(x) for x in base+['exec-out','screencap','-p']],stdout=f,check=True)

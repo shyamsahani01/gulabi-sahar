@@ -2,7 +2,7 @@ extends Node3D
 
 var skeleton: Skeleton3D
 var model: Node3D
-var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v07.glb")
+var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v08.glb")
 var time := 0.0
 var movement_speed := 0.0
 var grounded := true
@@ -46,12 +46,34 @@ var expression := "Neutral"
 var expression_time := 0.0
 var blink_clock := 1.8
 var blink_phase := -1.0
+var brow_flash := 0.0
 const EXPRESSIONS := ["Neutral", "Smile", "Serious", "Surprised"]
+# Blend-shape targets per expression. Smile carries its own cheek lift and lower-lid squint
+# (built in tools/refine_hero_v08.py); the eyebrows ride on separate BrowRaise/BrowFurrow keys.
+const EXPRESSION_SHAPES := {
+	"Neutral": {},
+	"Smile": {"Smile": 1.0, "BrowRaise": 0.22},
+	"Serious": {"Serious": 1.0, "BrowFurrow": 0.85},
+	"Surprised": {"Surprised": 1.0, "BrowRaise": 1.0},
+}
 
 func set_expression(value: String, duration: float = 5.0) -> void:
 	if value in EXPRESSIONS:
+		if value == "Smile" and expression != "Smile":
+			# A real smile starts with the brows: they lift first, then settle while the mouth widens.
+			brow_flash = 1.0
 		expression = value
 		expression_time = duration
+
+func face_targets() -> Dictionary:
+	var targets: Dictionary = EXPRESSION_SHAPES.get(expression, {}).duplicate()
+	if expression == "Smile":
+		targets["BrowRaise"] = targets["BrowRaise"] + 0.38 * brow_flash
+	if talking:
+		# Conversational brow movement: small lifts on the stressed beats of speech.
+		var beat := maxf(0.0, sin(time * 3.4) + 0.35 * sin(time * 7.1))
+		targets["BrowRaise"] = maxf(targets.get("BrowRaise", 0.0), 0.1 + 0.22 * beat)
+	return targets
 
 func cycle_expression() -> void:
 	set_expression(EXPRESSIONS[(EXPRESSIONS.find(expression) + 1) % EXPRESSIONS.size()], 3600.0)
@@ -72,10 +94,14 @@ func update_face(delta: float) -> void:
 		blink = sin(clampf(blink_phase / 0.18, 0, 1) * PI)
 		if blink_phase >= 0.18:
 			blink_phase = -1
+	brow_flash = move_toward(brow_flash, 0.0, delta * 1.4)
+	var targets := face_targets()
 	for i in range(face.mesh.get_blend_shape_count()):
 		var shape := str(face.mesh.get_blend_shape_name(i))
-		var target := blink if shape.begins_with("Blink") else (1.0 if shape == expression else 0.0)
-		face.set_blend_shape_value(i, move_toward(face.get_blend_shape_value(i), target, delta * 10))
+		var target: float = blink if shape.begins_with("Blink") else float(targets.get(shape, 0.0))
+		# Lids snap, brows are quick, the mouth and cheeks take about a third of a second.
+		var speed := 14.0 if shape.begins_with("Blink") else (7.0 if shape.begins_with("Brow") else 4.5)
+		face.set_blend_shape_value(i, move_toward(face.get_blend_shape_value(i), target, delta * speed))
 
 func _ready() -> void:
 	var scene: PackedScene = hero_scene
@@ -125,15 +151,18 @@ func _ready() -> void:
 			mat.metallic_specular = 0.15
 			mat.roughness = 0.85
 			if mesh.name.begins_with("HeroFace_Continuous"):
-				mat.roughness = .67
-				mat.metallic_specular = .28
+				# Slightly tighter highlights so the sculpted brow, nose and cheekbones read in-game.
+				mat.roughness = .62
+				mat.metallic_specular = .3
 			elif mesh.name.begins_with("HeroHair"):
 				mat.roughness = .58
 				mat.metallic_specular = .25
 			if mesh.name.begins_with("HeroEye"):
 				mat.roughness = 0.22
 				mat.metallic_specular = 0.45
-			mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+			# The closed body mesh culls back faces so the lid and mouth shells never show through
+			# the skin; garments and the hair cap stay double-sided.
+			mat.cull_mode = BaseMaterial3D.CULL_BACK if mesh.name.begins_with("HeroFace_Continuous") else BaseMaterial3D.CULL_DISABLED
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
 			if "eyebrow" in mesh.name or "short01" in mesh.name:
 				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
@@ -159,7 +188,7 @@ func _ready() -> void:
 			else:
 				mesh.set_surface_override_material(surface, mat)
 	for side in ["l", "r"]:
-		if not legacy_model or (not crowd and hero_scene.resource_path.ends_with("shyam_hero_v07.glb")):
+		if not legacy_model or (not crowd and hero_scene.resource_path.get_file() in ["shyam_hero_v07.glb", "shyam_hero_v08.glb"]):
 			break
 		var attachment := BoneAttachment3D.new()
 		attachment.bone_name = "foot_" + side

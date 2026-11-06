@@ -114,10 +114,10 @@ static func apply(human: Node3D, index: int) -> void:
 		lens.albedo_color.a = .92
 		lens.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		for side in [-1, 1]:
-			part(head, sphere(), Vector3(side * .033, .027, .09), Vector3(.06, .03, .014), lens)
-			part(head, cube(), Vector3(side * .033, .041, .089), Vector3(.062, .004, .008), black)
+			part(head, sphere(), Vector3(side * .033, .027, .096), Vector3(.06, .03, .014), lens)
+			part(head, cube(), Vector3(side * .033, .041, .095), Vector3(.062, .004, .008), black)
 			part(head, cube(), Vector3(side * .066, .038, .032), Vector3(.004, .005, .12), black)
-		part(head, cube(), Vector3(0, .036, .094), Vector3(.012, .004, .005), black)
+		part(head, cube(), Vector3(0, .036, .1), Vector3(.012, .004, .005), black)
 	if o.get("chain", false):
 		var chest := attach(human, "spine_03")
 		var torus := TorusMesh.new()

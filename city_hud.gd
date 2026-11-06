@@ -111,6 +111,7 @@ func _draw() -> void:
 		draw_style_box(panel(Color(.1,.15,.16,.9)),Rect2(outfit_center()-Vector2(78,22),Vector2(156,44)))
 		text_at(outfit_center()+Vector2(-66,6),"OUTFIT: "+outfit_label.to_upper()+" >",14,ink)
 		button_circle(face_center(),"BACK",32,Color("394d51"))
+		draw_face_zoom(ink,quiet)
 		return
 	button_circle(map_center(),"MAP",32,Color("1e333a"))
 	button_circle(face_center(),"FACE",30,Color("1e333a"))

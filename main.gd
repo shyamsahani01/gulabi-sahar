@@ -13,6 +13,9 @@ var jump_requested := false
 var portrait := false
 var portrait_angle := 0.0
 var portrait_height := 0.0
+var portrait_distance := 0.85
+const PORTRAIT_DISTANCE_MIN := 0.2
+const PORTRAIT_DISTANCE_MAX := 1.25
 var portrait_camera: Camera3D
 var activity: Node3D
 var actions: Control
@@ -126,6 +129,7 @@ func _ready() -> void:
 	sound.game = self
 	add_child(sound)
 	hud.face_view.connect(toggle_portrait)
+	hud.face_zoom.connect(zoom_portrait)
 	hud.expression_changed.connect(func():
 		avatar.cycle_expression()
 		hud.expression_label = avatar.expression)
@@ -149,16 +153,30 @@ func toggle_portrait() -> void:
 	if portrait:
 		portrait_angle = 0.0
 		portrait_height = 0.0
+		portrait_distance = 0.85
+		hud.face_zoom_level = 1.0
 		orbit_portrait(Vector2.ZERO)
 		portrait_camera.make_current()
 	else:
 		pivot.get_child(0).get_child(0).make_current()
 
 func orbit_portrait(delta: Vector2) -> void:
-	portrait_angle = clampf(portrait_angle - delta.x * 0.006, -0.85, 0.85)
-	portrait_height = clampf(portrait_height + delta.y * 0.0008, -0.08, 0.10)
-	portrait_camera.position = Vector3(sin(portrait_angle) * 0.85, 1.58 + portrait_height, -cos(portrait_angle) * 0.85)
-	portrait_camera.look_at(avatar.to_global(Vector3(0, 1.58, 0)))
+	# Drag orbits the head; the vertical drag also moves the point the camera studies
+	# (brows at the top, chin and neck at the bottom), scaled down as the zoom gets closer.
+	var closeness := portrait_distance / 0.85
+	portrait_angle = clampf(portrait_angle - delta.x * 0.006 * closeness, -1.15, 1.15)
+	portrait_height = clampf(portrait_height + delta.y * 0.0008 * closeness, -0.11, 0.11)
+	var focus := Vector3(0, 1.58 + portrait_height * 0.85, 0)
+	portrait_camera.position = focus + Vector3(sin(portrait_angle) * portrait_distance, portrait_height * 0.45, -cos(portrait_angle) * portrait_distance)
+	portrait_camera.look_at(avatar.to_global(focus))
+
+func zoom_portrait(factor: float) -> void:
+	# Pinch, wheel or the +/- buttons: factor > 1 moves the camera closer to the face.
+	if not portrait or factor <= 0:
+		return
+	portrait_distance = clampf(portrait_distance / factor, PORTRAIT_DISTANCE_MIN, PORTRAIT_DISTANCE_MAX)
+	hud.face_zoom_level = 0.85 / portrait_distance
+	orbit_portrait(Vector2.ZERO)
 
 func build_avatar() -> void:
 	avatar = preload("res://human.gd").new()
@@ -191,7 +209,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			yaw -= event.relative.x * 0.004
 			pitch = clampf(pitch - event.relative.y * 0.004, -0.7, 0.18)
+	if portrait and event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			zoom_portrait(1.15)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom_portrait(1 / 1.15)
 	if event is InputEventKey and event.pressed and not event.echo:
+		if portrait and event.keycode in [KEY_EQUAL, KEY_PLUS, KEY_KP_ADD]:
+			zoom_portrait(1.25)
+		elif portrait and event.keycode in [KEY_MINUS, KEY_KP_SUBTRACT]:
+			zoom_portrait(1 / 1.25)
 		if event.keycode == KEY_Q:
 			actions.attack()
 		elif event.keycode == KEY_T:

@@ -18,11 +18,14 @@ void fragment() {
 	float y = hp.y;
 	float z = hp.z;
 	// Jaw and chin below the mouth, wrapping around the sides toward the ears.
-	float chin = smoothstep(-0.115, -0.095, y) * (1.0 - smoothstep(-0.036, -0.026, y)) * smoothstep(0.0, 0.03, z);
-	float jaw = smoothstep(-0.115, -0.09, y) * (1.0 - smoothstep(-0.03, -0.012, y)) * smoothstep(0.042, 0.058, x) * smoothstep(-0.02, 0.01, z);
+	// The jawline sits about 0.068 below the head joint; the growth thins out 2 cm under it
+	// instead of stopping in a straight band across the neck.
+	float chin = smoothstep(-0.096, -0.07, y) * (1.0 - smoothstep(-0.036, -0.026, y)) * smoothstep(0.0, 0.03, z);
+	float jaw = smoothstep(-0.096, -0.068, y) * (1.0 - smoothstep(-0.03, -0.012, y)) * smoothstep(0.042, 0.058, x) * smoothstep(-0.02, 0.01, z);
+	float under_jaw = mix(0.45, 1.0, smoothstep(-0.078, -0.06, y));
 	float moustache = 0.7 * smoothstep(-0.018, -0.013, y) * (1.0 - smoothstep(-0.002, 0.004, y)) * (1.0 - smoothstep(0.026, 0.032, x)) * smoothstep(0.06, 0.08, z);
 	float sideburn = smoothstep(-0.03, -0.01, y) * (1.0 - smoothstep(0.04, 0.055, y)) * smoothstep(0.066, 0.074, x) * (1.0 - smoothstep(0.0, 0.025, z));
-	float mask = clamp(chin + jaw + moustache + sideburn, 0.0, 1.0);
+	float mask = clamp((chin + jaw) * under_jaw + moustache + sideburn, 0.0, 1.0);
 	// Keep the lips clear and fade at the neck.
 	mask *= 1.0 - (1.0 - smoothstep(0.028, 0.034, x)) * smoothstep(-0.036, -0.03, y) * (1.0 - smoothstep(-0.012, -0.006, y));
 	float grain = 0.55 + 0.45 * step(0.42, hash(floor(hp.xy * 1400.0) + floor(hp.z * 700.0)));

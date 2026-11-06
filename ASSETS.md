@@ -68,6 +68,10 @@ Jaipur reference photographs were fetched for local visual research only; their 
 - Chameliwala Market reference: https://travjoy.com/jaipur/eat-shop-and-party/local-bazaars-and-flea-markets/chameliwala-market . The downloaded photograph stays in ignored `builds/references/`; it is not a game texture. `scooter_design.gd`/`street_details.gd` are original native geometry, informed by street details rather than a literal reconstruction.
 - `shyam_hero_v07.glb` and `shyam_continuous_skin.png` derive from the existing user/MakeHuman body, approved generated concept and earlier MediaPipe fit described above. No new person's face was downloaded. `tools/refine_hero_v07.py` transfers fitted detail to the connected head, bakes the texture, adds original hair locks/cloth shaping/shoes and preserves the rig/morphs. `tools/source/hero_continuous.blend` is the editable packed source. Godot-generated GLB texture extractions are committed alongside the GLB. Prior candidates are retained. Approximate likeness and visible close-up transitions remain; not a scan or complete eye rig.
 
+### v0.9.4 structured hero face
+
+- `shyam_hero_v08.glb`, `shyam_structured_skin.png` and `tools/source/hero_v08.blend` derive from `shyam_hero_v07.glb` only (same user/MakeHuman body, approved concept and earlier MediaPipe fit). No new person's face, photo or downloaded asset is involved. `tools/refine_hero_v08.py` (portable Blender 4.2 + numpy) applies authored anatomical displacement fields, rebuilds the Smile key, adds BrowRaise/BrowFurrow, repairs the eyelid UVs/normals and bakes per-vertex tone/mask images; `tools/hero_v08_texture.py` (system Python, scipy/PIL) de-lights the photo region, matches the body skin tone to it and fills the texture background. Godot-generated GLB texture extractions are committed alongside the GLB; v07 and earlier candidates are retained. Still an approximate likeness with painted eyes; not a scan or a complete eye rig.
+
 ### v0.9.2 café / hospital architecture
 
 - `assets/fonts/DejaVuSans-Bold.ttf`: DejaVu Sans Bold, copied from the system font
