@@ -13,7 +13,7 @@ var building_count := 0
 var active_cells := 0
 var draw_detail := false
 var sphere_mesh := SphereMesh.new()
-var map_bounds := Rect2(-2900, -4200, 5000, 4950)
+var map_bounds := Rect2(-3600, -5800, 5700, 6550)
 var landmarks: Array = []
 var routes: Array = []
 var authored_roads: Array = []
@@ -101,7 +101,7 @@ func compact_layout() -> void:
 			p[1] *= CITY_COMPRESSION
 
 func make_city_materials() -> void:
-	for pair in [["shop_glass","779b9e"],["warm_light","ffe6b3"],["chrome","bac5c8"],["tile","c7cec8"],["grout","89958e"]]:
+	for pair in [["cafe_charcoal","181b1d"],["cafe_wood","795139"],["cafe_turf","426447"],["cafe_plaster","b9b6ad"],["cafe_frame","67716a"],["cafe_cane","ba9763"],["shop_glass","779b9e"],["warm_light","ffe6b3"],["chrome","bac5c8"],["tile","c7cec8"],["grout","89958e"]]:
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(pair[1])
 		mat.roughness = .28
@@ -519,6 +519,11 @@ func build_amenities() -> void:
 		var w: float = a.w
 		var d: float = a.d
 		var display_name: String = a.name if a.name != "" else ""
+		if a.get("design", "") == "reference_cafe":
+			var cafe = preload("res://cafe_reference.gd").new()
+			cafe.world = self
+			cafe.build(a)
+			continue
 		match a.kind:
 			"police": amenity_police(p, ang, front, w, d, display_name)
 			"hospital": amenity_hospital(p, ang, front, w, d, display_name)
@@ -529,6 +534,7 @@ func build_amenities() -> void:
 			"school": amenity_school(p, ang, front, w, d, display_name)
 			"temple": amenity_temple(p, ang, front, w, d, display_name)
 			"pharmacy": amenity_shop(p, ang, front, w, d, 6.0, "white", "cross_green", "मेडिकल स्टोर · " + (display_name if display_name != "" else "PHARMACY"))
+			"pub", "club": amenity_shop(p, ang, front, w, d, 7.0, "dark", "maroon", display_name if display_name != "" else "PUB / CLUB")
 			"restaurant": amenity_shop(p, ang, front, w, d, 7.0, "ivory", "maroon", (display_name if display_name != "" else "RESTAURANT") + " · भोजनालय")
 			_: amenity_shop(p, ang, front, w, d, 6.0, "cream", SHOP_COLORS[int(abs(p.x)) % SHOP_COLORS.size()], display_name if display_name != "" else "GENERAL STORE")
 
@@ -779,7 +785,7 @@ func build_landmarks() -> void:
 		sign.text = poi.hindi+"\n"+poi.name
 		sign.font_size = 32
 		sign.pixel_size = .006
-		sign.position = p+Vector3(-8,2.5,-6)
+		sign.position = p+(Vector3(0,2.5,3) if poi.name == "Crazy Coffee · VDN" else Vector3(-8,2.5,-6))
 		sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		sign.visibility_range_end = 100
 		cell(p).add_child(sign)
@@ -815,6 +821,8 @@ func district_at(at: Vector3) -> Dictionary:
 	at /= CITY_COMPRESSION
 	if at.x > 180 and at.z < -450:
 		return {"id":"hills","name":"Nahargarh / Brahmpuri","hindi":"नाहरगढ़ की पहाड़ियाँ"}
+	if at.z < -3650 and at.x < -1200:
+		return {"id":"vki","name":"Vishwakarma Industrial Area","hindi":"विश्वकर्मा औद्योगिक क्षेत्र"}
 	if at.z < -2050:
 		return {"id":"vdn","name":"Vidhyadhar Nagar","hindi":"विद्याधर नगर"}
 	if at.x < -1700:

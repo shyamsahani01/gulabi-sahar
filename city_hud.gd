@@ -13,7 +13,7 @@ var stamina := 100.0
 var driving := false
 var speed := 0
 # Real amenities drawn on the atlas/radar (OSM, see city_world.amenities).
-const AMENITY_STYLE := {"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
+const AMENITY_STYLE := {"cafe":["C",Color("cba675")],"pub":["P",Color("be86dc")],"club":["N",Color("be86dc")],"shop":["K",Color("9fc489")],"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
 var services_tab := false
 
 func action_centers() -> Dictionary:

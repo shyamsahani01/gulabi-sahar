@@ -66,7 +66,7 @@ func check() -> void:
 	print("AMENITIES ",kinds)
 	expect(scene.world.amenities.size()>200 and scene.world.amenity_count>200,"Real OSM amenities are loaded and built")
 	expect(kinds.get("police",0)>=2 and kinds.get("showroom",0)>=3 and kinds.get("theka",0)>=5 and kinds.get("hospital",0)>=20 and kinds.get("fuel",0)>=5,"Police stations, car showrooms, wine shops, hospitals and petrol pumps exist")
-	expect(scene.world.map_bounds.size.x<4500 and scene.world.map_bounds.size.y<4500,"Map bounds come from the data and are smaller than v0.8.0")
+	expect(scene.world.map_bounds.has_point(Vector2(-2350,-4750)*scene.world.CITY_COMPRESSION),"Expanded playable bounds include VKI south")
 	expect(scene.vehicle.wheels.size()==4 and scene.vehicle.body_mesh.get_child(0).mesh.get_surface_count()>=5,"Player car has a detailed body")
 	scene.vehicle.position=scene.player.position+Vector3(3,0,0)
 	scene.vehicle.toggle_drive()

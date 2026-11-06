@@ -386,3 +386,27 @@ The user explicitly asked to continue improving the character/design, fetch web 
 # Commit/push the current source and README first.
 python3 tools/install_tablet.py --preview
 ```
+
+## VKI / VDN and Crazy Coffee reference update — 2026-11-06
+
+Added fresh OSM coverage for VDN and **southern VKI** (interpreting the requested
+“VKL” as Vishwakarma Industrial Area). Imports add 51 OSM amenities: 27 hospital/
+clinic entries, 4 education locations, 14 shops, 3 restaurants, 1 café and 2 pubs.
+The road dataset now contains 6,323 ways. Missing nightclub data is not fabricated.
+Bounds and district identification extend to southern VKI, with a fast travel marker.
+
+Crazy Coffee at Central Spine uses screenshot-derived geometry: black sign fascia,
+large white letters, grid glazing, a clear central entrance, three steps, white pots,
+green outdoor seating, white fence and a gray/wood/cane interior. This template also
+replaces the generic facade for the imported VDN café. Crazy Coffee's branch address
+is [brand verified](https://crazycoffeeindia.com/pages/jaipur); its coordinates and
+dimensions are approximate. Other shops, schools, hospitals and pubs retain their
+typed facades; exact individual photo reconstructions are not claimed.
+
+See [actual engine renders, provenance and reproduction](designs/07-vki-vdn/README.md).
+Visual user approval remains pending. This update changes source/map data; a new
+Android APK or tablet installation is not included in this request.
+
+Validation: city smoke, combat, service refresh and café collision/route checks
+passed with zero failures. The café check also verifies a connected route into
+VKI and district identification. Exterior/interior images are actual engine captures.
