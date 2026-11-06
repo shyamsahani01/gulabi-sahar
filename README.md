@@ -410,3 +410,29 @@ Android APK or tablet installation is not included in this request.
 Validation: city smoke, combat, service refresh and café collision/route checks
 passed with zero failures. The café check also verifies a connected route into
 VKI and district identification. Exterior/interior images are actual engine captures.
+
+## v0.9.2 — photographed café structure and hospital interiors
+
+The user's café photographs now drive the left-side doorway, five broad treads,
+black fascia with extruded lettering/logo, large grid-glass bays and central black
+pier. The right terrace has round timber tables, green rope chairs, white fencing
+and individual potted foliage. Inside are wood floorboards, a narrow seating room,
+wall counters, cane-backed armchairs, woven wall panels, menus/bottles, warm lamps
+and the script “Espresso Yourself” sign. All seven café-tagged locations use this
+architecture, including cafés previously stored as restaurants. Glass stays clear
+and a collision ramp allows walking up the visible stairs.
+
+All 103 mapped hospital/clinic buildings and Sahar Hospital now use the white/teal
+medical facade with framed ward windows, medical cross, canopy, reception entrance,
+waiting chairs and reception desk. Hospital images were not supplied, so this is a
+hospital building type, not a claim to reproduce an individual hospital photograph.
+Other map categories retain their own building types.
+
+[Actual engine review images](designs/08-cafe-hospital/README.md). The game meshes
+follow the reference structure; measured dimensions and exact photographic likeness
+are not claimed. New primitives use the existing cell culling and shared instanced
+batches. DejaVu and URW fonts ship with their redistribution licenses. The wood shader
+uses the previously attributed Poly Haven CC0 grain texture.
+
+Android is v0.9.2 / version code 11. The build script now uses the installed SDK/JDK
+paths and exits after the import stage. Font licenses are included in the APK.

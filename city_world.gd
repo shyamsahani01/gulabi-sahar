@@ -2,6 +2,7 @@ extends "res://world.gd"
 # OSM source geometry is preserved on disk; the playable layout is 12% shorter.
 const CITY_COMPRESSION := 0.88
 var services: Array = []
+var architecture_meshes: Dictionary = {}
 var service_builder = preload("res://city_services.gd").new()
 const CELL := 160.0
 var data: Dictionary
@@ -42,6 +43,7 @@ func _ready() -> void:
 		mats[key].texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	lighting()
 	style_pass()
+	preload("res://architecture_materials.gd").install(self)
 	for key in ["hm_pink","rose","terracotta","fort"]:
 		mats[key].normal_enabled=false
 		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
@@ -166,7 +168,7 @@ func flush_batches() -> void:
 		var transforms: Array = batches[bucket]
 		var multi := MultiMesh.new()
 		multi.transform_format = MultiMesh.TRANSFORM_3D
-		multi.mesh = sphere_mesh if parts.size()>3 else cube
+		multi.mesh = architecture_meshes.get(parts[3],sphere_mesh) if parts.size()>3 else cube
 		multi.instance_count = transforms.size()
 		for i in transforms.size():
 			multi.set_instance_transform(i, transforms[i])
@@ -519,7 +521,7 @@ func build_amenities() -> void:
 		var w: float = a.w
 		var d: float = a.d
 		var display_name: String = a.name if a.name != "" else ""
-		if a.get("design", "") == "reference_cafe":
+		if a.kind == "cafe" or a.get("tags", {}).get("amenity", "") == "cafe" or a.get("design", "") == "reference_cafe":
 			var cafe = preload("res://cafe_reference.gd").new()
 			cafe.world = self
 			cafe.build(a)
@@ -574,32 +576,9 @@ func amenity_police(p: Vector3, ang: float, front: float, w: float, d: float, di
 	parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(w * .3, 0, back + front * (bd / 2 + 3.2)), ang, "jeep", "white")
 
 func amenity_hospital(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
-	var big: bool = w > 20
-	var height: float = 15.0 if big else 7.0
-	var bw: float = w * .8
-	var bd: float = d * .55
-	var back: float = -front * d * .18
-	lb(p, ang, Vector3(0, height / 2, back), Vector3(bw, height, bd), "white", true)
-	lb(p, ang, Vector3(0, height + .15, back), Vector3(bw + .4, .3, bd + .4), "trim")
-	draw_detail = true
-	var floors: int = int(height / 3.0)
-	for side in [-1, 1]:
-		for floor_index in floors:
-			lb(p, ang, Vector3(0, 1.6 + floor_index * 3.0, back + side * (bd / 2 + .05)), Vector3(bw * .84, 1.5, .1), "sky_blue")
-			lb(p, ang, Vector3(0, 2.6 + floor_index * 3.0, back + side * (bd / 2 + .4)), Vector3(bw * .9, .12, .8), "white")
-	# Red cross and canopy.
-	var top := Vector3(0, height + 1.6, back)
-	lb(p, ang, top, Vector3(2.4, .7, .3), "cross_red")
-	lb(p, ang, top, Vector3(.7, 2.4, .3), "cross_red")
-	lb(p, ang, Vector3(0, 3.4, back + front * (bd / 2 + 2.0)), Vector3(bw * .5, .2, 4.0), "white")
-	for side in [-1, 1]:
-		lb(p, ang, Vector3(side * bw * .22, 1.7, back + front * (bd / 2 + 3.8)), Vector3(.3, 3.4, .3), "white")
-	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.9 if big else 4.4, back + front * (bd / 2 + .12)), ang, front, ("अस्पताल · HOSPITAL\n" if big else "क्लिनिक · CLINIC\n") + display_name, "white", Vector3(bw * .8, 1.5, .18), Color("c8302a"), 32)
-	draw_detail = false
-	if big:
-		parked_vehicle(p + Basis(Vector3.UP, ang) * Vector3(bw * .3, 0, back + front * (bd / 2 + 5.0)), ang, "ambulance", "white")
-	else:
-		lb(p, ang, Vector3(0, .3, back + front * (bd / 2 + 1.8)), Vector3(bw * .4, .6, 3.2), "concrete", true)
+	var hospital = preload("res://hospital_reference.gd").new()
+	hospital.world = self
+	hospital.build({"p":[p.x,p.z],"a":ang,"front":front,"w":w,"d":d,"name":display_name})
 
 func amenity_showroom(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
 	# Glass box with a white fascia band, brand name and cars on a lit plinth.

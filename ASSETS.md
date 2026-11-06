@@ -67,3 +67,14 @@ Jaipur reference photographs were fetched for local visual research only; their 
 - **Pavement 05**, Jan Burghardt / Poly Haven, CC0: https://polyhaven.com/a/pavement_05 ; license https://polyhaven.com/license . Newly downloaded diffuse/OpenGL-normal/roughness JPEGs (1K), direct official download URLs and local SHA-256 hashes in `assets/textures/realism_sources.json`. This set was fetched from the official asset CDN; its hashes record local file integrity and are not claimed as API-verified upstream hashes.
 - Chameliwala Market reference: https://travjoy.com/jaipur/eat-shop-and-party/local-bazaars-and-flea-markets/chameliwala-market . The downloaded photograph stays in ignored `builds/references/`; it is not a game texture. `scooter_design.gd`/`street_details.gd` are original native geometry, informed by street details rather than a literal reconstruction.
 - `shyam_hero_v07.glb` and `shyam_continuous_skin.png` derive from the existing user/MakeHuman body, approved generated concept and earlier MediaPipe fit described above. No new person's face was downloaded. `tools/refine_hero_v07.py` transfers fitted detail to the connected head, bakes the texture, adds original hair locks/cloth shaping/shoes and preserves the rig/morphs. `tools/source/hero_continuous.blend` is the editable packed source. Godot-generated GLB texture extractions are committed alongside the GLB. Prior candidates are retained. Approximate likeness and visible close-up transitions remain; not a scan or complete eye rig.
+
+### v0.9.2 café / hospital architecture
+
+- `assets/fonts/DejaVuSans-Bold.ttf`: DejaVu Sans Bold, copied from the system font
+  package; redistribution terms in `assets/fonts/DejaVu-LICENSE.txt`.
+- `assets/fonts/Z003-MediumItalic.otf`: URW Base35 Z003 script face; redistribution
+  and font embedding terms in `assets/fonts/URW-LICENSE.txt`.
+- `assets/textures/cafe_wood.gdshader`: authored warm-wood material using existing
+  Poly Haven `wood_planks_grey` CC0 texture (see `polyhaven_sources.json`).
+- Café geometry is authored from the user's three photographs. No reference photo
+  is bundled. Hospital/clinic geometry is an authored building type.

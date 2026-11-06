@@ -4,15 +4,15 @@ BASE=/home/shyam/MyWork/Tools/Godot
 export XDG_DATA_HOME="$BASE/userdata"
 export XDG_CONFIG_HOME="$BASE/userdata"
 export XDG_CACHE_HOME="$BASE/userdata"
-export JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/temurin-17-jdk-amd64}"
-export ANDROID_HOME="${ANDROID_HOME:-/home/shyam/Android/sdk}"
+export JAVA_HOME="${JAVA_HOME:-/home/shyam/.jdks/jdk-21.0.11+10}"
+export ANDROID_HOME="${ANDROID_HOME:-/home/shyam/Android/Sdk}"
 PROJECT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 mkdir -p "$PROJECT/builds"
-"$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --editor --import
+"$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --editor --import --quit
 PROFILE="${1:-standard}"
 case "$PROFILE" in
-  standard) PRESET="Android"; APK="$PROJECT/builds/GulabiSahar-0.9.1-debug.apk" ;;
-  preview) PRESET="Android Preview"; APK="$PROJECT/builds/GulabiSahar-0.9.1-preview-debug.apk" ;;
+  standard) PRESET="Android"; APK="$PROJECT/builds/GulabiSahar-0.9.2-debug.apk" ;;
+  preview) PRESET="Android Preview"; APK="$PROJECT/builds/GulabiSahar-0.9.2-preview-debug.apk" ;;
   *) echo "Usage: $0 [standard|preview]" >&2; exit 2 ;;
 esac
 "$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --export-debug "$PRESET" "$APK"

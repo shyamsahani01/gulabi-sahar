@@ -67,6 +67,19 @@ func build(b: Dictionary) -> void:
 	if (closest-base).dot(facing.z)<0:
 		facing = facing.rotated(Vector3.UP,PI)
 	var front := depth/2
+	var entrance := base+facing*Vector3(0,0,front+1.8)
+	var destination: Dictionary = spec.duplicate()
+	destination.p = [entrance.x,entrance.z]
+	destination.building = b
+	destination.rotation = atan2(facing.z.x,facing.z.z)
+	destination.car_p = [closest.x,closest.z]
+	destination.car_heading = road_heading
+	world.services.append(destination)
+	if spec.kind=="hospital":
+		var hospital=preload("res://hospital_reference.gd").new()
+		hospital.world=world
+		hospital.build({"name":spec.name,"p":[base.x,base.z],"a":atan2(facing.z.x,facing.z.z),"w":width,"d":depth,"front":1})
+		return
 	var tint: String = spec.color
 	var wall := "cream" if spec.kind in ["hospital","showroom"] else "rose"
 	box(Vector3(0,.08,0),Vector3(width,.16,depth),"tile",true)
@@ -97,14 +110,7 @@ func build(b: Dictionary) -> void:
 		box(Vector3(side*(1.1+bay/2),1.24,front),Vector3(bay,2.1,.045),"shop_glass",true)
 		box(Vector3(side*1.13,1.26,front),Vector3(.075,2.35,.1),"metal")
 	box(Vector3(0,.035,front+.7),Vector3(2.3,.07,1.4),"stone",true)
-	var entrance := base+facing*Vector3(0,0,front+1.8)
-	var destination: Dictionary = spec.duplicate()
-	destination.p = [entrance.x,entrance.z]
-	destination.building = b
-	destination.rotation = atan2(facing.z.x,facing.z.z)
-	destination.car_p = [closest.x,closest.z]
-	destination.car_heading = road_heading
-	world.services.append(destination)
+
 	match spec.kind:
 		"showroom":
 			for side in [-1,1]:
