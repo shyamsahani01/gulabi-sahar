@@ -165,6 +165,11 @@ func _physics_process(delta: float) -> void:
 		if person.get("stun", 0.0) > 0:
 			person.stun -= delta
 			human.movement_speed = 0
+			if person.get("face_player", false) and player != null and not person.get("seated", false):
+				var toward: Vector3 = player.position - body.position
+				human.rotation.y = lerp_angle(human.rotation.y, atan2(-toward.x, -toward.z), delta * 6)
+			continue
+		if person.get("seated", false):
 			continue
 		var speed := 0.0
 		person.greet_time = maxf(0, person.greet_time - delta)

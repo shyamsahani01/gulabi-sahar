@@ -17,7 +17,7 @@ const AMENITY_STYLE := {"cafe":["C",Color("cba675")],"pub":["P",Color("be86dc")]
 var services_tab := false
 
 func action_centers() -> Dictionary:
-	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"crouch":Vector2(size.x-450,size.y-90)}
+	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
 
 func _input(event: InputEvent) -> void:
 	if map_open:
@@ -108,6 +108,8 @@ func _draw() -> void:
 	if portrait:
 		text_at(Vector2(size.x-240,170),"EXPRESSION: "+expression_label,16,ink)
 		button_circle(expression_center(),"SMILE",30,Color("394d51"))
+		draw_style_box(panel(Color(.1,.15,.16,.9)),Rect2(outfit_center()-Vector2(78,22),Vector2(156,44)))
+		text_at(outfit_center()+Vector2(-66,6),"OUTFIT: "+outfit_label.to_upper()+" >",14,ink)
 		button_circle(face_center(),"BACK",32,Color("394d51"))
 		return
 	button_circle(map_center(),"MAP",32,Color("1e333a"))
@@ -117,13 +119,13 @@ func _draw() -> void:
 	draw_circle(center()+knob,33,Color(.88,.82,.68,.7))
 	button_circle(jump_center(),"JUMP",49,Color("34494f"))
 	button_circle(run_center(),"BRAKE" if driving else "SPRINT",37,Color("866345") if running else Color("25383e"))
-	var labels := {"attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","crouch":"CROUCH"}
+	var labels := {"attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","sit":"STAND" if not game.seated.is_empty() else "SIT","crouch":"CROUCH"}
 	for action in action_centers():
-		button_circle(action_centers()[action],labels[action],39,Color("894e42") if action=="attack" else Color("263b41"))
+		button_circle(action_centers()[action],labels[action],39,Color("894e42") if action=="attack" else (Color("4d6a52") if action=="sit" and not game.seated.is_empty() else Color("263b41")))
 	if driving:
 		text_at(Vector2(size.x/2-60,size.y-45),"%03d KM/H"%speed,24,ink)
 	else:
-		text_at(Vector2(350,size.y-22),"Q punch · E kick · X dodge · B block · C crouch · T talk · V drive",12,quiet)
+		text_at(Vector2(350,size.y-22),"Q punch · E kick · X dodge · B block · C crouch · T talk · G sit · V drive",12,quiet)
 
 func button_circle(at: Vector2,label: String,radius: float,color: Color) -> void:
 	draw_circle(at,radius,Color(color,.86))

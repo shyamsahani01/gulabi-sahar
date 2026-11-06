@@ -32,6 +32,13 @@ func crowd_model_path() -> String:
 		return candidate
 	return "res://assets/characters/crowd_walk.glb"
 var animator: AnimationPlayer
+var look: LookAtModifier3D
+var outfit := 0
+var wardrobe_nodes: Array = []
+var stubble: MeshInstance3D
+var stubble_material: ShaderMaterial
+var look_target: Node3D
+var look_path := NodePath()
 static var shared_library: AnimationLibrary
 var bones: Dictionary = {}
 var face: MeshInstance3D
@@ -189,6 +196,72 @@ func _ready() -> void:
 	var action_library = preload("res://action_animation.gd").build(self)
 	animator.add_animation_library("action", action_library)
 	setup_blending()
+	setup_head_look()
+	if not crowd:
+		setup_stubble()
+		preload("res://hero_wardrobe.gd").apply(self, outfit)
+
+func apply_outfit(index: int) -> void:
+	if crowd:
+		return
+	preload("res://hero_wardrobe.gd").apply(self, index)
+
+func outfit_name() -> String:
+	return preload("res://hero_wardrobe.gd").OUTFITS[outfit].name
+
+func setup_stubble() -> void:
+	# A second draw of the skinned face carries the beard overlay; blend shapes are mirrored each frame.
+	if face == null or skeleton.find_bone("head") < 0:
+		return
+	stubble = MeshInstance3D.new()
+	stubble.name = "HeroStubble"
+	stubble.mesh = face.mesh
+	stubble.skin = face.skin
+	stubble_material = ShaderMaterial.new()
+	stubble_material.shader = preload("res://assets/shaders/stubble.gdshader")
+	stubble.material_override = stubble_material
+	stubble.visibility_range_end = 30
+	face.add_sibling(stubble)
+	stubble.transform = face.transform
+	stubble.skeleton = stubble.get_path_to(skeleton)
+
+func update_stubble() -> void:
+	if stubble == null or not stubble.visible:
+		return
+	var head := skeleton.find_bone("head")
+	var head_world: Transform3D = skeleton.global_transform * skeleton.get_bone_global_pose(head)
+	stubble_material.set_shader_parameter("head_inverse", head_world.affine_inverse())
+	for i in range(face.mesh.get_blend_shape_count()):
+		stubble.set_blend_shape_value(i, face.get_blend_shape_value(i))
+
+func setup_head_look() -> void:
+	# Head tracking for people nearby: only when this rig's head bone faces along ±Z.
+	var head := skeleton.find_bone("head")
+	if head < 0:
+		return
+	var forward: float = skeleton.get_bone_global_rest(head).basis.z.z
+	if absf(forward) < .7:
+		return
+	look = LookAtModifier3D.new()
+	look.bone_name = "head"
+	look.forward_axis = SkeletonModifier3D.BONE_AXIS_PLUS_Z if forward > 0 else SkeletonModifier3D.BONE_AXIS_MINUS_Z
+	look.primary_rotation_axis = Vector3.AXIS_Y
+	look.use_secondary_rotation = true
+	look.use_angle_limitation = true
+	look.primary_limit_angle = deg_to_rad(120)
+	look.primary_damp_threshold = deg_to_rad(70)
+	look.secondary_limit_angle = deg_to_rad(50)
+	look.secondary_damp_threshold = deg_to_rad(30)
+	look.duration = .3
+	look.influence = 0.0
+	skeleton.add_child(look)
+
+func stop_action(blend := .25) -> void:
+	action = ""
+	action_left = 0.0
+	if animation_tree != null:
+		animation_tree.active = true
+	animator.play("Idle",blend)
 
 func polish_generated_materials() -> void:
 	# MPFB exports plain principled materials; keep them but soften specular and fix hair alpha.
@@ -316,18 +389,31 @@ func setup_blending() -> void:
 	animation_tree.tree_root = blend
 	animation_tree.active = true
 
-func play_action(value: String, duration := -1.0) -> void:
+func play_action(value: String, duration := -1.0, blend := 0.09) -> void:
 	if not animator.has_animation("action/"+value):
 		return
 	action = value
 	action_left = animator.get_animation("action/"+value).length if duration < 0 else duration
 	animation_tree.active = false
 	animator.speed_scale = 1.0
-	animator.play("action/"+value,0.09)
+	animator.play("action/"+value,blend)
+
+func update_head_look(delta: float) -> void:
+	if look == null:
+		return
+	var valid: bool = look_target != null and is_instance_valid(look_target) and look_target.is_inside_tree()
+	if valid:
+		var path := look.get_path_to(look_target)
+		if path != look_path:
+			look_path = path
+			look.target_node = path
+	look.influence = move_toward(look.influence, 1.0 if valid else 0.0, delta * 2.5)
 
 func _process(delta: float) -> void:
 	time += delta
 	update_face(delta)
+	update_head_look(delta)
+	update_stubble()
 	if action_left > 0:
 		action_left -= delta
 		return

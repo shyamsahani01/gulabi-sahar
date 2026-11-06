@@ -21,7 +21,7 @@ func check() -> void:
 		if a.get("osm_id")==-91001:
 			cafe=a
 	if cafe.is_empty():
-		push_error("Crazy Coffee missing")
+		push_error("Crazy Cafe missing")
 		quit(1)
 		return
 	var p:=Vector3(cafe.p[0],world.terrain_height(cafe.p[0],cafe.p[1]),cafe.p[1])

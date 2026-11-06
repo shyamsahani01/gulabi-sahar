@@ -31,6 +31,21 @@ var player_collider: CollisionShape3D
 var vehicle: CharacterBody3D
 var traffic: Node3D
 var hud: Control
+# Body motion state: jump phases, landings, seats, idle fidgets, lean and head tracking.
+var seated: Dictionary = {}
+var sit_restore := Vector3.ZERO
+var air_time := 0.0
+var was_grounded := true
+var fall_speed := 0.0
+var jump_delay := -1.0
+var landing_lock := 0.0
+var land_dip := 0.0
+var idle_clock := 0.0
+var next_idle := 8.0
+var lean := Vector2.ZERO
+var previous_velocity := Vector3.ZERO
+var look_point: Node3D
+var last_landing := 0.0
 
 func _ready() -> void:
 	world = preload("res://city_world.gd").new()
@@ -63,6 +78,9 @@ func _ready() -> void:
 	collision.position.y = 0.88
 	player.add_child(collision)
 	build_avatar()
+	look_point = Node3D.new()
+	look_point.name = "LookPoint"
+	add_child(look_point)
 	pivot = Node3D.new()
 	pivot.position.y = 1.55
 	player.add_child(pivot)
@@ -111,6 +129,11 @@ func _ready() -> void:
 	hud.expression_changed.connect(func():
 		avatar.cycle_expression()
 		hud.expression_label = avatar.expression)
+	hud.outfit_changed.connect(func():
+		avatar.apply_outfit(avatar.outfit + 1)
+		hud.outfit_label = avatar.outfit_name()
+		actions.save_progress())
+	hud.outfit_label = avatar.outfit_name()
 	hud.jump.connect(func(): jump_requested = true)
 	hud.look.connect(func(delta: Vector2):
 		if portrait:
@@ -155,6 +178,8 @@ func nearest_drivable() -> CharacterBody3D:
 	return best
 
 func reset_player() -> void:
+	if not seated.is_empty():
+		stand_up()
 	player.position = SPAWN + Vector3(0, 0.6, 0)
 	player.velocity = Vector3.ZERO
 
@@ -183,6 +208,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			actions.handle_action("crouch")
 		elif event.keycode == KEY_V:
 			actions.handle_action("ride")
+		elif event.keycode == KEY_G:
+			actions.handle_action("sit")
+		elif event.keycode == KEY_O:
+			avatar.apply_outfit(avatar.outfit + 1)
+			hud.outfit_label = avatar.outfit_name()
+			actions.save_progress()
 		elif event.keycode == KEY_SPACE:
 			jump_requested = true
 		elif event.keycode == KEY_M:
@@ -193,6 +224,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func travel_to(index: int) -> void:
 	if index<0 or index>=world.destinations().size():
 		return
+	if not seated.is_empty():
+		stand_up()
 	var poi: Dictionary = world.destinations()[index]
 	var destination := Vector3(poi.p[0],world.terrain_height(poi.p[0],poi.p[1])+2.0,poi.p[1])
 	vehicle.driving=false
@@ -215,17 +248,77 @@ func travel_to(index: int) -> void:
 	hud.clear_input()
 	hud.map_open=false
 
+func sit_toggle() -> void:
+	if not seated.is_empty():
+		stand_up()
+		return
+	if vehicle.driving or portrait or hud.map_open or actions.dialogue_open or not player.is_on_floor():
+		return
+	var best: Dictionary = {}
+	var best_distance := 2.3
+	for seat in world.seats:
+		var distance: float = seat.p.distance_to(player.position)
+		if distance < best_distance:
+			best_distance = distance
+			best = seat
+	if best.is_empty():
+		actions.notify("Walk up to a chair, sofa or bench, then tap SIT")
+		return
+	sit_restore = player.position
+	seated = best
+	player.collision_layer = 0
+	player.collision_mask = 0
+	player.velocity = Vector3.ZERO
+	player.position = best.p
+	avatar.crouching = false
+	avatar.guarding = false
+	avatar.rotation.y = best.yaw
+	avatar.play_action(best.pose, 3600.0, .4)
+	avatar.set_expression("Smile", 3)
+	sound.play_effect("sit")
+	hud.clear_input()
+	actions.notify("Sitting down · push the stick or tap STAND to get up")
+
+func stand_up() -> void:
+	if seated.is_empty():
+		return
+	seated = {}
+	player.collision_layer = 1
+	player.collision_mask = 7
+	player.position = sit_restore + Vector3(0, .05, 0)
+	player.velocity = Vector3.ZERO
+	avatar.stop_action(.35)
+	jump_requested = false
+	hud.clear_input()
+
+func land(fall: float) -> void:
+	var hard := fall > 11.5
+	avatar.play_action("HardLand" if hard else "JumpLand", -1.0, .06)
+	land_dip = .22 if hard else .09
+	camera_shake = .16 if hard else .05
+	landing_lock = .6 if hard else .18
+	sound.play_effect("land")
+	last_landing = fall
+	if hard:
+		actions.health = maxf(1, actions.health - (fall - 11.5) * 4)
+		actions.notify("Hard landing")
+
 func _physics_process(delta: float) -> void:
 	if hud==null or actions==null:
 		return
 	attack_cooldown=maxf(0,attack_cooldown-delta)
 	dash_time=maxf(0,dash_time-delta)
 	camera_shake=maxf(0,camera_shake-delta)
+	landing_lock=maxf(0,landing_lock-delta)
+	land_dip=maxf(0,land_dip-delta*.5)
 	var move: Vector2=touch_move+hud.movement
 	move.x+=float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT))-float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
 	move.y+=float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN))-float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
 	move=move.limit_length()
-	var locked: bool=portrait or hud.map_open or actions.dialogue_open
+	if not seated.is_empty() and (move.length()>.4 or jump_requested):
+		stand_up()
+	var talking: bool=actions.dialogue_open and not actions.target.is_empty() and actions.target.has("body") and is_instance_valid(actions.target.body)
+	var locked: bool=portrait or hud.map_open or actions.dialogue_open or not seated.is_empty()
 	if locked:
 		move=Vector2.ZERO
 	move_input=move
@@ -238,16 +331,18 @@ func _physics_process(delta: float) -> void:
 		speed=1.5
 	if attack_cooldown>0:
 		speed*=.35
+	if landing_lock>0:
+		speed*=.3
 	if running and move.length()>.1 and not vehicle.driving:
 		stamina=maxf(0,stamina-delta*7)
 		if stamina<=3:
 			hud.running=false
 	elif dash_time<=0 and attack_cooldown<=0:
-		stamina=minf(100,stamina+delta*14)
+		stamina=minf(100,stamina+delta*(22 if not seated.is_empty() else 14))
 	if dash_time>0 and not locked:
 		direction=dodge_direction
 		speed=8.5
-	if not avatar.crouching and player_collider.shape.height<1.7:
+	if seated.is_empty() and not avatar.crouching and player_collider.shape.height<1.7:
 		var overhead:=PhysicsRayQueryParameters3D.create(player.position+Vector3.UP,player.position+Vector3(0,1.8,0),1)
 		overhead.exclude=[player.get_rid()]
 		if not get_world_3d().direct_space_state.intersect_ray(overhead).is_empty():
@@ -257,7 +352,19 @@ func _physics_process(delta: float) -> void:
 	var accel := 18.0 if player.is_on_floor() else 6.0
 	if direction.length()<.1:
 		accel=24.0
-	if not vehicle.driving:
+	if not seated.is_empty():
+		# Pinned to the seat: the body relaxes, health and stamina recover faster.
+		player.velocity=Vector3.ZERO
+		player.position=seated.p
+		if not talking:
+			avatar.rotation.y=lerp_angle(avatar.rotation.y,seated.yaw,1-exp(-10*delta))
+		avatar.movement_speed=0
+		avatar.grounded=true
+		jump_requested=false
+		actions.health=minf(100,actions.health+delta*3)
+		if avatar.action!=seated.pose:
+			avatar.play_action(seated.pose,3600.0,.3)
+	elif not vehicle.driving:
 		player.velocity.x=move_toward(player.velocity.x,direction.x*speed,delta*accel)
 		player.velocity.z=move_toward(player.velocity.z,direction.z*speed,delta*accel)
 		coyote_time=.12 if player.is_on_floor() else maxf(0,coyote_time-delta)
@@ -265,33 +372,106 @@ func _physics_process(delta: float) -> void:
 		if jump_requested and not locked:
 			jump_buffer=.15
 		jump_requested=false
-		if jump_buffer>0 and coyote_time>0:
-			player.velocity.y=6.7
+		var launch := false
+		if jump_buffer>0 and coyote_time>0 and jump_delay<0 and landing_lock<=0 and dash_time<=0:
+			# Short anticipation dip before the feet leave the ground.
+			jump_delay=.06
 			jump_buffer=0
 			coyote_time=0
-			avatar.play_action("Jump")
+			avatar.crouching=false
+			avatar.guarding=false
+			avatar.play_action("Jump",-1.0,.05)
+		if jump_delay>=0:
+			jump_delay-=delta
+			if jump_delay<0:
+				launch=true
+		if launch:
+			player.velocity.y=6.7
+			if running and move.length()>.3:
+				player.velocity.x+=direction.x*1.1
+				player.velocity.z+=direction.z*1.1
 		elif not player.is_on_floor():
 			player.velocity.y-=20*delta
 		else:
 			player.velocity.y=-.5
 		player.move_and_slide()
-		if direction.length()>.08 and attack_cooldown<=0 and dash_time<=0:
+		var grounded: bool=player.is_on_floor()
+		if grounded:
+			if not was_grounded and air_time>.18 and dash_time<=0:
+				land(fall_speed)
+			air_time=0
+			fall_speed=0
+		else:
+			air_time+=delta
+			fall_speed=maxf(fall_speed,-player.velocity.y)
+			if air_time>.2 and avatar.action_left<=0 and dash_time<=0:
+				avatar.play_action("JumpAir",3600.0,.14)
+		was_grounded=grounded
+		if direction.length()>.08 and attack_cooldown<=0 and dash_time<=0 and not talking:
 			avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-direction.x,-direction.z),1-exp(-12*delta))
 		avatar.movement_speed=Vector2(player.velocity.x,player.velocity.z).length()
-		avatar.grounded=player.is_on_floor()
+		avatar.grounded=grounded
+		# Idle fidget: after a quiet spell the hero glances around.
+		if grounded and move.length()<.05 and avatar.action=="" and not locked and not avatar.guarding and not avatar.crouching:
+			idle_clock+=delta
+			if idle_clock>next_idle:
+				idle_clock=0
+				next_idle=randf_range(7,13)
+				avatar.play_action("LookAround",-1.0,.3)
+		else:
+			idle_clock=0
 	else:
 		player.velocity=Vector3.ZERO
 		jump_requested=false
 		if move.length()>.1:
 			yaw=lerp_angle(yaw,vehicle.heading,delta*2)
+	# Lean into acceleration and turns while on foot.
+	var target_lean := Vector2.ZERO
+	if seated.is_empty() and not vehicle.driving and player.is_on_floor():
+		var change: Vector3=(player.velocity-previous_velocity)/maxf(delta,.001)
+		var local: Vector3=avatar.global_basis.inverse()*change
+		target_lean=Vector2(clampf(-local.z*.006,-.03,.10),clampf(-local.x*.008,-.12,.12))
+		if running and move.length()>.3:
+			target_lean.x+=.05
+	lean=lean.lerp(target_lean,1-exp(-7*delta))
+	avatar.rotation.x=lean.x
+	avatar.rotation.z=lean.y
+	previous_velocity=player.velocity
+	update_head_look(talking)
+	# Conversation framing: over the shoulder, facing the resident.
+	var spring_target := 4.5
+	var fov_target := 68.0
+	var pivot_target := 1.55
+	if talking:
+		var npc: Node3D=actions.target.body
+		var away: Vector3=player.global_position-npc.global_position
+		away.y=0
+		if away.length()>.05:
+			yaw=lerp_angle(yaw,atan2(away.x,away.z)+1.05,1-exp(-5*delta))
+			avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(away.x,away.z),1-exp(-8*delta))
+		pitch=lerpf(pitch,-.16,1-exp(-5*delta))
+		spring_target=3.1
+		fov_target=50.0
+		pivot_target=1.75
+	elif vehicle.driving:
+		spring_target=7.3
+		fov_target=76.0
+		pivot_target=2.1
+	elif not seated.is_empty():
+		spring_target=3.6
+		pivot_target=1.15
+	elif avatar.crouching:
+		pivot_target=1.2
+	elif running:
+		fov_target=76.0
 	smooth_yaw=lerp_angle(smooth_yaw,yaw,1-exp(-18*delta))
 	smooth_pitch=lerpf(smooth_pitch,pitch,1-exp(-18*delta))
 	pivot.rotation=Vector3(smooth_pitch,smooth_yaw,0)
-	pivot.position.y=lerpf(pivot.position.y,2.1 if vehicle.driving else (1.2 if avatar.crouching else 1.55),delta*5)
+	pivot.position.y=lerpf(pivot.position.y,pivot_target-land_dip*1.2,delta*(9 if land_dip>0 else 5))
 	var arm: SpringArm3D=pivot.get_child(0)
-	arm.spring_length=lerpf(arm.spring_length,7.3 if vehicle.driving else 4.5,delta*4)
+	arm.spring_length=lerpf(arm.spring_length,spring_target,delta*4)
 	var camera: Camera3D=arm.get_child(0)
-	camera.fov=lerpf(camera.fov,76.0 if running or vehicle.driving else 68.0,delta*4)
+	camera.fov=lerpf(camera.fov,fov_target,delta*4)
 	camera.h_offset=sin(Time.get_ticks_msec()*.12)*camera_shake*.18
 	hud.map_player=player.position
 	hud.map_yaw=yaw
@@ -300,3 +480,29 @@ func _physics_process(delta: float) -> void:
 	hud.speed=int(absf(vehicle.speed)*3.6)
 	if player.position.y < -10:
 		travel_to(0)
+
+func update_head_look(talking: bool) -> void:
+	# The hero's head follows the resident being spoken to, or the closest person in front.
+	var target: Dictionary={}
+	if talking:
+		target=actions.target
+	elif not vehicle.driving and not portrait:
+		var best := 5.0
+		var forward: Vector3=-avatar.global_basis.z
+		for person in activity.everyone():
+			if not is_instance_valid(person.body) or person.get("defeated",false):
+				continue
+			var offset: Vector3=person.body.global_position-player.global_position
+			var distance := offset.length()
+			if distance<best and distance>.3 and offset.normalized().dot(forward)>.15:
+				best=distance
+				target=person
+	if not target.is_empty():
+		var scale_factor: float=.62 if target.get("kind","adult")=="child" else 1.0
+		var height: float=1.52*scale_factor
+		if target.get("seated",false):
+			height=1.15 if target.get("pose","Sit")=="Sit" else 1.38
+		look_point.global_position=target.body.global_position+Vector3(0,height,0)
+		avatar.look_target=look_point
+	else:
+		avatar.look_target=null

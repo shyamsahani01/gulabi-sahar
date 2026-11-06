@@ -2,6 +2,7 @@ extends Control
 
 signal face_view
 signal expression_changed
+signal outfit_changed
 signal jump
 signal look(delta: Vector2)
 var movement := Vector2.ZERO
@@ -15,6 +16,7 @@ var elapsed := 0.0
 var fps := 0
 var portrait := false
 var expression_label := "Neutral"
+var outfit_label := "Street"
 var hindi_font: Font = preload("res://assets/fonts/NotoSansDevanagari-Regular.ttf")
 var zones: Array = []
 var zone_name: Dictionary = {}
@@ -54,6 +56,8 @@ func face_center() -> Vector2:
 	return Vector2(size.x - 78, 124)
 func expression_center() -> Vector2:
 	return Vector2(size.x - 100, 190)
+func outfit_center() -> Vector2:
+	return Vector2(size.x - 100, 262)
 func map_center() -> Vector2:
 	return Vector2(size.x - 78, 212)
 
@@ -140,6 +144,8 @@ func _input(event: InputEvent) -> void:
 				map_open = true
 			elif portrait and event.position.distance_to(expression_center()) < 64:
 				expression_changed.emit()
+			elif portrait and event.position.distance_to(outfit_center()) < 64:
+				outfit_changed.emit()
 			elif event.position.distance_to(jump_center()) < 58:
 				jump.emit()
 			elif event.position.distance_to(run_center()) < 45:
@@ -168,6 +174,8 @@ func _input(event: InputEvent) -> void:
 			map_open = true
 		elif portrait and event.position.distance_to(expression_center()) < 64:
 			expression_changed.emit()
+		elif portrait and event.position.distance_to(outfit_center()) < 64:
+			outfit_changed.emit()
 		elif event.position.distance_to(jump_center()) < 58:
 			jump.emit()
 		elif event.position.distance_to(run_center()) < 45:

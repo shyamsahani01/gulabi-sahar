@@ -2,6 +2,8 @@ extends "res://world.gd"
 # OSM source geometry is preserved on disk; the playable layout is 12% shorter.
 const CITY_COMPRESSION := 0.88
 var services: Array = []
+var seats: Array = []
+var patron_spots: Array = []
 var architecture_meshes: Dictionary = {}
 var service_builder = preload("res://city_services.gd").new()
 const CELL := 160.0
@@ -131,6 +133,25 @@ func make_city_materials() -> void:
 
 func destinations() -> Array:
 	return landmarks + services
+
+func nearest_road_point(x: float,z: float) -> Dictionary:
+	# Closest mapped road segment: used to park the player's car beside a destination.
+	var closest := Vector2(x,z)
+	var distance := INF
+	var heading := 0.0
+	for road in data.roads:
+		for i in range(road.p.size()-1):
+			var a := Vector2(road.p[i][0],road.p[i][1])
+			var b := Vector2(road.p[i+1][0],road.p[i+1][1])
+			if a.distance_squared_to(Vector2(x,z))>40000:
+				continue
+			var point := Geometry2D.get_closest_point_to_segment(Vector2(x,z),a,b)
+			var d := point.distance_squared_to(Vector2(x,z))
+			if d < distance:
+				distance = d
+				closest = point
+				heading = atan2(-(b.x-a.x),-(b.y-a.y))
+	return {"p":closest,"heading":heading}
 
 func cell_key(pos: Vector3) -> Vector2i:
 	return Vector2i(floori(pos.x / CELL), floori(pos.z / CELL))
@@ -764,7 +785,7 @@ func build_landmarks() -> void:
 		sign.text = poi.hindi+"\n"+poi.name
 		sign.font_size = 32
 		sign.pixel_size = .006
-		sign.position = p+(Vector3(0,2.5,3) if poi.name == "Crazy Coffee · VDN" else Vector3(-8,2.5,-6))
+		sign.position = p+(Vector3(0,2.5,3) if poi.name == "Crazy Cafe · VDN" else Vector3(-8,2.5,-6))
 		sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		sign.visibility_range_end = 100
 		cell(p).add_child(sign)

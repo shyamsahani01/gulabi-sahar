@@ -7,7 +7,7 @@ var step_clock:=0.0
 var enabled:=true
 var clips: Dictionary={}
 func _ready() -> void:
-	for key in ["step","impact","dodge","engine"]:
+	for key in ["step","impact","dodge","engine","land","sit"]:
 		clips[key]=load("res://assets/audio/"+key+".wav")
 	effects=AudioStreamPlayer.new()
 	add_child(effects)

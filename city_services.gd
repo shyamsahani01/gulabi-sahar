@@ -184,6 +184,8 @@ func car(at: Vector3, paint: Color, style: String, yaw: float) -> void:
 	world.cell(base).get_node("Collision").add_child(collider)
 
 func bench(at: Vector3) -> void:
+	for dx in [-.45,.45]:
+		world.seats.append({"p":base+facing*(at+Vector3(dx,0,0)),"yaw":atan2(facing.z.x,facing.z.z)+PI,"h":.5,"pose":"Sit"})
 	box(at+Vector3(0,.5,0),Vector3(1.8,.13,.55),"wood",true)
 	box(at+Vector3(0,.85,-.25),Vector3(1.8,.6,.1),"wood")
 	for side in [-1,1]:

@@ -76,7 +76,7 @@ func blocked() -> bool:
 func nearest(radius: float, facing := false) -> Dictionary:
 	var found: Dictionary = {}
 	var best := radius
-	for person in game.activity.people:
+	for person in game.activity.everyone():
 		if person.kind == "child" or person.get("defeated", false):
 			continue
 		var offset: Vector3 = person.body.global_position - game.player.global_position
@@ -84,7 +84,8 @@ func nearest(radius: float, facing := false) -> Dictionary:
 		if facing and distance > 0.1 and offset.normalized().dot(-game.avatar.global_basis.z) < 0.2:
 			continue
 		if distance < best:
-			var query := PhysicsRayQueryParameters3D.create(game.player.global_position + Vector3.UP, person.body.global_position + Vector3.UP, 1)
+			# Eye-level line of sight, so a counter or table between two people does not block talking.
+			var query := PhysicsRayQueryParameters3D.create(game.player.global_position + Vector3(0, 1.45, 0), person.body.global_position + Vector3(0, 1.45, 0), 1)
 			query.exclude = [game.player.get_rid()]
 			if not game.get_world_3d().direct_space_state.intersect_ray(query).is_empty():
 				continue

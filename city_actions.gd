@@ -13,6 +13,10 @@ var visited: Array = []
 var mission_indices := [1,3,5]
 var mission_names := ["Collect the parcel · Chandpole Bazaar","Deliver textiles · Central Spine, VDN","Meet the guide · Nahargarh Fort"]
 var blood_button: CheckButton
+var speaker: Label
+var speech: Label
+var reply_clock := 0.0
+const ROLES := {"adult":"Resident","elder":"Elder","child":"Child"}
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -33,17 +37,27 @@ func _ready() -> void:
 	message.add_theme_font_size_override("font_size",18)
 	add_child(message)
 	dialogue = PanelContainer.new()
-	dialogue.position = Vector2(345,210)
-	dialogue.custom_minimum_size = Vector2(520,320)
+	dialogue.position = Vector2(240,300)
+	dialogue.custom_minimum_size = Vector2(470,330)
 	dialogue.hide()
 	add_child(dialogue)
 	var choices := VBoxContainer.new()
-	choices.add_theme_constant_override("separation",8)
+	choices.add_theme_constant_override("separation",6)
 	dialogue.add_child(choices)
-	for entry in [["RAM RAM SA! · Leave",close_dialogue],["Tell me about this district",directions],["Start / track the city delivery job",work],["Chai + first aid · Rs 25",rest]]:
+	speaker = Label.new()
+	speaker.add_theme_color_override("font_color",Color("d6bb7f"))
+	speaker.add_theme_font_size_override("font_size",13)
+	choices.add_child(speaker)
+	speech = Label.new()
+	speech.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	speech.custom_minimum_size = Vector2(440,0)
+	speech.add_theme_color_override("font_color",Color("f4e6d0"))
+	speech.add_theme_font_size_override("font_size",16)
+	choices.add_child(speech)
+	for entry in [["Tell me about this district",directions],["Start / track the city delivery job",work],["Chai + first aid · Rs 25",rest],["Ram Ram sa! · Leave",close_dialogue]]:
 		var b := Button.new()
 		b.text=entry[0]
-		b.custom_minimum_size.y=52
+		b.custom_minimum_size.y=44
 		b.pressed.connect(entry[1])
 		choices.add_child(b)
 	blood_button = CheckButton.new()
@@ -77,6 +91,8 @@ func handle_action(value: String) -> void:
 			if not blocked():
 				game.avatar.crouching = not game.avatar.crouching
 				game.avatar.guarding = false
+		"sit":
+			game.sit_toggle()
 		"ride":
 			if not game.hud.map_open and not dialogue_open:
 				var was_driving: bool = game.vehicle.driving
@@ -92,7 +108,7 @@ func handle_action(value: String) -> void:
 							break
 
 func blocked() -> bool:
-	return game.portrait or game.hud.map_open or dialogue_open or game.vehicle.driving
+	return game.portrait or game.hud.map_open or dialogue_open or game.vehicle.driving or not game.seated.is_empty()
 
 func attack() -> void:
 	begin_attack(false)
@@ -175,7 +191,7 @@ func dash() -> void:
 	game.sound.play_effect("dodge")
 
 func talk() -> void:
-	if blocked():
+	if game.portrait or game.hud.map_open or dialogue_open or game.vehicle.driving:
 		return
 	target=nearest(3.8)
 	if target.is_empty():
@@ -186,10 +202,48 @@ func talk() -> void:
 	game.hud.modal=true
 	game.hud.clear_input()
 	target.stun=3600.0
-	target.human.play_action("Wave")
-	notify("Khamma ghani! · Wallet Rs %d"%cash)
+	target.face_player=true
+	# Both people turn to each other; the resident greets, the hero answers with a gesture.
+	var role: String=ROLES.get(target.kind,"Resident")
+	if target.get("seated",false):
+		role="Cafe guest"
+	elif target.get("pose","")=="Stand":
+		role="Barista"
+	speaker.text="%s · %s"%[role.to_upper(),str(game.world.district_at(game.player.position).get("name","Jaipur")).to_upper()]
+	var openers: Array=["Ram Ram sa! Kaise ho? Jaipur ghoomne aaye ho?","Khamma ghani! Kuch madad chahiye, bhai sa?","Aao, aao! Chai piyoge? Kya haal hai?","Namaste ji. Yahan naye lage ho, raasta bataun?"]
+	if role=="Cafe guest":
+		openers=["Yahan ka cappuccino try karo, kamaal ka hai!","Baitho na, WiFi bhi free hai yahan.","Espresso Yourself! Accha cafe hai, nahi?"]
+	elif role=="Barista":
+		openers=["Welcome to Crazy Cafe! Kya lenge aap?","Aaj special mocha hai, try karoge?","Order counter pe dein, table pe la denge."]
+	speech.text=openers[randi()%openers.size()]
+	target.human.set_expression("Smile",6)
+	if target.get("seated",false):
+		pass
+	elif game.player.position.distance_to(target.body.position)>2.2:
+		target.human.play_action("Wave",-1.0,.2)
+		reply_clock=1.4
+	else:
+		target.human.play_action("Talk",3600.0,.25)
+		reply_clock=2.4
+	game.avatar.play_action("Listen",3600.0,.25)
+	game.avatar.set_expression("Smile",4)
+	notify("Talking · Wallet Rs %d"%cash)
+func say(reply: String) -> void:
+	# The hero speaks with a gesture loop while the resident listens, then replies.
+	speech.text=reply
+	game.avatar.play_action("Talk",3600.0,.25)
+	if not target.is_empty() and not target.get("seated",false):
+		target.human.play_action("Listen",3600.0,.25)
+	reply_clock=2.2
 func close_dialogue() -> void:
+	if not target.is_empty():
+		target.face_player=false
+		if target.get("seated",false):
+			target.human.play_action(target.pose,3600.0,.3)
+		else:
+			target.human.stop_action(.3)
 	super.close_dialogue()
+	game.avatar.stop_action(.3)
 	game.hud.modal=false
 func directions() -> void:
 	var district: String=game.world.district_at(game.player.position).id
@@ -207,22 +261,23 @@ func directions() -> void:
 				best_name = a.name if a.name != "" else {"police":"police station","hospital":"clinic","theka":"wine shop","showroom":"car showroom","fuel":"petrol pump"}[kind]
 		if best < 1e8:
 			nearest_text += "\n%s %d m" % [best_name, int(best)]
-	notify(hints[district] + nearest_text)
+	say(hints[district] + nearest_text)
 func work() -> void:
 	if not mission_active:
 		mission_active=true
 		mission_stage=0
 	set_destination(mission_indices[mission_stage])
-	close_dialogue()
+	say("Theek hai bhai sa, "+mission_names[mission_stage]+". Gaadi start pe milegi.")
 	notify(mission_names[mission_stage]+" · car available at start")
 	save_progress()
 func rest() -> void:
 	if cash<25:
-		notify("You need Rs 25 for chai and first aid")
+		say("Arre, Rs 25 to lagenge chai aur patti ke liye!")
 		return
 	cash-=25
 	health=100
 	game.stamina=100
+	say("Lo, garam chai. Aaram se piyo, thakan utar jayegi.")
 	notify("Rested · health and stamina restored")
 	save_progress()
 func set_destination(index: int) -> void:
@@ -233,7 +288,7 @@ func set_destination(index: int) -> void:
 func save_progress() -> void:
 	var f:=FileAccess.open("user://city_progress.json",FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"cash":cash,"visited":visited,"mission_active":mission_active,"mission_stage":mission_stage}))
+		f.store_string(JSON.stringify({"cash":cash,"visited":visited,"mission_active":mission_active,"mission_stage":mission_stage,"outfit":game.avatar.outfit}))
 func load_progress() -> void:
 	if not FileAccess.file_exists("user://city_progress.json"):
 		return
@@ -247,9 +302,21 @@ func load_progress() -> void:
 				visited.append(index)
 		mission_active=saved.get("mission_active",false)
 		mission_stage=clampi(int(saved.get("mission_stage",0)),0,2)
+		var outfit:=int(saved.get("outfit",0))
+		if outfit!=game.avatar.outfit:
+			game.avatar.apply_outfit(outfit)
+			game.hud.outfit_label=game.avatar.outfit_name()
 
 func _physics_process(delta: float) -> void:
 	combo_clock=maxf(0,combo_clock-delta)
+	if dialogue_open and reply_clock>0:
+		reply_clock-=delta
+		if reply_clock<=0 and not target.is_empty():
+			# After a line, the resident answers with gestures and the hero listens.
+			if not target.get("seated",false):
+				target.human.play_action("Talk" if game.avatar.action!="Talk" else "Listen",3600.0,.3)
+			if game.avatar.action=="Talk":
+				game.avatar.play_action("Listen",3600.0,.3)
 	if hit_in>=0:
 		hit_in-=delta
 		if hit_in<0 and not blocked():

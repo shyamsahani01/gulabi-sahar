@@ -1,9 +1,18 @@
 extends "res://market_life.gd"
 var repopulate_clock := 0.0
 var last_center := Vector3(99999,0,0)
+# Seated cafe guests and counter staff, spawned only while the player is nearby.
+var patrons: Array[Dictionary] = []
+var patron_clock := 0.0
 
 func _ready() -> void:
 	name = "MarketLife"
+
+func everyone() -> Array:
+	var all: Array = []
+	all.append_array(people)
+	all.append_array(patrons)
+	return all
 
 func populate_near(at: Vector3) -> void:
 	var candidates: Array = []
@@ -47,6 +56,36 @@ func populate_near(at: Vector3) -> void:
 			p.body.collision_layer = 2
 			p.human.rotation.z = 0
 	last_center = at
+	update_patrons()
+
+func update_patrons() -> void:
+	for spot in world.patron_spots:
+		var distance: float = spot.p.distance_to(player.position)
+		if not spot.get("live",false) and distance < 120 and patrons.size() < 10:
+			spawn_patron(spot)
+		elif spot.get("live",false) and distance > 200:
+			for p in patrons:
+				if p.spot == spot:
+					p.body.queue_free()
+					patrons.erase(p)
+					break
+			spot.live = false
+
+func spawn_patron(spot: Dictionary) -> void:
+	spawn(spot.p,7+patrons.size()*3,false,1,"adult",[],spot.yaw)
+	var p: Dictionary = people.pop_back()
+	p.spot = spot
+	p.pose = spot.pose
+	p.seated = spot.pose != "Stand"
+	p.health = 100
+	p.home = spot.p
+	p.body.position = spot.p
+	p.greeting.text = "कॉफ़ी बढ़िया है!" if p.seated else "स्वागत है! क्या लेंगे?"
+	if p.seated:
+		p.human.play_action(spot.pose,3600.0,.01)
+		p.human.animator.advance(randf_range(0,3))
+	spot.live = true
+	patrons.append(p)
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -56,6 +95,26 @@ func _physics_process(delta: float) -> void:
 		repopulate_clock = 1.0
 		if player.position.distance_to(last_center)>85:
 			populate_near(player.position)
+	patron_clock -= delta
+	if patron_clock <= 0:
+		patron_clock = 2.0
+		update_patrons()
+	for p in patrons:
+		var nearby: bool = p.body.position.distance_to(player.position)<85
+		p.human.set_process(nearby)
+		p.human.animation_tree.active = nearby and not p.seated and p.human.action_left<=0
+		p.greet_time = maxf(0,p.get("greet_time",0.0)-delta)
+		p.cooldown = maxf(0,p.get("cooldown",0.0)-delta)
+		if nearby and player.position.distance_to(p.body.position) < 2.6 and p.cooldown <= 0:
+			p.greet_time = 2.5
+			p.cooldown = 14.0
+			p.human.set_expression("Smile",3)
+		if not p.seated and p.get("stun",0.0) <= 0 and nearby and player.position.distance_to(p.body.position) < 4:
+			var toward: Vector3 = player.position - p.body.position
+			p.human.rotation.y = lerp_angle(p.human.rotation.y, atan2(-toward.x,-toward.z), delta*3)
+		p.greeting.visible = p.greet_time > 0
+		if p.get("stun",0.0) > 0:
+			p.stun -= delta
 	for p in people:
 		var nearby: bool = p.body.position.distance_to(player.position)<85
 		p.human.set_process(nearby)
