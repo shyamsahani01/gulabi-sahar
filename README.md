@@ -436,3 +436,15 @@ uses the previously attributed Poly Haven CC0 grain texture.
 
 Android is v0.9.2 / version code 11. The build script now uses the installed SDK/JDK
 paths and exits after the import stage. Font licenses are included in the APK.
+
+**Device verification (2026-11-06):** source commit `b5a3b93` was pushed before
+wireless installation. The existing `com.itgurujan.gulabisahar` app updated in place
+on tablet `2509BRP2DI`: install Success, versionName 0.9.2, versionCode 11, launch
+Status ok. A subsequent screenshot confirms the playable city and retained progress.
+APK size: 176,251,126 bytes; SHA-256
+`91f50251927813abdbe8090dd02202df0170f6a31a6d82f3e65311dade972592`.
+APK v2/v3 signature, ZIP integrity and 16 KB alignment checks passed. The one device
+capture showed 19 FPS at Chandpole; this is not a sustained performance benchmark.
+Local evidence is under ignored `builds/validation-v092.json`,
+`builds/tablet-install-v092.json` and `builds/previews/tablet-v092-game.png`.
+Open Map → Districts → Crazy Coffee · VDN to visit the new reference storefront.
