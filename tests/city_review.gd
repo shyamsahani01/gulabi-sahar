@@ -66,4 +66,18 @@ func capture() -> void:
 	# The player's car up close.
 	await place(scene.vehicle.position+Vector3(-5,0,3),atan2(5,-3),-0.15)
 	await shot("15-player-car")
+	# 2026-11-06: VDN/Sikar Road pilot — police + theka researched from the web and
+	# authored in because the imported OSM extract had none in that bounding box.
+	# These are authored with a=0/front=1 (no real road alignment to inherit), so frame
+	# them with a fixed offset rather than the front/angle formula used above.
+	for spec in [[-90001.0,"16-vdn-police-station"],[-90003.0,"17-vdn-wine-shop"]]:
+		var pick: Dictionary={}
+		for a in scene.world.amenities:
+			if a.osm_id==spec[0]:
+				pick=a
+		if pick.is_empty():
+			continue
+		var at := Vector3(pick.p[0],0,pick.p[1]+35.0)
+		await place(at,0.0,-0.08)
+		await shot(spec[1])
 	quit()
