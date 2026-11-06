@@ -13,6 +13,9 @@ func check() -> void:
 	for i in range(30): await physics_frame
 	expect(stage.hero.skeleton.get_bone_count() > 40, "Review hero must keep the animated body rig")
 	expect(stage.hero.face != null, "Review hero must keep expression morphs")
+	expect(stage.hero.face.name.begins_with("HeroFace_Continuous"),"Current hero uses a continuous skinned face/body mesh")
+	expect(stage.hero.model.find_children("HeroFace_ReferenceFit*","MeshInstance3D",true,false).is_empty(),"Detached reference face patch must not return")
+	expect(stage.hero.model.find_children("HeroShoe_*","MeshInstance3D",true,false).size()==2,"Two authored, skinned shoes replace the loose runtime foot props")
 	for expression in ["Smile", "Serious", "Surprised"]:
 		stage.hero.set_expression(expression, 10)
 		for i in range(18): await physics_frame

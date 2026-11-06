@@ -1,5 +1,8 @@
 extends "res://world.gd"
-# Actual OSM streets at 65% scale. Every rendering batch has its own spatial cell.
+# OSM source geometry is preserved on disk; the playable layout is 12% shorter.
+const CITY_COMPRESSION := 0.88
+var services: Array = []
+var service_builder = preload("res://city_services.gd").new()
 const CELL := 160.0
 var data: Dictionary
 var cells: Dictionary = {}
@@ -26,11 +29,13 @@ func _ready() -> void:
 	sphere_mesh.radial_segments=12
 	sphere_mesh.rings=6
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/jaipur_city.json"))
+	compact_layout()
 	landmarks = data.pois
 	amenities = data.get("amenities", [])
-	var bb: Array = data.meta.bounds
-	map_bounds = Rect2(bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1])
+	service_builder.world = self
+	service_builder.assign(data,CITY_COMPRESSION)
 	make_materials()
+	make_city_materials()
 	# Less aggressive surface relief removes the sandpaper shimmer seen on the tablet.
 	for key in mats:
 		mats[key].normal_scale *= 0.32
@@ -47,11 +52,17 @@ func _ready() -> void:
 	build_ground()
 	build_roads()
 	for b in data.buildings:
-		if Vector2(b.x-495,b.z+760).length()<105 or b.has("kind"):
+		if Vector2(b.x-495*CITY_COMPRESSION,b.z+760*CITY_COMPRESSION).length()<105*CITY_COMPRESSION or b.has("kind"):
 			continue
 		city_building(b)
 		building_count += 1
 	build_amenities()
+	var order := ["showroom","hospital","police","theka","grocery","chai"]
+	services.sort_custom(func(a,b): return order.find(a.kind)<order.find(b.kind))
+	var details=preload("res://street_details.gd").new()
+	details.world=self
+	for i in services.size():
+		details.build(services[i].building,services[i].rotation,i)
 	build_parks()
 	build_landmarks()
 	flush_batches()
@@ -59,6 +70,65 @@ func _ready() -> void:
 	batches.clear()
 	road_meshes.clear()
 	update_cells(spawn_point)
+
+func compact_layout() -> void:
+	map_bounds = Rect2(map_bounds.position*CITY_COMPRESSION,map_bounds.size*CITY_COMPRESSION)
+	spawn_point.x *= CITY_COMPRESSION
+	spawn_point.z *= CITY_COMPRESSION
+	for road in data.roads:
+		road.width *= CITY_COMPRESSION
+		for p in road.p:
+			p[0] *= CITY_COMPRESSION
+			p[1] *= CITY_COMPRESSION
+	for b in data.buildings:
+		for key in ["x","z","w","d"]:
+			b[key] *= CITY_COMPRESSION
+	for park in data.parks:
+		for p in park.p:
+			p[0] *= CITY_COMPRESSION
+			p[1] *= CITY_COMPRESSION
+	for poi in data.pois:
+		poi.p[0] *= CITY_COMPRESSION
+		poi.p[1] *= CITY_COMPRESSION
+	for a in data.get("amenities", []):
+		a.p[0] *= CITY_COMPRESSION
+		a.p[1] *= CITY_COMPRESSION
+		a.w *= CITY_COMPRESSION
+		a.d *= CITY_COMPRESSION
+	for line in data.navigation:
+		for p in line:
+			p[0] *= CITY_COMPRESSION
+			p[1] *= CITY_COMPRESSION
+
+func make_city_materials() -> void:
+	for pair in [["shop_glass","779b9e"],["warm_light","ffe6b3"],["chrome","bac5c8"],["tile","c7cec8"],["grout","89958e"]]:
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(pair[1])
+		mat.roughness = .28
+		mats[pair[0]] = mat
+	mats["shop_glass"].transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mats["shop_glass"].albedo_color.a = .20
+	mats["shop_glass"].cull_mode = BaseMaterial3D.CULL_DISABLED
+	mats["warm_light"].emission_enabled = true
+	mats["warm_light"].emission = Color("ffe6b3")
+	mats["chrome"].metallic = .7
+	mats["glass"].albedo_color = Color("35535c")
+	mats["glass"].metallic = .08
+	mats["glass"].roughness = .45
+	mats["stone"].albedo_texture = preload("res://assets/textures/pavement05_diff.jpg")
+	mats["stone"].normal_texture = preload("res://assets/textures/pavement05_nor_gl.jpg")
+	mats["stone"].roughness_texture = preload("res://assets/textures/pavement05_rough.jpg")
+	mats["stone"].uv1_scale = Vector3.ONE/3.4
+	mats["stone"].albedo_color = Color("b8b6a9")
+	mats["stone"].normal_scale = .20
+	mats["tile"].roughness = .55
+	# Quieter road surfaces leave silhouette, signs and traffic readable at tablet scale.
+	mats["tarmac"].albedo_color = Color("4d5255")
+	mats["tarmac"].normal_enabled = false
+	mats["tarmac"].uv1_scale = Vector3.ONE*.10
+
+func destinations() -> Array:
+	return landmarks + services
 
 func cell_key(pos: Vector3) -> Vector2i:
 	return Vector2i(floori(pos.x / CELL), floori(pos.z / CELL))
@@ -80,7 +150,7 @@ func box(pos: Vector3, dimensions: Vector3, key: String, solid := false, rot := 
 	var bucket := "%d,%d|%s|%d" % [id.x, id.y, key, int(draw_detail)]
 	if not batches.has(bucket):
 		batches[bucket] = []
-	batches[bucket].append(Transform3D(Basis.from_euler(rot).scaled(dimensions), pos))
+	batches[bucket].append(Transform3D(Basis.from_euler(rot) * Basis.from_scale(dimensions), pos))
 	if solid:
 		var shape := CollisionShape3D.new()
 		var bounds := BoxShape3D.new()
@@ -124,6 +194,8 @@ func terrain_height(x: float,z: float) -> float:
 
 func terrain_raw(x: float,z: float) -> float:
 	# Artistic Aravalli ridge. Low gradient keeps every mapped hill road drivable.
+	x /= CITY_COMPRESSION
+	z /= CITY_COMPRESSION
 	var rise := exp(-pow((x - 680.0) / 560.0, 2) - pow((z + 1060.0) / 900.0, 2))
 	var shoulder := smoothstep(160.0, 510.0, x) * smoothstep(-250.0, -650.0, z)
 	var hill:=rise*shoulder*95.0
@@ -198,9 +270,9 @@ func build_roads() -> void:
 				road_piece(p,q,road.width,"tarmac",0.06)
 				if authored:
 					road_piece(p.lerp(q,0.2),p.lerp(q,0.6),0.3,"kerb_black",0.075)
-				if road.width >= 10 and j%2 == 0:
+				if road.width >= 10*CITY_COMPRESSION and j%2 == 0:
 					road_piece(p.lerp(q,0.1),p.lerp(q,0.65),0.16,"cream",0.075)
-			if road.width >= 10 and i % 4 == 0:
+			if road.width >= 10*CITY_COMPRESSION and i % 4 == 0:
 				var d := (b-a).normalized()
 				var at: Vector2 = a + Vector2(-d.y,d.x)*(road.width*0.5+1)
 				var y := terrain_height(at.x,at.y)
@@ -347,46 +419,56 @@ func style_pass() -> void:
 const SHOP_COLORS := ["teal", "maroon", "saffron", "blue", "green", "red"]
 
 func city_building(b: Dictionary) -> void:
-	var base := Vector3(b.x, terrain_height(b.x, b.z), b.z)
-	var ang: float = b.a
-	var basis := Basis(Vector3.UP, ang)
-	var rot := Vector3(0, ang, 0)
+	if b.has("service"):
+		service_builder.build(b)
+		return
+	var base := Vector3(b.x,terrain_height(b.x,b.z),b.z)
+	var basis := Basis(Vector3.UP,b.a)
 	var old: bool = b.z > -1000 and b.x > -850
-	var seed_value: int = int(abs(b.x * 7 + b.z * 13))
-	var color: String = ["rose", "hm_pink", "terracotta", "ochre"][seed_value % 4] if old else ["cream", "white", "concrete", "ivory"][seed_value % 4]
-	var width: float = b.w
-	var depth: float = b.d
+	var color: String = ["rose","hm_pink","terracotta","ochre"][int(abs(b.x+b.z))%4] if old else ["cream","white","concrete","ivory"][int(abs(b.x+b.z))%4]
 	var height: float = b.h
-	var floors: int = maxi(1, mini(5, int(height / 3.0)))
-	box(base + Vector3(0, height / 2, 0), Vector3(width, height, depth), color, true, rot)
-	# Parapet and roof furniture (cheap, always visible).
-	box(base + basis * Vector3(0, height + .14, 0), Vector3(width + .4, .28, depth + .4), "trim", false, rot)
+	box(base+Vector3(0,.025,0),Vector3(b.w+1.5,.05,b.d+1.5),"stone",false,Vector3(0,b.a,0))
+	box(base+Vector3(0,height/2,0),Vector3(b.w,height,b.d),color,true,Vector3(0,b.a,0))
+	box(base+Vector3(0,height+.12,0),Vector3(b.w+.5,.24,b.d+.5),"cream",false,Vector3(0,b.a,0))
 	draw_detail = true
-	box(base + basis * Vector3(width * .25, height + .55, depth * .15), Vector3(1.1, 1.1, 1.1), "dark", false, rot)
-	if seed_value % 3 == 0:
-		box(base + basis * Vector3(-width * .25, height + .9, -depth * .2), Vector3(2.2, 1.8, 2.0), color, false, rot)
-	for side in [-1, 1]:
-		var front: float = side * (depth / 2 + .05)
-		var usable: float = width - 1.2
-		# Ground floor: shopfront (shutter + awning + sign) on old-city streets, door + window otherwise.
-		if old or seed_value % 2 == 0:
-			var shop_color: String = SHOP_COLORS[(seed_value + side + 3) % SHOP_COLORS.size()]
-			box(base + basis * Vector3(0, 1.35, front), Vector3(usable * .9, 2.5, .1), "dark", false, rot)
-			box(base + basis * Vector3(0, 2.75, front + side * .55), Vector3(usable * .95, .12, 1.2), shop_color, false, Vector3(side * .22, ang, 0))
-			box(base + basis * Vector3(0, 3.15, front + side * .08), Vector3(usable * .96, .55, .14), shop_color, false, rot)
+	for side in [-1,1]:
+		var front: float = side*(b.d/2+.06)
+		for floor_index in range(mini(4,int(height/3))):
+			for bay in range(maxi(1,mini(4,int(b.w/3)))):
+				var x: float = -b.w/2+1.7+bay*2.8
+				var y := 1.5+floor_index*3
+				box(base+basis*Vector3(x,y,front),Vector3(1.2,1.65,.09),"dark" if old else "glass",false,Vector3(0,b.a,0))
+				box(base+basis*Vector3(x,y+1.0,front+side*.18),Vector3(1.65,.13,.6),"trim",false,Vector3(0,b.a,0))
+		if old:
+			box(base+basis*Vector3(0,2.7,front+side*.8),Vector3(b.w*.9,.13,1.7),"teal" if int(b.x)%2 else "maroon",false,Vector3(0,b.a,0))
+			box(base+basis*Vector3(0,3.1,front),Vector3(b.w*.8,.45,.15),"dark",false,Vector3(0,b.a,0))
 		else:
-			box(base + basis * Vector3(-usable * .3, 1.1, front), Vector3(1.0, 2.2, .1), "wood", false, rot)
-			box(base + basis * Vector3(usable * .2, 1.6, front), Vector3(usable * .4, 1.3, .1), "glass" if not old else "dark", false, rot)
-		# Upper floors: one window strip per floor, balcony slab or chhajja.
-		for floor_index in range(1, floors):
-			var y: float = 1.55 + floor_index * 3.0
-			box(base + basis * Vector3(0, y, front), Vector3(usable * .82, 1.5, .1), "dark" if old else "glass", false, rot)
-			if old:
-				box(base + basis * Vector3(0, y + .95, front + side * .35), Vector3(usable * .9, .12, .8), "trim", false, rot)
-			else:
-				box(base + basis * Vector3(0, y - 1.05, front + side * .5), Vector3(usable * .7, .14, 1.1), "white", false, rot)
-				box(base + basis * Vector3(0, y - .5, front + side * 1.0), Vector3(usable * .7, .9, .06), "metal", false, rot)
+			box(base+basis*Vector3(0,3.2,front+side*.4),Vector3(b.w*.8,.2,1.0),"white",false,Vector3(0,b.a,0))
+	if b.source == "infill":
+		var bays := maxi(1,mini(3,int(b.w/3.0)))
+		var bw: float = (b.w-.6)/bays
+		for side in [-1,1]:
+			var front: float = side*(b.d/2+.13)
+			for bay in bays:
+				var x: float = -b.w/2+.3+bw*(bay+.5)
+				box(base+basis*Vector3(x,1.25,front),Vector3(bw-.18,2.4,.12),"glass",false,Vector3(0,b.a,0))
+				box(base+basis*Vector3(x,1.2,front+side*.08),Vector3(.055,2.4,.08),"trim",false,Vector3(0,b.a,0))
+				box(base+basis*Vector3(x,.22,front+side*.12),Vector3(bw-.1,.2,.3),"trim",false,Vector3(0,b.a,0))
+			if Vector2(b.x,b.z).length()<160:
+				var label := Label3D.new()
+				label.text = ["PINK CITY TEXTILES","JAIPUR CRAFTS","MOHAN SWEETS","SAHAR PHARMACY","ROYAL FOOTWEAR","DAILY NEEDS"][int(abs(b.x+b.z))%6]
+				label.font_size=26
+				label.pixel_size=.005
+				label.position=base+basis*Vector3(0,3.08,front+side*.12)
+				label.rotation.y=b.a+(PI if side<0 else 0.0)
+				label.visibility_range_end=75
+				cell(base).add_child(label)
+	# Rooftop water tank, parapet and solar panel silhouettes.
+	box(base+basis*Vector3(b.w*.25,height+.55,b.d*.2),Vector3(1.1,1.1,1.1),"dark")
+	box(base+basis*Vector3(-b.w*.2,height+.3,0),Vector3(2,.12,1.3),"blue",false,Vector3(.18,b.a,0))
 	draw_detail = false
+
+
 
 func sign_board(at: Vector3, ang: float, front: float, text: String, board_key: String, size: Vector3, text_color := Color("fff6e6"), font_size := 36) -> void:
 	# Painted board with readable text, facing the road.
@@ -730,6 +812,7 @@ func build_landmarks() -> void:
 				box(p+Vector3(i*5,6.6,-20),Vector3(3,1,7),"fort")
 
 func district_at(at: Vector3) -> Dictionary:
+	at /= CITY_COMPRESSION
 	if at.x > 180 and at.z < -450:
 		return {"id":"hills","name":"Nahargarh / Brahmpuri","hindi":"नाहरगढ़ की पहाड़ियाँ"}
 	if at.z < -2050:

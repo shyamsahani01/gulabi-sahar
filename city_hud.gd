@@ -14,6 +14,7 @@ var driving := false
 var speed := 0
 # Real amenities drawn on the atlas/radar (OSM, see city_world.amenities).
 const AMENITY_STYLE := {"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
+var services_tab := false
 
 func action_centers() -> Dictionary:
 	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"crouch":Vector2(size.x-450,size.y-90)}
@@ -22,10 +23,19 @@ func _input(event: InputEvent) -> void:
 	if map_open:
 		if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed:
 			var pos: Vector2 = event.position
-			if pos.x > size.x-280 and pos.y>120 and pos.y<120+game.world.landmarks.size()*58:
-				var index := int((pos.y-120)/58)
-				travel_requested.emit(index)
-				map_open = false
+			if Rect2(size.x-282,88,106,36).has_point(pos):
+				services_tab=false
+				get_viewport().set_input_as_handled()
+				return
+			if Rect2(size.x-172,88,106,36).has_point(pos):
+				services_tab=true
+				get_viewport().set_input_as_handled()
+				return
+			var entries: Array=game.world.services if services_tab else game.world.landmarks
+			if Rect2(size.x-280,136,210,entries.size()*58).has_point(pos):
+				var index := int((pos.y-136)/58)
+				travel_requested.emit(index+game.world.landmarks.size() if services_tab else index)
+				map_open=false
 				clear_input()
 				get_viewport().set_input_as_handled()
 				return
@@ -34,7 +44,7 @@ func _input(event: InputEvent) -> void:
 	if modal:
 		clear_input()
 		return
-	var radar_rect := Rect2(24, 144, 184, 156)
+	var radar_rect := Rect2(24, 144, 174, 154)
 	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed and radar_rect.has_point(event.position):
 		map_open = true
 		get_viewport().set_input_as_handled()
@@ -121,10 +131,10 @@ func button_circle(at: Vector2,label: String,radius: float,color: Color) -> void
 	draw_string(font,at+Vector2(-radius,5),label,HORIZONTAL_ALIGNMENT_CENTER,radius*2,12,Color("f3e5d2"))
 
 func draw_radar() -> void:
-	var rect := Rect2(24,144,184,156)
+	var rect := Rect2(24,144,174,154)
 	draw_style_box(panel(Color("15282e")),rect)
 	var origin := rect.get_center()
-	var scale := .55
+	var scale := .52
 	for road in game.world.data.roads:
 		if road.p.size()<2:
 			continue
@@ -145,18 +155,22 @@ func draw_radar() -> void:
 		var at := origin+(Vector2(a.p[0],a.p[1])-Vector2(map_player.x,map_player.z))*scale
 		if rect.grow(-6).has_point(at):
 			draw_circle(at,3.5,AMENITY_STYLE[a.kind][1])
-	text_at(Vector2(36,290),"N ↑   JAIPUR / 65%",10,Color("adbdba"))
+	for poi in game.world.services:
+		var at := origin+(Vector2(poi.p[0],poi.p[1])-Vector2(map_player.x,map_player.z))*scale
+		if rect.grow(-10).has_point(at):
+			draw_circle(at,3.5,Color("75cbbb"))
+	text_at(Vector2(34,287),"N ↑    JAIPUR / 65%",9,Color("adbdba"))
 	if has_waypoint:
 		var direction := Vector2(waypoint.x-map_player.x,waypoint.z-map_player.z)
-		var at := origin+direction.limit_length(100)*.65
+		var at := origin+direction.limit_length(100)*scale
 		draw_circle(at,5,Color("75cbbb"))
-		text_at(Vector2(30,320),"DESTINATION  %d m"%int(direction.length()),12,Color("91d8c7"))
+		text_at(Vector2(28,319),"DESTINATION  %d m"%int(direction.length()),12,Color("91d8c7"))
 
 func draw_map() -> void:
 	draw_rect(Rect2(Vector2.ZERO,size),Color("10242c"))
 	text_at(Vector2(36,46),"JAIPUR  /  CITY ATLAS",27,Color("f1ddba"))
 	var km: Vector2 = game.world.map_bounds.size/1000.0
-	text_at(Vector2(36,74),"%.1f × %.1f km playable (65%% scale of %.1f × %.1f km of real Jaipur) · roads, parks and %d real places from OpenStreetMap · tap a district to travel"%[km.x,km.y,km.x/.65,km.y/.65,game.world.amenities.size()],13,Color("9eb5bb"))
+	text_at(Vector2(36,74),"%.1f × %.1f km compact Jaipur · roads, parks and %d real places from OpenStreetMap · select a destination to travel"%[km.x,km.y,game.world.amenities.size()],13,Color("9eb5bb"))
 	for road in game.world.data.roads:
 		var line := PackedVector2Array()
 		for p in road.p:
@@ -185,8 +199,21 @@ func draw_map() -> void:
 		var at := map_point(poi.p[0],poi.p[1])
 		draw_circle(at,5,Color("e7c278"))
 		text_at(at+Vector2(7,-5),poi.name,11,Color("f3e6cb"))
-		draw_style_box(panel(Color("233c44")),Rect2(size.x-280,120+i*58,210,48))
-		text_at(Vector2(size.x-265,149+i*58),poi.name,14,Color("f3e6cb"))
+		# Destination list is drawn below, separately from geographic markers.
+	for poi in game.world.services:
+		var at := map_point(poi.p[0],poi.p[1])
+		draw_circle(at,3,Color("75cbbb"))
+		if map_zoom>=3:
+			text_at(at+Vector2(6,4),poi.name,10,Color("75cbbb"))
+	for tab in 2:
+		draw_style_box(panel(Color("47736e") if (tab==1)==services_tab else Color("233c44")),Rect2(size.x-282+tab*110,88,106,36))
+		text_at(Vector2(size.x-272+tab*110,112),"SERVICES" if tab else "DISTRICTS",12,Color("f3e6cb"))
+	var entries: Array=game.world.services if services_tab else game.world.landmarks
+	for i in entries.size():
+		draw_style_box(panel(Color("233c44")),Rect2(size.x-280,136+i*58,210,48))
+		text_at(Vector2(size.x-265,165+i*58),entries[i].name,14,Color("f3e6cb"))
+	if services_tab:
+		text_at(Vector2(size.x-280,155+entries.size()*58),"Fictional neighborhood locations",10,Color("9eb5bb"))
 	var here := map_point(map_player.x,map_player.z)
 	draw_circle(here,7,Color("7de4cf"))
 	text_at(here+Vector2(10,5),"YOU",12,Color("7de4cf"))
@@ -220,7 +247,7 @@ func draw_map() -> void:
 		text_at(at+Vector2(8,-7),"GAME CONNECTOR",10,Color("e0a44a"))
 	draw_dashed_line(Vector2(35,size.y-44),Vector2(75,size.y-44),Color("e0a44a"),3,6)
 	text_at(Vector2(82,size.y-40),"authored game connector (Nahargarh link) · solid lines = OpenStreetMap roads",11,Color("e0a44a"))
-	text_at(Vector2(35,size.y-22),"© OpenStreetMap contributors · ODbL 1.0 · artistic terrain/buildings · 05 Nov 2026",11,Color("9eb5bb"))
+	text_at(Vector2(35,size.y-22),"© OpenStreetMap contributors · ODbL 1.0 · artistic terrain/buildings · 06 Nov 2026",11,Color("9eb5bb"))
 	button_circle(map_close_center(),"X",26,Color("344a50"))
 	button_circle(map_zoom_in_center(),"+",24,Color("344a50"))
 	button_circle(map_zoom_out_center(),"−",24,Color("344a50"))

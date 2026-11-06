@@ -6,18 +6,16 @@ var random := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	random.seed=86
-	var paints := [Color("e9e4d6"), Color("b9342c"), Color("3b5f9a"), Color("6c7378"), Color("d9d9d4"), Color("2f2f33")]
 	for i in 8:
 		var car=preload("res://city_vehicle.gd").new()
 		car.game=game
-		# Every third vehicle is an auto-rickshaw, the rest are hatchbacks in different paints.
-		car.kind="auto" if i%3==2 else "car"
-		car.paint=paints[i%paints.size()]
+		car.paint=Color(["c47e61","7eaaa7","e4c776","d3d8d8","526a80","eee5d2","8b464e","c1c7b1"][i])
+		car.style="taxi" if i%3==0 else "sedan"
 		add_child(car)
 		car.set_physics_process(false)
 		car.collision_layer=4
 		car.hide()
-		cars.append({"node":car,"route":PackedVector3Array(),"index":0,"speed":(4.0 if car.kind=="auto" else 5.5)+i*.4})
+		cars.append({"node":car,"route":PackedVector3Array(),"index":0,"speed":5.0+i*.5})
 
 func pick_route(car: Dictionary) -> void:
 	var candidates: Array=[]
@@ -78,3 +76,4 @@ func _physics_process(delta: float) -> void:
 		node.velocity.y=-1 if node.is_on_floor() else -12
 		node.rotation.y=lerp_angle(node.rotation.y,atan2(-direction.x,-direction.z),delta*4)
 		node.move_and_slide()
+		node.design.animate_wheels(node.velocity.length()*delta,0.0)

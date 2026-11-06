@@ -2,7 +2,7 @@ extends Node3D
 
 var skeleton: Skeleton3D
 var model: Node3D
-var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v06.glb")
+var hero_scene: PackedScene = preload("res://assets/characters/shyam_hero_v07.glb")
 var time := 0.0
 var movement_speed := 0.0
 var grounded := true
@@ -117,6 +117,12 @@ func _ready() -> void:
 			mat.metallic = 0.0
 			mat.metallic_specular = 0.15
 			mat.roughness = 0.85
+			if mesh.name.begins_with("HeroFace_Continuous"):
+				mat.roughness = .67
+				mat.metallic_specular = .28
+			elif mesh.name.begins_with("HeroHair"):
+				mat.roughness = .58
+				mat.metallic_specular = .25
 			if mesh.name.begins_with("HeroEye"):
 				mat.roughness = 0.22
 				mat.metallic_specular = 0.45
@@ -146,7 +152,7 @@ func _ready() -> void:
 			else:
 				mesh.set_surface_override_material(surface, mat)
 	for side in ["l", "r"]:
-		if not legacy_model:
+		if not legacy_model or (not crowd and hero_scene.resource_path.ends_with("shyam_hero_v07.glb")):
 			break
 		var attachment := BoneAttachment3D.new()
 		attachment.bone_name = "foot_" + side
