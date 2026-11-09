@@ -29,7 +29,8 @@ func check() -> void:
 	await ticks(20)
 	expect(Vector2(scene.player.velocity.x,scene.player.velocity.z).length()<.05,"Movement brakes to a stop")
 	scene.jump_requested=true
-	await ticks(8)
+	# Current mocap jump has 0.16 s of anticipation before takeoff.
+	await ticks(24)
 	expect(scene.player.position.y>origin.y+.3,"Buffered jump lifts player")
 	await ticks(70)
 	expect(scene.player.is_on_floor(),"Jump returns to ground")

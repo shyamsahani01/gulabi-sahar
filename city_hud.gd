@@ -13,8 +13,15 @@ var stamina := 100.0
 var driving := false
 var speed := 0
 # Real amenities drawn on the atlas/radar (OSM, see city_world.amenities).
-const AMENITY_STYLE := {"cafe":["C",Color("cba675")],"pub":["P",Color("be86dc")],"club":["N",Color("be86dc")],"shop":["K",Color("9fc489")],"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
+const AMENITY_STYLE := {"restaurant":["R",Color("d4a574")],"cafe":["C",Color("cba675")],"pub":["P",Color("be86dc")],"club":["N",Color("be86dc")],"shop":["K",Color("9fc489")],"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
 var services_tab := false
+var dining_tab := false
+
+func atlas_entries() -> Array:
+	return game.world.dining_destinations if dining_tab else (game.world.services if services_tab else game.world.landmarks)
+
+func atlas_offset() -> int:
+	return game.world.landmarks.size()+game.world.services.size() if dining_tab else (game.world.landmarks.size() if services_tab else 0)
 
 func action_centers() -> Dictionary:
 	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
@@ -23,18 +30,16 @@ func _input(event: InputEvent) -> void:
 	if map_open:
 		if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed:
 			var pos: Vector2 = event.position
-			if Rect2(size.x-282,88,106,36).has_point(pos):
-				services_tab=false
-				get_viewport().set_input_as_handled()
-				return
-			if Rect2(size.x-172,88,106,36).has_point(pos):
-				services_tab=true
-				get_viewport().set_input_as_handled()
-				return
-			var entries: Array=game.world.services if services_tab else game.world.landmarks
+			for tab in 3:
+				if Rect2(size.x-282+tab*74,88,70,36).has_point(pos):
+					services_tab=tab==1
+					dining_tab=tab==2
+					get_viewport().set_input_as_handled()
+					return
+			var entries: Array=atlas_entries()
 			if Rect2(size.x-280,136,210,entries.size()*58).has_point(pos):
 				var index := int((pos.y-136)/58)
-				travel_requested.emit(index+game.world.landmarks.size() if services_tab else index)
+				travel_requested.emit(index+atlas_offset())
 				map_open=false
 				clear_input()
 				get_viewport().set_input_as_handled()
@@ -208,14 +213,15 @@ func draw_map() -> void:
 		draw_circle(at,3,Color("75cbbb"))
 		if map_zoom>=3:
 			text_at(at+Vector2(6,4),poi.name,10,Color("75cbbb"))
-	for tab in 2:
-		draw_style_box(panel(Color("47736e") if (tab==1)==services_tab else Color("233c44")),Rect2(size.x-282+tab*110,88,106,36))
-		text_at(Vector2(size.x-272+tab*110,112),"SERVICES" if tab else "DISTRICTS",12,Color("f3e6cb"))
-	var entries: Array=game.world.services if services_tab else game.world.landmarks
+	var active_tab:=2 if dining_tab else (1 if services_tab else 0)
+	for tab in 3:
+		draw_style_box(panel(Color("47736e") if tab==active_tab else Color("233c44")),Rect2(size.x-282+tab*74,88,70,36))
+		text_at(Vector2(size.x-276+tab*74,112),["DISTRICTS","SERVICES","DINING"][tab],10,Color("f3e6cb"))
+	var entries: Array=atlas_entries()
 	for i in entries.size():
 		draw_style_box(panel(Color("233c44")),Rect2(size.x-280,136+i*58,210,48))
 		text_at(Vector2(size.x-265,165+i*58),entries[i].name,14,Color("f3e6cb"))
-	if services_tab:
+	if services_tab and not dining_tab:
 		text_at(Vector2(size.x-280,155+entries.size()*58),"Fictional neighborhood locations",10,Color("9eb5bb"))
 	var here := map_point(map_player.x,map_player.z)
 	draw_circle(here,7,Color("7de4cf"))
@@ -233,7 +239,7 @@ func draw_map() -> void:
 		draw_circle(at,6.5,Color(0,0,0,.45))
 		draw_circle(at,5.5,style[1])
 		draw_string(font,at+Vector2(-5.5,4),style[0],HORIZONTAL_ALIGNMENT_CENTER,11,9,Color("102028"))
-		if map_zoom>=2.0 and a.kind in ["police","hospital","showroom","fuel"] and a.name!="":
+		if map_zoom>=2.0 and a.kind in ["police","hospital","showroom","fuel","restaurant"] and a.name!="":
 			text_at(at+Vector2(8,4),a.name,10,style[1])
 	var legend_x := 35.0
 	for kind in ["police","hospital","showroom","theka","fuel","temple","bank","school"]:

@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-09",
+  "baseline_commit": "1e5a18e3957993baf014dd2497b03d7586cbe966",
+  "engine": "Godot 4.7.2 stable",
+  "renderer": "OpenGL Compatibility / Mesa llvmpipe software renderer",
+  "suites": {
+    "architecture_review": {
+      "result": "passed",
+      "failures": 0,
+      "summary": "ARCHITECTURE REVIEW: 0 failures; restaurants=38 styles=3"
+    },
+    "city_smoke": {
+      "result": "passed",
+      "failures": 0,
+      "summary": "CITY SMOKE RESULT: 0 failures; elapsed 32134 ms"
+    },
+    "cafe_review": {
+      "result": "passed",
+      "failures": 0,
+      "summary": "CAFE REVIEW RESULT: 0 failures"
+    },
+    "city_refresh": {
+      "result": "passed",
+      "failures": 0,
+      "summary": "CITY REFRESH RESULT: 0 failures"
+    }
+  },
+  "coverage": {
+    "restaurant_interiors": 38,
+    "restaurant_families": 3,
+    "dining_destinations": 3,
+    "palace": "gate raycasts and real player traversal, courtyard floor and fountain collision",
+    "atlas": "touch tab switching and row travel"
+  },
+  "capture_draw_calls": {
+    "before-rajasthani-thali-exterior.png": {
+      "draw_calls": 289
+    },
+    "before-kalidoscope-exterior.png": {
+      "draw_calls": 349
+    },
+    "before-spicy-king-exterior.png": {
+      "draw_calls": 260
+    },
+    "before-nahargarh-fort-exterior.png": {
+      "draw_calls": 133
+    },
+    "after-rajasthani-thali-exterior.png": {
+      "draw_calls": 433
+    },
+    "after-rajasthani-thali-interior.png": {
+      "draw_calls": 523
+    },
+    "after-kalidoscope-exterior.png": {
+      "draw_calls": 530
+    },
+    "after-kalidoscope-interior.png": {
+      "draw_calls": 617
+    },
+    "after-spicy-king-exterior.png": {
+      "draw_calls": 405
+    },
+    "after-spicy-king-interior.png": {
+      "draw_calls": 496
+    },
+    "after-nahargarh-fort-exterior.png": {
+      "draw_calls": 191
+    },
+    "after-nahargarh-fort-interior.png": {
+      "draw_calls": 213
+    }
+  },
+  "performance_note": "Selected exterior draw calls increased from 289 to 433 (Thali), 349 to 530 (Kalidoscope), 260 to 405 (Spicy King), 133 to 191 (fort). Gameplay captures show about 7 FPS on software rendering; this is not Android device performance. Tablet profiling remains required.",
+  "android_build_or_install": false,
+  "visual_approval": "pending user review"
+}

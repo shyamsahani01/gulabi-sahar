@@ -87,3 +87,20 @@ Jaipur reference photographs were fetched for local visual research only; their 
   Poly Haven `wood_planks_grey` CC0 texture (see `polyhaven_sources.json`).
 - Café geometry is authored from the user's three photographs. No reference photo
   is bundled. Hospital/clinic geometry is an authored building type.
+
+
+## 2026-11-09 restaurant / palace architecture
+
+`heritage_kit.gd`, `restaurant_architecture.gd`, `palace_architecture.gd` and
+`neighborhood_architecture.gd` are original parametric Godot geometry. The shared
+kit creates extruded cusped arches, lathed domes/columns, jali, windows, chhatris,
+lanterns and date palms. Mineral/ground texture is generated from seeded Godot
+FastNoiseLite; no external texture or mesh was added. Café chairs, tables, plants,
+wood shader and bundled fonts reuse the already credited project assets.
+
+External architecture photographs were viewed only as design references; none is
+redistributed or used as an in-game texture. Source links and interpretation notes
+are in [the architecture review](designs/13-architecture/README.md). Screenshots in
+that directory are original renders of the project. Restaurant locations/names
+retain the existing OSM data and attribution; the new facades/interiors and palace
+courtyard are artistic designs, not surveyed replicas of those venues.

@@ -1,5 +1,10 @@
 # Gulabi Sahar — Chat requirements and project record
 
+
+## Latest request — 9 November 2026
+
+User requested: pull the latest GitHub code first, improve actual 3D architecture using the existing Crazy Cafe and real references, extend that detail to restaurants/palaces, update the README and push the project. Pulled `1e5a18e` before changes. Implemented 38 restaurant interiors in three architectural families, a Jaipur-inspired palace courtyard at Nahargarh, nearby facade improvements and a DINING atlas tab. Actual engine comparisons, references, validation and next art priorities: [designs/13-architecture/README.md](designs/13-architecture/README.md). These visuals await review; the user did not approve them by authorizing implementation. No Android installation requested or performed in this pass. Existing local character changes remain outside the architecture commit.
+
 This document records the user's requests, revisions and approvals from the available conversation. It is a consolidated record, not a verbatim chat export. Source-document suggestions are identified separately from direct user instructions.
 
 ## 1. Naam aur goal

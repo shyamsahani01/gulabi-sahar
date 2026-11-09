@@ -5,6 +5,9 @@ var services: Array = []
 var seats: Array = []
 var patron_spots: Array = []
 var architecture_meshes: Dictionary = {}
+var restaurant_entries: Array = []
+var palace_entry: Dictionary = {}
+var dining_destinations: Array = []
 var service_builder = preload("res://city_services.gd").new()
 const CELL := 160.0
 var data: Dictionary
@@ -46,6 +49,7 @@ func _ready() -> void:
 	lighting()
 	style_pass()
 	preload("res://architecture_materials.gd").install(self)
+	preload("res://heritage_kit.gd").install(self)
 	for key in ["hm_pink","rose","terracotta","fort"]:
 		mats[key].normal_enabled=false
 		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
@@ -61,6 +65,7 @@ func _ready() -> void:
 		city_building(b)
 		building_count += 1
 	build_amenities()
+	register_dining_destinations()
 	var order := ["showroom","hospital","police","theka","grocery","chai"]
 	services.sort_custom(func(a,b): return order.find(a.kind)<order.find(b.kind))
 	var details=preload("res://street_details.gd").new()
@@ -132,7 +137,16 @@ func make_city_materials() -> void:
 	mats["tarmac"].uv1_scale = Vector3.ONE*.10
 
 func destinations() -> Array:
-	return landmarks + services
+	return landmarks + services + dining_destinations
+
+func register_dining_destinations() -> void:
+	for title in ["Rajasthani Thali","Kalidoscope","Spicy King"]:
+		for entry in restaurant_entries:
+			if entry.name!=title:
+				continue
+			var at: Vector3=entry.origin+entry.basis*Vector3(0,0,entry.d/2+2.2)
+			var road:=nearest_road_point(at.x,at.z)
+			dining_destinations.append({"name":title,"hindi":"","kind":"restaurant","p":[at.x,at.z],"rotation":atan2(entry.basis.z.x,entry.basis.z.z),"car_p":[road.p.x,road.p.y],"car_heading":road.heading})
 
 func nearest_road_point(x: float,z: float) -> Dictionary:
 	# Closest mapped road segment: used to park the player's car beside a destination.
@@ -367,7 +381,7 @@ func style_pass() -> void:
 	for child in get_children():
 		if child is DirectionalLight3D:
 			child.light_color = Color("ffe6c7")
-			child.light_energy = 1.22
+			child.light_energy = 1.05
 			child.rotation_degrees = Vector3(-46, -34, 0)
 			child.directional_shadow_max_distance = 58
 			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
@@ -384,7 +398,7 @@ func style_pass() -> void:
 			sky_mat.sun_curve = 0.12
 			env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 			env.ambient_light_sky_contribution = 1.0
-			env.ambient_light_energy = 0.72
+			env.ambient_light_energy = 0.62
 			env.tonemap_mode = Environment.TONE_MAPPER_ACES
 			env.tonemap_exposure = 1.0
 			env.tonemap_white = 5.0
@@ -444,6 +458,18 @@ const SHOP_COLORS := ["teal", "maroon", "saffron", "blue", "green", "red"]
 func city_building(b: Dictionary) -> void:
 	if b.has("service"):
 		service_builder.build(b)
+		return
+	# Detailed street shells around restaurants and the initial Chandpole neighbourhood.
+	var featured: bool=Vector2(b.x,b.z).length_squared()<9000
+	if not featured:
+		for a in amenities:
+			if a.kind=="restaurant" and Vector2(b.x-a.p[0],b.z-a.p[1]).length_squared()<900:
+				featured=true
+				break
+	if featured and b.w>=3.5 and b.d>=3.0:
+		var neighbourhood=preload("res://neighborhood_architecture.gd").new()
+		neighbourhood.world=self
+		neighbourhood.build({"p":[b.x,b.z],"a":b.a,"w":b.w,"d":b.d,"h":b.h,"old":b.z>-1000 and b.x>-850})
 		return
 	var base := Vector3(b.x,terrain_height(b.x,b.z),b.z)
 	var basis := Basis(Vector3.UP,b.a)
@@ -547,6 +573,11 @@ func build_amenities() -> void:
 			cafe.world = self
 			cafe.build(a)
 			continue
+		if a.kind == "restaurant":
+			var restaurant=preload("res://restaurant_architecture.gd").new()
+			restaurant.world=self
+			restaurant.build(a)
+			continue
 		match a.kind:
 			"police": amenity_police(p, ang, front, w, d, display_name)
 			"hospital": amenity_hospital(p, ang, front, w, d, display_name)
@@ -558,7 +589,6 @@ func build_amenities() -> void:
 			"temple": amenity_temple(p, ang, front, w, d, display_name)
 			"pharmacy": amenity_shop(p, ang, front, w, d, 6.0, "white", "cross_green", "मेडिकल स्टोर · " + (display_name if display_name != "" else "PHARMACY"))
 			"pub", "club": amenity_shop(p, ang, front, w, d, 7.0, "dark", "maroon", display_name if display_name != "" else "PUB / CLUB")
-			"restaurant": amenity_shop(p, ang, front, w, d, 7.0, "ivory", "maroon", (display_name if display_name != "" else "RESTAURANT") + " · भोजनालय")
 			_: amenity_shop(p, ang, front, w, d, 6.0, "cream", SHOP_COLORS[int(abs(p.x)) % SHOP_COLORS.size()], display_name if display_name != "" else "GENERAL STORE")
 
 func lb(p: Vector3, ang: float, local: Vector3, size: Vector3, key: String, solid := false, tilt := 0.0) -> void:
@@ -804,18 +834,9 @@ func build_landmarks() -> void:
 			for i in range(-12,13,2):
 				box(p+Vector3(0,11.5,i),Vector3(5,.7,.65),"cream")
 		elif poi.kind == "fort":
-			# Courtyard set to the east of the road, with ramparts and bastions.
-			p += Vector3(45,0,0)
-			for side in [-1,1]:
-				box(p+Vector3(side*30,4,0),Vector3(2,8,65),"fort",true)
-				for edge in [-1,1]:
-					box(p+Vector3(edge*18,4,side*32),Vector3(24,8,2),"fort",true)
-				for k in range(-30,31,3):
-					box(p+Vector3(side*30,8.6,k),Vector3(2.5,1.2,1.5),"fort")
-			box(p+Vector3(0,3,-20),Vector3(38,6,12),"cream",true)
-			for i in range(-3,4):
-				box(p+Vector3(i*5,3,-13.8),Vector3(2.6,4,.2),"dark")
-				box(p+Vector3(i*5,6.6,-20),Vector3(3,1,7),"fort")
+			var palace=preload("res://palace_architecture.gd").new()
+			palace.world=self
+			palace.build_palace(p)
 
 func district_at(at: Vector3) -> Dictionary:
 	at /= CITY_COMPRESSION
