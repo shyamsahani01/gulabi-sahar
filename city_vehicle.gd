@@ -22,9 +22,9 @@ func _ready() -> void:
 	wheels = design.wheels
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(1.78,1.7,4.05)
+	shape.size = Vector3(1.96 if style=="suv" else 1.86,1.85 if style=="suv" else 1.7,4.42)
 	collision.shape = shape
-	collision.position.y = .79
+	collision.position.y = .90 if style=="suv" else .79
 	add_child(collision)
 
 func toggle_drive() -> void:

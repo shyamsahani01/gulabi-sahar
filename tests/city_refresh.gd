@@ -15,7 +15,7 @@ func check() -> void:
 	root.add_child(scene)
 	await ticks(50)
 	var world: Node3D=scene.world
-	expect(is_equal_approx(world.map_bounds.size.x,5016),"Expanded VKI map retains 12% layout compression")
+	expect(is_equal_approx(world.map_bounds.size.x,1716),"Compact VKI–VDN width is 1716 metres")
 	expect(world.services.size()==6,"Six authored city services exist")
 	# Rotated rectangular batches must stay orthogonal, matching the box colliders.
 	var checked := 0

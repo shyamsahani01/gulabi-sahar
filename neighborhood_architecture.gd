@@ -9,6 +9,21 @@ func build(a: Dictionary) -> void:
 	box(Vector3(0,height/2,0),Vector3(w,height,d),plaster,true)
 	box(Vector3(0,.15,0),Vector3(w+.35,.3,d+.35),"arch_step")
 	box(Vector3(0,height+.12,0),Vector3(w+.5,.24,d+.5),"heritage_lime")
+	# Side elevations matter at junctions: recessed glazing, drip mouldings,
+	# balcony rails and AC vents keep exposed party walls from reading as cubes.
+	for side in [-1,1]:
+		for level in range(1,mini(4,maxi(2,int(height/3)))):
+			for bay in [-1,1]:
+				var z: float=bay*d*.25
+				var y:=level*3.0+1.1
+				box(Vector3(side*(w/2+.02),y,z),Vector3(.08,1.6,1.15),"heritage_ink")
+				box(Vector3(side*(w/2+.075),y,z),Vector3(.08,1.48,.045),"heritage_lime")
+				for dy in [-.87,.9]:
+					box(Vector3(side*(w/2+.22),y+dy,z),Vector3(.52,.12,1.5),"heritage_lime")
+				if level==1:
+					box(Vector3(side*(w/2+.35),y-.92,z),Vector3(.8,.15,1.9),"heritage_lime")
+					box(Vector3(side*(w/2+.72),y-.5,z),Vector3(.06,.7,1.8),"arch_frame")
+		box(Vector3(side*(w/2+.15),2.8,-d*.3),Vector3(.35,.58,.85),"arch_step")
 	# Roof parapets have open sky behind them, rather than another solid cube.
 	for side in [-1,1]:
 		box(Vector3(side*w/2,height+.55,0),Vector3(.18,.8,d),plaster)

@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPAWN := Vector3(22.0, 1.0, 0.0)
+const SPAWN := Vector3(-1400.124, 1.0, -2502.4296) # VDN fallback; world supplies the road-snapped spawn.
 
 var player: CharacterBody3D
 var pivot: Node3D
@@ -62,7 +62,7 @@ func _ready() -> void:
 	player = CharacterBody3D.new()
 	player.name = "Player"
 	player.collision_mask = 7
-	player.position = SPAWN
+	player.position = world.spawn_point + Basis(Vector3.UP,world.spawn_heading)*Vector3(2.6,0,0)
 	player.floor_snap_length = 0.35
 	player.floor_max_angle = deg_to_rad(48)
 	add_child(player)
@@ -96,8 +96,8 @@ func _ready() -> void:
 	var camera := Camera3D.new()
 	camera.current = true
 	camera.fov = 68
-	camera.near = 0.15
-	camera.far = 720
+	camera.near = 0.25
+	camera.far = 1000
 	arm.add_child(camera)
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
@@ -114,8 +114,8 @@ func _ready() -> void:
 	portrait_camera.rotation.y = PI
 	vehicle = preload("res://city_vehicle.gd").new()
 	vehicle.game = self
-	vehicle.position = Vector3(22,1,4)
-	vehicle.heading = -PI/2
+	vehicle.position = world.spawn_point
+	vehicle.heading = world.spawn_heading
 	add_child(vehicle)
 	traffic = preload("res://city_traffic.gd").new()
 	traffic.game = self
@@ -199,7 +199,7 @@ func nearest_drivable() -> CharacterBody3D:
 func reset_player() -> void:
 	if not seated.is_empty():
 		stand_up()
-	player.position = SPAWN + Vector3(0, 0.6, 0)
+	player.position = world.spawn_point + Basis(Vector3.UP,world.spawn_heading)*Vector3(2.6,0,0) + Vector3(0, 0.6, 0)
 	player.velocity = Vector3.ZERO
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -40,17 +40,7 @@ func run() -> void:
 			if absf(local.x)<entry.w/2 and absf(local.z)<entry.d/2 and absf(local.y-entry.floor)<.05: seats+=1
 		expect(seats>=2,"Usable restaurant seats: "+entry.name)
 	expect(styles.size()==3,"Three distinct restaurant families")
-	var palace: Dictionary=world.palace_entry
-	var p: Vector3=palace.origin
-	var b: Basis=palace.basis
-	world.update_cells(p)
-	await ticks(3)
-	for x in [-1.0,0.0,1.0]:
-		expect(ray(scene,p+b*Vector3(x,1.5,28),p+b*Vector3(x,1.5,6)).is_empty(),"Palace gate opens into courtyard")
-	for x in [-6.0,6.0]:
-		var floor_hit:=ray(scene,p+b*Vector3(x,2,8),p+b*Vector3(x,-.2,8))
-		expect(not floor_hit.is_empty() and absf(floor_hit.position.y-p.y-palace.floor)<.04,"Palace courtyard is grounded")
-	expect(not ray(scene,p+b*Vector3(0,.3,4),p+b*Vector3(0,.3,0)).is_empty(),"Fountain has collision")
+	expect(world.palace_entry.is_empty(),"Out-of-area palace is excluded from VKI–VDN")
 	expect(world.dining_destinations.size()==3,"Dining destinations registered")
 	scene.hud.dining_tab=true
 	expect(scene.hud.atlas_entries().size()==3,"DINING tab exposes the three reviewed places")
@@ -86,18 +76,5 @@ func run() -> void:
 	scene.hud._input(tap)
 	var destination: Dictionary=world.dining_destinations[0]
 	expect(not scene.hud.map_open and Vector2(scene.player.position.x,scene.player.position.z).distance_to(Vector2(destination.p[0],destination.p[1]))<.1,"Dining row touch travels to the right entrance")
-	# The palace ramp must also carry the player, not just a clear ray.
-	scene.player.position=p+b*Vector3(0,.4,27)
-	scene.player.velocity=Vector3.ZERO
-	scene.yaw=-PI/2
-	scene.smooth_yaw=scene.yaw
-	world.update_cells(scene.player.position)
-	await ticks(40)
-	scene.touch_move=Vector2(0,-1)
-	await ticks(120)
-	scene.touch_move=Vector2.ZERO
-	await ticks(10)
-	var palace_local: Vector3=b.inverse()*(scene.player.position-p)
-	expect(palace_local.z<23 and scene.player.is_on_floor(),"Player walks through palace gate into courtyard")
 	print("ARCHITECTURE REVIEW: ",failures," failures; restaurants=",expected," styles=",styles.size())
 	quit(1 if failures else 0)

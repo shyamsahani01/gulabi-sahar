@@ -7,7 +7,7 @@ var action_fingers: Dictionary = {}
 var waypoint := Vector3.ZERO
 var navigation: PackedVector3Array = []
 var has_waypoint := false
-var quest := "EXPLORE JAIPUR · Visit the district markers"
+var quest := "EXPLORE VKI + VDN · Visit the district markers"
 var health := 100.0
 var stamina := 100.0
 var driving := false
@@ -167,7 +167,7 @@ func draw_radar() -> void:
 		var at := origin+(Vector2(poi.p[0],poi.p[1])-Vector2(map_player.x,map_player.z))*scale
 		if rect.grow(-10).has_point(at):
 			draw_circle(at,3.5,Color("75cbbb"))
-	text_at(Vector2(34,287),"N ↑    JAIPUR / 65%",9,Color("adbdba"))
+	text_at(Vector2(34,287),"N ↑    VKI / VDN",9,Color("adbdba"))
 	if has_waypoint:
 		var direction := Vector2(waypoint.x-map_player.x,waypoint.z-map_player.z)
 		var at := origin+direction.limit_length(100)*scale
@@ -176,9 +176,9 @@ func draw_radar() -> void:
 
 func draw_map() -> void:
 	draw_rect(Rect2(Vector2.ZERO,size),Color("10242c"))
-	text_at(Vector2(36,46),"JAIPUR  /  CITY ATLAS",27,Color("f1ddba"))
+	text_at(Vector2(36,46),"GULABI SAHAR  /  VKI + VDN",27,Color("f1ddba"))
 	var km: Vector2 = game.world.map_bounds.size/1000.0
-	text_at(Vector2(36,74),"%.1f × %.1f km compact Jaipur · roads, parks and %d real places from OpenStreetMap · select a destination to travel"%[km.x,km.y,game.world.amenities.size()],13,Color("9eb5bb"))
+	text_at(Vector2(36,74),"%.1f × %.1f km VKI–VDN · %d mapped / authored places · OSM roads · select a destination to travel"%[km.x,km.y,game.world.amenities.size()],13,Color("9eb5bb"))
 	for road in game.world.data.roads:
 		var line := PackedVector2Array()
 		for p in road.p:
@@ -254,9 +254,9 @@ func draw_map() -> void:
 		draw_circle(at,9,Color("e0a44a",.35))
 		draw_circle(at,4,Color("e0a44a"))
 		text_at(at+Vector2(8,-7),"GAME CONNECTOR",10,Color("e0a44a"))
-	draw_dashed_line(Vector2(35,size.y-44),Vector2(75,size.y-44),Color("e0a44a"),3,6)
-	text_at(Vector2(82,size.y-40),"authored game connector (Nahargarh link) · solid lines = OpenStreetMap roads",11,Color("e0a44a"))
-	text_at(Vector2(35,size.y-22),"© OpenStreetMap contributors · ODbL 1.0 · artistic terrain/buildings · 06 Nov 2026",11,Color("9eb5bb"))
+
+	text_at(Vector2(82,size.y-40),"VKI SOUTH + VIDHYADHAR NAGAR · solid lines = OpenStreetMap roads",11,Color("e0a44a"))
+	text_at(Vector2(35,size.y-22),"© OpenStreetMap contributors · ODbL 1.0 · artistic terrain/buildings · 10 Nov 2026",11,Color("9eb5bb"))
 	button_circle(map_close_center(),"X",26,Color("344a50"))
 	button_circle(map_zoom_in_center(),"+",24,Color("344a50"))
 	button_circle(map_zoom_out_center(),"−",24,Color("344a50"))

@@ -16,9 +16,9 @@ func check() -> void:
 	root.add_child(scene)
 	print("WORLD READY ",Time.get_ticks_msec()-began," ms; cells ",scene.world.cells.size()," buildings ",scene.world.building_count)
 	await ticks(90)
-	expect(scene.player.is_on_floor(),"Player lands at Chandpole")
-	expect(scene.world.building_count>5000,"Substantial city population of buildings")
-	expect(scene.world.data.roads.size()>4000,"OSM road network loaded")
+	expect(scene.player.is_on_floor(),"Player lands at VDN")
+	expect(scene.world.building_count>1000 and scene.world.building_count<3000,"Substantial city population of buildings")
+	expect(scene.world.data.roads.size()>1000 and scene.world.data.roads.size()<2000,"OSM road network loaded")
 	expect(scene.world.active_cells<scene.world.cells.size()/2,"Distance culling limits active city")
 	expect(scene.activity.people.size()>6,"Pedestrians spawn near player")
 	var origin: Vector3=scene.player.position
@@ -45,29 +45,23 @@ func check() -> void:
 	expect(pose.angle_to(hero.skeleton.get_bone_pose_rotation(bone))>.05,"Punch actually animates the arm")
 	await ticks(40)
 	expect(hero.animation_tree.active,"Locomotion blending resumes after action")
-	for index in [2,5,0]:
+	for index in [2,4,0]:
 		scene.travel_to(index)
 		await ticks(90)
 		expect(scene.player.is_on_floor(),"Destination %d has solid ground"%index)
 		expect(scene.player.position.y>-1,"Destination does not fall through terrain")
-	var route: PackedVector3Array=scene.world.route_between(Vector3.ZERO,Vector3(scene.world.landmarks[2].p[0],0,scene.world.landmarks[2].p[1]))
+	var vki: Dictionary=scene.world.landmarks[2]
+	var route: PackedVector3Array=scene.world.route_between(scene.world.spawn_point,Vector3(vki.p[0],0,vki.p[1]))
 	print("ROUTE points ",route.size())
-	expect(route.size()>2,"Chandpole to VDN has connected road navigation")
-	expect(scene.world.authored_roads.size()==1 and scene.world.authored_roads[0].source=="authored","Exactly one authored game connector is tagged in the data")
-	var fort: PackedVector3Array=scene.world.route_between(Vector3.ZERO,Vector3(scene.world.landmarks[5].p[0],0,scene.world.landmarks[5].p[1]))
-	var uses_connector:=false
-	for p in fort:
-		if Vector2(p.x,p.z).distance_to(Vector2(500,-896)*scene.world.CITY_COMPRESSION)<40:
-			uses_connector=true
-	expect(fort.size()>2 and uses_connector,"Nahargarh route reaches the fort through the marked game connector")
-	expect(scene.world.data.roads.filter(func(r):return r.get("source","osm")=="osm" or not r.has("source")).size()>4000,"Everything else in the road network comes from OSM")
+	expect(route.size()>2,"VDN to VKI has connected road navigation")
+	expect(scene.world.authored_roads.is_empty(),"Out-of-area Nahargarh connector is excluded")
 	var kinds: Dictionary={}
 	for a in scene.world.amenities:
 		kinds[a.kind]=kinds.get(a.kind,0)+1
 	print("AMENITIES ",kinds)
-	expect(scene.world.amenities.size()>200 and scene.world.amenity_count>200,"Real OSM amenities are loaded and built")
-	expect(kinds.get("police",0)>=2 and kinds.get("showroom",0)>=3 and kinds.get("theka",0)>=5 and kinds.get("hospital",0)>=20 and kinds.get("fuel",0)>=5,"Police stations, car showrooms, wine shops, hospitals and petrol pumps exist")
-	expect(scene.world.map_bounds.has_point(Vector2(-2350,-4750)*scene.world.CITY_COMPRESSION),"Expanded playable bounds include VKI south")
+	expect(scene.world.amenities.size()>40 and scene.world.amenity_count==scene.world.amenities.size(),"Real OSM amenities are loaded and built")
+	expect(kinds.get("police",0)>=1 and kinds.get("showroom",0)>=1 and kinds.get("theka",0)>=1 and kinds.get("hospital",0)>=20 and kinds.get("fuel",0)>=3,"Police stations, car showrooms, wine shops, hospitals and petrol pumps exist")
+	expect(scene.world.map_bounds.has_point(Vector2(-2350,-4750)*scene.world.CITY_COMPRESSION),"Compact playable bounds include VKI south")
 	expect(scene.vehicle.wheels.size()==4 and scene.vehicle.body_mesh.get_child(0).mesh.get_surface_count()>=5,"Player car has a detailed body")
 	scene.vehicle.position=scene.player.position+Vector3(3,0,0)
 	scene.vehicle.toggle_drive()

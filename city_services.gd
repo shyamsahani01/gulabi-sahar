@@ -15,14 +15,14 @@ var facing := Basis.IDENTITY
 var width := 8.0
 var depth := 8.0
 
-func assign(data: Dictionary, compression: float) -> void:
+func assign(data: Dictionary, compression: float, origin := Vector2.ZERO) -> void:
 	for spec in SPECS:
 		var best: Dictionary = {}
 		var distance := INF
 		for b in data.buildings:
-			if b.has("service"):
+			if b.has("service") or b.has("kind") or b.w<7.5 or b.d<7.0:
 				continue
-			var d := Vector2(b.x,b.z).distance_to(spec.at*compression)
+			var d := Vector2(b.x,b.z).distance_to((spec.at+origin)*compression)
 			if d < distance:
 				distance = d
 				best = b
@@ -115,7 +115,7 @@ func build(b: Dictionary) -> void:
 		"showroom":
 			for side in [-1,1]:
 				box(Vector3(side*width*.25,.20,-.4),Vector3(2.8,.22,4.9),"white")
-				car(Vector3(side*width*.25,.32,-.4),Color("bd5146") if side<0 else Color("6c9c9b"),"sedan",PI+.22*side)
+				car(Vector3(side*width*.25,.32,-.4),Color("bd5146") if side<0 else Color("6c9c9b"),"sedan" if side<0 else "suv",PI+.22*side)
 			label(Vector3(0,1.8,-front+.3),"GULABI MOTORS\nDESIGNED FOR THE CITY",28)
 		"hospital":
 			box(Vector3(0,b.h+1,front-.2),Vector3(.38,1.7,.18),"teal")
@@ -177,7 +177,7 @@ func car(at: Vector3, paint: Color, style: String, yaw: float) -> void:
 	# Parked/display cars are solid but have no driving controller.
 	var collider := CollisionShape3D.new()
 	var bounds := BoxShape3D.new()
-	bounds.size = Vector3(1.8,1.4,4.1)
+	bounds.size = Vector3(1.96 if style=="suv" else 1.86,1.8 if style=="suv" else 1.5,4.42)
 	collider.shape = bounds
 	collider.position = base+facing*(at+Vector3(0,.7,0))
 	collider.rotation.y = atan2(facing.z.x,facing.z.z)+yaw

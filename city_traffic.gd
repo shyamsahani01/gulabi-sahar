@@ -10,7 +10,7 @@ func _ready() -> void:
 		var car=preload("res://city_vehicle.gd").new()
 		car.game=game
 		car.paint=Color(["c47e61","7eaaa7","e4c776","d3d8d8","526a80","eee5d2","8b464e","c1c7b1"][i])
-		car.style="taxi" if i%3==0 else "sedan"
+		car.style=["taxi","sedan","suv","sedan","police","suv","taxi","sedan"][i]
 		add_child(car)
 		car.set_physics_process(false)
 		car.collision_layer=4

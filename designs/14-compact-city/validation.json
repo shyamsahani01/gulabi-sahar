@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-10",
+  "engine": "Godot 4.7.2 stable",
+  "edition": "vki-vdn-compact-v1",
+  "map_metres": [
+    1716,
+    2420
+  ],
+  "area_reduction_percent": 85.64,
+  "data": {
+    "road_pieces": 1662,
+    "building_records": 2683,
+    "artistic_infill": 1148,
+    "vki_workshops": 791,
+    "parks": 7,
+    "amenities_including_authored": 55,
+    "fictional_services": 6,
+    "landmarks": 5
+  },
+  "godot_import": "passed; Android device detection reported no adb daemon (no device build/install attempted)",
+  "python_clipping_tests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "generator_reproduction": "regenerated dataset is semantically identical",
+  "suites": {
+    "compact_world": {
+      "failures": 0,
+      "summary": "COMPACT WORLD RESULT: 0 failures / 246803 checks"
+    },
+    "city_smoke": {
+      "failures": 0,
+      "summary": "CITY SMOKE RESULT: 0 failures; elapsed 36042 ms"
+    },
+    "city_refresh": {
+      "failures": 0,
+      "summary": "CITY REFRESH RESULT: 0 failures"
+    },
+    "cafe_review": {
+      "failures": 0,
+      "summary": "CAFE REVIEW RESULT: 0 failures"
+    },
+    "architecture_review": {
+      "failures": 0,
+      "summary": "ARCHITECTURE REVIEW: 0 failures; restaurants=3 styles=3"
+    },
+    "city_combat": {
+      "failures": 0,
+      "summary": "CITY COMBAT RESULT: 0 failures"
+    }
+  },
+  "post_mesh_cache_check": "compact_world: 0 failures / 246803 checks",
+  "desktop_draw_calls": {
+    "01-vdn-aerial": 555,
+    "02-vdn-showroom": 657,
+    "03-vdn-street": 790,
+    "04-vki-aerial": 323,
+    "vehicle-sedan": 58,
+    "vehicle-taxi": 59,
+    "vehicle-police": 63,
+    "vehicle-suv": 61,
+    "05-vehicle-lineup": 235
+  },
+  "capture_renderer": "Compatibility / Mesa llvmpipe software OpenGL",
+  "android_fps_measured": false,
+  "apk_built_or_installed": false,
+  "notes": [
+    "Actual engine captures; visual quality is stylized mobile 3D, not photoreal reference parity.",
+    "Raw Jaipur source retained unchanged.",
+    "Unrelated existing Android and character/import edits excluded."
+  ]
+}

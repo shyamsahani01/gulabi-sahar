@@ -10,8 +10,8 @@ var mission_active := false
 var mission_stage := 0
 var cash := 250
 var visited: Array = []
-var mission_indices := [1,3,5]
-var mission_names := ["Collect the parcel · Chandpole Bazaar","Deliver textiles · Central Spine, VDN","Meet the guide · Nahargarh Fort"]
+var mission_indices := [1,2,0]
+var mission_names := ["Collect the parcel · Central Spine","Deliver parts · VKI South","Return to Vidhyadhar Nagar"]
 var blood_button: CheckButton
 var speaker: Label
 var speech: Label
@@ -256,7 +256,7 @@ func close_dialogue() -> void:
 	game.hud.modal=false
 func directions() -> void:
 	var district: String=game.world.district_at(game.player.position).id
-	var hints: Dictionary={"chandpole":"Bazaar lanes, Chandpole Gate and the road toward Shastri Nagar.","vdn":"Residential sectors, parks and the Central Spine shopping streets.","hills":"Brahmpuri below; Nahargarh fort and the Aravalli ridge above.","sikar":"Sikar Road links the northern colonies and bus depots.","shastri":"Shastri Nagar connects the old city and Vidhyadhar Nagar."}
+	var hints: Dictionary={"vki":"VKI workshops, auto works and industrial streets. Head south to VDN Central Spine.","chandpole":"Bazaar lanes, Chandpole Gate and the road toward Shastri Nagar.","vdn":"Residential sectors, parks and the Central Spine shopping streets.","hills":"Brahmpuri below; Nahargarh fort and the Aravalli ridge above.","sikar":"Sikar Road links the northern colonies and bus depots.","shastri":"Shastri Nagar connects the old city and Vidhyadhar Nagar."}
 	var nearest_text := ""
 	for kind in ["police","hospital","theka","showroom","fuel"]:
 		var best := 1e9
@@ -297,7 +297,7 @@ func set_destination(index: int) -> void:
 func save_progress() -> void:
 	var f:=FileAccess.open("user://city_progress.json",FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"cash":cash,"visited":visited,"mission_active":mission_active,"mission_stage":mission_stage,"outfit":game.avatar.outfit}))
+		f.store_string(JSON.stringify({"map_edition":game.world.MAP_EDITION,"cash":cash,"visited":visited,"mission_active":mission_active,"mission_stage":mission_stage,"outfit":game.avatar.outfit}))
 func load_progress() -> void:
 	if not FileAccess.file_exists("user://city_progress.json"):
 		return
@@ -305,11 +305,11 @@ func load_progress() -> void:
 	if saved is Dictionary:
 		cash=int(saved.get("cash",250))
 		visited=[]
-		for value in saved.get("visited",[]):
+		for value in (saved.get("visited",[]) if saved.get("map_edition","")==game.world.MAP_EDITION else []):
 			var index:=int(value)
-			if index>=0 and index<8 and not visited.has(index):
+			if index>=0 and index<game.world.landmarks.size() and not visited.has(index):
 				visited.append(index)
-		mission_active=saved.get("mission_active",false)
+		mission_active=saved.get("mission_active",false) and saved.get("map_edition","")==game.world.MAP_EDITION
 		mission_stage=clampi(int(saved.get("mission_stage",0)),0,2)
 		var outfit:=int(saved.get("outfit",0))
 		if outfit!=game.avatar.outfit:
@@ -358,6 +358,6 @@ func _process(delta: float) -> void:
 	message.visible=toast_clock>0
 	game.hud.health=health
 	game.hud.stamina=game.stamina
-	game.hud.quest=mission_names[mission_stage] if mission_active else "EXPLORE %d/8 · Rs %d · talk for delivery work"%[visited.size(),cash]
+	game.hud.quest=mission_names[mission_stage] if mission_active else "EXPLORE %d/%d · Rs %d · talk for delivery work"%[visited.size(),game.world.landmarks.size(),cash]
 	if dialogue_open and (game.hud.map_open or game.portrait):
 		close_dialogue()

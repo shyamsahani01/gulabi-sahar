@@ -19,9 +19,14 @@ func check() -> void:
 	var scene=load("res://main.tscn").instantiate()
 	root.add_child(scene)
 	await ticks(90)
+	# Freeze crowd routing while testing exact attack-contact distances.
+	scene.activity.set_physics_process(false)
+	scene.traffic.set_physics_process(false)
+	for car in scene.traffic.cars: car.node.collision_layer=0
 	var target: Dictionary=scene.activity.people[0]
-	scene.player.position=Vector3(25,0.15,0)
-	target.body.position=Vector3(26.5,.15,0)
+	target.body.velocity=Vector3.ZERO
+	scene.vehicle.position+=Vector3(0,0,30) # Clear the road for deterministic contact checks.
+	target.body.position=scene.player.position+Vector3(1.5,0,0)
 	target.walking=false
 	target.stun=0
 	target.health=100

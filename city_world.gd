@@ -1,5 +1,5 @@
 extends "res://world.gd"
-# OSM source geometry is preserved on disk; the playable layout is 12% shorter.
+# VKI–VDN only. Archived Jaipur data remains available to the import tools.
 const CITY_COMPRESSION := 0.88
 var services: Array = []
 var seats: Array = []
@@ -19,13 +19,15 @@ var building_count := 0
 var active_cells := 0
 var draw_detail := false
 var sphere_mesh := SphereMesh.new()
-var map_bounds := Rect2(-3600, -5800, 5700, 6550)
+var map_bounds := Rect2(-2850, -5100, 1950, 2750)
 var landmarks: Array = []
 var routes: Array = []
 var authored_roads: Array = []
 var amenities: Array = []
 var amenity_count := 0
-var spawn_point := Vector3(25, 1, 0)
+var spawn_point := Vector3(-1591.05, 1, -2843.67)
+var spawn_heading := 0.0
+const MAP_EDITION := "vki-vdn-compact-v1"
 
 func _ready() -> void:
 	add_child(collision_root)
@@ -34,12 +36,15 @@ func _ready() -> void:
 	sphere_mesh.height=1
 	sphere_mesh.radial_segments=12
 	sphere_mesh.rings=6
-	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/jaipur_city.json"))
+	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
 	compact_layout()
+	var arrival := safe_road_arrival(Vector2(spawn_point.x,spawn_point.z))
+	spawn_point = Vector3(arrival.p.x,1,arrival.p.y)
+	spawn_heading = arrival.heading
 	landmarks = data.pois
 	amenities = data.get("amenities", [])
 	service_builder.world = self
-	service_builder.assign(data,CITY_COMPRESSION)
+	service_builder.assign(data,CITY_COMPRESSION,Vector2(-1591.05,-2843.67))
 	make_materials()
 	make_city_materials()
 	# Less aggressive surface relief removes the sandpaper shimmer seen on the tablet.
@@ -50,6 +55,7 @@ func _ready() -> void:
 	style_pass()
 	preload("res://architecture_materials.gd").install(self)
 	preload("res://heritage_kit.gd").install(self)
+	finish_materials()
 	for key in ["hm_pink","rose","terracotta","fort"]:
 		mats[key].normal_enabled=false
 		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
@@ -60,7 +66,7 @@ func _ready() -> void:
 	build_ground()
 	build_roads()
 	for b in data.buildings:
-		if Vector2(b.x-495*CITY_COMPRESSION,b.z+760*CITY_COMPRESSION).length()<105*CITY_COMPRESSION or b.has("kind"):
+		if b.has("kind"):
 			continue
 		city_building(b)
 		building_count += 1
@@ -74,6 +80,7 @@ func _ready() -> void:
 		details.build(services[i].building,services[i].rotation,i)
 	build_parks()
 	build_landmarks()
+	preload("res://district_details.gd").new().decorate(self)
 	flush_batches()
 	flush_road_meshes()
 	batches.clear()
@@ -136,17 +143,30 @@ func make_city_materials() -> void:
 	mats["tarmac"].normal_enabled = false
 	mats["tarmac"].uv1_scale = Vector3.ONE*.10
 
+func finish_materials() -> void:
+	# Quiet, metre-scaled surfaces: the old scanned plaster/asphalt multiplied
+	# too much contrast into tiny batched primitives and shimmered at distance.
+	var mineral=preload("res://heritage_kit.gd").mineral_texture()
+	for pair in [["arch_cream","e2d3b8"],["cream","e6d5b8"],["white","e9e1d1"],["concrete","c5bca9"],["stone","b4a893"],["tarmac","303b42"],["sand","9c927a"],["grass","52784d"],["leaves","244f35"],["leaves_light","467b43"]]:
+		var m: StandardMaterial3D=mats[pair[0]]
+		m.albedo_color=Color(pair[1])
+		m.albedo_texture=mineral if pair[0] not in ["leaves","leaves_light"] else null
+		m.normal_enabled=false
+		m.roughness_texture=null
+		m.roughness=.9
+		m.uv1_scale=Vector3.ONE*.12
+		m.uv1_triplanar=true
+		m.uv1_world_triplanar=true
+		m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+
 func destinations() -> Array:
 	return landmarks + services + dining_destinations
 
 func register_dining_destinations() -> void:
-	for title in ["Rajasthani Thali","Kalidoscope","Spicy King"]:
-		for entry in restaurant_entries:
-			if entry.name!=title:
-				continue
-			var at: Vector3=entry.origin+entry.basis*Vector3(0,0,entry.d/2+2.2)
-			var road:=nearest_road_point(at.x,at.z)
-			dining_destinations.append({"name":title,"hindi":"","kind":"restaurant","p":[at.x,at.z],"rotation":atan2(entry.basis.z.x,entry.basis.z.z),"car_p":[road.p.x,road.p.y],"car_heading":road.heading})
+	for entry in restaurant_entries:
+		var at: Vector3=entry.origin+entry.basis*Vector3(0,0,entry.d/2+2.2)
+		var road:=nearest_road_point(at.x,at.z)
+		dining_destinations.append({"name":entry.name,"hindi":"","kind":"restaurant","p":[at.x,at.z],"rotation":atan2(entry.basis.z.x,entry.basis.z.z),"car_p":[road.p.x,road.p.y],"car_heading":road.heading})
 
 func nearest_road_point(x: float,z: float) -> Dictionary:
 	# Closest mapped road segment: used to park the player's car beside a destination.
@@ -165,6 +185,38 @@ func nearest_road_point(x: float,z: float) -> Dictionary:
 				distance = d
 				closest = point
 				heading = atan2(-(b.x-a.x),-(b.y-a.y))
+	return {"p":closest,"heading":heading}
+
+func clear_arrival(at: Vector2, margin: float) -> bool:
+	if not map_bounds.grow(-8).has_point(at): return false
+	for b in data.buildings:
+		var local:=Vector2(at.x-b.x,at.y-b.z).rotated(b.a)
+		if absf(local.x)<b.w/2+margin and absf(local.y)<b.d/2+margin: return false
+	for a in data.get("amenities",[]):
+		var local:=Vector2(at.x-a.p[0],at.y-a.p[1]).rotated(a.a)
+		if absf(local.x)<a.w/2+margin and absf(local.y)<a.d/2+margin: return false
+	return true
+
+func safe_road_arrival(hint: Vector2) -> Dictionary:
+	var closest:=Vector2.ZERO
+	var distance:=INF
+	var heading:=0.0
+	for road in data.roads:
+		if road.width<6: continue
+		for i in range(road.p.size()-1):
+			var a:=Vector2(road.p[i][0],road.p[i][1])
+			var b:=Vector2(road.p[i+1][0],road.p[i+1][1])
+			if a.distance_to(hint)>220: continue
+			var direction: Vector2=(b-a).normalized()
+			var side:=Vector2(-direction.y,direction.x)
+			for fraction in [.2,.5,.8]:
+				var point:=a.lerp(b,fraction)
+				var score:=point.distance_squared_to(hint)
+				if score>=distance or not clear_arrival(point,3.0) or not clear_arrival(point+side*2.6,1.0): continue
+				distance=score
+				closest=point
+				heading=atan2(-direction.x,-direction.y)
+	if is_inf(distance): return nearest_road_point(hint.x,hint.y)
 	return {"p":closest,"heading":heading}
 
 func cell_key(pos: Vector3) -> Vector2i:
@@ -210,6 +262,8 @@ func flush_batches() -> void:
 		var mesh := MultiMeshInstance3D.new()
 		mesh.multimesh = multi
 		mesh.material_override = mats[parts[1]]
+		if parts[1] in ["stone","sand","grass","tarmac","grout"]:
+			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		mesh.visibility_range_end = 170 if parts[2] == "1" else 600
 		mesh.visibility_range_end_margin = 20
 		cell(transforms[0].origin).add_child(mesh)
@@ -263,12 +317,18 @@ func build_ground() -> void:
 			mesh.mesh = st.commit()
 			mesh.material_override = mats["scrub"] if cx > 200 and cz < -300 else mats["sand"]
 			add_child(mesh)
+			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			mesh.create_trimesh_collision()
 	# Boundaries stop traversal beyond the imported area.
 	var c := map_bounds.get_center()
 	var sz := map_bounds.size
 	for spec in [[Vector3(map_bounds.position.x,80,c.y),Vector3(2,400,sz.y)],[Vector3(map_bounds.end.x,80,c.y),Vector3(2,400,sz.y)],[Vector3(c.x,80,map_bounds.position.y),Vector3(sz.x,400,2)],[Vector3(c.x,80,map_bounds.end.y),Vector3(sz.x,400,2)]]:
-		box(spec[0],spec[1],"sand",true)
+		var boundary := CollisionShape3D.new()
+		var bounds := BoxShape3D.new()
+		bounds.size = spec[1]
+		boundary.shape = bounds
+		boundary.position = spec[0]
+		collision_root.add_child(boundary)
 
 func road_piece(a: Vector2, b: Vector2, width: float, key: String, lift: float) -> void:
 	var direction := (b-a).normalized()
@@ -304,11 +364,11 @@ func build_roads() -> void:
 				var p := a.lerp(b,float(j)/count)
 				var q := a.lerp(b,float(j+1)/count)
 				road_piece(p,q,road.width+3.0,"kerb_yellow" if authored else "stone",0.035)
-				road_piece(p,q,road.width,"tarmac",0.06)
+				road_piece(p,q,road.width,"stone" if road.kind in ["footway","path","pedestrian","track"] else "tarmac",0.14)
 				if authored:
 					road_piece(p.lerp(q,0.2),p.lerp(q,0.6),0.3,"kerb_black",0.075)
 				if road.width >= 10*CITY_COMPRESSION and j%2 == 0:
-					road_piece(p.lerp(q,0.1),p.lerp(q,0.65),0.16,"cream",0.075)
+					road_piece(p.lerp(q,0.1),p.lerp(q,0.65),0.16,"cream",0.16)
 			if road.width >= 10*CITY_COMPRESSION and i % 4 == 0:
 				var d := (b-a).normalized()
 				var at: Vector2 = a + Vector2(-d.y,d.x)*(road.width*0.5+1)
@@ -381,30 +441,30 @@ func style_pass() -> void:
 	for child in get_children():
 		if child is DirectionalLight3D:
 			child.light_color = Color("ffe6c7")
-			child.light_energy = 1.05
-			child.rotation_degrees = Vector3(-46, -34, 0)
-			child.directional_shadow_max_distance = 58
+			child.light_energy = 0.85
+			child.rotation_degrees = Vector3(-31, -34, 0)
+			child.directional_shadow_max_distance = 90
 			child.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
-			child.shadow_bias = 0.03
-			child.shadow_normal_bias = 1.4
+			child.shadow_bias = 0.08
+			child.shadow_normal_bias = 1.2
 		elif child is WorldEnvironment:
 			var env: Environment = child.environment
 			var sky_mat: ProceduralSkyMaterial = env.sky.sky_material
-			sky_mat.sky_top_color = Color("5f98c6")
-			sky_mat.sky_horizon_color = Color("e8dcc6")
-			sky_mat.ground_horizon_color = Color("e8dcc6")
+			sky_mat.sky_top_color = Color("699bb8")
+			sky_mat.sky_horizon_color = Color("efc6ab")
+			sky_mat.ground_horizon_color = Color("efc6ab")
 			sky_mat.ground_bottom_color = Color("8d7f68")
 			sky_mat.sun_angle_max = 20
 			sky_mat.sun_curve = 0.12
 			env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 			env.ambient_light_sky_contribution = 1.0
-			env.ambient_light_energy = 0.62
+			env.ambient_light_energy = 0.38
 			env.tonemap_mode = Environment.TONE_MAPPER_ACES
-			env.tonemap_exposure = 1.0
+			env.tonemap_exposure = 0.9
 			env.tonemap_white = 5.0
 			env.fog_enabled = true
 			env.fog_light_color = Color("e5d8c3")
-			env.fog_density = 0.0011
+			env.fog_density = 0.00065
 			env.fog_sky_affect = 0.18
 			env.glow_enabled = true
 			env.glow_intensity = 0.22
@@ -459,8 +519,12 @@ func city_building(b: Dictionary) -> void:
 	if b.has("service"):
 		service_builder.build(b)
 		return
-	# Detailed street shells around restaurants and the initial Chandpole neighbourhood.
-	var featured: bool=Vector2(b.x,b.z).length_squared()<9000
+	# Richer street shells around the VDN arrival and dining locations.
+	if b.z < -3650*CITY_COMPRESSION and b.w>=7 and b.d>=7:
+		var industrial=preload("res://district_details.gd").new()
+		industrial.factory(self,b)
+		return
+	var featured: bool=Vector2(b.x-spawn_point.x,b.z-spawn_point.z).length_squared()<62500
 	if not featured:
 		for a in amenities:
 			if a.kind=="restaurant" and Vector2(b.x-a.p[0],b.z-a.p[1]).length_squared()<900:
@@ -469,11 +533,11 @@ func city_building(b: Dictionary) -> void:
 	if featured and b.w>=3.5 and b.d>=3.0:
 		var neighbourhood=preload("res://neighborhood_architecture.gd").new()
 		neighbourhood.world=self
-		neighbourhood.build({"p":[b.x,b.z],"a":b.a,"w":b.w,"d":b.d,"h":b.h,"old":b.z>-1000 and b.x>-850})
+		neighbourhood.build({"p":[b.x,b.z],"a":b.a,"w":b.w,"d":b.d,"h":b.h,"old":int(abs(b.x+b.z))%3==0})
 		return
 	var base := Vector3(b.x,terrain_height(b.x,b.z),b.z)
 	var basis := Basis(Vector3.UP,b.a)
-	var old: bool = b.z > -1000 and b.x > -850
+	var old: bool = int(abs(b.x+b.z))%4==0
 	var color: String = ["rose","hm_pink","terracotta","ochre"][int(abs(b.x+b.z))%4] if old else ["cream","white","concrete","ivory"][int(abs(b.x+b.z))%4]
 	var height: float = b.h
 	box(base+Vector3(0,.025,0),Vector3(b.w+1.5,.05,b.d+1.5),"stone",false,Vector3(0,b.a,0))
@@ -539,23 +603,12 @@ func sign_board(at: Vector3, ang: float, front: float, text: String, board_key: 
 	cell(at).add_child(label)
 
 func parked_vehicle(at: Vector3, ang: float, kind: String, color: String) -> void:
-	# Static silhouette for forecourts (traffic/driving use city_vehicle.gd).
-	var basis := Basis(Vector3.UP, ang)
-	var rot := Vector3(0, ang, 0)
-	draw_detail = true
-	if kind == "ambulance" or kind == "jeep":
-		box(at + basis * Vector3(0, .95, 0), Vector3(1.8, 1.5, 4.4), "white", false, rot)
-		box(at + basis * Vector3(0, 1.0, 0), Vector3(1.84, .28, 4.0), "cross_red" if kind == "ambulance" else "police_blue", false, rot)
-		box(at + basis * Vector3(0, 1.75, 1.2), Vector3(.5, .2, .5), "cross_red" if kind == "ambulance" else "police_blue", false, rot)
-		box(at + basis * Vector3(0, 1.35, -1.5), Vector3(1.6, .6, 1.3), "glass", false, rot)
-	else:
-		box(at + basis * Vector3(0, .62, 0), Vector3(1.7, .5, 3.9), color, false, rot)
-		box(at + basis * Vector3(0, 1.12, .25), Vector3(1.5, .55, 1.9), "glass", false, rot)
-		box(at + basis * Vector3(0, 1.42, .25), Vector3(1.55, .08, 2.0), color, false, rot)
-	for side in [-1, 1]:
-		for z in [-1.35, 1.35]:
-			round_prop(at + basis * Vector3(side * .85, .34, z), Vector3(.3, .66, .66), "dark")
-	draw_detail = false
+	var model:=preload("res://vehicle_design.gd").new()
+	model.style="police" if kind=="jeep" else ("ambulance" if kind=="ambulance" else ("suv" if color=="teal" else "sedan"))
+	model.paint=mats[color].albedo_color if mats.has(color) else Color("d9d5ca")
+	model.position=at
+	model.rotation.y=ang
+	cell(at).add_child(model)
 
 func build_amenities() -> void:
 	for a in amenities:
@@ -784,6 +837,7 @@ func build_parks() -> void:
 		var m := MeshInstance3D.new()
 		m.mesh = st.commit()
 		m.material_override = mats["grass"]
+		m.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		cell(Vector3(center.x,0,center.y)).add_child(m)
 		for i in range(0,points.size(),maxi(1,points.size()/8)):
 			var p := points[i].lerp(center,.15)
@@ -803,12 +857,29 @@ func build_parks() -> void:
 		box(Vector3(center.x,ground+.6,center.y),Vector3(3.5,.12,.6),"terracotta")
 
 func tree_at(at: Vector3) -> void:
-	box(at+Vector3(0,1.6,0),Vector3(.35,3.2,.35),"wood")
-	for i in 3:
-		round_prop(at+Vector3(sin(i*2)*.8,3.4+i*.7,cos(i*2)*.8),Vector3(3.3-i*.45,2.6,3.3-i*.45),"leaves" if i%2 else "leaves_light")
+	box(at+Vector3(0,1.9,0),Vector3(.26,3.8,.26),"wood")
+	for side in [-1,1]:
+		box(at+Vector3(side*.42,2.9,0),Vector3(.15,1.6,.15),"wood",false,Vector3(0,0,side*-.5))
+	for i in 7:
+		var angle:=i*2.399
+		var radius:=1.25 if i<5 else .5
+		var center:=at+Vector3(sin(angle)*radius,3.7+(i%3)*.62,cos(angle)*radius)
+		round_prop(center,Vector3(2.7,2.6,2.8),"leaves" if i%3 else "leaves_light")
 
 func build_landmarks() -> void:
 	for poi in landmarks:
+		var arrival:=safe_road_arrival(Vector2(poi.p[0],poi.p[1]))
+		poi.car_p=[arrival.p.x,arrival.p.y]
+		poi.car_heading=arrival.heading
+		poi.rotation=arrival.heading
+		if poi.kind not in ["park"] and poi.name!="Crazy Cafe · VDN":
+			var sidewalk: Vector3=Basis(Vector3.UP,arrival.heading)*Vector3(2.6,0,0)
+			poi.p=[arrival.p.x+sidewalk.x,arrival.p.y+sidewalk.z]
+		elif poi.name=="Crazy Cafe · VDN":
+			for a in amenities:
+				if a.get("osm_id",0)==-91001:
+					poi.p=[a.p[0]-a.w*.25,a.p[1]+a.d/2+2.9]
+					poi.rotation=0.0
 		var p := Vector3(poi.p[0],terrain_height(poi.p[0],poi.p[1]),poi.p[1])
 		var sign := Label3D.new()
 		sign.font = hindi_font
@@ -839,18 +910,9 @@ func build_landmarks() -> void:
 			palace.build_palace(p)
 
 func district_at(at: Vector3) -> Dictionary:
-	at /= CITY_COMPRESSION
-	if at.x > 180 and at.z < -450:
-		return {"id":"hills","name":"Nahargarh / Brahmpuri","hindi":"नाहरगढ़ की पहाड़ियाँ"}
-	if at.z < -3650 and at.x < -1200:
-		return {"id":"vki","name":"Vishwakarma Industrial Area","hindi":"विश्वकर्मा औद्योगिक क्षेत्र"}
-	if at.z < -2050:
-		return {"id":"vdn","name":"Vidhyadhar Nagar","hindi":"विद्याधर नगर"}
-	if at.x < -1700:
-		return {"id":"sikar","name":"Sikar Road","hindi":"सीकर रोड"}
-	if at.z < -650:
-		return {"id":"shastri","name":"Shastri Nagar","hindi":"शास्त्री नगर"}
-	return {"id":"chandpole","name":"Chandpole Bazaar","hindi":"चाँदपोल बाज़ार"}
+	if at.z < -3650*CITY_COMPRESSION:
+		return {"id":"vki","name":"VKI South","hindi":"विश्वकर्मा औद्योगिक क्षेत्र"}
+	return {"id":"vdn","name":"Vidhyadhar Nagar","hindi":"विद्याधर नगर"}
 
 func update_cells(at: Vector3) -> void:
 	active_cells = 0

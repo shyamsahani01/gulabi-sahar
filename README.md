@@ -2,6 +2,19 @@
 
 **Read this file first when continuing the project.** It records the user's requirements, the current implementation, files, commands and unfinished work. It is project context; the user's latest instructions take precedence.
 
+**Latest source update: 2026-11-10 — compact VKI + Vidhyadhar Nagar, vehicle and street graphics refresh.**
+
+The active game now covers **VKI South and Vidhyadhar Nagar only**, following the user's latest scope and supplied “Gulabi Sahar: Jaipur Open World” art reference. The playable footprint is **1.716 × 2.420 km (4.15 km²), 85.6% smaller** than the previous 5.016 × 5.764 km bounds. The original Jaipur data remains archived; Chandpole, Shastri Nagar and Nahargarh are outside the active map.
+
+- **Start / explore:** spawn on a clear VDN road near Central Spine. `MAP → DISTRICTS` offers VDN, Central Spine, VKI South, Crazy Cafe and Smriti Park. Services and three local dining interiors are reachable through the other tabs. The delivery job collects at Central Spine, delivers to VKI and returns to VDN. Old saves retain cash/outfit while obsolete map discovery and mission indices reset.
+- **3D streets:** 2,683 building records, including 1,148 deterministic artistic infill plots (791 in VKI). Workshops have pitched sheet-metal roofs, ridge caps, gutters, shutters, clerestory windows, bollards and signage. VDN has cream/rose street façades, arched windows, balconies, side-elevation details, planted verges, banners, benches and a Smriti Park pavilion. Roads and parks retain their OSM geometry; artistic parcels are collision-checked against roads, buildings and parks during generation.
+- **Vehicles:** original cream sedan, black/yellow taxi, white/blue police sedan and teal/coloured compact SUVs, plus a matching medical response variant. Curved body sections, wheel openings, alloy spokes, grille slats, lamps, mirrors, pillars, trim, plates, taxi/police markings and SUV roof rails. The same models appear in driving, AI traffic, showrooms and parked forecourts; wheels roll and the front axle steers.
+- **Graphics:** warm late-afternoon lighting, quieter surface materials, deeper foliage colour, corrected road/ground shadow casting and distinct pedestrian-path surfacing. Instanced district cells, distance culling and merged vehicle materials remain in use.
+- **Review / reproduce:** [actual Godot screenshots, commands, scope and validation](designs/14-compact-city/README.md). The source crop is reproducible with `python3 tools/build_compact_city.py`; the game loads `assets/data/vki_vdn_city.json`.
+- **Limits:** this is a stylized mobile 3D implementation, not a photoreal match to the reference poster or a surveyed reconstruction. The three dining venues and six service businesses are fictional. No new APK installation or device FPS claim accompanies this source update; Android performance still needs measurement on the target tablet. Existing unrelated local Android/character work was kept out of this commit.
+
+The entries below are historical; their city-wide destinations and older APK descriptions do not describe the current compact map.
+
 **Latest source update: 2026-11-09 — restaurant and palace 3D architecture pass.** Pulled `origin/main` successfully to `1e5a18e` **before editing**, as requested. The existing Crazy Cafe informed the same level of room/furniture detail; Jaipur palace and Palladio courtyard references informed original new geometry. [Full review, references, before/after images and next 3D priorities](designs/13-architecture/README.md).
 
 - **38 restaurants** now have walkable interiors in three styles: terracotta haveli, blue/cream garden pavilion and green/wood brasserie. Cusped 3D arches, glazed side bays, serving counters, shelves, lamps, cane seating, plants and usable seats replace the solid restaurant boxes. The five restaurant-tagged cafés retain the café template.

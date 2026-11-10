@@ -10,7 +10,7 @@ func check() -> void:
 		await physics_frame
 	var world: Node3D=scene.world
 	var vki: Vector3=Vector3(-2350,0,-4750)*world.CITY_COMPRESSION
-	if world.route_between(Vector3.ZERO,vki).size()<2:
+	if world.route_between(world.spawn_point,vki).size()<2:
 		push_error("VKI road network disconnected")
 		failures+=1
 	if world.district_at(vki).id != "vki":

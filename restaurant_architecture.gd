@@ -4,7 +4,7 @@ const GROUND := .12
 var accent: String
 func build(a: Dictionary) -> void:
 	setup(a)
-	var style: int=absi(int(a.get("osm_id",0)))%3
+	var style: int=int(a.get("design_style",absi(int(a.get("osm_id",0)))%3))
 	if "Thali" in a.name or "Bhoj" in a.name: style=0
 	if a.name=="Kalidoscope": style=1
 	if a.name=="Spicy King": style=2
