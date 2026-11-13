@@ -35,15 +35,20 @@ func toggle_drive() -> void:
 		if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():
 			game.actions.notify("Exit blocked · move away from the wall")
 			return
-		driving = false
+		release_driver()
 		game.player.position = candidate
-		game.avatar.show()
-		game.player.collision_layer = 1
-		game.player.collision_mask = 7
 		game.actions.notify("On foot")
 	elif global_position.distance_to(game.player.global_position)<5:
+		heading=rotation.y
 		driving = true
-		game.avatar.hide()
+		game.avatar.show()
+		game.avatar.crouching=false
+		game.avatar.guarding=false
+		game.avatar.movement_speed=0
+		game.avatar.play_action("Drive",3600,.15)
+		game.player.velocity=Vector3.ZERO
+		update_driver()
+		game.pivot.get_child(0).add_excluded_object(get_rid())
 		game.player.collision_layer = 0
 		game.player.collision_mask = 0
 		game.yaw = rotation.y
@@ -73,4 +78,20 @@ func _physics_process(delta: float) -> void:
 				speed *= .7
 	design.animate_wheels(speed*delta, move.x if driving else 0.0)
 	if driving:
-		game.player.global_position = global_position+Vector3(0,.3,0)
+		game.player.global_position = global_position
+		update_driver()
+
+func update_driver() -> void:
+	# The same hero occupies the right-hand front seat, in car-local coordinates.
+	game.avatar.global_transform=global_transform*Transform3D(Basis.IDENTITY,Vector3(.39,.08,.02))
+	game.avatar.movement_speed=0
+	game.avatar.grounded=false
+
+func release_driver() -> void:
+	driving=false
+	game.avatar.show()
+	game.avatar.transform=Transform3D.IDENTITY
+	game.avatar.stop_action(.15)
+	game.player.collision_layer=1
+	game.player.collision_mask=7
+	game.pivot.get_child(0).remove_excluded_object(get_rid())

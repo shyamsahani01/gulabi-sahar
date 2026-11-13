@@ -56,6 +56,7 @@ func _ready() -> void:
 	preload("res://architecture_materials.gd").install(self)
 	preload("res://heritage_kit.gd").install(self)
 	finish_materials()
+	mark_street_pilot()
 	for key in ["hm_pink","rose","terracotta","fort"]:
 		mats[key].normal_enabled=false
 		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
@@ -514,6 +515,20 @@ func style_pass() -> void:
 
 # ------------------------------------------------------------ buildings ----
 const SHOP_COLORS := ["teal", "maroon", "saffron", "blue", "green", "red"]
+
+func mark_street_pilot() -> void:
+	# Pass 01: Road Number 5, OSM way 374927752. Reference-inspired, not a survey.
+	for road in data.roads:
+		if int(road.get("id",0))!=374927752: continue
+		var middle: Array=road.p[road.p.size()/2]
+		for b in data.buildings:
+			if Vector2(b.x-middle[0],b.z-middle[1]).length()>100: continue
+			for i in range(road.p.size()-1):
+				var a:=Vector2(road.p[i][0],road.p[i][1])
+				var z:=Vector2(road.p[i+1][0],road.p[i+1][1])
+				if Geometry2D.get_closest_point_to_segment(Vector2(b.x,b.z),a,z).distance_to(Vector2(b.x,b.z))<32:
+					b.street_pilot="01-vki-road-5"
+		return
 
 func city_building(b: Dictionary) -> void:
 	if b.has("service"):

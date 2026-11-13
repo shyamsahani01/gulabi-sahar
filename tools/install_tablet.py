@@ -1,11 +1,12 @@
 import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil,os
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.9.5';tag='v095'
+version='0.9.8';tag='v098'
 preview='--preview' in sys.argv
-package='com.itgurujan.gulabisahar'+('.preview' if preview else '')
+# Historical package ID retained for in-place updates; launcher name is Gulabi Sahar.
+package='com.itgurujan.gulabisahar.preview'
 suffix='-preview' if preview else ''
 if preview:tag+='-preview'
-sdk=pathlib.Path(os.environ.get('ANDROID_HOME','/home/shyam/Android/Sdk'));apk=root/f'builds/GulabiSahar-{version}{suffix}-debug.apk'
+sdk=pathlib.Path(os.environ.get('ANDROID_HOME','/home/shyam/Android/sdk'));apk=root/f'builds/GulabiSahar-{version}{suffix}-debug.apk'
 def run(args):
  p=subprocess.run([str(a) for a in args],capture_output=True,text=True)
  if p.returncode:raise RuntimeError(p.stdout+p.stderr)
@@ -37,7 +38,7 @@ except RuntimeError as exc:
  (root/f'builds/tablet-install-{tag}.json').write_text(json.dumps(record,indent=2))
  raise
 if fresh_preview:
- old=subprocess.run([str(x) for x in base+['exec-out','run-as','com.itgurujan.gulabisahar','cat','files/city_progress.json']],capture_output=True)
+ old=subprocess.run([str(x) for x in base+['shell','run-as','com.itgurujan.gulabisahar','cat','files/city_progress.json']],capture_output=True)
  if old.returncode==0:
   assert isinstance(json.loads(old.stdout),dict), 'Existing save is not a JSON object'
   (root/'builds/tablet-progress-backup.json').write_bytes(old.stdout)

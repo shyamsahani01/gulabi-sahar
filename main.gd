@@ -148,6 +148,7 @@ func _ready() -> void:
 		pitch = clampf(pitch - delta.y * 0.004, -0.7, 0.18))
 
 func toggle_portrait() -> void:
+	if vehicle!=null and vehicle.driving: return
 	portrait = not portrait
 	hud.portrait = portrait
 	hud.clear_input()
@@ -203,6 +204,7 @@ func reset_player() -> void:
 	player.velocity = Vector3.ZERO
 
 func _unhandled_input(event: InputEvent) -> void:
+	if hud.map_open: return
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if event.position.x > 400 and event.position.y < 570:
 			if portrait:
@@ -256,7 +258,7 @@ func travel_to(index: int) -> void:
 		stand_up()
 	var poi: Dictionary = world.destinations()[index]
 	var destination := Vector3(poi.p[0],world.terrain_height(poi.p[0],poi.p[1])+2.0,poi.p[1])
-	vehicle.driving=false
+	vehicle.release_driver()
 	vehicle.speed=0
 	avatar.show()
 	player.collision_layer=1
@@ -275,6 +277,41 @@ func travel_to(index: int) -> void:
 	vehicle.velocity=Vector3.ZERO
 	hud.clear_input()
 	hud.map_open=false
+
+func map_arrival(entry: Dictionary) -> Dictionary:
+	var hint:=Vector2(entry.p[0],entry.p[1])
+	# For a street, use the selected segment itself, including narrow lanes.
+	if entry.get("kind", "")=="street":
+		var path: Array=entry.get("path",[])
+		var best: Dictionary={}
+		var distance:=INF
+		for i in range(path.size()-1):
+			var a:=Vector2(path[i][0],path[i][1])
+			var b:=Vector2(path[i+1][0],path[i+1][1])
+			for at in [Geometry2D.get_closest_point_to_segment(hint,a,b),a.lerp(b,.25),a.lerp(b,.5),a.lerp(b,.75)]:
+				if at.distance_squared_to(hint)<distance and world.clear_arrival(at,.4):
+					distance=at.distance_squared_to(hint)
+					best={"p":at,"heading":atan2(-(b.x-a.x),-(b.y-a.y))}
+		if not best.is_empty(): return best
+	return world.safe_road_arrival(hint)
+
+func travel_to_map_entry(entry: Dictionary) -> void:
+	var arrival:=map_arrival(entry)
+	if not seated.is_empty(): stand_up()
+	vehicle.release_driver()
+	vehicle.speed=0
+	player.position=Vector3(arrival.p.x,world.terrain_height(arrival.p.x,arrival.p.y)+1,arrival.p.y)
+	player.velocity=Vector3.ZERO
+	yaw=arrival.heading
+	smooth_yaw=yaw
+	world.update_cells(player.position)
+	activity.populate_near(player.position)
+	hud.waypoint=player.position
+	hud.has_waypoint=true
+	hud.navigation=PackedVector3Array()
+	hud.clear_input()
+	hud.map_open=false
+	actions.notify("Arrived near "+str(entry.name))
 
 func sit_toggle() -> void:
 	if not seated.is_empty():

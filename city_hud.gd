@@ -16,6 +16,44 @@ var speed := 0
 const AMENITY_STYLE := {"restaurant":["R",Color("d4a574")],"cafe":["C",Color("cba675")],"pub":["P",Color("be86dc")],"club":["N",Color("be86dc")],"shop":["K",Color("9fc489")],"police":["P",Color("4d7fd8")],"hospital":["+",Color("e05a4e")],"showroom":["C",Color("b48ae6")],"theka":["W",Color("5cc26b")],"fuel":["F",Color("f0a040")],"temple":["T",Color("f2b24a")],"bank":["B",Color("4fb8b0")],"school":["S",Color("f0d060")]}
 var services_tab := false
 var dining_tab := false
+var atlas: Control
+var combat_controls := false
+var context_actions: Array[String] = []
+var context_clock := 0.0
+
+func _ready() -> void:
+	super._ready()
+	atlas=preload("res://city_atlas.gd").new()
+	atlas.game=game
+	atlas.hud=self
+	add_child(atlas)
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	context_clock-=delta
+	if context_clock<=0 and game.actions!=null:
+		context_clock=.2
+		context_actions.clear()
+		if game.vehicle.driving:
+			context_actions.append("ride")
+		elif not game.seated.is_empty():
+			context_actions.append("sit")
+		else:
+			context_actions.append("combat")
+			if game.nearest_drivable().global_position.distance_to(game.player.global_position)<5:
+				context_actions.append("ride")
+			if not game.actions.nearest(3.5).is_empty(): context_actions.append("talk")
+			for seat in game.world.seats:
+				if seat.p.distance_to(game.player.position)<2.3:
+					context_actions.append("sit")
+					break
+			if combat_controls: context_actions.append_array(["attack","kick","dodge","guard","crouch"])
+	queue_redraw()
+
+func dispatch_action(action: String) -> void:
+	if action=="combat": combat_controls=not combat_controls; context_clock=0
+	else: action_pressed.emit(action)
+
 
 func atlas_entries() -> Array:
 	return game.world.dining_destinations if dining_tab else (game.world.services if services_tab else game.world.landmarks)
@@ -24,30 +62,23 @@ func atlas_offset() -> int:
 	return game.world.landmarks.size()+game.world.services.size() if dining_tab else (game.world.landmarks.size() if services_tab else 0)
 
 func action_centers() -> Dictionary:
-	return {"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-345,size.y-90),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
+	var all := {"combat":Vector2(size.x-345,size.y-90),"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-450,size.y-190),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
+	var active := {}
+	for key in context_actions: active[key]=all[key]
+	return active
 
 func _input(event: InputEvent) -> void:
 	if map_open:
-		if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed:
-			var pos: Vector2 = event.position
-			for tab in 3:
-				if Rect2(size.x-282+tab*74,88,70,36).has_point(pos):
-					services_tab=tab==1
-					dining_tab=tab==2
-					get_viewport().set_input_as_handled()
-					return
-			var entries: Array=atlas_entries()
-			if Rect2(size.x-280,136,210,entries.size()*58).has_point(pos):
-				var index := int((pos.y-136)/58)
-				travel_requested.emit(index+atlas_offset())
-				map_open=false
-				clear_input()
-				get_viewport().set_input_as_handled()
-				return
-		super._input(event)
+		if event is InputEventKey and event.pressed and event.keycode in [KEY_M,KEY_ESCAPE] and not atlas.search.has_focus():
+			map_open=false
+			clear_input()
+			get_viewport().set_input_as_handled()
 		return
 	if modal:
 		clear_input()
+		return
+	if portrait:
+		super._input(event)
 		return
 	var radar_rect := Rect2(24, 144, 174, 154)
 	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed and radar_rect.has_point(event.position):
@@ -59,7 +90,7 @@ func _input(event: InputEvent) -> void:
 			for action in action_centers():
 				if event.position.distance_to(action_centers()[action]) < 43:
 					action_fingers[event.index] = action
-					action_pressed.emit(action)
+					dispatch_action(action)
 					get_viewport().set_input_as_handled()
 					return
 		elif action_fingers.has(event.index):
@@ -70,9 +101,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
 		for action in action_centers():
 			if event.position.distance_to(action_centers()[action])<43:
-				action_pressed.emit(action)
+				dispatch_action(action)
 				get_viewport().set_input_as_handled()
 				return
+	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed:
+		if (driving or not game.seated.is_empty()) and event.position.distance_to(jump_center())<58: return
+		if driving and event.position.distance_to(face_center())<42: return
 	super._input(event)
 
 func clear_input() -> void:
@@ -93,8 +127,7 @@ func _draw() -> void:
 	if game==null or game.world==null:
 		return
 	if map_open:
-		draw_map()
-		return
+		return # Native atlas overlay handles drawing and input.
 	var ink := Color("f5e6d1")
 	var quiet := Color("b8c4c6")
 	draw_style_box(panel(Color(.045,.065,.075,.88)),Rect2(24,22,350,106))
@@ -110,6 +143,7 @@ func _draw() -> void:
 	text_at(Vector2(418,74),quest,14,ink)
 	text_at(Vector2(size.x-150,50),"%d FPS"%fps,14,quiet)
 	draw_radar()
+	if modal: return
 	if portrait:
 		text_at(Vector2(size.x-240,170),"EXPRESSION: "+expression_label,16,ink)
 		button_circle(expression_center(),"SMILE",30,Color("394d51"))
@@ -119,19 +153,18 @@ func _draw() -> void:
 		draw_face_zoom(ink,quiet)
 		return
 	button_circle(map_center(),"MAP",32,Color("1e333a"))
-	button_circle(face_center(),"FACE",30,Color("1e333a"))
+	if not driving: button_circle(face_center(),"FACE",30,Color("1e333a"))
 	draw_circle(center(),86,Color(.06,.1,.12,.4))
 	draw_arc(center(),86,0,TAU,48,Color(.8,.8,.7,.4),2,true)
 	draw_circle(center()+knob,33,Color(.88,.82,.68,.7))
-	button_circle(jump_center(),"JUMP",49,Color("34494f"))
-	button_circle(run_center(),"BRAKE" if driving else "SPRINT",37,Color("866345") if running else Color("25383e"))
-	var labels := {"attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","sit":"STAND" if not game.seated.is_empty() else "SIT","crouch":"CROUCH"}
+	if not driving and game.seated.is_empty(): button_circle(jump_center(),"JUMP",49,Color("34494f"))
+	if game.seated.is_empty(): button_circle(run_center(),"BRAKE" if driving else "SPRINT",37,Color("866345") if running else Color("25383e"))
+	var labels := {"combat":"LESS" if combat_controls else "ACTIONS","attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","sit":"STAND" if not game.seated.is_empty() else "SIT","crouch":"CROUCH"}
 	for action in action_centers():
 		button_circle(action_centers()[action],labels[action],39,Color("894e42") if action=="attack" else (Color("4d6a52") if action=="sit" and not game.seated.is_empty() else Color("263b41")))
 	if driving:
 		text_at(Vector2(size.x/2-60,size.y-45),"%03d KM/H"%speed,24,ink)
-	else:
-		text_at(Vector2(350,size.y-22),"Q punch · E kick · X dodge · B block · C crouch · T talk · G sit · V drive",12,quiet)
+
 
 func button_circle(at: Vector2,label: String,radius: float,color: Color) -> void:
 	draw_circle(at,radius,Color(color,.86))
@@ -155,8 +188,10 @@ func draw_radar() -> void:
 			if rect.has_point(a) and rect.has_point(b):
 				var authored: bool = road.get("source","osm")=="authored"
 				draw_line(a,b,Color("e0a44a") if authored else Color("718282"),maxf(1,road.width*scale*.35))
-	draw_circle(origin,4,Color("f4dc9e"))
-	draw_line(origin,origin+Vector2(-sin(map_yaw),-cos(map_yaw))*14,Color("f4dc9e"),2)
+	draw_circle(origin,12,Color(.2,.85,1,.2))
+	draw_circle(origin,6,Color("58dcff"))
+	text_at(origin+Vector2(9,4),"YOU",10,Color.WHITE)
+	draw_line(origin,origin+Vector2(-sin(map_yaw),-cos(map_yaw))*14,Color.WHITE,2)
 	for a in game.world.amenities:
 		if not AMENITY_STYLE.has(a.kind):
 			continue
@@ -173,90 +208,3 @@ func draw_radar() -> void:
 		var at := origin+direction.limit_length(100)*scale
 		draw_circle(at,5,Color("75cbbb"))
 		text_at(Vector2(28,319),"DESTINATION  %d m"%int(direction.length()),12,Color("91d8c7"))
-
-func draw_map() -> void:
-	draw_rect(Rect2(Vector2.ZERO,size),Color("10242c"))
-	text_at(Vector2(36,46),"GULABI SAHAR  /  VKI + VDN",27,Color("f1ddba"))
-	var km: Vector2 = game.world.map_bounds.size/1000.0
-	text_at(Vector2(36,74),"%.1f × %.1f km VKI–VDN · %d mapped / authored places · OSM roads · select a destination to travel"%[km.x,km.y,game.world.amenities.size()],13,Color("9eb5bb"))
-	for road in game.world.data.roads:
-		var line := PackedVector2Array()
-		for p in road.p:
-			line.append(map_point(p[0],p[1]))
-		if line.size()>1:
-			var area:=Rect2(30,100,size.x-370,size.y-150)
-			for i in range(line.size()-1):
-				if area.has_point(line[i]) and area.has_point(line[i+1]):
-					if road.get("source","osm")=="authored":
-						draw_dashed_line(line[i],line[i+1],Color("e0a44a"),3,6)
-					else:
-						draw_line(line[i],line[i+1],Color("81968e") if road.width>=10 else Color("415a60"),2 if road.width>=10 else 1)
-	for park_data in game.world.data.parks:
-		var poly := PackedVector2Array()
-		for p in park_data.p:
-			poly.append(map_point(p[0],p[1]))
-		if poly.size()>2:
-			draw_polyline(poly,Color("6c9c75"),2)
-	if navigation.size()>1:
-		var line := PackedVector2Array()
-		for p in navigation:
-			line.append(map_point(p.x,p.z))
-		draw_polyline(line,Color("e7c278"),3,true)
-	for i in game.world.landmarks.size():
-		var poi: Dictionary = game.world.landmarks[i]
-		var at := map_point(poi.p[0],poi.p[1])
-		draw_circle(at,5,Color("e7c278"))
-		text_at(at+Vector2(7,-5),poi.name,11,Color("f3e6cb"))
-		# Destination list is drawn below, separately from geographic markers.
-	for poi in game.world.services:
-		var at := map_point(poi.p[0],poi.p[1])
-		draw_circle(at,3,Color("75cbbb"))
-		if map_zoom>=3:
-			text_at(at+Vector2(6,4),poi.name,10,Color("75cbbb"))
-	var active_tab:=2 if dining_tab else (1 if services_tab else 0)
-	for tab in 3:
-		draw_style_box(panel(Color("47736e") if tab==active_tab else Color("233c44")),Rect2(size.x-282+tab*74,88,70,36))
-		text_at(Vector2(size.x-276+tab*74,112),["DISTRICTS","SERVICES","DINING"][tab],10,Color("f3e6cb"))
-	var entries: Array=atlas_entries()
-	for i in entries.size():
-		draw_style_box(panel(Color("233c44")),Rect2(size.x-280,136+i*58,210,48))
-		text_at(Vector2(size.x-265,165+i*58),entries[i].name,14,Color("f3e6cb"))
-	if services_tab and not dining_tab:
-		text_at(Vector2(size.x-280,155+entries.size()*58),"Fictional neighborhood locations",10,Color("9eb5bb"))
-	var here := map_point(map_player.x,map_player.z)
-	draw_circle(here,7,Color("7de4cf"))
-	text_at(here+Vector2(10,5),"YOU",12,Color("7de4cf"))
-	var car: Vector3 = game.vehicle.position
-	draw_circle(map_point(car.x,car.z),4,Color("d5a7ed"))
-	var area:=Rect2(30,100,size.x-370,size.y-150)
-	for a in game.world.amenities:
-		if not AMENITY_STYLE.has(a.kind):
-			continue
-		var at := map_point(a.p[0],a.p[1])
-		if not area.has_point(at):
-			continue
-		var style: Array = AMENITY_STYLE[a.kind]
-		draw_circle(at,6.5,Color(0,0,0,.45))
-		draw_circle(at,5.5,style[1])
-		draw_string(font,at+Vector2(-5.5,4),style[0],HORIZONTAL_ALIGNMENT_CENTER,11,9,Color("102028"))
-		if map_zoom>=2.0 and a.kind in ["police","hospital","showroom","fuel","restaurant"] and a.name!="":
-			text_at(at+Vector2(8,4),a.name,10,style[1])
-	var legend_x := 35.0
-	for kind in ["police","hospital","showroom","theka","fuel","temple","bank","school"]:
-		var style: Array = AMENITY_STYLE[kind]
-		draw_circle(Vector2(legend_x+5,size.y-64),5,style[1])
-		var label: String = {"police":"police","hospital":"hospital/clinic","showroom":"car showroom","theka":"wine shop","fuel":"petrol pump","temple":"temple","bank":"bank/ATM","school":"school"}[kind]
-		text_at(Vector2(legend_x+14,size.y-60),label,10,Color("c9d6d6"))
-		legend_x += 26+label.length()*5.6
-	for road in game.world.authored_roads:
-		var mid: Array = road.p[road.p.size()/2]
-		var at := map_point(mid[0],mid[1])
-		draw_circle(at,9,Color("e0a44a",.35))
-		draw_circle(at,4,Color("e0a44a"))
-		text_at(at+Vector2(8,-7),"GAME CONNECTOR",10,Color("e0a44a"))
-
-	text_at(Vector2(82,size.y-40),"VKI SOUTH + VIDHYADHAR NAGAR · solid lines = OpenStreetMap roads",11,Color("e0a44a"))
-	text_at(Vector2(35,size.y-22),"© OpenStreetMap contributors · ODbL 1.0 · artistic terrain/buildings · 10 Nov 2026",11,Color("9eb5bb"))
-	button_circle(map_close_center(),"X",26,Color("344a50"))
-	button_circle(map_zoom_in_center(),"+",24,Color("344a50"))
-	button_circle(map_zoom_out_center(),"−",24,Color("344a50"))

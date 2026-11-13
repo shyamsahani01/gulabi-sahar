@@ -1,0 +1,140 @@
+{
+  "images": [
+    {
+      "file": "references/01-vki-workshop-lane/street-gates.jpg",
+      "image_url": "https://dyimg2.realestateindia.com/prop_images/3727007/1362940_4.jpg",
+      "source_page": "https://www.realestateindia.com/property-detail/warehouse-godown-for-rent-in-vishwakarma-industrial-area-jaipur-7850-sq-ft-1-25-lac-1362940.htm",
+      "note": "VKI listing: boundary gate, road edge and workshop frontage",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "9f1f578f2f906792b5c56b5b4f9b2ced103312605cf82c168ce775989bdce7e4"
+    },
+    {
+      "file": "references/01-vki-workshop-lane/warehouse-frame.jpg",
+      "image_url": "https://dyimg2.realestateindia.com/prop_images/127348/1109394_4.jpg",
+      "source_page": "https://www.realestateindia.com/property-detail/warehouse-godown-for-rent-in-vishwakarma-industrial-area-jaipur-35000-sq-ft-5-60-lac-1109394.htm",
+      "note": "VKI listing: steel roof frame and open loading bays",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "fa16b47dd2f2273c527de401f89dfa82cefd7d6489e80e0427e3da6e855a1432"
+    },
+    {
+      "file": "references/01-vki-workshop-lane/loading-bays.jpeg",
+      "image_url": "https://dyimg2.realestateindia.com/prop_images/3739227/1345554_7.jpeg",
+      "source_page": "https://www.realestateindia.com/property-detail/warehouse-godown-for-rent-in-vishwakarma-industrial-area-jaipur-55000-sq-ft-9-94-lac-1345554.htm",
+      "note": "VKI listing: roller shutters and forecourt",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "645f8b15c1fe594f74457aa7f791e3a487cf1a19bfc2d6194875a8ba173b09a5"
+    },
+    {
+      "file": "references/02-vdn-central-spine/commercial-facade.jpeg",
+      "image_url": "https://lscdn.azureedge.net/biz-live/img/11478175-11478175-5e4552e0.jpeg",
+      "source_page": "https://branches.muthootfinance.com/gold-loan-agency-in-vidyadhar-nagar-jaipur-11478175/home",
+      "note": "VDN branch photo: stacked signs, jali balconies, shop shutters",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "9d6fa533feecad1c42f8988e8e0bfeaef1af126e82afecc52722eb5c8ef33292"
+    },
+    {
+      "file": "references/02-vdn-central-spine/enclave-b11.jpg",
+      "image_url": "https://img.staticmb.com/mbphoto/property/cropped_images/2026/Apr/12/Photo_h600_w900/2026/Apr/12/83684217_3_20260411_140648_600_900.jpg",
+      "source_page": "https://www.magicbricks.com/vidyadhar-enclave-photo-videos-vidhyadhar-nagar-jaipur-pdpid-4d4235323937373739",
+      "note": "Vidyadhar Enclave B-11: pink/white facade, balconies, parking",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "164a8278b966d57a68d7594c53cc10cb5ca8dfdb8118cd8a6a9b056af0b1bbc3"
+    },
+    {
+      "file": "references/03-vdn-sikar-commercial/sun-n-moon.jpg",
+      "image_url": "https://dyimg1.realestateindia.com/proj_images/project62328/projGal-1-770x400.jpg",
+      "source_page": "https://www.realestateindia.com/projects/sun-n-moon-in-vidyadhar-nagar-jaipur-pjid-62328/",
+      "note": "Sun N Moon: arcade rhythm and upper-floor shade",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "182265a9326384c4dfa8768ac9a7892863dd80d39c174e4765602309e5b9fc53"
+    },
+    {
+      "file": "references/04-vdn-cafe-frontage/cafe-terrace.jpg",
+      "image_url": "https://b.zmtcdn.com/data/reviews_photos/270/974b00ddd5367f35ed6bb7366d3ab270_1654275341.jpg",
+      "source_page": "https://www.zomato.com/jaipur/foreigners-cafe-vidhyadhar-nagar/reviews",
+      "note": "VDN cafe listing: turf patio, pots, mixed seating",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "3b9c9e9eb3d434935740a9ec6a8eeb8ed1ed1dd6a7247d2334f04b350a32dfe6"
+    },
+    {
+      "file": "references/04-vdn-cafe-frontage/window-seating.png",
+      "image_url": "https://b.zmtcdn.com/data/pictures/6/19486156/cb41778c22ffe489025800b322f23fb8.png",
+      "source_page": "https://www.zomato.com/jaipur/brown-sugar-vidhyadhar-nagar",
+      "note": "VDN cafe: window counter and pendants",
+      "retrieved": "2026-11-13",
+      "usage": "Local visual study only. Copyright retained by source; excluded from game export. Exact street/geolocation not verified from listing photos.",
+      "status": "saved",
+      "sha256": "98f9145141607bf539393bb6f3cbfdebb6733bb1613c001f6bfbcd717ba7f813"
+    }
+  ],
+  "streetview_links": [
+    {
+      "file": "pano_sikar_road_<yaw>.jpg",
+      "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=tYbPMARe7iM_0cBHOeU0zg&yaw=<0|90|180|270>",
+      "source_page": "https://www.google.com/maps/@26.9436,75.7857,3a,75y/data=!3m4!1e1!3m2!1stYbPMARe7iM_0cBHOeU0zg!2e0",
+      "usage": "Street View in a residential colony off Sikar Road (26.94357, 75.78571): pink/cream houses, ornate black iron gates, arched boundary-wall panels, balcony railings, parked cars. Reference for the Vidhyadhar Nagar house() style. Local only.",
+      "status": "not_downloaded",
+      "reason": "Google thumbnail endpoint returned HTTP 403 on 2026-11-13; saved link only. Historical pano location metadata from existing project; not reverified.",
+      "requested_headings": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ]
+    },
+    {
+      "file": "pano_vdn_central_spine_<yaw>.jpg",
+      "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=k6wOEO8zJ-hWWlnwCr5Egw&yaw=<0|90|180|270>",
+      "source_page": "https://www.google.com/maps/@26.9717,75.7808,3a,75y/data=!3m4!1e1!3m2!1sk6wOEO8zJ-hWWlnwCr5Egw!2e0",
+      "usage": "Street View at the edge of Vidhyadhar Nagar (26.97168, 75.78076): red boundary walls, open plots, trees, water tower. Local only.",
+      "status": "not_downloaded",
+      "reason": "Google thumbnail endpoint returned HTTP 403 on 2026-11-13; saved link only. Historical pano location metadata from existing project; not reverified.",
+      "requested_headings": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ]
+    },
+    {
+      "file": "pano_vdn_sector_houses_<yaw>.jpg",
+      "image_url": "https://streetviewpixels-pa.clients6.google.com/v1/thumbnail?cb_client=maps_sv.tactile&w=1200&h=800&pitch=5&panoid=ZlXjx7sh9quao6ex29ECMg&yaw=<0|90|180|270>",
+      "source_page": "https://www.google.com/maps/@26.9745,75.7775,3a,75y/data=!3m4!1e1!3m2!1sZlXjx7sh9quao6ex29ECMg!2e0",
+      "usage": "Street View in the VKI industrial strip next to Vidhyadhar Nagar (26.97454, 75.77750): yellow painted walls with adverts, trucks, warehouses, two-lane road with yellow centre lines. Reference for the modern-road feel of the Sikar Road zone. Local only.",
+      "status": "not_downloaded",
+      "reason": "Google thumbnail endpoint returned HTTP 403 on 2026-11-13; saved link only. Historical pano location metadata from existing project; not reverified.",
+      "requested_headings": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ]
+    }
+  ]
+}

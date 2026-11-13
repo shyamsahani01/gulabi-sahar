@@ -54,16 +54,18 @@ func check() -> void:
 	expect(absf(vehicle.design.wheels[0].get_child(0).rotation.x-before)>.1,"Wheel rolls with distance")
 	expect(absf(vehicle.design.wheels[0].rotation.y)>.01,"Front wheels visibly steer")
 	expect(is_zero_approx(vehicle.design.wheels[1].rotation.y),"Rear wheels do not steer")
-	# Services-tab touch must use the service index, not the district underneath it.
+	# Search selects a specific place; travel is an explicit second action.
 	scene.hud.map_open=true
-	scene.hud.services_tab=true
-	var event:=InputEventScreenTouch.new()
-	event.index=9
-	event.pressed=true
-	event.position=Vector2(scene.hud.size.x-220,160)
-	scene.hud._input(event)
-	expect(not scene.hud.map_open,"Service selection closes atlas")
-	var target: Dictionary=world.services[0]
-	expect(Vector2(scene.player.position.x,scene.player.position.z).distance_to(Vector2(target.p[0],target.p[1]))<1,"Service touch travels to showroom")
+	await process_frame
+	var atlas=scene.hud.atlas
+	atlas.search.text="Gulabi Motors"
+	atlas.refresh_results()
+	expect(atlas.filtered.size()==1,"Showroom search resolves the intended location")
+	atlas.select_entry(atlas.filtered[0])
+	expect(scene.hud.map_open,"Selection keeps atlas open for review")
+	atlas.travel()
+	expect(not scene.hud.map_open,"GO closes atlas")
+	await ticks(45)
+	expect(scene.player.is_on_floor(),"Search travel lands on road near showroom")
 	print("CITY REFRESH RESULT: ",failures," failures")
 	quit(1 if failures else 0)

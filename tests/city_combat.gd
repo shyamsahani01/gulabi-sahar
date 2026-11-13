@@ -74,6 +74,9 @@ func check() -> void:
 	expect(scene.actions.dialogue_open,"Conversation opens")
 	scene.actions.close_dialogue()
 	expect(not scene.hud.modal,"Conversation releases input")
+	scene.hud.combat_controls=true
+	scene.hud.context_clock=0
+	scene.hud._process(.3)
 	# Independent fingers: attack must not acquire the camera drag finger.
 	finger(scene.hud,1,scene.hud.center()+Vector2(0,-60),true)
 	finger(scene.hud,2,scene.hud.action_centers().attack,true)

@@ -33,7 +33,7 @@ for key in body.data.shape_keys.key_blocks:
 # Update the rest mesh before reading its outer-surface normals.
 for i,v in enumerate(body.data.vertices):v.co=body.data.shape_keys.key_blocks['Basis'].data[i].co
 body.data.update()
-base=body.data.shape_keys.key_blocks['Basis'];projected={};weights={} 
+base=body.data.shape_keys.key_blocks['Basis'];projected={};weights={}
 for i,v in enumerate(base.data):
  x,y,z=v.co;weights[i]=0
  if y>-.06 or not 1.475<z<1.65:continue

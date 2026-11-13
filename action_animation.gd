@@ -27,6 +27,8 @@ static func clips() -> Array:
 	var land_rise := {"thigh_l":Vector3(-16,0,0),"thigh_r":Vector3(-16,0,0),"calf_l":Vector3(30,0,0),"calf_r":Vector3(30,0,0),"spine_01":Vector3(8,0,0),"upperarm_l":Vector3(-6,0,-8),"upperarm_r":Vector3(-6,0,8)}
 	# Seated: thighs level, shins vertical, hands resting on the thighs; a gentle breath cycle.
 	var sit := {"thigh_l":Vector3(-86,0,6),"thigh_r":Vector3(-86,0,-6),"calf_l":Vector3(88,0,0),"calf_r":Vector3(88,0,0),"spine_01":Vector3(-3,0,0),"spine_02":Vector3(4,0,0),"upperarm_l":Vector3(-20,0,-6),"upperarm_r":Vector3(-20,0,6),"lowerarm_l":Vector3(-66,0,10),"lowerarm_r":Vector3(-66,0,-10),"hand_l":Vector3(14,0,0),"hand_r":Vector3(14,0,0),"foot_l":Vector3(8,0,0),"foot_r":Vector3(8,0,0)}
+	var drive := sit.duplicate()
+	drive.merge({"thigh_l":Vector3(-78,0,4),"thigh_r":Vector3(-78,0,-4),"calf_l":Vector3(65,0,0),"calf_r":Vector3(65,0,0),"upperarm_l":Vector3(-58,0,-12),"upperarm_r":Vector3(-58,0,12),"lowerarm_l":Vector3(-35,0,0),"lowerarm_r":Vector3(-35,0,0)},true)
 	var sit_breath := sit.duplicate()
 	sit_breath.merge({"spine_02":Vector3(6,0,0),"neck_01":Vector3(3,0,0),"head":Vector3(0,6,0)},true)
 	var sit_high := sit.duplicate()
@@ -57,6 +59,7 @@ static func clips() -> Array:
 		["JumpAir",.7,true,[[0,air_a,0],[.35,air_b,0],[.7,air_a,0]]],
 		["JumpLand",.5,false,[[0,air_a,0],[.1,land_deep,-.3],[.26,land_deep,-.26],[.5,land_rise,0]]],
 		["HardLand",.9,false,[[0,air_a,0],[.1,land_deep,-.42],[.45,land_deep,-.4],[.9,land_rise,0]]],
+		["Drive",2.0,true,[[0,drive,-.37],[2.0,drive,-.37]]],
 		["Sit",4.0,true,[[0,sit,-.37],[2.0,sit_breath,-.37],[4.0,sit,-.37]]],
 		["SitHigh",4.0,true,[[0,sit_high,-.14],[2.0,sit_high_breath,-.14],[4.0,sit_high,-.14]]],
 		["Talk",2.8,true,[[0,talk_a,0],[.7,talk_b,0],[1.4,talk_c,0],[2.1,talk_d,0],[2.8,talk_a,0]]],

@@ -94,13 +94,13 @@ func handle_action(value: String) -> void:
 		"sit":
 			game.sit_toggle()
 		"ride":
-			if not game.hud.map_open and not dialogue_open:
+			if not game.hud.map_open and not dialogue_open and not game.portrait and game.seated.is_empty():
 				var was_driving: bool = game.vehicle.driving
 				if not was_driving:
 					game.vehicle = game.nearest_drivable()
 					game.vehicle.set_physics_process(true)
 				game.vehicle.toggle_drive()
-				if was_driving:
+				if was_driving and not game.vehicle.driving:
 					for car in game.traffic.cars:
 						if car.node == game.vehicle:
 							car.route = PackedVector3Array()

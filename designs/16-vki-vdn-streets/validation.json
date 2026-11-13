@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-13",
+  "version": "0.9.8",
+  "version_code": 17,
+  "package": "com.itgurujan.gulabisahar.preview",
+  "apk_sha256": "58b13f1f1fb71f54ca4b2d0d2704f060c763e275efd1e20a2b43e465327b3e62",
+  "apk_bytes": 208384566,
+  "apk_signature_verified": true,
+  "apk_alignment_16kb_verified": true,
+  "apk_zip_integrity": true,
+  "tests": {
+    "map_navigation": [
+      "MAP / DRIVER RESULT: 0 failures; 2 wine shops; 5 pilot footprints"
+    ],
+    "city_smoke": [
+      "CITY SMOKE RESULT: 0 failures; elapsed 29318 ms"
+    ],
+    "city_refresh": [
+      "CITY REFRESH RESULT: 0 failures"
+    ],
+    "city_combat": [
+      "CITY COMBAT RESULT: 0 failures"
+    ],
+    "vehicle_geometry": [
+      "VEHICLE GEOMETRY RESULT: 0 failures {\"ambulance\":{\"body_and_one_wheel_triangles\":42216,\"body_surfaces\":12},\"police\":{\"body_and_one_wheel_triangles\":41148,\"body_surfaces\":11},\"sedan\":{\"body_and_one_wheel_triangles\":40484,\"body_surfaces\":10},\"suv\":{\"body_and_one_wheel_triangles\":41552,\"body_surfaces\":11},\"taxi\":{\"body_and_one_wheel_triangles\":50426,\"body_surfaces\":9}}"
+    ]
+  },
+  "reference_images_saved": 8,
+  "new_google_360_captures_saved": 0,
+  "google_capture_status": "HTTP 403; links only",
+  "road_segments_indexed": 1662,
+  "wine_shops_available": 2,
+  "pilot_building_footprints": 5,
+  "native_ui_input_test": "Synthetic GUI mouse click; platform touch emulation enabled. Device touch validation pending.",
+  "tablet_install": "not attempted",
+  "captures": "Desktop OpenGL compatibility; see navigation_capture.gd"
+}

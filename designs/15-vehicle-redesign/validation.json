@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-13",
+  "version": "0.9.7",
+  "version_code": 16,
+  "label": "Gulabi Sahar",
+  "package": "com.itgurujan.gulabisahar.preview",
+  "installed_copy_count": 1,
+  "apk_sha256": "37475ff33f716e37d46cc5a8cfc9352c96a69c9282ffa2059ed8fae299d15739",
+  "installed_apk_matches_build": true,
+  "save_cash_outfit_retained": true,
+  "runtime_script_or_fatal_errors": [],
+  "tests": {
+    "vehicle_geometry": "0 failures",
+    "compact_world": "0 failures / 84593 checks",
+    "city_refresh": "0 failures",
+    "git_diff_check": "passed"
+  },
+  "apk_signature_verified": true,
+  "apk_zip_integrity": true,
+  "apk_alignment": "Verification successful",
+  "device_capture": "tablet-gameplay.png",
+  "performance": "One device capture showed 30 FPS; not a sustained benchmark."
+}

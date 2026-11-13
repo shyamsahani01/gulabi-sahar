@@ -32,6 +32,29 @@ func factory(target: Node3D, b: Dictionary) -> void:
 			box(Vector3(x,.55,d/2+.45),Vector3(.16,1.1,.16),"kerb_yellow")
 			box(Vector3(x,.6,d/2+.45),Vector3(.18,.2,.18),"kerb_black")
 		basis=keep
+	if b.get("street_pilot", "")=="01-vki-road-5":
+		# Local photos: grey structural frames, glazed office bands, ribbed shutters,
+		# painted boundary panels and downpipes. Kept inside the existing footprint.
+		for side in [-1,1]:
+			var keep:=basis
+			basis*=Basis(Vector3.UP,PI if side<0 else 0)
+			var bays:=maxi(2,int(w/3.0))
+			for bay in bays:
+				var x: float=(bay-(bays-1)/2.0)*(w-.5)/bays
+				var bw: float=(w-.5)/bays-.18
+				box(Vector3(x,h-1.1,d/2+.13),Vector3(bw,1.15,.12),"glass")
+				for dx in [-bw/2,0,bw/2]:
+					box(Vector3(x+dx,h-1.1,d/2+.22),Vector3(.055,1.2,.05),"chrome")
+				box(Vector3(x,h-1.1,d/2+.23),Vector3(bw,.045,.05),"chrome")
+			for x in [-w/2+.16,w/2-.16]:
+				box(Vector3(x,h/2,d/2+.2),Vector3(.3,h,.4),"concrete")
+				rod(Vector3(x+.22,.1,d/2+.34),Vector3(x+.22,h,d/2+.34),.045,"arch_frame")
+			box(Vector3(0,h-.4,d/2+.3),Vector3(w,.18,.65),"arch_frame")
+			box(Vector3(0,.04,d/2+.75),Vector3(w,.08,1.5),"arch_step")
+			for x in [-w*.38,w*.38]:
+				box(Vector3(x,.06,d/2+.7),Vector3(.1,.02,1.2),"kerb_yellow")
+			label(Vector3(0,3.8,d/2+.23),"ROAD 5  /  WORKSHOPS",.18,"heritage_lime",w-.8)
+			basis=keep
 	shape(Vector3(w*.25,h+.8,-d*.2),Vector3(.65,1.6,.65),"chrome")
 
 func clear_verge(at: Vector2) -> bool:
