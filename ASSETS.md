@@ -126,3 +126,5 @@ The Road Number 5 facade additions, atlas UI and Drive animation are original pr
 ## Sector 2 / Central Spine — 15 November 2026
 
 Actual Google Maps Street View page screenshots are saved locally under `designs/17-sector-2-central-spine/`, with visible Google/contributor attribution. Source URLs, panorama IDs, capture dates and SHA-256 hashes are in `captures.json` and `cinema-area/captures.json`. They are local design references, excluded from Git and Android exports, not CC0 textures. `sector2_street.gd` creates original procedural meshes informed by observed facade/street details, adapted to existing compact-map plots. Exact building footprint/tenancy correspondence is not surveyed.
+
+Cinestar (0.9.10): `cinema_frontages.gd` builds original exterior meshes from the photographed facade. Store names use plain original text; no Google photos, film posters or downloaded logos are bundled. The map pin comes from the saved Google place listing; its compact footprint and vestibule are approximations, not surveyed architectural plans.

@@ -15,7 +15,8 @@ func run() -> void:
 	for item in world.amenities:
 		if item.get("sector2_design","")=="rose_tower":a=item
 	check(not a.is_empty(),"Featured tower exists on the intended original clinic plot")
-	check(world.amenities.size()==original.amenities.size(),"No original amenity removed or fabricated")
+	for existing in original.amenities:
+		check(world.amenities.any(func(item):return item.osm_id==existing.osm_id),"Original amenity retained")
 	check(world.data.roads.size()==original.roads.size(),"Road segment count preserved")
 	var atlas=scene.hud.atlas
 	atlas.search.text="Sector 2"

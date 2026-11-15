@@ -38,6 +38,7 @@ func _ready() -> void:
 	sphere_mesh.rings=6
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
 	preload("res://sector2_street.gd").prepare(data)
+	preload("res://cinema_frontages.gd").prepare(data)
 	compact_layout()
 	var arrival := safe_road_arrival(Vector2(spawn_point.x,spawn_point.z))
 	spawn_point = Vector3(arrival.p.x,1,arrival.p.y)
@@ -657,6 +658,11 @@ func build_amenities() -> void:
 			var street=preload("res://sector2_street.gd").new()
 			street.world=self
 			street.tower(a)
+			continue
+		if a.get("design", "")=="cinestar_exterior":
+			var cinema=preload("res://cinema_frontages.gd").new()
+			cinema.world=self
+			cinema.cinestar(a)
 			continue
 		match a.kind:
 			"police": amenity_police(p, ang, front, w, d, display_name)

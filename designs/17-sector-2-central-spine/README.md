@@ -1,13 +1,13 @@
 # Sector 2 / Central Spine — street progress
 
-Updated 15 November 2026. **Release 0.9.9 / code 18 is installed and launched on the Redmi tablet.** This release implements the first surveyed section; the entire road and surrounding lanes remain unfinished.
+Updated 15 November 2026. **Latest release 0.9.10 / code 19 adds Cinestar and is installed and launched on the Redmi tablet.** This release implements the first surveyed section; the entire road and surrounding lanes remain unfinished.
 
 ## Progress by section
 
 | Section | Actual references | Game status | Delivery |
 |---|---|---|---|
 | Sector 2 supplied panorama / OSM 261520097 | 52 photos; 4 distinct positions with overlapping full 360° horizontal sweeps | First section implemented on existing compact-map plots | 0.9.9 installed; GitHub push recorded in git history |
-| Cinestar frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Reference inspection complete; modeling queued | Local photo gallery and source manifest |
+| Cinestar frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Exterior implemented; surrounding lane unfinished | 0.9.10 installed |
 | Funstar / Times Square Mall frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Reference inspection complete; modeling queued | Local photo gallery and source manifest |
 | Remaining Central Spine and side lanes | Not yet surveyed end to end | Queued | No claim of completion |
 
@@ -40,3 +40,9 @@ Actual engine renders: [tower](engine-01-tower.png), [street](engine-02-street.p
 5. Test/build, push original code and docs to GitHub, and update the existing tablet app. User explicitly authorized this sequence on 15 November.
 
 Capture tools: `tools/capture_sector2_refs.py`, `tools/capture_sector2_nearby.py`, `tools/capture_cinema_references.py`. Run with a Playwright Python environment and headed Chrome, e.g. `xvfb-run -a /tmp/gulabi-maps-browser/bin/python tools/capture_cinema_references.py`. Rebuild gallery with `python3 tools/build_sector2_gallery.py`.
+
+## Cinestar pass — 0.9.10 / code 19
+
+37 reference photos from three full 360° camera positions informed `cinema_frontages.gd`: circular upper openings, pale gridded facade panels, paired columns, rooftop name, side arches, storefronts and entry steps. The map now finds **Cinestar**; **GO HERE** reaches a clear connected road nearby. The original imported streets and named places remain; only overlapping generated infill was replaced. Position follows the Maps place pin with an approximately one-unit offset for clearance; footprint/height are fitted compact-map estimates. No cinema auditorium has been surveyed or fabricated.
+
+Runtime views: [front](engine-cinestar-front.png), [approach](engine-cinestar-approach.png), [entrance](engine-cinestar-entrance.png). [Build, test and tablet evidence](validation-cinestar.json). Cinema navigation, entrance and neighboring service-lane/footway checks pass; Sector 2 regression also passes. Version 0.9.10 was installed over 0.9.9 without uninstalling the app. GitHub delivery is recorded in the corresponding commit history.
