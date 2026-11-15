@@ -26,3 +26,10 @@ venv/
 # Downloaded third-party reference photos remain local; commit their source URLs
 designs/02-jaipur-lane/references/*.jpg
 designs/02-jaipur-lane/references/*.html
+
+# Maps screenshots stay in the local reference project; publish code and source manifests.
+designs/17-sector-2-central-spine/references/*.png
+designs/17-sector-2-central-spine/cinema-area/**/*.png
+designs/17-sector-2-central-spine/cinema-area/*.png
+designs/17-sector-2-central-spine/evidence/*.png
+designs/17-sector-2-central-spine/review/*.png

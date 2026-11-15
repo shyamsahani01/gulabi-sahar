@@ -1,0 +1,1133 @@
+{
+  "capture_date": "2026-11-15",
+  "method": "Headed Google Chrome, direct page screenshots, 1920x1080",
+  "scope": "Cinestar Multiplex and Funstar / Times Square Mall area. Observed exterior only; interiors not inferred.",
+  "sites": [
+    {
+      "name": "cinestar",
+      "base": "https://www.google.com/maps/@26.9647888,75.7813022,487a,90y,270h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "lat": 26.9649688,
+      "lon": 75.7814471,
+      "front": 35
+    },
+    {
+      "name": "funstar",
+      "base": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,239.41h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D239.41498!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "lat": 26.9605303,
+      "lon": 75.7786635,
+      "front": 240
+    }
+  ],
+  "images": [
+    {
+      "file": "cinema-area/cinestar/wide-000.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,0h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "c7f1e046e0047f233086bc21f3fdc46cc2040eafa1a951ab318f6fd67ee6d469",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-030.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,30h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,30h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "4debc0bce913723e99ee11df42f422bf87de2185ac7955f4527d54ebf0bb6873",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-060.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,60h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,60h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "7dcc2fff26e723ae451bd433611f1dc85dd49301b128c3871f88c0040bd652e4",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-090.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "4e5aedbbba271f50a1d556e44fc9507752fd24def00f380cfd314481001fcd33",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-120.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,120h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D120!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,120h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D120!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "2142d8eb5c133c24ca878b94cd74d8d9f7863d3b8e9f68d9688c21637ad606a3",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-150.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,150h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D150!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,150h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D150!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "1af289b207de7dd638039c36128cc78b15863927b9a9cb0fdad3e1b518ff9248",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-180.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "00d8b3cc72a4db46fa39ba9293d706b298dac5457d1f7c67631bb3ba2afb03cd",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-210.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,210h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D210!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,210h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D210!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "f07336034a36c6478a83122bddda8117f1e413d452d6942053352f644d1ffd10",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-240.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,240h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,240h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "4b9a88c9e3cbc9b305f138b6ce86977c8b372e754bf9a29fea4effd02285673c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-270.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "98ac9a98890726efa80220c23da65ca43bcd1bb1101ca664a1e8bd23763c670a",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-300.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,300h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D300!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,300h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D300!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "198121049820b25e2e3b9c5bd1b90bb64c079f2dec5e8931e66bd2167b483cdb",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/wide-330.png",
+      "site": "cinestar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,330h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D330!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,75y,330h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D330!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "cfc3cd169b578122f3bed8ab077f3adb82cb5ee0cf404462a19e10f03ce3d183",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/entrance-010.png",
+      "site": "cinestar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,10h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,10h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "7340f3e5a6def96f3c9530c756c362856c3499c7ceb303f0673990857f786f4e",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/forecourt-010.png",
+      "site": "cinestar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,10h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,10h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "441899735447dd50ed8deccdf4d3fe1596000617c24eb170edba7bccbf13335c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/entrance-035.png",
+      "site": "cinestar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,35h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,35h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "8ea91a7ce14649d46069f2ffa1a96eb23ec22b68f14fd70affcf38a55ce8b112",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/forecourt-035.png",
+      "site": "cinestar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,35h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,35h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "7808c3b2f905d458f2185f440997d15e8f7f0bd5c632cae568de3c12ef47a33f",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/entrance-060.png",
+      "site": "cinestar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,60h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,50y,60h,90t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "9d69c00e2e0b1b6a3750aeed6756154cf44001c34c9007ac40eb7d3e27c31795",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/forecourt-060.png",
+      "site": "cinestar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,60h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,60h,68t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "9a26f8b7266fc42e3fc7374a455ce667a42c13db593e102d4006a61e636905d1",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-307.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,307h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D307!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,307h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D307!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "4f4e8c0e720bd425355d708be8984fbf78fd46fbfd192dfb1e3f5c7bf55b52f6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-352.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,352h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D352!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,352h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D352!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "41492fc55058c38a992ac87916b8d2a6fb3e89d1c183145c81fc4cbd51e61e37",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-037.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,37h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D37!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,37h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D37!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "86ad26b7d3ef13f204f368c181ea0e3521d827e88e272cc954579088e488119c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-172.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,172h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D172!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,172h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D172!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "a3d5a332dd26bca361b223607cb8a21096fa2c4dbffa94a7a03e0fc4bd60f66a",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-029.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,29h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D29!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,29h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D29!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "06a7808318d784663cc560e1ea691526fd62c3ed6f0c7fd2cb6da1043d15a3e7",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-074.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,74h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D74!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,74h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D74!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "7672e6fb45f180ced595e560bfa14cc58e4c4f243e91053ae24aa35446ea857a",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-119.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,119h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D119!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,119h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D119!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "ea959d408f0a0b3abf10bb9cd39d2eb98d7ffe880bf3f544f85b68b6c4e69a6c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-254.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,254h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D254!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,254h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D254!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "c72a4d81118f666a8b50950c78ca5865d8f2ad8233ae2fab662e3810f160b294",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-000.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,0h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "813f419f2c85cb44ec4e0538ae32066e60ba49fed2410fff41c4ea7459bfabb7",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-030.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,30h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,30h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "c0a1ee772eaab9e40da340030dbb2a568514d57af71809c8290b52fc75aa5e05",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-060.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,60h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,60h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "239f565ea3722d9d984185a50b7514a0e7934440af1129d72f1e5bd92c666712",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-090.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,90h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,90h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "2a8715ec95af16bbe63d7b00b47f7572b0616f876278ac41a00b4940404b73f8",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-120.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,120h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D120!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,120h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D120!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "54524343f049efedf1484c03605fc51d62c6df38b6419a29c62aab63f024511b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-150.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,150h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D150!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,150h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D150!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "dd45dc2ecc04bfbbcd7d1bb1b6d886abe4ee4ddc9412a80c4612b83fe690a9a6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-180.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,180h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,180h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "0579e5f839db9196d300b52e27650b2a745784c6fa74a2dd06d87eb903e3bc77",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-210.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,210h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D210!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,210h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D210!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "d7b268c71608d4b008ba6c83622476602e72a197f0ad249a677c41ba9f00ae0b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-240.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,240h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,240h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "97f549bd0da9427f4f935043c9ea6d968105424a71b938e15f186273598b2d54",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-270.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,270h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,270h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "464ada977e6d7251231b7ce44949dd784d4622ad79350bea411cba1d78f4d6bd",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-300.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,300h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D300!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,300h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D300!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "c5866000a29b6f2e9d0f87a07634058cab88bd645c2989b0b0d214e7cadbc679",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/wide-330.png",
+      "site": "funstar",
+      "kind": "360-degree directional view",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,330h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D330!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,75y,330h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D330!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "354b02b58f1514f9edf594aec1b031efcde0bcf53ca2d5a18be6ec2a6b69120f",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/entrance-215.png",
+      "site": "funstar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,215h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,215h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "e529e9852528c9d9dfe3b943302a5c3ccc4b2486f45703a8724c00f6a2fe66e7",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/forecourt-215.png",
+      "site": "funstar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,215h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,215h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "bf5363fccfbe06f64163f2e45195cf679b0a25a87eda77007b5f86286758d043",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/entrance-240.png",
+      "site": "funstar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,240h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,240h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "254d90f826986e8b22c346ab64563e8b1efe0250c4aa20604ef89ae5ac293c60",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/forecourt-240.png",
+      "site": "funstar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,240h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,240h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "e86a83ac458f427b2cb16652a0f7c62cd202405c14aa54d5b1c4fb8cedef62e6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/entrance-265.png",
+      "site": "funstar",
+      "kind": "Closer facade and entrance",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,265h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,50y,265h,90t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "3550d420865bb168f110f4c2e7a98146696a4d431218a75e5b3d9a8942bacd98",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/forecourt-265.png",
+      "site": "funstar",
+      "kind": "Downward view of forecourt and parking (visually checked)",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,265h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,265h,68t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "8c418b0e6cb798ea7e4308e502a68822a8fb417c9ab8f9a5956608d31103763c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-204.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,204h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D204!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,204h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D204!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "7e6573b91ad25a9b5f3af2a3264f4d33be15ea581ee99b6462cc799dafad2ea8",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-249.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,249h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D249!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,249h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D249!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "90ff5e78217ae2c90188e6853f48e2d6c2756d44b19f5b0dfe1d6909e3272772",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-294.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,294h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D294!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,294h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D294!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "f71ec35d456b8d592b254dfcc2c5403854d86743a9edddbbd59d33e10f71330c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-069.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,69h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D69!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,69h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D69!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "76cecbb9551b24db8a1af44254c60c0df290ee825e8475b00c1a77ad54eb2e3d",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-173.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,173h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D173!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,173h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D173!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "294c3450fce280d48c2cc465bd591ed437470f6ce8bd7922003a25fa54a1ccf6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-218.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,218h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D218!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,218h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D218!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "ba59b90731e66cdce3da6ddb9679c06984ee02d622d7f4b77910d76d8cc3dfb6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-263.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,263h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D263!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,263h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D263!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "858538d9616c5d67383fd4c8442ba932bf22b74b40bd2d539e8bb7f7dfcf038c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-038.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,38h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D38!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,38h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D38!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "53f5e9d6da324fd3673a940a9fc8fa4cb8c654db9c97f694bd01d489de19dd3b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/upper-010.png",
+      "site": "cinestar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,10h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,10h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D10!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "f77cee4b47ee72820f78751675a690e787c8ad73acabfdc199932c172b2f3aa9",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/upper-035.png",
+      "site": "cinestar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,35h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,35h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D35!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "aebda455f1ef5c6d433123a78801c58feb8790a6edcde82e80ea26eeda77128b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/upper-060.png",
+      "site": "cinestar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,60h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9647888,75.7813022,487a,60y,60h,112t/data=!3m7!1e1!3m5!1sqeLPiQj_r_09Pt4YrXE06A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DqeLPiQj_r_09Pt4YrXE06A%26yaw%3D60!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "qeLPiQj_r_09Pt4YrXE06A",
+      "camera_coordinates": [
+        26.9647888,
+        75.7813022
+      ],
+      "sha256": "84edadf02a473e0290aa7255de8f823dca29c37fea6caa0f5ad46ce6de54dd7b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-082.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,82h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D82!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,82h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D82!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "1a4b73b9bc0bd2409eef5f1521215d809aa12809a4ae783b8536b3ab8f5559bf",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-127.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,127h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D127!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,127h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D127!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "0ecf76686c1c202e0968d20e99f8901676b9bbea0965fa8948fcee3cee821b79",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-217.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,217h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D217!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,217h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D217!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "57a9460545dc74a0dc2092e24f0de41010d3b521b10f9a7fbeb4d5199f18e6f6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-east-262.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,262h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D262!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,262h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D262!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "camera_coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "sha256": "61d8a362086baec21cb17d6072e6c87e3118dd3e2f9f8fba8489c53f8da539e2",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-164.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,164h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D164!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,164h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D164!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "7131a2b9ab6be809495991942a96b7bbd10b881757e4fe215d454d1aa540d584",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-209.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,209h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D209!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,209h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D209!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "77de3f746db2949b822f15ce9b256fa298dbc0bd711fde5ffc58268eae6ea2c1",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-299.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,299h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D299!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,299h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D299!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "801ea471d08d5fca2d2d9b12e94365482104827b266be7868c6259ab7a9f3733",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/cinestar/approach-west-344.png",
+      "site": "cinestar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,344h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D344!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964882,75.781107,487a,75y,344h,90t/data=!3m7!1e1!3m5!1sq5XtoYVOpNBLjSoRY9Nekw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dq5XtoYVOpNBLjSoRY9Nekw%26yaw%3D344!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "q5XtoYVOpNBLjSoRY9Nekw",
+      "camera_coordinates": [
+        26.964882,
+        75.781107
+      ],
+      "sha256": "33a875a60f33a816d99f4b0b872585ff9209125e0ca68dc4af230c6559840e15",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/upper-215.png",
+      "site": "funstar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,215h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,215h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D215!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "2e5c61c9ee06b3291470ec35a72bba3a2d8eef070c374282047826ba2db10fe8",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/upper-240.png",
+      "site": "funstar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,240h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,240h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D240!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "e41c107eabf9b3135cee32537b39c3b65072b2e92f145f17acb3970fce656895",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/upper-265.png",
+      "site": "funstar",
+      "kind": "Upper facade, roof and signage",
+      "source_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,265h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9608694,75.7792047,484a,60y,265h,112t/data=!3m7!1e1!3m5!1stJc23Y3EIvBKYqf9-abumA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22%26panoid%3DtJc23Y3EIvBKYqf9-abumA%26yaw%3D265!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "tJc23Y3EIvBKYqf9-abumA",
+      "camera_coordinates": [
+        26.9608694,
+        75.7792047
+      ],
+      "sha256": "a780483428d98c96d1abf7c38a4c0dbfd85dc70b624a6fefa19f016a13735312",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-339.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,339h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D339!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,339h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D339!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "670510b23257995cfded289d3e7840673932b66c8d1fb4c4ad7fc0408ade1c8e",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-024.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,24h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D24!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,24h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D24!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "4c3e1503b56bdcc99d0b0e73edf8177112fd431064cd63955de18069d95f5df4",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-114.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,114h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D114!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,114h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D114!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "fde7c5c4e60c9fe11bc6f9ba6557b574b085ba31ebbed719d1b0331b9f3cafbc",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-east-159.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,159h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D159!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.960775,75.7793899,484a,75y,159h,90t/data=!3m7!1e1!3m5!1s9qSlDr2o6_wSintrAcgMxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D9qSlDr2o6_wSintrAcgMxQ%26yaw%3D159!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "9qSlDr2o6_wSintrAcgMxQ",
+      "camera_coordinates": [
+        26.960775,
+        75.7793899
+      ],
+      "sha256": "36ccbf6b8e527bb8151da10fc52e3e312de68d8d3d4292b5bf31d3e5ec07c25c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-308.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,308h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D308!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,308h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D308!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "1ec87362af823a15f30c137f14af0714a6d6993b2a2487ec868fde390a7cb183",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-353.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,353h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D353!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,353h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D353!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "38553b2aebeab7afb54fdad2f9702bbca0b1fbef66734d7b165adf6e67a21eb3",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-083.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,83h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D83!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,83h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D83!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "5e952fa930e737dd266649b3a26d21a992f1c5e3976c93135f7caf3d4be6cc61",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    },
+    {
+      "file": "cinema-area/funstar/approach-west-128.png",
+      "site": "funstar",
+      "kind": "Alternate actual Street View position; view toward place or approach road",
+      "source_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,128h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D128!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9609514,75.7790269,484a,75y,128h,90t/data=!3m7!1e1!3m5!1s6FczjdXOTrj0t2l1jOHzkw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D6FczjdXOTrj0t2l1jOHzkw%26yaw%3D128!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "6FczjdXOTrj0t2l1jOHzkw",
+      "camera_coordinates": [
+        26.9609514,
+        75.7790269
+      ],
+      "sha256": "74da0b8b7fad4aa0fef24dd71c913520b2a5ee6da3d2b38088445bd0387dbbcc",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "contact_sheet_reviewed_2026-11-15"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+2026-11-15
+Chromium body.inner_text() for the exact original user URL:
+Back / Search / Close
+No Street View imagery available here.
+
+The screenshot records the blank Maps viewport, not a street photograph.

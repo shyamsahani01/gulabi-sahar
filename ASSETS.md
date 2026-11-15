@@ -122,3 +122,7 @@ courtyard are artistic designs, not surveyed replicas of those venues.
 `designs/16-vki-vdn-streets/sources.json` records eight local reference photographs, source pages, download status and SHA-256 checksums. Copyright remains with the original photographers/sites. These files and the contact sheet are visual study material, excluded from Android export under `designs/*`; no source photograph is used as a game texture. Google panorama links are retained as links only after HTTP 403, with current coverage unverified. `street-index.json` derives from the existing OSM extract (© OpenStreetMap contributors, ODbL 1.0).
 
 The Road Number 5 facade additions, atlas UI and Drive animation are original procedural/code assets. In-engine review images are generated with `tests/navigation_capture.gd`. The geometry is reference-inspired and not a surveyed reconstruction of real buildings.
+
+## Sector 2 / Central Spine — 15 November 2026
+
+Actual Google Maps Street View page screenshots are saved locally under `designs/17-sector-2-central-spine/`, with visible Google/contributor attribution. Source URLs, panorama IDs, capture dates and SHA-256 hashes are in `captures.json` and `cinema-area/captures.json`. They are local design references, excluded from Git and Android exports, not CC0 textures. `sector2_street.gd` creates original procedural meshes informed by observed facade/street details, adapted to existing compact-map plots. Exact building footprint/tenancy correspondence is not surveyed.

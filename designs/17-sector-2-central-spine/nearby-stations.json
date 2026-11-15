@@ -1,0 +1,17 @@
+[
+  {
+    "name": "north-near",
+    "url": "https://www.google.com/maps/@26.9634993,75.7798109,486a,75y,30h,90t/data=!3m7!1e1!3m5!1scBR0zlNpvWGLj1DGQqkl3w!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DcBR0zlNpvWGLj1DGQqkl3w%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "pano": "cBR0zlNpvWGLj1DGQqkl3w"
+  },
+  {
+    "name": "north-far",
+    "url": "https://www.google.com/maps/@26.9637656,75.7799755,486a,75y,30h,90t/data=!3m7!1e1!3m5!1s78WouBt6e_saDSzdaKKtbg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D78WouBt6e_saDSzdaKKtbg%26yaw%3D30!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "pano": "78WouBt6e_saDSzdaKKtbg"
+  },
+  {
+    "name": "south-near",
+    "url": "https://www.google.com/maps/@26.963279,75.779641,486a,75y,210h,90t/data=!3m7!1e1!3m5!1sXJyOFLaab3zzCaPnZvF15A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DXJyOFLaab3zzCaPnZvF15A%26yaw%3D210!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "pano": "XJyOFLaab3zzCaPnZvF15A"
+  }
+]

@@ -1,0 +1,127 @@
+{
+  "requested_date": "2026-11-15",
+  "source_url": "https://www.google.com/maps/place/Sector+2,+Central+Spine,+Vidyadhar+Nagar,+Jaipur,+Jaipur+Nagar+Nigam+Area,+Rajasthan+302039/@26.9634146,75.7797631,486a,75y,147.55h,89.06t/data=!3m7!1e1!3m5!1ssvgpKyn-Fi_8G2MTKzTZbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0.9398416899779249%26panoid%3DsvgpKyn-Fi_8G2MTKzTZbQ%26yaw%3D147.54501305384454!7i16384!8i8192!4m6!3m5!1s0x396db3b4d783502b:0xecb375ef8a1a198f!8m2!3d26.9641493!4d75.7814791!16s%2Fg%2F1tf1m6tc?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+  "panorama_id": "svgpKyn-Fi_8G2MTKzTZbQ",
+  "requested_heading": 147.54501305384454,
+  "requested_capture_headings": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "locations": [
+    {
+      "meaning": "resolved_google_street_view_camera_position",
+      "lat": 26.9634146,
+      "lon": 75.7797631,
+      "source_map_coordinates": [
+        -1851.087413499897,
+        -2656.595026799987
+      ],
+      "runtime_coordinates": [
+        -1628.9569238799093,
+        -2337.8036235839886
+      ],
+      "nearest_road_candidates": [
+        {
+          "osm_id": 261520097,
+          "name": "",
+          "kind": "tertiary",
+          "distance_source_units": 2.758
+        },
+        {
+          "osm_id": 1210923188,
+          "name": "",
+          "kind": "service",
+          "distance_source_units": 5.471
+        },
+        {
+          "osm_id": 278200313,
+          "name": "",
+          "kind": "tertiary",
+          "distance_source_units": 10.923
+        },
+        {
+          "osm_id": 1210923187,
+          "name": "",
+          "kind": "service",
+          "distance_source_units": 15.977
+        }
+      ]
+    },
+    {
+      "meaning": "place_pin_not_verified_panorama_position",
+      "lat": 26.9641493,
+      "lon": 75.7814791,
+      "source_map_coordinates": [
+        -1740.5512734997792,
+        -2709.756449399905
+      ],
+      "runtime_coordinates": [
+        -1531.6851206798058,
+        -2384.585675471916
+      ],
+      "nearest_road_candidates": [
+        {
+          "osm_id": 374922955,
+          "name": "",
+          "kind": "residential",
+          "distance_source_units": 5.538
+        },
+        {
+          "osm_id": 375068138,
+          "name": "",
+          "kind": "residential",
+          "distance_source_units": 23.629
+        },
+        {
+          "osm_id": 261520115,
+          "name": "",
+          "kind": "residential",
+          "distance_source_units": 29.606
+        },
+        {
+          "osm_id": 374923169,
+          "name": "",
+          "kind": "service",
+          "distance_source_units": 36.699
+        }
+      ]
+    }
+  ],
+  "reference_photos_saved": 52,
+  "status": "reference_captured_and_first_section_modeled",
+  "attempts": [
+    {
+      "method": "Direct thumbnail URL supplied in user link",
+      "http_status": 403,
+      "message": "The caller does not have permission / PERMISSION_DENIED"
+    },
+    {
+      "method": "Normal Chromium Google Maps panorama URL",
+      "visible_page_text": "No Street View imagery available here."
+    },
+    {
+      "method": "Normal Chromium exact original user URL",
+      "visible_page_text": "No Street View imagery available here.",
+      "screenshot": "evidence/original-link-browser.png"
+    },
+    {
+      "method": "Headed installed Google Chrome on isolated X display; direct Playwright page screenshots",
+      "result": "52 usable primary-lane photos; full azimuth sweeps from four distinct panorama positions. Cinema-area captures tracked separately.",
+      "manifest": "captures.json"
+    }
+  ],
+  "implementation": "First photo-informed section on existing compact-map plots; sector2_street.gd. Full road and surrounding lanes remain unfinished.",
+  "captured_section": {
+    "latitude_min": 26.963279,
+    "latitude_max": 26.9637656,
+    "longitude_min": 75.779641,
+    "longitude_max": 75.7799755,
+    "note": "Approximately 64 m between furthest camera positions; views extend beyond these points. Not the entire OSM road."
+  }
+}

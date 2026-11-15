@@ -1,6 +1,10 @@
 # Gulabi Sahar — Chat requirements and project record
 
 
+## Latest request — 15 November 2026
+
+User requested many real Chrome Street View screenshots of Sector 2 / Central Spine, especially Cinestar and Funstar, followed by updates to the actual game. Latest instruction explicitly authorizes continuing lane by lane: obtain full 360° views, update README after each lane, push the code to GitHub, and install each game update on the tablet over wireless debugging. This authorizes implementation and deployment; it does not imply the user has visually approved the result. Capture multiple positions and distinguish a completed short section from a whole road. Current working area is Sector 2–Central Spine around Cinestar–Funstar pending any broader boundary from the user. See [live street progress](designs/17-sector-2-central-spine/README.md).
+
 ## Latest request — 9 November 2026
 
 User requested: pull the latest GitHub code first, improve actual 3D architecture using the existing Crazy Cafe and real references, extend that detail to restaurants/palaces, update the README and push the project. Pulled `1e5a18e` before changes. Implemented 38 restaurant interiors in three architectural families, a Jaipur-inspired palace courtyard at Nahargarh, nearby facade improvements and a DINING atlas tab. Actual engine comparisons, references, validation and next art priorities: [designs/13-architecture/README.md](designs/13-architecture/README.md). These visuals await review; the user did not approve them by authorizing implementation. No Android installation requested or performed in this pass. Existing local character changes remain outside the architecture commit.

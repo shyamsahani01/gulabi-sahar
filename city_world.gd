@@ -37,6 +37,7 @@ func _ready() -> void:
 	sphere_mesh.radial_segments=12
 	sphere_mesh.rings=6
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
+	preload("res://sector2_street.gd").prepare(data)
 	compact_layout()
 	var arrival := safe_road_arrival(Vector2(spawn_point.x,spawn_point.z))
 	spawn_point = Vector3(arrival.p.x,1,arrival.p.y)
@@ -82,6 +83,7 @@ func _ready() -> void:
 	build_parks()
 	build_landmarks()
 	preload("res://district_details.gd").new().decorate(self)
+	preload("res://sector2_street.gd").new().streetscape(self)
 	flush_batches()
 	flush_road_meshes()
 	batches.clear()
@@ -534,6 +536,11 @@ func city_building(b: Dictionary) -> void:
 	if b.has("service"):
 		service_builder.build(b)
 		return
+	if b.get("sector2_design", "")=="shop_row":
+		var street=preload("res://sector2_street.gd").new()
+		street.world=self
+		street.shop_row(b)
+		return
 	# Richer street shells around the VDN arrival and dining locations.
 	if b.z < -3650*CITY_COMPRESSION and b.w>=7 and b.d>=7:
 		var industrial=preload("res://district_details.gd").new()
@@ -645,6 +652,11 @@ func build_amenities() -> void:
 			var restaurant=preload("res://restaurant_architecture.gd").new()
 			restaurant.world=self
 			restaurant.build(a)
+			continue
+		if a.get("sector2_design", "")=="rose_tower":
+			var street=preload("res://sector2_street.gd").new()
+			street.world=self
+			street.tower(a)
 			continue
 		match a.kind:
 			"police": amenity_police(p, ang, front, w, d, display_name)

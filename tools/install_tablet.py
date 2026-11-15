@@ -1,6 +1,6 @@
 import subprocess,pathlib,json,zipfile,hashlib,time,sys,shutil,os
 root=pathlib.Path(__file__).resolve().parents[1]
-version='0.9.8';tag='v098'
+version='0.9.9';tag='v099'
 preview='--preview' in sys.argv
 # Historical package ID retained for in-place updates; launcher name is Gulabi Sahar.
 package='com.itgurujan.gulabisahar.preview'
