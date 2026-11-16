@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-16",
+  "photo_count": 48,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "hashes_verified": true,
+  "all_contact_sheets_visually_reviewed": true,
+  "stations": [
+    {
+      "station": "station-00",
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    },
+    {
+      "station": "station-01",
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    },
+    {
+      "station": "station-02",
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    },
+    {
+      "station": "station-03",
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    },
+    {
+      "station": "station-04",
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    },
+    {
+      "station": "station-05",
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "photos": 8,
+      "maximum_heading_gap_degrees": 45
+    }
+  ],
+  "adjacent_station_distance_m": [
+    54.3714397985803,
+    52.86825050136166,
+    51.804427445368496,
+    50.60367064445079,
+    57.695876637413235
+  ],
+  "maximum_station_gap_m": 57.695876637413235,
+  "scope": "Western block only; station 00 and 05 cover endpoint junctions. Original full way and hidden interiors incomplete."
+}

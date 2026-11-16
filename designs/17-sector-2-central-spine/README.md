@@ -54,3 +54,7 @@ Runtime views: [front](engine-cinestar-front.png), [approach](engine-cinestar-ap
 Runtime views: [front](engine-funstar-front.png), [corner approach](engine-funstar-approach.png), [entrance](engine-funstar-entrance.png). Cinema/road/doorway tests, Sector 2 regression and map/driver navigation pass with zero failures. [APK/device evidence](validation-funstar.json) records the signed APK, successful in-place wireless installation, version code 20 and running app. Full road/side-lane completion remains pending; [street progress](street-progress.json) tracks it explicitly.
 
 Delivery follow-up, 16 November 2026: final 0.9.11 APK includes the rear shop-glazing offset correction and was installed successfully. The initial 0.9.11 tablet touch flow (Funstar search, selection and GO HERE) reached the mall and showed 30 FPS in one screenshot; this is not a sustained performance measurement.
+
+## Continuation — 16 November 2026
+
+0.9.12 adds the [Cinestar western approach block](../19-cinestar-approach/README.md): 48 more actual photos, six full horizontal 360° stations, six adapted infill facades and nine clear roadside pockets. The [inner lane](../18-sector-2-inner-lane/README.md) has 16 endpoint photos; interior imagery is unavailable and no hidden lane geometry is asserted. Both READMEs track the limits separately.

@@ -1,0 +1,16 @@
+{
+  "capture_date": "2026-11-16",
+  "street_id": 374922955,
+  "title": "Sector 2 inner lane \u2014 endpoints only, interior coverage unavailable",
+  "stations": [
+    {
+      "name": "south-end",
+      "url": "https://www.google.com/maps/@26.9627197,75.780627,485a,75y,27h,90t/data=!3m7!1e1!3m5!1sZSCj8hihTrGQUPZvvG1Zeg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DZSCj8hihTrGQUPZvvG1Zeg%26yaw%3D27!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "north-end",
+      "url": "https://www.google.com/maps/@26.9646004,75.7816564,487a,75y,27h,90t/data=!3m7!1e1!3m5!1sSMTebVEBXNVFGHQlXMOBxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DSMTebVEBXNVFGHQlXMOBxQ%26yaw%3D27!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    }
+  ],
+  "coverage_limit": "Midpoint selected an unavailable contributor panorama. Navigation from both ends retained the same panorama ID. Interior remains unobserved; no full-lane 360 coverage claim."
+}

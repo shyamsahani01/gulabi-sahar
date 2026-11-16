@@ -1,0 +1,31 @@
+{
+  "capture_date": "2026-11-16",
+  "street_id": 261520115,
+  "title": "Cinestar approach \u2014 western block only",
+  "stations": [
+    {
+      "name": "station-00",
+      "url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,118h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "station-01",
+      "url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,118h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "station-02",
+      "url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,118h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "station-03",
+      "url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,118h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "station-04",
+      "url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,118h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      "name": "station-05",
+      "url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,118h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D118!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+    }
+  ]
+}

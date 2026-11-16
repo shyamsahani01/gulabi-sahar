@@ -130,3 +130,7 @@ Actual Google Maps Street View page screenshots are saved locally under `designs
 Cinestar (0.9.10): `cinema_frontages.gd` builds original exterior meshes from the photographed facade. Store names use plain original text; no Google photos, film posters or downloaded logos are bundled. The map pin comes from the saved Google place listing; its compact footprint and vestibule are approximations, not surveyed architectural plans.
 
 Times Square / Funstar area (0.9.11): original procedural rose facades, pilasters, glazing, gallery and shop bands use the existing imported mall footprint (OSM 1497498145). The Funstar destination follows the saved listing; exterior signage uses observed ARG/Times Square names. Repeated unseen facades, height and shop-bay placement are artistic approximations. No cinema interior or Google textures are included.
+
+## Cinestar approach and inner lane — 16 November 2026
+
+Reference packs 18/19 contain 64 additional actual Chrome screenshots (March 2026 Google Street View), with retained attribution, source URLs, panorama IDs and hashes. PNGs remain local and excluded from Git/APK. `cinestar_street.gd` adds original procedural cream/green galleries, rose balconies, inferred side windows and roadside pockets fitted to existing infill plots. No source pixels or hidden-interior claims are embedded.

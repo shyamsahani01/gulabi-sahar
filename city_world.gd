@@ -39,6 +39,7 @@ func _ready() -> void:
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
 	preload("res://sector2_street.gd").prepare(data)
 	preload("res://cinema_frontages.gd").prepare(data)
+	preload("res://cinestar_street.gd").prepare(data)
 	compact_layout()
 	var arrival := safe_road_arrival(Vector2(spawn_point.x,spawn_point.z))
 	spawn_point = Vector3(arrival.p.x,1,arrival.p.y)
@@ -85,6 +86,7 @@ func _ready() -> void:
 	build_landmarks()
 	preload("res://district_details.gd").new().decorate(self)
 	preload("res://sector2_street.gd").new().streetscape(self)
+	preload("res://cinestar_street.gd").new().streetscape(self)
 	flush_batches()
 	flush_road_meshes()
 	batches.clear()
@@ -536,6 +538,11 @@ func mark_street_pilot() -> void:
 func city_building(b: Dictionary) -> void:
 	if b.has("service"):
 		service_builder.build(b)
+		return
+	if b.has("cinestar_street"):
+		var street=preload("res://cinestar_street.gd").new()
+		street.world=self
+		street.frontage(b)
 		return
 	if b.get("sector2_design", "")=="shop_row":
 		var street=preload("res://sector2_street.gd").new()

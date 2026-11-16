@@ -1,0 +1,35 @@
+[
+  {
+    "station": "south-end",
+    "requested_coordinate": [
+      26.962687174880458,
+      75.78054610727314
+    ],
+    "source_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.9626872,75.7805461&heading=27&pitch=0&fov=75",
+    "resolved_url": "https://www.google.com/maps/@26.9627197,75.780627,485a,75y,27h,90t/data=!3m7!1e1!3m5!1sZSCj8hihTrGQUPZvvG1Zeg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DZSCj8hihTrGQUPZvvG1Zeg%26yaw%3D27!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "body": "Search Google Maps\n\ue8b6\n\ue52e\nDirections\n\ue5c4\nJaipur, Rajasthan\n Google Street View\nMar 2026\nSee more dates\n\ue0c8\n\ue5d4\n\ue80d\nShare\n\ue5cd\n\ue145\n\ue15b\n\ueacf\n\ue5cd\n\ue5d0\nExpand\nImage capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+    "image": "evidence/south-end.png"
+  },
+  {
+    "station": "middle",
+    "requested_coordinate": [
+      26.963621556704165,
+      75.78108068772801
+    ],
+    "source_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.9636216,75.7810807&heading=27&pitch=0&fov=75",
+    "resolved_url": "https://www.google.com/maps/@26.963468,75.7813614,3a,75y,27h,90t/data=!3m7!1e1!3m5!1sCIHM0ogKEICAgID4up3nDQ!2e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FAM4Q-U8qC7xm-wLXEGQ1kSl6P2Gmv03f4_zbOZvYZtuXiwbiTGI2bNSqpeDQ2bKntK0gJE9RPOkfAczGy8dcMzmwNc05NfJQUOP77x19OLzfZ2ZMFhFW_llvbZ3iOLLOoWQOyMmmBvFH%3Dw900-h600-k-no-pi0-ya13.63000011444092-ro0-fo100!7i2508!8i1254?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "body": "No Street View imagery available here.\n\ue5cd\nSearch Google Maps\n\ue8b6\n\ue52e\n\t\nNo Street View imagery available here.",
+    "image": "evidence/middle.png"
+  },
+  {
+    "station": "north-end",
+    "requested_coordinate": [
+      26.964555938527877,
+      75.78161526818288
+    ],
+    "source_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.9645559,75.7816153&heading=27&pitch=0&fov=75",
+    "resolved_url": "https://www.google.com/maps/@26.9646004,75.7816564,487a,75y,27h,90t/data=!3m7!1e1!3m5!1sSMTebVEBXNVFGHQlXMOBxQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DSMTebVEBXNVFGHQlXMOBxQ%26yaw%3D27!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+    "body": "Search Google Maps\n\ue8b6\n\ue52e\n\ue5c4\nJaipur, Rajasthan\n Google Street View\nMar 2026\nSee more dates\n\ue0c8\n\ue5d4\n\ue80d\nShare\n\ue5cd\n\ue145\n\ue15b\n\ueacf\n\ue5cd\n\ue5d0\nImage capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+    "image": "evidence/north-end.png"
+  }
+]

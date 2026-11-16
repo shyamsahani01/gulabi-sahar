@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-16",
+  "version": "0.9.12",
+  "version_code": 21,
+  "street_test": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCINESTAR STREET RESULT: 0 failures; facades=6 pockets=9",
+  "cinema_regression": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCINEMA EXTERIORS RESULT: 0 failures",
+  "apk": {
+    "apk": "/home/shyam/MyWork/Gulabi Sahar/builds/GulabiSahar-0.9.12-debug.apk",
+    "sha256": "7c51b1158290677f2b204e2bb710736bd490c182bfedf470b9519035f73ef0a4",
+    "bytes": 208405493,
+    "signature": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1",
+    "alignment": "Verification successful",
+    "archive_error": null,
+    "documentation_or_source_bundled": []
+  },
+  "tablet": {
+    "version": "0.9.12",
+    "package_id": "com.itgurujan.gulabisahar.preview",
+    "transport": "1",
+    "model": "2509BRP2DI",
+    "install": "Performing Streamed Install\nSuccess",
+    "launch": "Starting: Intent { cmp=com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher }\nStatus: ok\nLaunchState: COLD\nActivity: com.itgurujan.gulabisahar.preview/com.godot.game.GodotApp\nTotalTime: 1781\nWaitTime: 1809\nComplete",
+    "package": "versionCode=21 minSdk=24 targetSdk=36\nversionName=0.9.12",
+    "foreground": "topResumedActivity=ActivityRecord{208345546 u0 com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher t2772}\nResumedActivity: ActivityRecord{208345546 u0 com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher t2772}",
+    "pid": "12020",
+    "keyguard": "unlocked"
+  },
+  "native_touch_check": {
+    "result": "PASS on retry",
+    "steps": [
+      "Tap MAP",
+      "Tap search; type Cinestar",
+      "Use visible keyboard Done key",
+      "Select Cinestar Multiplex",
+      "Tap GO HERE"
+    ],
+    "evidence": "tablet-cinestar-arrival.png",
+    "visible_message": "Arrived near Cinestar Multiplex",
+    "pid_after_arrival": "14986",
+    "first_attempt": "Rapid scripted search followed by injected Android Back exited the first process (SIGNALED/status 9). No matching app crash stack was found. Relaunched; slower per-step retry using visible keyboard Done completed successfully. Initial exit cause remains unconfirmed."
+  },
+  "limitations": [
+    "Six adapted infill facades and nine clear tree/parking pockets; no exact continuous frontage reconstruction.",
+    "Mast placement guard skips the proposed position because it overlaps imported way 230843926.",
+    "Hidden interior of road 374922955 remains unobserved; only endpoint 360 references saved."
+  ],
+  "engine_previews": "Final side-window build: west, east and overview visually reviewed"
+}

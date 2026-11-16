@@ -1,0 +1,728 @@
+{
+  "capture_date": "2026-11-16",
+  "street_id": 261520115,
+  "title": "Cinestar approach \u2014 western block only",
+  "method": "Headed Google Chrome, direct 1920x1080 page screenshots",
+  "images": [
+    {
+      "file": "references/station-00-000.png",
+      "station": "station-00",
+      "heading_degrees": 0,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,0h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "c9321ca714e034679f70383ce272702ea3ae4b57eba726b8000582a3562aed25",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-045.png",
+      "station": "station-00",
+      "heading_degrees": 45,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,45h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,45h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "f76a79a25886941f1c6242e3880882be5e7f0144b3ad922b5271d7e8e773114b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-090.png",
+      "station": "station-00",
+      "heading_degrees": 90,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,90h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,90h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "b26a59f067c99d1870f180616e3b0caae6489c6b9f37d249764b232df94a1850",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-135.png",
+      "station": "station-00",
+      "heading_degrees": 135,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,135h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,135h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "293e692ef823f1d5d9979abca937593a4fe6bdfd53d84857d4531ec99ac73fb9",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-180.png",
+      "station": "station-00",
+      "heading_degrees": 180,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,180h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,180h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ca184d3f31badf721ee2ecd7e8ca8a3aa4fd16aca3b0c4516ec381f76212f1b4",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-225.png",
+      "station": "station-00",
+      "heading_degrees": 225,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,225h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,225h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "833aec77e5d082689d59ffaa1adc74202869d3fb8752bbb542148c2191925e17",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-270.png",
+      "station": "station-00",
+      "heading_degrees": 270,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,270h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,270h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "9b8967894acacf65a8afa1e4f66dd09d167329986fd39606b24a33bc13e2fbd8",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-00-315.png",
+      "station": "station-00",
+      "heading_degrees": 315,
+      "panorama_id": "ILF3vzPAqX6_4NpcwyAInA",
+      "coordinates": [
+        26.9651667,
+        75.7805381
+      ],
+      "source_url": "https://www.google.com/maps/@26.9651667,75.7805381,3a,75y,315h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9651667,75.7805381,488a,75y,315h,90t/data=!3m7!1e1!3m5!1sILF3vzPAqX6_4NpcwyAInA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DILF3vzPAqX6_4NpcwyAInA%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ad27e9e38cf7cf78d7573c3cc760c0b007f82076d9edc77c7ce299697e117ac2",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-000.png",
+      "station": "station-01",
+      "heading_degrees": 0,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,0h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "e71f59a1c239610a9f2e8c72844fb9abc030a2ac965e8321b8885143d5cb6064",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-045.png",
+      "station": "station-01",
+      "heading_degrees": 45,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,45h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,45h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "c01b043211bbf5ebaeeeea1274372a3e35cc13a8c6c4bf24dc2e9c8ea212a069",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-090.png",
+      "station": "station-01",
+      "heading_degrees": 90,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,90h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "8f2b68efbe82f33d0eac6b716e6c3682d79baf445415ec974287e06c330458e6",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-135.png",
+      "station": "station-01",
+      "heading_degrees": 135,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,135h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,135h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "b7978791ef75b5f682466821a2cce644f0b51aba79912c5fed0dadb6db3ffeb1",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-180.png",
+      "station": "station-01",
+      "heading_degrees": 180,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,180h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "5a44cccd0118c576cd7039ffbb35202b4d7d09e4852ed9cf5321454408494daa",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-225.png",
+      "station": "station-01",
+      "heading_degrees": 225,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,225h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,225h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ce1cb8de38e0307bb717336f945050d369c4cdface951ebeb1d3c5d73038930b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-270.png",
+      "station": "station-01",
+      "heading_degrees": 270,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,270h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ea142bb86a71cbc548ce0c434d99a73d4a359e42e73d2ba3028d50b961131748",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-01-315.png",
+      "station": "station-01",
+      "heading_degrees": 315,
+      "panorama_id": "Dx9Zw53i3frBlR4xD76GAA",
+      "coordinates": [
+        26.9649218,
+        75.7810128
+      ],
+      "source_url": "https://www.google.com/maps/@26.9649218,75.7810128,3a,75y,315h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9649218,75.7810128,487a,75y,315h,90t/data=!3m7!1e1!3m5!1sDx9Zw53i3frBlR4xD76GAA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DDx9Zw53i3frBlR4xD76GAA%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "b25a73737aaeb3faa5af302613496984d08c9ccbf6e494f72969805be461ae37",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-000.png",
+      "station": "station-02",
+      "heading_degrees": 0,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,0h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "15cb6cad1878ce7f3e52f40949dbb5e71fca970d29ec7b7ee9d67991c6472961",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-045.png",
+      "station": "station-02",
+      "heading_degrees": 45,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,45h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,45h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "cd500b6c714f9edc1625060cc4cd8e292ace49b2ca043d2df3e4c3cbc7aad5a4",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-090.png",
+      "station": "station-02",
+      "heading_degrees": 90,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,90h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,90h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "caa3d8e22aa499294a5b91bd938471ab097c86ee26f14676bad0ef00adb08be2",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-135.png",
+      "station": "station-02",
+      "heading_degrees": 135,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,135h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,135h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "0e8cc937eb83b4d8c07fd0c4be0231a5a1cfc6c8e38414dbbfbc41faada66c25",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-180.png",
+      "station": "station-02",
+      "heading_degrees": 180,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,180h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,180h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "4c0e88a49a1a52f6e74a679931e2c14ceebc90b9dcca3b0237e8c618dceebc32",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-225.png",
+      "station": "station-02",
+      "heading_degrees": 225,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,225h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,225h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "4b859d432a34ab76a51aba7dbad327ce331557bd556fdde130bc9a0ba4439083",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-270.png",
+      "station": "station-02",
+      "heading_degrees": 270,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,270h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,270h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "dd5ced823790f1300df8feaf323139914951c5421050a33d0e8a1fad4dfeb42c",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-02-315.png",
+      "station": "station-02",
+      "heading_degrees": 315,
+      "panorama_id": "05tkFvTHT1PKI2Z1NeoJDw",
+      "coordinates": [
+        26.964707,
+        75.7814886
+      ],
+      "source_url": "https://www.google.com/maps/@26.964707,75.7814886,3a,75y,315h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.964707,75.7814886,488a,75y,315h,90t/data=!3m7!1e1!3m5!1s05tkFvTHT1PKI2Z1NeoJDw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3D05tkFvTHT1PKI2Z1NeoJDw%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "4efe70c717a7a5f922fbe920e1215a4a112189fad4f79390395dd74d48330d5e",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-000.png",
+      "station": "station-03",
+      "heading_degrees": 0,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,0h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "86243956d30a30ed74942404fc1d9d6ae3d370c32b913cc31f8ba80e4f494cc3",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-045.png",
+      "station": "station-03",
+      "heading_degrees": 45,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,45h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,45h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "9bf9801927ce7244664a666c9d5bddb6b2fdc1a2b92112f9ec474de7cab47e25",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-090.png",
+      "station": "station-03",
+      "heading_degrees": 90,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,90h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "7a132f974495a5564654c071731d6fcd52dbc1b967eb1097460bd3d5d768cd98",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-135.png",
+      "station": "station-03",
+      "heading_degrees": 135,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,135h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,135h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "8d8930f68ca35aae5895272241284204bbbbf3fe47a8af9fc4108ee91ddb9f02",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-180.png",
+      "station": "station-03",
+      "heading_degrees": 180,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,180h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "030efe2842ef8a141dc14c95ed80182183e50d11644e63d74854d762be7ffec4",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-225.png",
+      "station": "station-03",
+      "heading_degrees": 225,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,225h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,225h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "f327dfa97194dd82ebdf2b6707e5c4092a967b84d53c496fb6ec2c00dbaa8848",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-270.png",
+      "station": "station-03",
+      "heading_degrees": 270,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,270h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ee413ab694a02ad4ca99500dfd22247fbe76070154d6b5ebe46313639f4025dd",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-03-315.png",
+      "station": "station-03",
+      "heading_degrees": 315,
+      "panorama_id": "YEZav4JCjCy7ndb4BrIeSg",
+      "coordinates": [
+        26.9644669,
+        75.7819364
+      ],
+      "source_url": "https://www.google.com/maps/@26.9644669,75.7819364,3a,75y,315h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9644669,75.7819364,487a,75y,315h,90t/data=!3m7!1e1!3m5!1sYEZav4JCjCy7ndb4BrIeSg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DYEZav4JCjCy7ndb4BrIeSg%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "818cfab55ce13831dae31027c9da64bb7d2e8b7f1d0dcae755fd584c2f7549a7",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-000.png",
+      "station": "station-04",
+      "heading_degrees": 0,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,0h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "18602f5ca2ff632f33a9215f22f5ae575be43e14acf4690c57f518b512c56a3b",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-045.png",
+      "station": "station-04",
+      "heading_degrees": 45,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,45h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,45h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "9a84224c2a2bf6fa33a5265ad69055a0f108d23256539de44ae6b081b6c062c3",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-090.png",
+      "station": "station-04",
+      "heading_degrees": 90,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,90h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "9a9db82c23d7e4884a3fbd5e25d49d3a45a8a9cb678c50701db603093adc45bb",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-135.png",
+      "station": "station-04",
+      "heading_degrees": 135,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,135h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,135h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "49ce9302f3934616a61153b013ebb850747f9edaef397c9cf1425e3123a8c7ea",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-180.png",
+      "station": "station-04",
+      "heading_degrees": 180,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,180h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "2ac00b34b12154a4605479c51ee7ec85ab0f8fb744f795ddf4833349bb4496cd",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-225.png",
+      "station": "station-04",
+      "heading_degrees": 225,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,225h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,225h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "f2d8fd7412ca4e636667d06fb464d78f511b62bc19bdc7c90a568b18dfa02c09",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-270.png",
+      "station": "station-04",
+      "heading_degrees": 270,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,270h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "d38ff470f8fb09bc3da4327f15ff51b77ffa1734cbe6c95f6cca292687765816",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-04-315.png",
+      "station": "station-04",
+      "heading_degrees": 315,
+      "panorama_id": "gDpl9qIW7seO-lKeYwyfbQ",
+      "coordinates": [
+        26.9642625,
+        75.7823925
+      ],
+      "source_url": "https://www.google.com/maps/@26.9642625,75.7823925,3a,75y,315h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9642625,75.7823925,487a,75y,315h,90t/data=!3m7!1e1!3m5!1sgDpl9qIW7seO-lKeYwyfbQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DgDpl9qIW7seO-lKeYwyfbQ%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "e5dd035bd56109ecd772886bf3f39d44bc63bcc2677faff9dce11237f97ef0dc",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-000.png",
+      "station": "station-05",
+      "heading_degrees": 0,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,0h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D0!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "c3b7e82b689d2a3dbaa286fb731f405911932f442329246d29fd5c528cab25eb",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-045.png",
+      "station": "station-05",
+      "heading_degrees": 45,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,45h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,45h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D45!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "ca13512c0ae5c46c91e28446b176eba8d478ae69b0e768d9ccce916dc20bab46",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-090.png",
+      "station": "station-05",
+      "heading_degrees": 90,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,90h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,90h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D90!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "b340b4a9df78746c5f7ffa7837bc4b27f875d486404243dce26ceab2c5a6a2f1",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-135.png",
+      "station": "station-05",
+      "heading_degrees": 135,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,135h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,135h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D135!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "0da6a2e870010c567ffb3586835ab9982e8d4da8667dfa0b9b2ee8bc36c91271",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-180.png",
+      "station": "station-05",
+      "heading_degrees": 180,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,180h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,180h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D180!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "8076d9fd9d7bdc37d272b35bbb9342c70ebc9abda5463a1a1a50363820c22e20",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-225.png",
+      "station": "station-05",
+      "heading_degrees": 225,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,225h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,225h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D225!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "90bbdc0c45cb26db0d29170f68c1144252a0fecb76d581ee5916dd9093af22a9",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-270.png",
+      "station": "station-05",
+      "heading_degrees": 270,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,270h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,270h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D270!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "db956cb6faa97353fad4b537a6348e36f2d3ec0324d4bac34004767a5d8a144d",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    },
+    {
+      "file": "references/station-05-315.png",
+      "station": "station-05",
+      "heading_degrees": 315,
+      "panorama_id": "E1oyGsuG4vRiq7aB2ztElQ",
+      "coordinates": [
+        26.9639098,
+        75.7828191
+      ],
+      "source_url": "https://www.google.com/maps/@26.9639098,75.7828191,3a,75y,315h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "resolved_url": "https://www.google.com/maps/@26.9639098,75.7828191,487a,75y,315h,90t/data=!3m7!1e1!3m5!1sE1oyGsuG4vRiq7aB2ztElQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3DE1oyGsuG4vRiq7aB2ztElQ%26yaw%3D315!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D",
+      "sha256": "34ca339d174d849e08e5c5104fcf62a50e45fc1c3f8aa8893b392b54ad04836d",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t",
+      "review_status": "contact_sheet_visually_reviewed_2026-11-16"
+    }
+  ]
+}

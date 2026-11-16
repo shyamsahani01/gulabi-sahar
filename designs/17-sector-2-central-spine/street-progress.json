@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "working_scope": "Sector 2 / Central Spine, Cinestar and Funstar\u2013Times Square surroundings. Initial working boundary, not a completed neighborhood survey.",
   "workflow": [
     "capture multiple stations and full horizontal 360 at each",
@@ -49,6 +49,27 @@
       "model_status": "frontage_shipped",
       "full_lane_complete": false,
       "version": "0.9.11"
+    },
+    {
+      "id": "sector2-inner-lane",
+      "road_ids": [
+        374922955
+      ],
+      "reference_count": 16,
+      "camera_positions": 2,
+      "model_status": "deferred_interior_imagery_unavailable",
+      "full_lane_complete": false
+    },
+    {
+      "id": "cinestar-western-block",
+      "road_ids": [
+        261520115
+      ],
+      "reference_count": 48,
+      "camera_positions": 6,
+      "model_status": "partial_facade_pass_installed",
+      "full_lane_complete": false,
+      "version": "0.9.12"
     }
   ],
   "remaining": [

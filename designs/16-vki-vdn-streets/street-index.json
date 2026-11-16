@@ -1500,10 +1500,12 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.963971,75.782801",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "frontage_modeled_full_road_incomplete",
+    "status": "western_block_surveyed_partial_facades_installed",
     "reference_group": "02-vdn-central-spine",
     "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
-    "progress_readme": "../17-sector-2-central-spine/README.md"
+    "progress_readme": "../17-sector-2-central-spine/README.md",
+    "reference_pack": "19-cinestar-approach",
+    "full_lane_complete": false
   },
   {
     "osm_way_id": 261520120,
@@ -5102,8 +5104,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.964556,75.781615",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "endpoint_360_captured_interior_unavailable",
+    "reference_group": "02-vdn-central-spine",
+    "reference_pack": "18-sector-2-inner-lane",
+    "full_lane_complete": false
   },
   {
     "osm_way_id": 374922956,
