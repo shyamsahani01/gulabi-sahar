@@ -11,8 +11,8 @@ mkdir -p "$PROJECT/builds"
 "$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --editor --import --quit
 PROFILE="${1:-standard}"
 case "$PROFILE" in
-  standard) PRESET="Android"; APK="$PROJECT/builds/GulabiSahar-0.9.10-debug.apk" ;;
-  preview) PRESET="Android Preview"; APK="$PROJECT/builds/GulabiSahar-0.9.10-preview-debug.apk" ;;
+  standard) PRESET="Android"; APK="$PROJECT/builds/GulabiSahar-0.9.11-debug.apk" ;;
+  preview) PRESET="Android Preview"; APK="$PROJECT/builds/GulabiSahar-0.9.11-preview-debug.apk" ;;
   *) echo "Usage: $0 [standard|preview]" >&2; exit 2 ;;
 esac
 "$BASE/Godot_v4.7.2-stable_linux.x86_64" --headless --path "$PROJECT" --export-debug "$PRESET" "$APK"

@@ -1,6 +1,6 @@
 # Sector 2 / Central Spine — street progress
 
-Updated 15 November 2026. **Latest release 0.9.10 / code 19 adds Cinestar and is installed and launched on the Redmi tablet.** This release implements the first surveyed section; the entire road and surrounding lanes remain unfinished.
+Updated 15 November 2026. **Latest release 0.9.11 / code 20 includes Sector 2, Cinestar and Times Square exterior passes; installed and launched on the Redmi tablet.** These releases implement three exterior/short-section passes; entire roads and surrounding lanes remain unfinished.
 
 ## Progress by section
 
@@ -8,7 +8,7 @@ Updated 15 November 2026. **Latest release 0.9.10 / code 19 adds Cinestar and is
 |---|---|---|---|
 | Sector 2 supplied panorama / OSM 261520097 | 52 photos; 4 distinct positions with overlapping full 360° horizontal sweeps | First section implemented on existing compact-map plots | 0.9.9 installed; GitHub push recorded in git history |
 | Cinestar frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Exterior implemented; surrounding lane unfinished | 0.9.10 installed |
-| Funstar / Times Square Mall frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Reference inspection complete; modeling queued | Local photo gallery and source manifest |
+| Funstar / Times Square Mall frontage and approach | Main camera and two approach positions; directional sweeps plus entrance/roof details | Exterior implemented; surrounding lanes unfinished | 0.9.11 installed |
 | Remaining Central Spine and side lanes | Not yet surveyed end to end | Queued | No claim of completion |
 
 ## Actual photographs
@@ -46,3 +46,11 @@ Capture tools: `tools/capture_sector2_refs.py`, `tools/capture_sector2_nearby.py
 37 reference photos from three full 360° camera positions informed `cinema_frontages.gd`: circular upper openings, pale gridded facade panels, paired columns, rooftop name, side arches, storefronts and entry steps. The map now finds **Cinestar**; **GO HERE** reaches a clear connected road nearby. The original imported streets and named places remain; only overlapping generated infill was replaced. Position follows the Maps place pin with an approximately one-unit offset for clearance; footprint/height are fitted compact-map estimates. No cinema auditorium has been surveyed or fabricated.
 
 Runtime views: [front](engine-cinestar-front.png), [approach](engine-cinestar-approach.png), [entrance](engine-cinestar-entrance.png). [Build, test and tablet evidence](validation-cinestar.json). Cinema navigation, entrance and neighboring service-lane/footway checks pass; Sector 2 regression also passes. Version 0.9.10 was installed over 0.9.9 without uninstalling the app. GitHub delivery is recorded in the corresponding commit history.
+
+## Funstar / Times Square pass — 0.9.11 / code 20
+
+37 inspected photos from three full 360° camera positions inform the Times Square exterior: long rose facade, repeated tall pilasters and rounded glazing, gallery railings, ground-floor shop bands and ARG/Times Square rooftop text. **Funstar** and **Times Square** both find the same destination in the atlas. The existing imported footprint (OSM 1497498145) is retained; the building height, repeated unseen elevations, simplified vestibule and individual shop-bay placement are approximated. The photographed exterior does not establish a Funstar facade sign or auditorium layout; neither was invented.
+
+Runtime views: [front](engine-funstar-front.png), [corner approach](engine-funstar-approach.png), [entrance](engine-funstar-entrance.png). Cinema/road/doorway tests, Sector 2 regression and map/driver navigation pass with zero failures. [APK/device evidence](validation-funstar.json) records the signed APK, successful in-place wireless installation, version code 20 and running app. Full road/side-lane completion remains pending; [street progress](street-progress.json) tracks it explicitly.
+
+Delivery follow-up, 16 November 2026: final 0.9.11 APK includes the rear shop-glazing offset correction and was installed successfully. The initial 0.9.11 tablet touch flow (Funstar search, selection and GO HERE) reached the mall and showed 30 FPS in one screenshot; this is not a sustained performance measurement.

@@ -15,11 +15,18 @@ func run() -> void:
 		if b.get("source","")=="infill":continue
 		check(world.data.buildings.any(func(item):return item.get("osm_id",0)==b.get("osm_id",0)),"Imported building retained")
 	check(world.data.roads.size()==original.roads.size(),"Original streets retained")
+	await check_place(scene,"Cinestar",[374923169,1210939418,261520115])
+	await check_place(scene,"Funstar",[1210908405,931378210,931378209,261520097,463584272])
+	print("CINEMA EXTERIORS RESULT: ",failures," failures")
+	quit(1 if failures else 0)
+
+func check_place(scene: Node,name: String,road_ids: Array) -> void:
+	var world=scene.world
 	var atlas=scene.hud.atlas
-	atlas.search.text="Cinestar"
+	atlas.search.text=name
 	atlas.refresh_results()
-	check(atlas.filtered.size()==1,"Cinestar has one searchable destination")
-	if atlas.filtered.size()!=1:quit(1);return
+	check(atlas.filtered.size()==1,name+" has one searchable destination")
+	if atlas.filtered.size()!=1:return
 	var a: Dictionary=atlas.filtered[0]
 	scene.travel_to_map_entry(a)
 	for i in 60:await physics_frame
@@ -27,7 +34,7 @@ func run() -> void:
 	check(world.clear_arrival(Vector2(scene.player.position.x,scene.player.position.z),.4),"Cinema travel is clear of buildings")
 	check(not world.route_between(world.spawn_point,scene.player.position).is_empty(),"Cinema has a connected route")
 	var at:=Vector3(a.p[0],0,a.p[1])
-	var facing:=Basis(Vector3.UP,a.a)
+	var facing:=Basis(Vector3.UP,a.a+(PI if a.get("front",1)<0 else 0))
 	world.update_cells(at)
 	for i in 4:await physics_frame
 	var space=scene.get_world_3d().direct_space_state
@@ -35,7 +42,7 @@ func run() -> void:
 	ray.exclude=[scene.player.get_rid()]
 	check(space.intersect_ray(ray).is_empty(),"Central cinema doorway is open")
 	for road in world.data.roads:
-		if int(road.get("id",0)) not in [374923169,1210939418,261520115]:continue
+		if int(road.get("id",0)) not in road_ids:continue
 		for i in range(road.p.size()-1):
 			var start:=Vector2(road.p[i][0],road.p[i][1])
 			var end:=Vector2(road.p[i+1][0],road.p[i+1][1])
@@ -49,5 +56,3 @@ func run() -> void:
 				ray=PhysicsRayQueryParameters3D.create(Vector3(p0.x,1,p0.y),Vector3(p1.x,1,p1.y),1)
 				ray.exclude=[scene.player.get_rid()]
 				check(space.intersect_ray(ray).is_empty(),"Cinema frontage leaves nearby street/footway clear: "+str(road.id))
-	print("CINEMA EXTERIORS RESULT: ",failures," failures")
-	quit(1 if failures else 0)

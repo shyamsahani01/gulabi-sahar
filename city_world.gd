@@ -664,6 +664,11 @@ func build_amenities() -> void:
 			cinema.world=self
 			cinema.cinestar(a)
 			continue
+		if a.get("design", "")=="times_square_exterior":
+			var cinema=preload("res://cinema_frontages.gd").new()
+			cinema.world=self
+			cinema.times_square(a)
+			continue
 		match a.kind:
 			"police": amenity_police(p, ang, front, w, d, display_name)
 			"hospital": amenity_hospital(p, ang, front, w, d, display_name)

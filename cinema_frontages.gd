@@ -2,8 +2,13 @@ extends "res://heritage_kit.gd"
 ## Observed exterior details: designs/17-sector-2-central-spine/cinema-area.
 ## Pin is from Google Maps; compact footprint/height and plain lobby are approximations.
 const CINESTAR_ID := -92001
+const TIMES_SQUARE_ID := 1497498145
 
 static func prepare(data: Dictionary) -> void:
+	prepare_cinestar(data)
+	prepare_times_square(data)
+
+static func prepare_cinestar(data: Dictionary) -> void:
 	for a in data.amenities:
 		if int(a.get("osm_id",0))==CINESTAR_ID:return
 	var a: Dictionary={"name":"Cinestar Multiplex","hindi":"सिनेस्टार सिनेमा","kind":"cinema","p":[-1742.13,-2769.93],"a":-.5,"w":22.0,"d":13.5,"front":1,"osm_id":CINESTAR_ID,"design":"cinestar_exterior","source":"Google Maps place and March 2026 exterior photos; approximate compact footprint","tags":{"amenity":"cinema"}}
@@ -17,6 +22,17 @@ static func prepare(data: Dictionary) -> void:
 	data.buildings=kept
 	data.buildings.append({"x":a.p[0],"z":a.p[1],"w":a.w,"d":a.d,"a":a.a,"h":13.8,"source":"reference-design","osm_id":CINESTAR_ID,"kind":"cinema"})
 	data.amenities.append(a)
+
+static func prepare_times_square(data: Dictionary) -> void:
+	for a in data.amenities:
+		if a.get("design","")=="times_square_exterior":return
+	for b in data.buildings:
+		if int(b.get("osm_id",0))!=TIMES_SQUARE_ID:continue
+		# Retain the imported footprint/rotation; author a destination for the verified mall area.
+		b.kind="cinema"
+		b.h=15.5
+		data.amenities.append({"name":"Funstar · Times Square Mall","hindi":"फनस्टार टाइम्स स्क्वायर मॉल","kind":"cinema","p":[b.x,b.z],"a":b.a,"w":b.w,"d":b.d,"front":-1,"osm_id":-92002,"design":"times_square_exterior","source":"Funstar Google Maps listing and Times Square exterior; imported nearby mall footprint 1497498145, approximate height","tags":{"amenity":"cinema"}})
+		return
 
 func cinestar(a: Dictionary) -> void:
 	setup(a)
@@ -95,3 +111,71 @@ func round_opening(at: Vector3,radius: float) -> void:
 		var span:=sqrt(radius*radius-y*y)*2
 		box(at+Vector3(0,y,.15),Vector3(span,.035,.05),"heritage_gold")
 	box(at+Vector3(0,-.68,.06),Vector3(radius*1.65,.24,.24),"cinema_stone")
+
+func times_square(a: Dictionary) -> void:
+	setup(a)
+	var f:=d/2
+	# Imported mall footprint, with an open central street entrance and simplified vestibule.
+	box(Vector3(0,.15,0),Vector3(w,.3,d),"arch_step",true)
+	box(Vector3(0,1.65,-f),Vector3(w,3.3,.2),"heritage_rose",true)
+	for side in [-1,1]:
+		box(Vector3(side*(w/2-.1),1.65,0),Vector3(.2,3.3,d),"heritage_rose",true)
+		var bw: float=(w-3)/2
+		box(Vector3(side*(1.5+bw/2),1.6,f),Vector3(bw,2.9,.10),"arch_glazing",true)
+	box(Vector3(0,3.45,0),Vector3(w+.1,.26,d+.1),"heritage_lime",true)
+	box(Vector3(0,4.6,-.6),Vector3(w-1.2,2.1,d-1.2),"heritage_rose",true)
+	box(Vector3(0,10.55,0),Vector3(w,9.9,d),"heritage_rose",true)
+	box(Vector3(0,15.65,0),Vector3(w+.45,.28,d+.45),"heritage_lime")
+	# Both visible street faces use the tall pilasters, rounded glazing and gallery of the photos.
+	var saved:=basis
+	for face in 4:
+		basis=saved*Basis(Vector3.UP,face*PI/2)
+		var width: float=w if face%2==0 else d
+		var depth: float=d if face%2==0 else w
+		mall_face(width,depth,8 if face%2==0 else 6,face==0)
+	basis=saved
+	# The photographed building says ARG / Times Square. Funstar is the searchable place,
+	# not an invented facade sign or an assertion about the unseen auditorium.
+	for turn in [0,1]:
+		basis=saved*Basis(Vector3.UP,turn*PI/2)
+		var width: float=w if turn==0 else d
+		var depth: float=d if turn==0 else w
+		box(Vector3(width*.30,16.45,depth/2-.2),Vector3(width*.32,1.3,.18),"arch_white")
+		label(Vector3(width*.30,16.65,depth/2-.08),"ARG",.64,"heritage_red",width*.29)
+		label(Vector3(width*.30,16.15,depth/2-.07),"TIMES SQUARE",.23,"heritage_ink",width*.29)
+	basis=saved
+	for i in 3:
+		box(Vector3(0,.05*(i+1),f+.72-i*.25),Vector3(3,.10*(i+1),.28),"arch_step")
+	collision_ramp(0,f,2.8,1.0,.32)
+	box(Vector3(0,1.6,f-3),Vector3(4,3,.15),"heritage_ink",true)
+	label(Vector3(0,2.0,f-2.9),"TIMES SQUARE",.4,"arch_white",3.8)
+	world.draw_detail=false
+
+func mall_face(width: float,depth: float,bays: int,main_entry: bool) -> void:
+	var f:=depth/2
+	var bay:=width/bays
+	for i in range(bays+1):
+		var x: float=-width/2+i*bay
+		box(Vector3(x,10.6,f+.16),Vector3(.28,9.5,.35),"heritage_lime")
+		box(Vector3(x,15.2,f+.22),Vector3(.56,.30,.47),"heritage_lime")
+		box(Vector3(x,4.6,f+.1),Vector3(.18,2.05,.25),"heritage_lime")
+	for i in bays:
+		var x: float=-width/2+(i+.5)*bay
+		var window_width: float=bay*.62
+		box(Vector3(x,10.2,f+.025),Vector3(window_width,7.2,.07),"arch_glazing")
+		shape(Vector3(x,13.8,f+.025),Vector3(window_width,.08,window_width),"arch_glazing","cylinder",Basis(Vector3.RIGHT,PI/2))
+		for y in [7.5,9.3,11.1,12.9]:
+			box(Vector3(x,y,f+.08),Vector3(window_width,.04,.045),"arch_frame")
+		box(Vector3(x,10.2,f+.08),Vector3(.045,7.2,.045),"arch_frame")
+		box(Vector3(x,4.5,f-.3),Vector3(bay*.82,1.65,.06),"arch_glazing")
+		jali(Vector3(x,3.95,f+.32),bay-.25,.75,"heritage_lime")
+		# Glass shop bays and simple fascia, leaving the central front doorway free.
+		if not main_entry or absf(x)>2.4:
+			# Clear the rear wall's outer face as well as the side-wall faces.
+			box(Vector3(x,1.65,f+.15),Vector3(bay-.2,2.8,.08),"arch_glazing")
+			box(Vector3(x,1.65,f+.21),Vector3(.06,2.8,.04),"arch_frame")
+		var text_value: String="JIO" if i%4==0 else ("GRAND JHUNNI" if i%4==1 else "SHOPS")
+		box(Vector3(x,3.0,f+.26),Vector3(bay-.08,.52,.3),"heritage_blue" if i%4==0 else "heritage_ink")
+		label(Vector3(x,3.0,f+.43),text_value,.27,"arch_white",bay-.3)
+	for y in [3.42,5.6,15.55]:
+		box(Vector3(0,y,f+.2),Vector3(width+.35,.18,.55),"heritage_lime")

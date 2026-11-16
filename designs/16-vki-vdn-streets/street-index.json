@@ -1500,8 +1500,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.963971,75.782801",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 261520120,
@@ -5172,8 +5174,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.964808,75.781511",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 374923170,
@@ -8678,8 +8682,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.959464,75.784117",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 463584272,
@@ -8724,8 +8730,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.961735,75.774532",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 479027231,
@@ -11460,8 +11468,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.960383,75.779511",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 931378210,
@@ -11478,8 +11488,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.960871,75.779054",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 931378211,
@@ -15726,8 +15738,10 @@
     ],
     "google_maps_link": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=26.965062,75.781739",
     "link_note": "Coordinate-derived Street View request; coverage and panorama not verified.",
-    "status": "queued",
-    "reference_group": "02-vdn-central-spine"
+    "status": "frontage_modeled_full_road_incomplete",
+    "reference_group": "02-vdn-central-spine",
+    "reference_manifest": "../17-sector-2-central-spine/cinema-area/captures.json",
+    "progress_readme": "../17-sector-2-central-spine/README.md"
   },
   {
     "osm_way_id": 1210939419,

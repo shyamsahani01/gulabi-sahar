@@ -1,0 +1,60 @@
+{
+  "updated": "2026-11-15",
+  "working_scope": "Sector 2 / Central Spine, Cinestar and Funstar\u2013Times Square surroundings. Initial working boundary, not a completed neighborhood survey.",
+  "workflow": [
+    "capture multiple stations and full horizontal 360 at each",
+    "inspect references and model section",
+    "update README and status",
+    "test/export",
+    "push source",
+    "install existing tablet app"
+  ],
+  "sections": [
+    {
+      "id": "sector2-first-section",
+      "road_ids": [
+        261520097,
+        278200313
+      ],
+      "reference_count": 52,
+      "camera_positions": 4,
+      "model_status": "first_section_shipped",
+      "full_lane_complete": false,
+      "version": "0.9.9",
+      "commit": "5368976"
+    },
+    {
+      "id": "cinestar-frontage",
+      "road_ids": [
+        261520115,
+        374923169,
+        1210939418
+      ],
+      "reference_count": 37,
+      "camera_positions": 3,
+      "model_status": "frontage_shipped",
+      "full_lane_complete": false,
+      "version": "0.9.10",
+      "commit": "4a86aa0"
+    },
+    {
+      "id": "times-square-frontage",
+      "road_ids": [
+        463584272,
+        931378210,
+        931378209
+      ],
+      "reference_count": 37,
+      "camera_positions": 3,
+      "model_status": "frontage_shipped",
+      "full_lane_complete": false,
+      "version": "0.9.11"
+    }
+  ],
+  "remaining": [
+    "Survey the full lengths of these road ways, including both ends and junctions.",
+    "Survey and model connected side lanes; no surrounding alley is marked complete.",
+    "Review hidden facades/footprints where imagery allows; maintain approximation notes.",
+    "Measure tablet performance and obtain user visual feedback."
+  ]
+}

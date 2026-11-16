@@ -1,0 +1,60 @@
+{
+  "release": "0.9.11",
+  "version_code": 20,
+  "checks": {
+    "cinema_exteriors": "PASS: 0 failures; both destinations, safe travel, routes, doors, nearby carriageways/footways and retained imported buildings",
+    "sector2_street": "PASS: 0 failures",
+    "map_navigation": "PASS: 0 failures"
+  },
+  "android": {
+    "apk": "/home/shyam/MyWork/Gulabi Sahar/builds/GulabiSahar-0.9.11-debug.apk",
+    "sha256": "3da7b711a4c74523a1bbf3858b8baa10a09c2a8bf7fbff318d8d08fb0a3cc301",
+    "bytes": 208401248,
+    "signature": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1",
+    "alignment": "Verification successful",
+    "archive_error": null,
+    "documentation_or_source_bundled": []
+  },
+  "tablet": {
+    "version": "0.9.11",
+    "package_id": "com.itgurujan.gulabisahar.preview",
+    "transport": "1",
+    "model": "2509BRP2DI",
+    "install": "Performing Streamed Install\nSuccess",
+    "launch": "Starting: Intent { cmp=com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher }\nStatus: ok\nLaunchState: COLD\nActivity: com.itgurujan.gulabisahar.preview/com.godot.game.GodotApp\nTotalTime: 1019\nWaitTime: 1047\nComplete",
+    "package": "versionCode=20 minSdk=24 targetSdk=36\nversionName=0.9.11",
+    "foreground": "topResumedActivity=ActivityRecord{207891862 u0 com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher t2745}\nResumedActivity: ActivityRecord{207891862 u0 com.itgurujan.gulabisahar.preview/com.godot.game.GodotAppLauncher t2745}",
+    "pid": "14973",
+    "keyguard": "unlocked"
+  },
+  "placement": {
+    "google_funstar_pin": [
+      26.9605303,
+      75.7786635
+    ],
+    "imported_building_id": 1497498145,
+    "uncompressed_position": [
+      -1930.02,
+      -2454.17
+    ],
+    "width": 35.66,
+    "depth": 24.07,
+    "rotation": -2.1002,
+    "retained_original_footprint": true,
+    "approximate": [
+      "height",
+      "unseen repeated elevations",
+      "exact tenant/shop-bay layout",
+      "simple vestibule"
+    ]
+  },
+  "reference_count": 37,
+  "camera_positions": 3,
+  "scope": "Times Square mall exterior, searchable as Funstar; complete surrounding roads and hidden cinema interiors not surveyed.",
+  "native_touch_check": {
+    "flow": "Funstar search -> select result -> GO HERE -> arrival shown beside mall",
+    "result": "passed on initial 0.9.11 build before the final decorative rear-glazing offset correction",
+    "screenshot": "builds/previews/tablet-v0911-funstar-arrival.png",
+    "fps_note": "HUD displayed 30 FPS in one screenshot; not a sustained benchmark"
+  }
+}
