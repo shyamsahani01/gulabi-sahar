@@ -164,6 +164,24 @@ func finish_materials() -> void:
 		m.uv1_triplanar=true
 		m.uv1_world_triplanar=true
 		m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	# First Android visual-quality pass: restore subtle real-world surface detail
+	# only on roads/stone/concrete. These textures are already bundled, so this
+	# does not introduce new downloads or change world geometry/collisions.
+	# Keep normal strength conservative to avoid shimmer on mobile screens.
+	for spec in [["tarmac", "asphalt2", 0.18, 0.45], ["stone", "pavement05", 0.14, 0.38], ["concrete", "concrete", 0.12, 0.42]]:
+		var material: StandardMaterial3D = mats[spec[0]]
+		var texture_name: String = spec[1]
+		var diffuse_name := "res://assets/textures/" + texture_name + ("_diff.jpg" if texture_name == "pavement05" else "_Diffuse.jpg")
+		var normal_name := "res://assets/textures/" + texture_name + "_nor_gl.jpg"
+		var rough_name := "res://assets/textures/" + texture_name + ("_rough.jpg" if texture_name == "pavement05" else "_Rough.jpg")
+		material.albedo_texture = load(diffuse_name)
+		material.normal_texture = load(normal_name)
+		material.normal_enabled = true
+		material.normal_scale = spec[2]
+		material.roughness_texture = load(rough_name)
+		material.roughness_texture_channel = BaseMaterial3D.TEXTURE_CHANNEL_RED
+		material.roughness = spec[3]
+		material.uv1_scale = Vector3.ONE * (0.22 if texture_name == "asphalt2" else 0.28)
 
 func destinations() -> Array:
 	return landmarks + services + dining_destinations
