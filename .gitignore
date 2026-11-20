@@ -43,3 +43,7 @@ designs/18-sector-2-inner-lane/review/*.png
 designs/19-cinestar-approach/references/*.png
 designs/19-cinestar-approach/evidence/*.png
 designs/19-cinestar-approach/review/*.png
+
+# Close Street View references remain local.
+designs/20-jaipur-road-and-people/references/*.png
+designs/20-jaipur-road-and-people/review/*.png

@@ -1,0 +1,13 @@
+{
+  "vertices": 66649,
+  "triangles": 115986,
+  "material_slots": 14,
+  "dimensions_metres": [
+    36.4927978515625,
+    30.084999084472656,
+    21.94500160217285
+  ],
+  "status": "Exterior review candidate; approximate scale; not integrated into city or tablet tested",
+  "unobserved": "Roof service layout, rear and internal stair flights are simplified estimates",
+  "lod1_triangles": 37114
+}

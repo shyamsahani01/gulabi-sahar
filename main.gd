@@ -1,5 +1,10 @@
 extends Node3D
 
+signal startup_progress(fraction: float, stage: String)
+signal startup_complete
+var incremental_startup := false
+var startup_finished := false
+
 const SPAWN := Vector3(-1400.124, 1.0, -2502.4296) # VDN fallback; world supplies the road-snapped spawn.
 
 var player: CharacterBody3D
@@ -18,6 +23,7 @@ const PORTRAIT_DISTANCE_MIN := 0.2
 const PORTRAIT_DISTANCE_MAX := 1.25
 var portrait_camera: Camera3D
 var activity: Node3D
+var visits: Control
 var actions: Control
 var dash_time := 0.0
 var stamina := 100.0
@@ -54,7 +60,11 @@ var last_landing := 0.0
 func _ready() -> void:
 	world = preload("res://city_world.gd").new()
 	world.name = "World"
+	world.incremental_startup=incremental_startup
+	world.build_progress.connect(func(fraction: float, label: String): startup_progress.emit(.15+.65*fraction,label))
 	add_child(world)
+	if not world.build_finished:await world.world_built
+	await startup_checkpoint(.81,"Preparing your character")
 	activity = preload("res://city_life.gd").new()
 	activity.world_mode = true
 	activity.world = world
@@ -82,6 +92,7 @@ func _ready() -> void:
 	collision.position.y = 0.88
 	player.add_child(collision)
 	build_avatar()
+	await startup_checkpoint(.86,"Preparing the map and controls")
 	look_point = Node3D.new()
 	look_point.name = "LookPoint"
 	add_child(look_point)
@@ -112,6 +123,7 @@ func _ready() -> void:
 	avatar.add_child(portrait_camera)
 	portrait_camera.position = Vector3(0, 1.58, -0.85)
 	portrait_camera.rotation.y = PI
+	await startup_checkpoint(.90,"Preparing vehicles")
 	vehicle = preload("res://city_vehicle.gd").new()
 	vehicle.game = self
 	vehicle.position = world.spawn_point
@@ -121,11 +133,15 @@ func _ready() -> void:
 	traffic.game = self
 	traffic.name = "Traffic"
 	add_child(traffic)
+	await startup_checkpoint(.94,"Loading your progress")
 	hud.travel_requested.connect(travel_to)
 	actions = preload("res://city_actions.gd").new()
 	actions.game = self
 	canvas.add_child(actions)
 	actions.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	visits=preload("res://place_visits.gd").new()
+	visits.game=self
+	canvas.add_child(visits)
 	sound = preload("res://city_audio.gd").new()
 	sound.game = self
 	add_child(sound)
@@ -146,6 +162,17 @@ func _ready() -> void:
 			return
 		yaw -= delta.x * 0.004
 		pitch = clampf(pitch - delta.y * 0.004, -0.7, 0.18))
+
+	if incremental_startup:
+		await startup_checkpoint(.96,"Welcoming nearby residents")
+		activity.populate_near(player.position)
+		await startup_checkpoint(.98,"Finishing the neighbourhood")
+	startup_finished=true
+	startup_complete.emit()
+
+func startup_checkpoint(fraction: float, label: String) -> void:
+	startup_progress.emit(fraction,label)
+	if incremental_startup:await get_tree().process_frame
 
 func toggle_portrait() -> void:
 	if vehicle!=null and vehicle.driving: return

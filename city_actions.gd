@@ -83,6 +83,7 @@ func handle_action(value: String) -> void:
 		"kick":kick()
 		"dodge":dash()
 		"talk":talk()
+		"visit":game.visits.open()
 		"guard":
 			if not blocked():
 				game.avatar.guarding = not game.avatar.guarding

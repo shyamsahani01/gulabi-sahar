@@ -1,0 +1,51 @@
+{
+  "loader_frames": 345,
+  "resource_ms": 1611,
+  "total_ms": 19967,
+  "world_stages": [
+    {
+      "ms": 90,
+      "stage": "Reading city map"
+    },
+    {
+      "ms": 17,
+      "stage": "Finding safe arrival"
+    },
+    {
+      "ms": 1344,
+      "stage": "Preparing surface materials"
+    },
+    {
+      "ms": 23,
+      "stage": "Building ground"
+    },
+    {
+      "ms": 535,
+      "stage": "Building roads"
+    },
+    {
+      "ms": 5688,
+      "stage": "Building neighbourhoods"
+    },
+    {
+      "ms": 3521,
+      "stage": "Preparing places to visit"
+    },
+    {
+      "ms": 15,
+      "stage": "Building parks and landmarks"
+    },
+    {
+      "ms": 3297,
+      "stage": "Adding street details"
+    },
+    {
+      "ms": 156,
+      "stage": "Preparing visible city"
+    },
+    {
+      "ms": 37,
+      "stage": "Preparing road surfaces"
+    }
+  ]
+}

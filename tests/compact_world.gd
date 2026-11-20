@@ -68,6 +68,8 @@ func run() -> void:
 	expect(heights.suv>heights.sedan+.2,"SUV has its own taller silhouette")
 	expect(heights.taxi>heights.sedan+.2,"Taxi has rounded tall cabin and roof sign")
 	expect(w.palace_entry.is_empty(),"Out-of-area fort is not instantiated")
-	expect(w.dining_destinations.size()==3,"Three local fictional dining interiors retained")
+	expect(w.dining_destinations.size()==w.amenities.filter(func(a):return a.kind=="restaurant").size(),"Every restaurant has a dining destination")
+	for name0 in ["Gulabi Thali · VDN","Spine Garden Kitchen","VKI Canteen"]:
+		expect(w.dining_destinations.any(func(a):return a.name==name0),"Original local dining retained: "+name0)
 	print("COMPACT WORLD RESULT: ",failures," failures / ",checks," checks")
 	quit(1 if failures else 0)

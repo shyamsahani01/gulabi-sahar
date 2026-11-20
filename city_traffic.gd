@@ -29,20 +29,27 @@ func pick_route(car: Dictionary) -> void:
 		car.node.hide()
 		return
 	var route: Dictionary=candidates[random.randi_range(0,candidates.size()-1)]
-	var path:=PackedVector3Array()
-	for i in route.p.size():
-		var p:=Vector3(route.p[i][0],0,route.p[i][1])
-		var next: Array=route.p[mini(i+1,route.p.size()-1)] if i<route.p.size()-1 else route.p[i-1]
-		var d:=(Vector3(next[0],0,next[1])-p).normalized()
-		if i==route.p.size()-1:
-			d=-d
-		p+=Vector3(d.z,0,-d.x)*route.width*.25
-		p.y=game.world.terrain_height(p.x,p.z)+.1
-		path.append(p)
+	var path:=lane_path(route,false)
+	car.return_route=lane_path(route,true)
+	for points in [path,car.return_route]:
+		for i in points.size():points[i].y=game.world.terrain_height(points[i].x,points[i].z)+.1
 	car.route=path
 	car.index=1
 	car.node.position=path[0]
 	car.node.show()
+
+# Offset each travel direction independently for Indian left-hand traffic.
+static func lane_path(route: Dictionary,reverse: bool) -> PackedVector3Array:
+	var center: Array=route.p.duplicate()
+	if reverse:center.reverse()
+	var path:=PackedVector3Array()
+	for i in center.size():
+		var p:=Vector3(center[i][0],0,center[i][1])
+		var next: Array=center[i+1] if i<center.size()-1 else center[i-1]
+		var d:=(Vector3(next[0],0,next[1])-p).normalized()
+		if i==center.size()-1:d=-d
+		path.append(p+Vector3(d.z,0,-d.x)*route.width*.25)
+	return path
 
 func _physics_process(delta: float) -> void:
 	check_clock-=delta
@@ -63,13 +70,15 @@ func _physics_process(delta: float) -> void:
 		if offset.length()<2:
 			car.index+=1
 			if car.index>=car.route.size():
-				car.route.reverse()
-				car.index=1
+				var previous: PackedVector3Array=car.route
+				car.route=car.return_route
+				car.return_route=previous
+				car.index=0
 			continue
 		var direction:=offset.normalized()
 		var obstacle: Vector3=game.player.position-node.position
 		var stop:=obstacle.length()<7 and obstacle.normalized().dot(direction)>.75
-		var query:=PhysicsRayQueryParameters3D.create(node.position+Vector3.UP,node.position+Vector3.UP+direction*5,5)
+		var query:=PhysicsRayQueryParameters3D.create(node.position+Vector3.UP,node.position+Vector3.UP+direction*5,7)
 		query.exclude=[node.get_rid()]
 		stop=stop or not get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 		node.velocity=direction*(0 if stop else car.speed)

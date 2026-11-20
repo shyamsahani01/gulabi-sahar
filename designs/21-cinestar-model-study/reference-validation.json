@@ -1,0 +1,30 @@
+{
+  "review_date": "2026-11-19",
+  "checks": [
+    {
+      "file": "references/corner.png",
+      "sha256_and_dimensions_pass": true,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "references/gallery.png",
+      "sha256_and_dimensions_pass": true,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "references/facade.png",
+      "sha256_and_dimensions_pass": true,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "references/forecourt.png",
+      "sha256_and_dimensions_pass": true,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "distinct_panorama_positions": 1
+}

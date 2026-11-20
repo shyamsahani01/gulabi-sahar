@@ -10,7 +10,7 @@ func run() -> void:
 	root.add_child(scene)
 	for i in 45:await physics_frame
 	var world: Node3D=scene.world
-	var original: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
+	var original: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city_small.json"))
 	var a: Dictionary={}
 	for item in world.amenities:
 		if item.get("sector2_design","")=="rose_tower":a=item

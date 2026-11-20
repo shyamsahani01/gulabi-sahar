@@ -58,22 +58,14 @@ func factory(target: Node3D, b: Dictionary) -> void:
 	shape(Vector3(w*.25,h+.8,-d*.2),Vector3(.65,1.6,.65),"chrome")
 
 func clear_verge(at: Vector2) -> bool:
-	if not world.map_bounds.grow(-5).has_point(at): return false
-	for b in world.data.buildings:
-		var local:=Vector2(at.x-b.x,at.y-b.z).rotated(b.a)
-		if absf(local.x)<b.w/2+2 and absf(local.y)<b.d/2+2: return false
-	for r in world.data.roads:
-		for i in range(r.p.size()-1):
-			var a:=Vector2(r.p[i][0],r.p[i][1])
-			var z:=Vector2(r.p[i+1][0],r.p[i+1][1])
-			if Geometry2D.get_closest_point_to_segment(at,a,z).distance_to(at)<r.width/2+1: return false
-	return true
+	return world.clear_verge(at)
 
 func decorate(target: Node3D) -> void:
 	world=target
 	var occupied: Array[Vector2]=[]
 	var count:=0
 	for road in world.data.roads:
+		await world.loading_checkpoint(.78,"Adding street details")
 		if road.kind not in ["primary","secondary","tertiary"]: continue
 		for i in range(road.p.size()-1):
 			var a:=Vector2(road.p[i][0],road.p[i][1])

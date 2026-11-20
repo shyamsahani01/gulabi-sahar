@@ -1,0 +1,52 @@
+{
+  "review_date": "2026-11-19",
+  "engine": "Godot 4.7.2",
+  "renderer": "Vulkan / Forward Mobile",
+  "device": "Development laptop NVIDIA GTX 1650; not Android",
+  "gpu_capture_count": 6,
+  "images": [
+    {
+      "file": "engine-corner-lod1.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "b03dcff249646fd2198bf86b11989371097697e7b67f5aa47252c34197be3059",
+      "reviewed": true
+    },
+    {
+      "file": "engine-corner.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "48a11b75661608fe7eb5e5ee79cdda8210b0d0cf614eec4c5483564eb2c1abba",
+      "reviewed": true
+    },
+    {
+      "file": "engine-entrance.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "34d353419a03b0581f2f6cef8ebef019e99570eaefbf0b4a97ecbce7af3af389",
+      "reviewed": true
+    },
+    {
+      "file": "engine-front.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "c990d621aea3ad91aba89291e9e478aa75aa32aa748e97aa674b29275389d206",
+      "reviewed": true
+    },
+    {
+      "file": "engine-openings.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "24855587579757678bac98d439b366cba2f4065b763026ead924e150beb70d7f",
+      "reviewed": true
+    },
+    {
+      "file": "engine-side.png",
+      "width": 1280,
+      "height": 800,
+      "sha256": "e514c6ad071a677b8e971e03ea094baaf2755ea06dd3073b594c5592276b6443",
+      "reviewed": true
+    }
+  ],
+  "visual_findings": "Openings and arcade have visible depth; side windows corrected. Proportions, repetitive side bays and material/weathering realism remain approximate."
+}

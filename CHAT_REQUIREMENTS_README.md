@@ -1,5 +1,10 @@
 # Gulabi Sahar — Chat requirements and project record
 
+## 17 November 2026 — road detail and resident variety
+
+User requested more useful Google Maps screenshots, roads/footpaths matching Jaipur references, visible roadside activity and Indian residents who do not all look identical. Continued the already authorized survey → model → per-street README → GitHub push → wireless tablet install workflow. Pack 20 adds 20 close Chrome screenshots at the six existing Cinestar-block stations. The code adds pavement/parking surfaces, ramps, scooters, vendor pockets and left-hand traffic. Eleven actual crowd variants fix the previous absent-assets fallback, with casual/traditional clothes and varying builds, face shape, hair, skin palettes and age groups. These are original stylized edits to the existing rig; no photorealism or completed neighborhood is claimed. [Current evidence and delivery status](designs/20-jaipur-road-and-people/README.md).
+
+
 
 ## Latest request — 15 November 2026
 

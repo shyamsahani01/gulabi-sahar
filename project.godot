@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Gulabi Sahar"
-config/version="0.9.12"
-run/main_scene="res://main.tscn"
+config/version="0.9.14"
+run/main_scene="res://startup.tscn"
 config/features=PackedStringArray("4.7")
 run/max_fps=30
 config/icon="res://icon.svg"

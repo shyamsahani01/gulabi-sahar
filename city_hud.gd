@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 			context_actions.append("sit")
 		else:
 			context_actions.append("combat")
+			if game.visits!=null and not game.visits.nearest().is_empty():context_actions.append("visit")
 			if game.nearest_drivable().global_position.distance_to(game.player.global_position)<5:
 				context_actions.append("ride")
 			if not game.actions.nearest(3.5).is_empty(): context_actions.append("talk")
@@ -62,7 +63,7 @@ func atlas_offset() -> int:
 	return game.world.landmarks.size()+game.world.services.size() if dining_tab else (game.world.landmarks.size() if services_tab else 0)
 
 func action_centers() -> Dictionary:
-	var all := {"combat":Vector2(size.x-345,size.y-90),"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-450,size.y-190),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
+	var all := {"visit":Vector2(size.x-110,510),"combat":Vector2(size.x-345,size.y-90),"attack":Vector2(size.x-110,size.y-270),"kick":Vector2(size.x-225,size.y-245),"dodge":Vector2(size.x-330,size.y-190),"guard":Vector2(size.x-450,size.y-190),"talk":Vector2(size.x-110,300),"ride":Vector2(size.x-110,370),"sit":Vector2(size.x-110,440),"crouch":Vector2(size.x-450,size.y-90)}
 	var active := {}
 	for key in context_actions: active[key]=all[key]
 	return active
@@ -159,7 +160,7 @@ func _draw() -> void:
 	draw_circle(center()+knob,33,Color(.88,.82,.68,.7))
 	if not driving and game.seated.is_empty(): button_circle(jump_center(),"JUMP",49,Color("34494f"))
 	if game.seated.is_empty(): button_circle(run_center(),"BRAKE" if driving else "SPRINT",37,Color("866345") if running else Color("25383e"))
-	var labels := {"combat":"LESS" if combat_controls else "ACTIONS","attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","sit":"STAND" if not game.seated.is_empty() else "SIT","crouch":"CROUCH"}
+	var labels := {"visit":"VISIT","combat":"LESS" if combat_controls else "ACTIONS","attack":"PUNCH","kick":"KICK","dodge":"DODGE","guard":"BLOCK","talk":"TALK","ride":"EXIT" if driving else "DRIVE","sit":"STAND" if not game.seated.is_empty() else "SIT","crouch":"CROUCH"}
 	for action in action_centers():
 		button_circle(action_centers()[action],labels[action],39,Color("894e42") if action=="attack" else (Color("4d6a52") if action=="sit" and not game.seated.is_empty() else Color("263b41")))
 	if driving:

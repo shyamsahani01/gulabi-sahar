@@ -1,0 +1,47 @@
+{
+  "capture_date": "2026-11-18",
+  "method": "Headed Chrome page screenshots, 1920x1080",
+  "scope": "Four directions from the user-supplied panorama; not four distinct positions or a full survey.",
+  "images": [
+    {
+      "file": "references/corner.png",
+      "source_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,90y,300h,102t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-12%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D300!7i16384!8i8192",
+      "resolved_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,90y,300h,102t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-12%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D300!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExNS4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "t5UWA6t52VJ4QqZTjiXPjg",
+      "sha256": "1c5367aa9859f5a0c23e2d93dcf35bcd4c9184e218389a2d59356718ca78fa14",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem\n\t\nClose",
+      "review_status": "visually_reviewed_2026-11-18",
+      "observed": "Oblique facade, circular openings, stepped right corner and opposite concrete frame."
+    },
+    {
+      "file": "references/gallery.png",
+      "source_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,75y,330h,104t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-14%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D330!7i16384!8i8192",
+      "resolved_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,75y,330h,104t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-14%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D330!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExNS4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "t5UWA6t52VJ4QqZTjiXPjg",
+      "sha256": "619750ae806eec7f5a4071449697ae37020ad14aafef8c9b718be8c38d42c687",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "visually_reviewed_2026-11-18",
+      "observed": "Clear front-right facade and long side arcade; principal new modeling reference."
+    },
+    {
+      "file": "references/facade.png",
+      "source_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,65y,280h,110t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-20%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D280!7i16384!8i8192",
+      "resolved_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,65y,280h,110t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-20%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D280!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExNS4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "t5UWA6t52VJ4QqZTjiXPjg",
+      "sha256": "975a40b3179c5f7bd3e52836cdb42bbc8188a1fbb130d8c7cc386f52fa3e36ce",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "visually_reviewed_2026-11-18",
+      "observed": "Cropped cinema facade at right; opposite building dominates. Context only, not a full front elevation."
+    },
+    {
+      "file": "references/forecourt.png",
+      "source_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,85y,20h,90t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D20!7i16384!8i8192",
+      "resolved_url": "https://www.google.com/maps/@26.9646459,75.7815701,487a,85y,20h,90t/data=!3m7!1e1!3m5!1st5UWA6t52VJ4QqZTjiXPjg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0%26panoid%3Dt5UWA6t52VJ4QqZTjiXPjg%26yaw%3D20!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MTExNS4wIKXMDSoASAFQAw%3D%3D",
+      "panorama_id": "t5UWA6t52VJ4QqZTjiXPjg",
+      "sha256": "3af587d5d6a693d95cf2534dd63b2b58f63a87175e2900883b7d3c63aad81bee",
+      "visible_attribution": "Image capture: Mar 2026\u00a9 2026 GoogleIndiaTermsPrivacyReport a problem",
+      "review_status": "visually_reviewed_2026-11-18",
+      "observed": "Plaza, side arcade and adjacent commercial fronts."
+    }
+  ]
+}

@@ -16,10 +16,13 @@ func everyone() -> Array:
 
 func populate_near(at: Vector3) -> void:
 	var candidates: Array = []
+	for pair in world.pedestrian_routes:
+		if pair[0].distance_to(at)<110 and candidates.size()<12:candidates.append(pair)
 	for road in world.data.roads:
 		if road.width < 5 or road.p.size()<2:
 			continue
 		for i in range(road.p.size()-1):
+			if road.get("jaipur_block",false) and i<2:continue
 			var a := Vector3(road.p[i][0],0,road.p[i][1])
 			var b := Vector3(road.p[i+1][0],0,road.p[i+1][1])
 			if a.distance_to(b)<15 or Vector2(a.x-at.x,a.z-at.z).length()>110:
@@ -39,7 +42,7 @@ func populate_near(at: Vector3) -> void:
 		var pair: Array = candidates[i]
 		var start: Vector3 = pair[0].lerp(pair[1],float(i%5)/5)
 		if i >= people.size():
-			spawn(start,i+1,i%4!=0,1,"adult" if i%6 else "elder",pair)
+			spawn(start,i,i%4!=0,1,"child" if i in [9,16] else ("elder" if i in [4,13] else "adult"),pair)
 			people[i].goal = 1
 			people[i].health = 100
 			people[i].home = start
@@ -74,7 +77,7 @@ func update_patrons() -> void:
 			spot.live = false
 
 func spawn_patron(spot: Dictionary) -> void:
-	spawn(spot.p,7+patrons.size()*3,false,1,"adult",[],spot.yaw)
+	spawn(spot.p,7+patrons.size(),false,1,"adult",[],spot.yaw)
 	var p: Dictionary = people.pop_back()
 	p.spot = spot
 	p.pose = spot.pose
@@ -82,7 +85,7 @@ func spawn_patron(spot: Dictionary) -> void:
 	p.health = 100
 	p.home = spot.p
 	p.body.position = spot.p
-	p.greeting.text = "कॉफ़ी बढ़िया है!" if p.seated else "स्वागत है! क्या लेंगे?"
+	p.greeting.text = "नमस्ते! देख लीजिए।" if spot.get("street_vendor",false) else ("कॉफ़ी बढ़िया है!" if p.seated else "स्वागत है! क्या लेंगे?")
 	if p.seated:
 		p.human.play_action(spot.pose,3600.0,.01)
 		p.human.animator.advance(randf_range(0,3))

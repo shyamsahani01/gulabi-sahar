@@ -67,5 +67,6 @@ func build(a: Dictionary) -> void:
 	if not clinic:
 		label(Vector3(bw*.29,2.4,front+.12),"24 H\nCARE",.27,"arch_teal",bw*.22)
 	light(Vector3(0,2.75,(front+back)/2),.45,minf(bw,7))
+	world.place_interactions.append({"name":a.name if a.name!="" else "City Clinic","kind":"hospital","p":origin+basis*Vector3(0,.12,back+2.1),"description":"Reception · first aid restores your health and stamina for Rs 25."})
 	detail=false
 	world.draw_detail=false

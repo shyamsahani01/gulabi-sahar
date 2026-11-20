@@ -45,21 +45,23 @@ def main():
     manifest_file = root / 'captures.json'
     manifest = json.loads(manifest_file.read_text()) if manifest_file.exists() else {
         'capture_date': plan['capture_date'], 'street_id': plan['street_id'],
-        'title': plan['title'], 'method': 'Headed Google Chrome, direct 1920x1080 page screenshots',
-        'images': []}
+        'title': plan['title'], 'method': 'Headed Google Chrome, direct page screenshots at recorded viewport',
+        'images': [], 'viewport': plan.get('viewport', {'width': 1920, 'height': 1080})}
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path='/opt/google/chrome/chrome', headless=False,
                                     args=['--no-sandbox', '--ozone-platform=x11'])
-        page = browser.new_page(viewport={'width': 1920, 'height': 1080})
+        page = browser.new_page(viewport=plan.get('viewport', {'width': 1920, 'height': 1080}))
         for station in plan['stations']:
             expected = re.search(r'!1s([^!]+)', station['url']).group(1)
-            for heading in range(0, 360, 45):
-                dest = refs / f'{station["name"]}-{heading:03d}.png'
+            for view in station.get('views', [{'name': f'{h:03d}', 'heading': h} for h in range(0, 360, 45)]):
+                heading = view['heading']
+                tilt, fov = view.get('tilt', 90), view.get('fov', 75)
+                dest = refs / f'{station["name"]}-{view["name"]}.png'
                 relative = str(dest.relative_to(root))
                 existing = next((i for i in manifest['images'] if i['file'] == relative), None)
                 if existing and dest.exists() and hashlib.sha256(dest.read_bytes()).hexdigest() == existing['sha256']:
                     continue
-                url = reframe(station['url'], heading)
+                url = reframe(station['url'], heading, tilt, fov)
                 page.goto(url, wait_until='domcontentloaded', timeout=60000)
                 page.wait_for_timeout(6000)
                 body = page.locator('body').inner_text()
@@ -73,6 +75,7 @@ def main():
                 page.mouse.move(1800, 20)
                 page.screenshot(path=str(dest))
                 item = {'file': relative, 'station': station['name'], 'heading_degrees': heading,
+                        'requested_tilt': tilt, 'requested_fov': fov,
                         'panorama_id': expected, 'coordinates': list(map(float, coordinate.groups())),
                         'source_url': url, 'resolved_url': page.url,
                         'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(),

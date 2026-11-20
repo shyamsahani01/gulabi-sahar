@@ -10,7 +10,7 @@ func run() -> void:
 	root.add_child(scene)
 	for i in 45:await physics_frame
 	var world=scene.world
-	var original: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
+	var original: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city_small.json"))
 	for b in original.buildings:
 		if b.get("source","")=="infill":continue
 		check(world.data.buildings.any(func(item):return item.get("osm_id",0)==b.get("osm_id",0)),"Imported building retained")

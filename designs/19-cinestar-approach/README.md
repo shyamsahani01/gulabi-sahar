@@ -15,3 +15,15 @@ The 0.9.12 game pass adapts the observed cream/green galleries and rose apartmen
 Original game previews: [west](engine-west.png), [east](engine-east.png), [overview](engine-overview.png).
 
 Native tablet check: MAP → search **Cinestar** → keyboard Done → select result → **GO HERE** passed on the relaunched app. [Actual arrival screenshot](tablet-cinestar-arrival.png). A first rapid automated attempt ended after an injected Android Back command (process exit status 9, no matching app crash stack); the cause was not confirmed. The slower retry completed and the process remained running.
+
+## Continuation — 17 November, 0.9.13
+
+[Pack 20](../20-jaipur-road-and-people/README.md) adds 20 close surface/pavement screenshots at these same six panorama stations, improves the roadway and roadside activity, and replaces the identical crowd fallback with eleven authored variants. This later pass overrides the width of only the two surveyed road segments, moves the six generated infill facades outward where needed and replaces the earlier nine-pocket street treatment. The 0.9.12 descriptions above remain historical delivery records. Original centerline vertices, imported named places and the unobserved remainder of the way are retained.
+
+## Detailed building review — 19 November
+
+[Pack 21: Cinestar model study](../21-cinestar-model-study/README.md) provides an editable Blender exterior, GLBs and actual Godot front/corner/entrance previews. It adds real circular openings, recessed shops, open arched landings and a deep side arcade using the user's screenshots and four additional views from their panorama. This is an isolated review candidate, not an update to the playable city or installed APK. Its approximate dimensions still require fitting to the compact map; integration and tablet performance checks remain pending.
+
+## 20 November: whole-game scope and smaller map
+
+The user clarified that the playable area should shrink while graphics improve across the game. [Pack 22](../22-startup-and-smaller-map/README.md) records the 30.3% smaller boundary, startup loader, material pass, campuses, hospital reception actions and park seating. Full-map realism and complete cinema interiors remain unfinished; this older approach study is not a claim that those are complete.

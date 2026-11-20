@@ -1,0 +1,169 @@
+{
+  "date": "2026-11-17",
+  "images": 20,
+  "distinct_panorama_positions": 6,
+  "visual_review": "Both contact sheets visually inspected; station-01 road surface and station-00 junction close frames inspected full-size. Street View imagery, not VS Code screenshots.",
+  "coverage": "20 narrow/downward close views supplement pack 19 full horizontal sweeps at the same six positions; no additional panorama positions or spherical capture claimed.",
+  "checks": [
+    {
+      "file": "references/station-00-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-00-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-00-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-00-junction-kerbs.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-01-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-01-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-01-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-02-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-02-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-02-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-03-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-03-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-03-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-04-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-04-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-04-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-05-road-surface.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-05-north-footpath.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-05-south-frontage.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    },
+    {
+      "file": "references/station-05-junction-kerbs.png",
+      "sha256_verified": true,
+      "dimensions": [
+        2560,
+        1440
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "description": "Large circular opening is physically open at x=-14.0",
+      "passed": true
+    },
+    {
+      "description": "Large circular opening is physically open at x=-7.2",
+      "passed": true
+    },
+    {
+      "description": "Large circular opening is physically open at x=3.0",
+      "passed": true
+    },
+    {
+      "description": "Large circular opening is physically open at x=9.8",
+      "passed": true
+    },
+    {
+      "description": "Stone facade between openings remains solid",
+      "passed": true
+    },
+    {
+      "description": "Central keyhole opening is open",
+      "passed": true
+    },
+    {
+      "description": "Right arch crown is open at height=3.7",
+      "passed": true
+    },
+    {
+      "description": "Right arch crown is open at height=7.85",
+      "passed": true
+    },
+    {
+      "description": "Right arch crown is open at height=12.0",
+      "passed": true
+    },
+    {
+      "description": "Side ground arcade has continuous clear space",
+      "passed": true
+    },
+    {
+      "description": "Recessed side window sits outside the core wall",
+      "passed": true
+    },
+    {
+      "description": "Review model is below 200k triangles after geometry cleanup",
+      "passed": true
+    },
+    {
+      "description": "Distant model reduces triangles by more than 60 percent",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "model": {
+    "dimensions_metres": [
+      36.4927978515625,
+      30.0849990844727,
+      21.9450016021729
+    ],
+    "lod1_triangles": 37114.0,
+    "material_slots": 14.0,
+    "status": "Exterior review candidate; approximate scale; not integrated into city or tablet tested",
+    "triangles": 115986.0,
+    "unobserved": "Roof service layout, rear and internal stair flights are simplified estimates",
+    "vertices": 66649.0
+  },
+  "review_date": "2026-11-19",
+  "scope": "Isolated model geometry and import, not game navigation or tablet performance"
+}

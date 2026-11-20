@@ -1,0 +1,79 @@
+[
+  {
+    "name": "man_shirt_01",
+    "clothes": "shirt",
+    "build": 1.03,
+    "height": 1.04,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "woman_kurti_01",
+    "clothes": "kurti",
+    "build": 0.91,
+    "height": 0.96,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "man_kurta_01",
+    "clothes": "kurta",
+    "build": 1.1,
+    "height": 1.01,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "woman_dress_01",
+    "clothes": "sari",
+    "build": 1.03,
+    "height": 0.97,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "man_shirt_02",
+    "clothes": "shirt",
+    "build": 0.89,
+    "height": 1.07,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "woman_kurti_02",
+    "clothes": "kurti",
+    "build": 1.04,
+    "height": 1.02,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "old_man_01",
+    "clothes": "kurta",
+    "build": 0.96,
+    "height": 0.98,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "old_woman_01",
+    "clothes": "sari",
+    "build": 1.08,
+    "height": 0.96,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "boy_01",
+    "clothes": "shirt",
+    "build": 0.88,
+    "height": 1.0,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "girl_01",
+    "clothes": "kurti",
+    "build": 0.9,
+    "height": 1.0,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  },
+  {
+    "name": "boy_02",
+    "clothes": "shirt",
+    "build": 0.94,
+    "height": 1.0,
+    "source": "Original edits to existing licensed crowd mesh and rig"
+  }
+]

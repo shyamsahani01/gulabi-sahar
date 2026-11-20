@@ -20,9 +20,9 @@ Fourteen more Poly Haven CC0 texture sets (1K diffuse, OpenGL normal, roughness;
 
 `assets/animals/*.glb` are converted from the **Farm Animals Pack by Quaternius** (CC0), downloaded from https://opengameart.org/content/lowpoly-animated-farm-animal-pack (`Farm Animals by @Quaternius.zip`, FBX with Idle/Walk/Run/Jump clips for cow, horse, zebra; Idle/Jump for pug, sheep, pig, llama). FBX → GLB conversion was done with Blender 4.2 (`export_scene.gltf`, animations kept). Quaternius: https://quaternius.com — CC0, attribution appreciated. Used in `animals.gd` for cows (`cow.glb`), dogs (`pug.glb`) and goats (`sheep.glb`); monkeys, pigeons, peacocks and the camel remain box-built.
 
-## MakeHuman crowd (in progress)
+## MakeHuman crowd — original variants (17 November 2026)
 
-`tools/build_crowd.py` generates crowd variants with the MPFB2 Blender extension (https://extensions.blender.org/add-ons/mpfb/, GPL code; generated meshes are the user's own) and the CC0 MakeHuman asset packs from http://files2.makehumancommunity.org/asset_packs/ (`makehuman_system_assets_cc0.zip`, `skins01_cc0.zip`, `eyebrows01_cc0.zip`, `hair01_cc0.zip`, `shirts01_cc0.zip`, `pants01_cc0.zip`, `shoes01_cc0.zip`, `dress01_cc0.zip`, `skirts01_cc0.zip`). The packs stay outside the repository; exported GLBs go to `assets/characters/crowd/`. Rig: MakeHuman "game_engine" skeleton, the same bone names as the existing crowd/hero rigs, so the Mixamo-derived Idle/Walk/Run clips apply unchanged.
+`tools/build_jaipur_crowd.py` imports the already credited `crowd_walk.glb` mesh/rig and authors eleven new variants in `assets/characters/crowd/`. Body/face edits, skinned garment meshes, drapes, hair buns, glasses and shoes are original project geometry. The original Walk animation and existing shared action library remain; underlying MakeHuman mesh/texture and animation provenance below continues to apply. `tools/share_crowd_textures.py` references the existing body, eye, eyebrow and hair textures instead of embedding eleven copies. No new person's likeness or external clothing pack was downloaded. `variants.json` records the authored outfit/build parameters. The older `tools/build_crowd.py` MPFB asset-pack pipeline remains an unused alternative, not the generator of these exports.
 
 ## Existing user character and animation assets
 
@@ -134,3 +134,7 @@ Times Square / Funstar area (0.9.11): original procedural rose facades, pilaster
 ## Cinestar approach and inner lane — 16 November 2026
 
 Reference packs 18/19 contain 64 additional actual Chrome screenshots (March 2026 Google Street View), with retained attribution, source URLs, panorama IDs and hashes. PNGs remain local and excluded from Git/APK. `cinestar_street.gd` adds original procedural cream/green galleries, rose balconies, inferred side windows and roadside pockets fitted to existing infill plots. No source pixels or hidden-interior claims are embedded.
+
+## Jaipur road/pavement close study — 17 November 2026
+
+Pack 20 contains 20 more actual Chrome page screenshots of the six existing Cinestar panorama stations, at 2560 × 1440 with attribution. Local-only reference images and their contact sheets are excluded from Git/APK; source URLs, hashes and review notes are retained. `jaipur_streetscape.gd` and `assets/shaders/jaipur_street.gdshader` create original pavement, asphalt, dusty shoulders, kerbs, drains, ramps, scooters and vendor props. Placement and road width are compact-map estimates, not measured survey dimensions. No source photo pixels are used as textures. Engine and tablet screenshots show the actual game.

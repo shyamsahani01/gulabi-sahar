@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-19",
+  "bounds": [
+    -2600.0,
+    -4850.0,
+    -1300.0,
+    -1975.0
+  ],
+  "area_km2": 2.89432,
+  "previous_area_km2": 4.15272,
+  "area_reduction_percent": 30.303030303030297,
+  "counts": {
+    "roads": 1528,
+    "buildings": 2509,
+    "amenities": 65,
+    "parks": 7,
+    "pois": 5
+  },
+  "education": [
+    "Maheshwari girls public school",
+    "Biyani group of college",
+    "Candlewick Public School",
+    "BISMA - Biyani Institute of Science and Management for Girls",
+    "BIYANI SCHOOL OF NURSING & PARA-MEDICAL SCIENCE (G.N.M.)"
+  ],
+  "removed_amenities": [
+    "Narmada Hospital and Diagnostic Centre",
+    "Shiva Hospital",
+    "Dariya Clinic",
+    "Suraksha Hospital",
+    "Pooja Hospital",
+    "Dr. Charu's Homeo Clinic",
+    "Shri Narayan Hospital",
+    "Shree Balaji Hospital",
+    "kgn cafe",
+    "R.D. Honda"
+  ],
+  "source": "Existing archived OSM import; no invented real places or resized roads/buildings"
+}

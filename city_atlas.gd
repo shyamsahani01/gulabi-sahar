@@ -20,7 +20,7 @@ var fingers: Dictionary = {}
 var drag_start := Vector2.ZERO
 var dragged := false
 var mouse_down := false
-var categories := ["All places", "Streets / gali", "Theka / wine", "Food / cafes", "Hospitals", "Police", "Shops", "Fuel", "Temples", "Districts"]
+var categories := ["All places", "Streets / gali", "Theka / wine", "Food / cafes", "Hospitals", "Police", "Shops", "Fuel", "Temples", "Districts", "Cinemas", "Schools / colleges", "Parks"]
 var last_open := false
 var previous_mouse_emulation := false
 var font := ThemeDB.fallback_font
@@ -137,7 +137,7 @@ func _process(_delta: float) -> void:
 func build_entries() -> void:
 	entries.clear()
 	var seen := {}
-	for group in [game.world.landmarks,game.world.services,game.world.dining_destinations,game.world.amenities]:
+	for group in [game.world.landmarks,game.world.services,game.world.dining_destinations,game.world.amenities,game.world.park_destinations]:
 		for source in group:
 			var entry: Dictionary = source.duplicate(true)
 			entry.kind = "district" if group==game.world.landmarks else entry.get("kind", "shop")
@@ -162,9 +162,9 @@ func build_entries() -> void:
 func matches(entry: Dictionary) -> bool:
 	var kind: String = entry.kind
 	if category.selected==0 and kind=="street" and search.text.strip_edges().is_empty(): return false
-	var groups := [[],["street"],["theka"],["restaurant","cafe","chai","pub","club"],["hospital","pharmacy"],["police"],["shop","grocery","showroom"],["fuel"],["temple"],["district"]]
+	var groups := [[],["street"],["theka"],["restaurant","cafe","chai","pub","club"],["hospital","pharmacy"],["police"],["shop","grocery","showroom"],["fuel"],["temple"],["district"],["cinema"],["school","college"],["park"]]
 	if category.selected>0 and kind not in groups[category.selected]: return false
-	var aliases := {"theka":"wine liquor ठेका शराब", "street":"road gali street गली सड़क", "cafe":"coffee chai cafe", "hospital":"clinic hospital अस्पताल"}
+	var aliases := {"theka":"wine liquor ठेका शराब", "street":"road gali street गली सड़क", "cafe":"coffee chai cafe", "hospital":"clinic hospital अस्पताल", "school":"school college campus education विद्यालय कॉलेज", "cinema":"cinema movie film theatre सिनेमा", "park":"park garden उद्यान"}
 	var haystack := (str(entry.name)+" "+kind+" "+str(entry.get("hindi",""))+" "+str(aliases.get(kind,""))).to_lower()
 	for word in search.text.to_lower().split(" ",false):
 		if not haystack.contains(word): return false

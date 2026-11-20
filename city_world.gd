@@ -1,13 +1,26 @@
 extends "res://world.gd"
 # VKI–VDN only. Archived Jaipur data remains available to the import tools.
 const CITY_COMPRESSION := 0.88
+const CITY_DATA_PATH := "res://assets/data/vki_vdn_city_small.json"
+signal build_progress(fraction: float, stage: String)
+signal world_built
+var incremental_startup := false
+var build_finished := false
+var startup_timings: Array = []
+var checkpoint_time := 0
+var stage_started := 0
+var stage_name := ""
+var spatial = preload("res://city_spatial_index.gd").new()
 var services: Array = []
 var seats: Array = []
 var patron_spots: Array = []
+var pedestrian_routes: Array = []
 var architecture_meshes: Dictionary = {}
 var restaurant_entries: Array = []
 var palace_entry: Dictionary = {}
 var dining_destinations: Array = []
+var park_destinations: Array = []
+var place_interactions: Array = []
 var service_builder = preload("res://city_services.gd").new()
 const CELL := 160.0
 var data: Dictionary
@@ -27,20 +40,28 @@ var amenities: Array = []
 var amenity_count := 0
 var spawn_point := Vector3(-1591.05, 1, -2843.67)
 var spawn_heading := 0.0
-const MAP_EDITION := "vki-vdn-compact-v1"
+const MAP_EDITION := "vki-vdn-focused-v2"
 
 func _ready() -> void:
+	checkpoint_time=Time.get_ticks_msec()
+	stage_started=checkpoint_time
+	await loading_checkpoint(.0,"Reading city map",true)
 	add_child(collision_root)
 	cube.size = Vector3.ONE
 	sphere_mesh.radius=.5
 	sphere_mesh.height=1
 	sphere_mesh.radial_segments=12
 	sphere_mesh.rings=6
-	data = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/vki_vdn_city.json"))
+	data = JSON.parse_string(FileAccess.get_file_as_string(CITY_DATA_PATH))
 	preload("res://sector2_street.gd").prepare(data)
 	preload("res://cinema_frontages.gd").prepare(data)
 	preload("res://cinestar_street.gd").prepare(data)
+	preload("res://jaipur_streetscape.gd").prepare(data)
+	var bounds: Array=data.meta.playable_bounds
+	map_bounds=Rect2(bounds[0],bounds[1],bounds[2]-bounds[0],bounds[3]-bounds[1])
 	compact_layout()
+	spatial.build(data)
+	await loading_checkpoint(.06,"Finding safe arrival",true)
 	var arrival := safe_road_arrival(Vector2(spawn_point.x,spawn_point.z))
 	spawn_point = Vector3(arrival.p.x,1,arrival.p.y)
 	spawn_heading = arrival.heading
@@ -48,6 +69,7 @@ func _ready() -> void:
 	amenities = data.get("amenities", [])
 	service_builder.world = self
 	service_builder.assign(data,CITY_COMPRESSION,Vector2(-1591.05,-2843.67))
+	await loading_checkpoint(.10,"Preparing surface materials",true)
 	make_materials()
 	make_city_materials()
 	# Less aggressive surface relief removes the sandpaper shimmer seen on the tablet.
@@ -59,22 +81,31 @@ func _ready() -> void:
 	preload("res://architecture_materials.gd").install(self)
 	preload("res://heritage_kit.gd").install(self)
 	finish_materials()
+	var jaipur_street=preload("res://jaipur_streetscape.gd").new()
+	jaipur_street.world=self
+	jaipur_street.install_materials()
 	mark_street_pilot()
 	for key in ["hm_pink","rose","terracotta","fort"]:
-		mats[key].normal_enabled=false
-		mats[key].albedo_texture=load("res://assets/textures/paintedwall_Diffuse.jpg")
+		pbr(key,"paintedwall",mats[key].albedo_color,.32,.07)
 	mats["hm_pink"].albedo_color=Color("c98c76")
 	mats["rose"].albedo_color=Color("cc9b87")
 	mats["terracotta"].albedo_color=Color("b98069")
 	mats["fort"].albedo_color=Color("aa9a7c")
-	build_ground()
-	build_roads()
+	await loading_checkpoint(.18,"Building ground",true)
+	await build_ground()
+	await loading_checkpoint(.23,"Building roads",true)
+	await build_roads()
+	await loading_checkpoint(.35,"Building neighbourhoods",true)
+	var built_count := 0
 	for b in data.buildings:
+		built_count+=1
+		await loading_checkpoint(.35+.22*float(built_count)/data.buildings.size(),"Building neighbourhoods")
 		if b.has("kind"):
 			continue
 		city_building(b)
 		building_count += 1
-	build_amenities()
+	await loading_checkpoint(.57,"Preparing places to visit",true)
+	await build_amenities()
 	register_dining_destinations()
 	var order := ["showroom","hospital","police","theka","grocery","chai"]
 	services.sort_custom(func(a,b): return order.find(a.kind)<order.find(b.kind))
@@ -82,16 +113,22 @@ func _ready() -> void:
 	details.world=self
 	for i in services.size():
 		details.build(services[i].building,services[i].rotation,i)
+	await loading_checkpoint(.70,"Building parks and landmarks",true)
 	build_parks()
 	build_landmarks()
-	preload("res://district_details.gd").new().decorate(self)
+	await loading_checkpoint(.75,"Adding street details",true)
+	await preload("res://district_details.gd").new().decorate(self)
 	preload("res://sector2_street.gd").new().streetscape(self)
-	preload("res://cinestar_street.gd").new().streetscape(self)
-	flush_batches()
-	flush_road_meshes()
+	preload("res://jaipur_streetscape.gd").new().streetscape(self)
+	await loading_checkpoint(.84,"Preparing visible city",true)
+	await flush_batches()
+	await flush_road_meshes()
 	batches.clear()
 	road_meshes.clear()
 	update_cells(spawn_point)
+	await loading_checkpoint(1.0,"City ready",true)
+	build_finished=true
+	world_built.emit()
 
 func compact_layout() -> void:
 	map_bounds = Rect2(map_bounds.position*CITY_COMPRESSION,map_bounds.size*CITY_COMPRESSION)
@@ -99,6 +136,8 @@ func compact_layout() -> void:
 	spawn_point.z *= CITY_COMPRESSION
 	for road in data.roads:
 		road.width *= CITY_COMPRESSION
+		if road.has("segment_widths"):
+			for i in road.segment_widths.size():road.segment_widths[i]*=CITY_COMPRESSION
 		for p in road.p:
 			p[0] *= CITY_COMPRESSION
 			p[1] *= CITY_COMPRESSION
@@ -150,20 +189,15 @@ func make_city_materials() -> void:
 	mats["tarmac"].uv1_scale = Vector3.ONE*.10
 
 func finish_materials() -> void:
-	# Quiet, metre-scaled surfaces: the old scanned plaster/asphalt multiplied
-	# too much contrast into tiny batched primitives and shimmered at distance.
-	var mineral=preload("res://heritage_kit.gd").mineral_texture()
-	for pair in [["arch_cream","e2d3b8"],["cream","e6d5b8"],["white","e9e1d1"],["concrete","c5bca9"],["stone","b4a893"],["tarmac","303b42"],["sand","9c927a"],["grass","52784d"],["leaves","244f35"],["leaves_light","467b43"]]:
-		var m: StandardMaterial3D=mats[pair[0]]
-		m.albedo_color=Color(pair[1])
-		m.albedo_texture=mineral if pair[0] not in ["leaves","leaves_light"] else null
-		m.normal_enabled=false
-		m.roughness_texture=null
-		m.roughness=.9
-		m.uv1_scale=Vector3.ONE*.12
-		m.uv1_triplanar=true
-		m.uv1_world_triplanar=true
-		m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	# Metre-scaled CC0 surfaces with restrained relief and mipmaps. Keep the
+	# normal/roughness maps: the former blanket override flattened every material.
+	for item in [["arch_cream","paintedwall","e2d3b8",.35,.07],["cream","paintedwall","e6d5b8",.35,.07],["white","paintedwall","e9e1d1",.35,.06],["concrete","concrete","c5bca9",.25,.10],["stone","cobble","c5bca9",.25,.10],["tarmac","asphalt2","7b8288",.18,.08],["sand","scrubland","c1b697",.18,.08],["grass","scrubland","83a77d",.20,.08]]:
+		pbr(item[0],item[1],Color(item[2]),item[3],item[4])
+		mats[item[0]].texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	for key in ["leaves","leaves_light"]:
+		mats[key].albedo_texture=null
+		mats[key].albedo_color=Color("31583a") if key=="leaves" else Color("527849")
+		mats[key].roughness=.9
 
 func destinations() -> Array:
 	return landmarks + services + dining_destinations
@@ -194,14 +228,21 @@ func nearest_road_point(x: float,z: float) -> Dictionary:
 	return {"p":closest,"heading":heading}
 
 func clear_arrival(at: Vector2, margin: float) -> bool:
-	if not map_bounds.grow(-8).has_point(at): return false
-	for b in data.buildings:
-		var local:=Vector2(at.x-b.x,at.y-b.z).rotated(b.a)
-		if absf(local.x)<b.w/2+margin and absf(local.y)<b.d/2+margin: return false
-	for a in data.get("amenities",[]):
-		var local:=Vector2(at.x-a.p[0],at.y-a.p[1]).rotated(a.a)
-		if absf(local.x)<a.w/2+margin and absf(local.y)<a.d/2+margin: return false
-	return true
+	return map_bounds.grow(-8).has_point(at) and spatial.obstacles_clear(at,margin)
+
+func clear_verge(at: Vector2) -> bool:
+	return map_bounds.grow(-5).has_point(at) and spatial.obstacles_clear(at,2.0) and spatial.roads_clear(at,1.0)
+
+func loading_checkpoint(fraction: float, label: String, force := false) -> void:
+	var now := Time.get_ticks_msec()
+	if label!=stage_name:
+		if not stage_name.is_empty():startup_timings.append({"stage":stage_name,"ms":now-stage_started})
+		stage_name=label
+		stage_started=now
+	if force or now-checkpoint_time>=20:
+		build_progress.emit(fraction,label)
+		if incremental_startup:await get_tree().process_frame
+		checkpoint_time=Time.get_ticks_msec()
 
 func safe_road_arrival(hint: Vector2) -> Dictionary:
 	var closest:=Vector2.ZERO
@@ -256,7 +297,10 @@ func box(pos: Vector3, dimensions: Vector3, key: String, solid := false, rot := 
 		cell(pos).get_node("Collision").add_child(shape)
 
 func flush_batches() -> void:
+	var completed := 0
 	for bucket in batches:
+		completed+=1
+		await loading_checkpoint(.84+.12*float(completed)/maxi(1,batches.size()),"Preparing visible city")
 		var parts: PackedStringArray = bucket.split("|")
 		var transforms: Array = batches[bucket]
 		var multi := MultiMesh.new()
@@ -293,6 +337,8 @@ func terrain_raw(x: float,z: float) -> float:
 	# Artistic Aravalli ridge. Low gradient keeps every mapped hill road drivable.
 	x /= CITY_COMPRESSION
 	z /= CITY_COMPRESSION
+	# The entire retained VKI/VDN crop lies on the exactly-flat branch.
+	if x<0:return 0.0
 	var rise := exp(-pow((x - 680.0) / 560.0, 2) - pow((z + 1060.0) / 900.0, 2))
 	var shoulder := smoothstep(160.0, 510.0, x) * smoothstep(-250.0, -650.0, z)
 	var hill:=rise*shoulder*95.0
@@ -305,6 +351,18 @@ func build_ground() -> void:
 	var z0 := int(floor(map_bounds.position.y / 400.0) * 400) - 400
 	for cx in range(x0, int(map_bounds.end.x) + 400, 400):
 		for cz in range(z0, int(map_bounds.end.y) + 400, 400):
+			await loading_checkpoint(.20,"Building ground")
+			if cx+400<0:
+				var flat := MeshInstance3D.new()
+				var plane := PlaneMesh.new()
+				plane.size=Vector2(400,400)
+				flat.mesh=plane
+				flat.position=Vector3(cx+200,0,cz+200)
+				flat.material_override=mats["sand"]
+				flat.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				add_child(flat)
+				flat.create_trimesh_collision()
+				continue
 			var st := SurfaceTool.new()
 			st.begin(Mesh.PRIMITIVE_TRIANGLES)
 			for ix in 16:
@@ -349,13 +407,24 @@ func road_piece(a: Vector2, b: Vector2, width: float, key: String, lift: float) 
 		entry.v.append(Vector3(p.x,terrain_height(p.x,p.y)+lift,p.y))
 		entry.uv.append(p*0.08)
 
+func road_segment_width(road: Dictionary,index: int) -> float:
+	return road.segment_widths[index] if road.has("segment_widths") else road.width
+
 func build_roads() -> void:
+	var completed := 0
 	for road in data.roads:
+		completed+=1
+		await loading_checkpoint(.23+.12*float(completed)/data.roads.size(),"Building roads")
 		var points: Array = road.p
 		if points.size() < 2:
 			continue
 		if road.kind in ["primary","secondary","tertiary","trunk"]:
 			routes.append(road)
+		if road.get("jaipur_block",false):
+			var local_route: Dictionary=road.duplicate(true)
+			local_route.p=road.p.slice(0,3)
+			local_route.width=road_segment_width(road,0)
+			routes.append(local_route)
 		var authored: bool = road.get("source","osm") == "authored"
 		if authored:
 			authored_roads.append(road)
@@ -365,12 +434,14 @@ func build_roads() -> void:
 			var b := Vector2(points[i+1][0],points[i+1][1])
 			if a.distance_to(b)>500 or not map_bounds.has_point(a):
 				continue
+			var width:=road_segment_width(road,i)
+			var studied: bool=road.get("jaipur_block",false) and i<2
 			var count := maxi(1,ceili(a.distance_to(b)/12.0))
 			for j in count:
 				var p := a.lerp(b,float(j)/count)
 				var q := a.lerp(b,float(j+1)/count)
-				road_piece(p,q,road.width+3.0,"kerb_yellow" if authored else "stone",0.035)
-				road_piece(p,q,road.width,"stone" if road.kind in ["footway","path","pedestrian","track"] else "tarmac",0.14)
+				road_piece(p,q,width+3.0,"jaipur_dust" if studied else ("kerb_yellow" if authored else "stone"),0.035)
+				road_piece(p,q,width,"jaipur_asphalt" if studied else ("stone" if road.kind in ["footway","path","pedestrian","track"] else "tarmac"),0.14)
 				if authored:
 					road_piece(p.lerp(q,0.2),p.lerp(q,0.6),0.3,"kerb_black",0.075)
 				if road.width >= 10*CITY_COMPRESSION and j%2 == 0:
@@ -423,6 +494,7 @@ func mark_connector(road: Dictionary) -> void:
 
 func flush_road_meshes() -> void:
 	for bucket in road_meshes:
+		await loading_checkpoint(.97,"Preparing road surfaces")
 		var entry: Dictionary = road_meshes[bucket]
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
@@ -641,10 +713,14 @@ func parked_vehicle(at: Vector3, ang: float, kind: String, color: String) -> voi
 	cell(at).add_child(model)
 
 func build_amenities() -> void:
+	var completed := 0
 	for a in amenities:
+		completed+=1
+		await loading_checkpoint(.57+.13*float(completed)/amenities.size(),"Preparing places to visit")
 		if not map_bounds.has_point(Vector2(a.p[0], a.p[1])):
 			continue
 		amenity_count += 1
+		if a.has("shared_campus"):continue
 		var p := Vector3(a.p[0], terrain_height(a.p[0], a.p[1]), a.p[1])
 		var ang: float = a.a
 		var front: float = a.get("front", 1)
@@ -808,24 +884,9 @@ func amenity_bank(p: Vector3, ang: float, front: float, w: float, d: float, disp
 	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 3.6, fz + front * .1), ang, front, (display_name if display_name != "" else "BANK") + " · बैंक", "blue", Vector3(w * .85, 1.0, .16), Color("ffffff"), 30)
 
 func amenity_school(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
-	var bd: float = d * .4
-	var back: float = -front * d * .25
-	lb(p, ang, Vector3(0, 3.5, back), Vector3(w * .95, 7, bd), "ochre", true)
-	lb(p, ang, Vector3(0, 7.15, back), Vector3(w * .95 + .4, .3, bd + .4), "trim")
-	draw_detail = true
-	for floor_index in 2:
-		lb(p, ang, Vector3(0, 1.6 + floor_index * 3.0, back + front * (bd / 2 + .05)), Vector3(w * .85, 1.5, .1), "blue")
-		lb(p, ang, Vector3(0, 2.6 + floor_index * 3.0, back + front * (bd / 2 + .4)), Vector3(w * .9, .12, .8), "white")
-	# Playground, boundary wall and flag.
-	lb(p, ang, Vector3(0, .05, front * d * .2), Vector3(w * .9, .1, d * .45), "sand")
-	for side in [-1, 1]:
-		lb(p, ang, Vector3(side * (w / 2 - .15), .6, 0), Vector3(.3, 1.2, d), "ochre")
-	lb(p, ang, Vector3(0, .6, front * (d / 2 - .15)), Vector3(w * .7, 1.2, .3), "ochre")
-	lb(p, ang, Vector3(w * .35, 3.5, front * d * .3), Vector3(.1, 7, .1), "metal")
-	for i in 3:
-		lb(p, ang, Vector3(w * .35 + .5, 6.8 - i * .3, front * d * .3), Vector3(.9, .3, .04), ["saffron", "white", "green"][i])
-	draw_detail = false
-	sign_board(p + Basis(Vector3.UP, ang) * Vector3(0, 4.9, back + front * (bd / 2 + .12)), ang, front, display_name if display_name != "" else "SCHOOL · विद्यालय", "blue", Vector3(w * .7, 1.1, .16), Color("ffffff"), 30)
+	var campus=preload("res://education_reference.gd").new()
+	campus.world=self
+	campus.build({"p":[p.x,p.z],"a":ang,"front":front,"w":w,"d":d,"name":display_name})
 
 func amenity_temple(p: Vector3, ang: float, front: float, w: float, d: float, display_name: String) -> void:
 	var s: float = minf(w, d)
@@ -888,10 +949,12 @@ func build_parks() -> void:
 			var p := points[i].lerp(center,.15)
 			var at:=Vector3(p.x,terrain_height(p.x,p.y),p.y)
 			tree_at(at)
+			seats.append({"p":at+Vector3(2,0,-.1),"yaw":0.0,"h":.63,"pose":"Sit","park":true})
 			box(at+Vector3(2,.55,0),Vector3(1.8,.16,.6),"wood")
 			box(at+Vector3(2,.95,.3),Vector3(1.8,.65,.12),"wood")
 			for side in [-1,1]:
 				box(at+Vector3(2+side*.65,.25,0),Vector3(.1,.5,.45),"metal")
+		park_destinations.append({"name":park_data.get("name","") if not str(park_data.get("name","")).is_empty() else "Neighbourhood Park %d" % (park_destinations.size()+1),"kind":"park","p":[center.x,center.y],"source":"Archived OpenStreetMap park footprint"})
 		var ground:=terrain_height(center.x,center.y)
 		box(Vector3(center.x,ground+.06,center.y),Vector3(12,.1,8),"sand")
 		for side in [-1,1]:
