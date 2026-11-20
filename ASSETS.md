@@ -138,3 +138,7 @@ Reference packs 18/19 contain 64 additional actual Chrome screenshots (March 202
 ## Jaipur road/pavement close study — 17 November 2026
 
 Pack 20 contains 20 more actual Chrome page screenshots of the six existing Cinestar panorama stations, at 2560 × 1440 with attribution. Local-only reference images and their contact sheets are excluded from Git/APK; source URLs, hashes and review notes are retained. `jaipur_streetscape.gd` and `assets/shaders/jaipur_street.gdshader` create original pavement, asphalt, dusty shoulders, kerbs, drains, ramps, scooters and vendor props. Placement and road width are compact-map estimates, not measured survey dimensions. No source photo pixels are used as textures. Engine and tablet screenshots show the actual game.
+
+## Smaller-map surface and campus pass — 20 November 2026
+
+Pack 22 reuses the existing credited CC0 surface maps, including pavement05 from the merged graphics pass. The grass image in the older pack is a plant atlas, so the lawn surface uses the existing scrubland set instead. Campus geometry, visitor UI and the loader are original project code; campus shells and reception layouts are artistic approximations at archived map locations, not surveys. Pack 21 contains original Cinestar Blender/GLB study geometry and remains outside the playable/exported game.

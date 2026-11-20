@@ -21,6 +21,16 @@ The pre-change headless laptop profile measured resource loading **978 ms**, syn
 
 Validation: spatial index versus 4,000 brute-force queries; compact bounds/navigation/save migration; startup progress/handover/failure UI/grounding; campus gate/reception clearance; paid hospital care and insufficient-funds handling; park sitting; atlas and driving; existing city and cinema regressions. Final results and device delivery are recorded in `validation.json` and `tablet-delivery.json` when completed. The missing-resource startup test intentionally emits resource-load errors while verifying the retry UI. Godot reports existing ObjectDB shutdown warnings; no claim is made that all resource leaks are resolved.
 
+## Tablet delivery — 20 November
+
+**0.9.14 / versionCode 23 installed in place and launched over wireless ADB** on the Redmi 2509BRP2DI. The existing package/signing identity was retained. APK archive, signature and alignment checks passed. Loader and gameplay were visually verified with the tablet unlocked; the game remained the foreground activity.
+
+[Tablet loader](tablet-loading.png) · [Tablet gameplay](tablet-gameplay.png) · [Delivery evidence](tablet-delivery.json) · [Regression results](validation.json)
+
+The first device launch after installation took **59.646 seconds from loader start to handover** (1.930 seconds resource loading). Neighbourhood construction took 13.363 seconds and places to visit 14.538 seconds; subsequent character/vehicle/resident work and first rendering also contribute. The loader fixes the blank/frozen presentation, but startup is **still long**. These measurements do not establish a tablet startup speedup or gameplay FPS. Spatial optimization is a start; loading only the nearby world first is still needed.
+
+Remote `def6e2a` was merged, preserving the asphalt/concrete PBR restoration and its pavement texture selection; relief/roughness were tuned with the broader material pass. Source, original authored assets, tests and review documentation are included; Google reference pixels, APK binaries and device identifiers/network addresses are kept out of the repository delivery.
+
 ## Realistic graphics: remaining work
 
 This is **not GTA-level or a finished photoreal map**. Generic background buildings and rounded placeholder vegetation remain. Cinemas retain accessible entrance vestibules; ticket purchase, screenings and surveyed auditoriums are not implemented. Teaching rooms and hospital wards are not complete interiors. The detailed Cinestar Blender/GLB candidate in [pack 21](../21-cinestar-model-study/README.md) is still isolated from the playable world.

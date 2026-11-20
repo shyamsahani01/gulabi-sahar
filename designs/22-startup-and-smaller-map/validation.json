@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-20",
+  "godot": "4.7.2",
+  "version": "0.9.14",
+  "code": 23,
+  "checks": {
+    "compact_world": "COMPACT WORLD RESULT: 0 failures / 80613 checks",
+    "city_smoke": "CITY SMOKE RESULT: 0 failures; elapsed 21344 ms",
+    "map_navigation": "MAP / DRIVER RESULT: 0 failures; 2 wine shops; 5 pilot footprints",
+    "place_visits": "PLACE VISITS RESULT: 0 failures",
+    "startup_loading": "STARTUP TEST RESULT: 0 failures; 345 progress events",
+    "cinema_exteriors": "CINEMA EXTERIORS RESULT: 0 failures",
+    "cinestar_street": "CINESTAR STREET RESULT: 0 failures; facades=6 pockets=2 pavement=95 routes=12"
+  },
+  "spatial_index": "0 failures / 4000 comparisons against brute-force geometry",
+  "python_clipping": "5 tests passed",
+  "notes": [
+    "Missing-resource errors in startup_loading are intentional failure-UI coverage.",
+    "Headed Linux rendering used Mesa Intel UHD Graphics; Android is validated separately.",
+    "Godot reports existing ObjectDB shutdown warnings.",
+    "No full-map photorealism or complete cinema interior claim."
+  ]
+}

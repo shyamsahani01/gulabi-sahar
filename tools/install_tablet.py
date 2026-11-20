@@ -50,22 +50,42 @@ if fresh_preview:
   record['save_migration']='Existing save was not readable; original retained'
 
 print('INSTALL',record['install'],flush=True)
-# Keep the tablet awake while Godot creates its Vulkan surface: a sleep/pause during startup
-# makes the engine quit ("Couldn't create Android Surface"), which looked like a crash in 0.9.4.
+# Keep the tablet awake until the staged loader hands over; always restore timeout.
 screen_timeout=run(base+['shell','settings','get','system','screen_off_timeout'])
-run(base+['shell','settings','put','system','screen_off_timeout','600000'])
-run(base+['shell','input','keyevent','KEYCODE_WAKEUP'])
-subprocess.run([str(x) for x in base+['shell','wm','dismiss-keyguard']],capture_output=True)
-record['launch']=run(base+['shell','am','start','-W','-n',package+'/com.godot.game.GodotAppLauncher'])
-record['package']=run(base+['shell','dumpsys','package',package])
-record['package']='\n'.join(x.strip() for x in record['package'].splitlines() if 'versionName=' in x or 'versionCode=' in x)
-time.sleep(8)
-record['foreground']='\n'.join(x.strip() for x in run(base+['shell','dumpsys','activity','activities']).splitlines() if 'ResumedActivity' in x)
-pid=subprocess.run([str(x) for x in base+['shell','pidof',package]],capture_output=True,text=True)
-record['pid']=pid.stdout.strip() or 'NOT RUNNING after 8 s'
-record['keyguard']=run(base+['shell','dumpsys','window']).count('isKeyguardShowing=true') and 'secure keyguard showing: screenshot will be black until the user unlocks' or 'unlocked'
-run(base+['shell','settings','put','system','screen_off_timeout',screen_timeout])
-(root/f'builds/tablet-install-{tag}.json').write_text(json.dumps(record,indent=2))
-(root/'builds/previews').mkdir(parents=True,exist_ok=True)
-with (root/f'builds/previews/tablet-{tag}-installed.png').open('wb') as f:subprocess.run([str(x) for x in base+['exec-out','screencap','-p']],stdout=f,check=True)
+previews=root/'builds/previews'
+previews.mkdir(parents=True,exist_ok=True)
+def screenshot(name):
+ with (previews/name).open('wb') as f:
+  subprocess.run([str(x) for x in base+['exec-out','screencap','-p']],stdout=f,check=True)
+try:
+ run(base+['shell','settings','put','system','screen_off_timeout','600000'])
+ run(base+['shell','input','keyevent','KEYCODE_WAKEUP'])
+ subprocess.run([str(x) for x in base+['shell','wm','dismiss-keyguard']],capture_output=True)
+ record['launch']=run(base+['shell','am','start','-W','-n',package+'/com.godot.game.GodotAppLauncher'])
+ record['package']=run(base+['shell','dumpsys','package',package])
+ record['package']='\n'.join(x.strip() for x in record['package'].splitlines() if 'versionName=' in x or 'versionCode=' in x)
+ began=time.monotonic()
+ record['ready']=False
+ time.sleep(2)
+ screenshot(f'tablet-{tag}-loading.png')
+ while time.monotonic()-began<120:
+  pid=subprocess.run([str(x) for x in base+['shell','pidof',package]],capture_output=True,text=True).stdout.strip()
+  record['pid']=pid or 'NOT RUNNING'
+  if not pid:break
+  logs=run(base+['logcat','--pid',pid,'-d','-s','godot:V','Godot:V','*:S'])
+  startup=[line for line in logs.splitlines() if 'STARTUP_LOADING ' in line]
+  if startup:
+   record['startup']=json.loads(startup[-1].split('STARTUP_LOADING ',1)[1])
+   record['ready']=True
+   break
+  time.sleep(2)
+ record['observed_wait_seconds']=round(time.monotonic()-began,2)
+ record['foreground']='\n'.join(x.strip() for x in run(base+['shell','dumpsys','activity','activities']).splitlines() if 'ResumedActivity' in x)
+ record['keyguard']='secure keyguard showing' if 'isKeyguardShowing=true' in run(base+['shell','dumpsys','window']) else 'unlocked'
+ if record['ready']:time.sleep(3)
+ screenshot(f'tablet-{tag}-installed.png')
+finally:
+ run(base+['shell','settings','put','system','screen_off_timeout',screen_timeout])
+ (root/f'builds/tablet-install-{tag}.json').write_text(json.dumps(record,indent=2))
 print(json.dumps(record,indent=2),flush=True)
+if not record.get('ready',False):raise RuntimeError('Installed, but gameplay startup was not confirmed; inspect device/logs')

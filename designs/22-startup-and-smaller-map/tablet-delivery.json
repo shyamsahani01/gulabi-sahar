@@ -1,0 +1,69 @@
+{
+  "version": "0.9.14",
+  "model": "2509BRP2DI",
+  "package_id": "com.itgurujan.gulabisahar.preview",
+  "package": "versionCode=23 minSdk=24 targetSdk=36\nversionName=0.9.14",
+  "ready": true,
+  "startup": {
+    "loader_frames": 377,
+    "resource_ms": 1930,
+    "total_ms": 59646,
+    "world_stages": [
+      {
+        "ms": 135,
+        "stage": "Reading city map"
+      },
+      {
+        "ms": 24,
+        "stage": "Finding safe arrival"
+      },
+      {
+        "ms": 1682,
+        "stage": "Preparing surface materials"
+      },
+      {
+        "ms": 610,
+        "stage": "Building ground"
+      },
+      {
+        "ms": 524,
+        "stage": "Building roads"
+      },
+      {
+        "ms": 13363,
+        "stage": "Building neighbourhoods"
+      },
+      {
+        "ms": 14538,
+        "stage": "Preparing places to visit"
+      },
+      {
+        "ms": 20,
+        "stage": "Building parks and landmarks"
+      },
+      {
+        "ms": 3523,
+        "stage": "Adding street details"
+      },
+      {
+        "ms": 375,
+        "stage": "Preparing visible city"
+      },
+      {
+        "ms": 53,
+        "stage": "Preparing road surfaces"
+      }
+    ]
+  },
+  "observed_wait_seconds": 62.4,
+  "keyguard": "unlocked",
+  "date": "2026-11-20",
+  "install": "adb install -r: Success",
+  "renderer": "Forward Mobile / Vulkan, Adreno 810",
+  "apk_sha256": "59e65ff8a8d106d70a15cc0c23e3ad0201345892f5dbd3ef6c7061c61c0bf356",
+  "apk_bytes": 214512161,
+  "archive_verified": true,
+  "source_and_reference_images_excluded": true,
+  "foreground_confirmed": true,
+  "limits": "Single first launch after install. Not a frame-rate benchmark or a before/after tablet comparison. CPU and resource work still makes startup long."
+}
